@@ -1,0 +1,28 @@
+{
+  "name": "front-consilio",
+  "version": "1.0.0",
+  "description": "Front desenvolvido nas tecnologias VueJS + NuxtJs + Axios para consumir API disponibilizada no WordPress.",
+  "author": "Humberto Martins",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "dev-debug": "node --debug node_modules/.bin/nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "@nuxtjs/amp": "^0.2.1",
+    "@nuxtjs/pwa": "^3.0.0-beta.19",
+    "axios": "^0.19.0",
+    "bootstrap-vue": "^2.1.0",
+    "nuxt": "^2.0.0",
+    "vue-material-design-icons": "^4.1.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0"
+  }
+}
