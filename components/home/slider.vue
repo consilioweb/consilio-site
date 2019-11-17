@@ -1,12 +1,32 @@
 <template>
   <div id="slider">
     <div class="slides row container">
-      <div v-for="(slide,idx) in slides" :key="idx" v-if="slide == active">
-        <div class="slider-title">
-          <h1>{{ slide.title }}</h1>
+      <transition-group
+        name="slide"
+        mode="out-in"
+        enter-class="slide-in"
+        leave-class="slide-out"
+        enter-active-class="animated slide-in-active"
+        leave-active-class="animated slide-out-active"
+      >
+        <div
+          v-for="(slide, index) in slides"
+          v-if="slide.menu_order == active"
+          :key="index+1"
+          class="slider-title"
+        >
+          <h1>{{ slide.title.rendered }}</h1>
         </div>
-      </div>
-
+      </transition-group>
+      <transition name="progress-indicator">
+        <ul class="progress-indicator" :data-slides-count="'0' + slides.length" v-if="loaded">
+          <li
+            v-for="(slide,index) of slides"
+            :class="index === currentActiveSlide ? 'progress-indicator__bar  progress-indicator__bar--active' : 'progress-indicator__bar'"
+            :key="index"
+          ></li>
+        </ul>
+      </transition>
       <div class="controls-slider">
         <span class="prev" @click="move(-1)">
           <chevron-left-icon />
@@ -17,10 +37,10 @@
 
         <ul class="dots">
           <li
-            v-for="(dot, id) in slides"
-            :key="id"
-            :class="{ active: ++id === active }"
-            @click="jump(id)"
+            v-for="(dot, index) in slides"
+            :key="index"
+            :class="{ active: ++index === active }"
+            @click="jump(index)"
           ></li>
         </ul>
       </div>
@@ -30,43 +50,46 @@
 
 <script>
 import axios from "axios";
+import api from "@/api/index";
 import ChevronLeftIcon from "vue-material-design-icons/ChevronLeft.vue";
 import ChevronRightIcon from "vue-material-design-icons/ChevronRight.vue";
 export default {
-  name: "Slider",
   components: {
     ChevronLeftIcon,
     ChevronRightIcon
+  },
+  data() {
+    return {
+      slides: {},
+      active: 1,
+      countSlides: 0
+    };
   },
   methods: {
     move(amount) {
       let newActive;
       const newIndex = this.active + amount;
-      if (newIndex > this.slides) newActive = 1;
-      if (newIndex === 0) newActive = this.slides;
+      if (newIndex > this.countSlides) newActive = 1;
+      if (newIndex === 0) newActive = this.countSlides;
       this.active = newActive || newIndex;
     },
     jump(index) {
       this.active = index;
     }
   },
-  data() {
-    return {
-      slides: [],
-      active: 0
-    };
-  },
   mounted() {
-    this.$slider;
-    axios.get("http://apiconsilio.local/wp-json/wp/v2/posts").then(response => {
-      response.data;
-    });
-    fetch("http://apiconsilio.local/wp-json/wp/v2/slider").then(response => {
-      response.json().then(sliders => {
-        this.title = sliders[0].title.rendered;
-        this.slides = sliders[0];
+    axios
+      .get("http://apiconsilio.local/wp-json/wp/v2/slider")
+      .then(response => {
+        this.slides = response.data;
+        this.countSlides = response.data.length;
       });
+    JSON.stringify({
+      filter: { published: true },
+      sort: { _created: -1 },
+      populate: 1
     });
+    this.changeArrayItem;
   }
 };
 </script>
@@ -90,14 +113,16 @@ $primary: #586371;
 }
 #slider .controls-slider {
   position: absolute;
-  width: 100%;
+  width: 250px;
   height: 35px;
   bottom: 10%;
+  left: 0;
+  display: flex;
+  align-items: center;
 }
 #slider .prev,
 #slider .next {
   position: absolute;
-  bottom: 0px;
   width: 30px;
   height: 30px;
   border: 2px solid $primary;
@@ -120,60 +145,62 @@ $primary: #586371;
     color: #fff;
     transform: scale(1.2);
   }
-
   &:active {
     transform: translate(0, 3px) scale(1.2);
   }
 }
 #slider .prev {
-  left: 50px;
+  left: 0px;
   opacity: 1;
 }
-
 #slider .next {
-  left: 300px;
+  right: 0px;
   margin-left: auto;
   text-indent: 2px;
 }
-
 #slider .dots {
   position: absolute;
   display: flex;
   text-align: center;
-  bottom: 8px;
-  left: 100px;
+  width: 100px;
+  height: 4px;
+  background: #fff;
+  position: relative;
+  margin: 0 auto;
   &:before {
     content: "01";
     font-size: 14px;
     font-family: "Quicksand Bold";
-    display: block;
     color: $primary;
     padding-right: 10px;
     margin-top: -4px;
+    display: flex;
+    position: absolute;
+    left: -30px;
   }
   &:after {
     content: "03";
     font-size: 14px;
     font-family: "Quicksand Bold";
-    display: block;
     color: $primary;
     padding-left: 10px;
     margin-top: -4px;
+    display: flex;
+    position: absolute;
+    right: -30px;
   }
-
   li {
-    width: 20px;
+    flex-grow: 1;
     height: 4px;
     background: #ffffff;
     display: inline-block;
     cursor: pointer;
-    transition: opacity 0.4s ease-in-out,
-      width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
+    transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1) 0s;
+    border-radius: 5px;
     &.active {
-      width: 50px;
       background: $primary;
       border-radius: 5px;
+      flex-grow: 1;
     }
   }
 }
@@ -188,11 +215,9 @@ $primary: #586371;
   justify-content: center;
   align-content: center;
   font-weight: bold;
-
   @media (min-width: 600px) {
     font-size: 80px;
   }
-
   @media (min-width: 900px) {
     font-size: 140px;
   }
@@ -218,7 +243,7 @@ $primary: #586371;
 
   .slide-out-active {
     opacity: 0;
-    transform: translate(-60%, -50%);
+    transform: translate(-50%, -50%);
   }
 }
 

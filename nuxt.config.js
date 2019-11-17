@@ -48,12 +48,7 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-    {
-      src: '~/plugins/slider.js',
-      ssr: false
-    }
-  ],
+  plugins: [],
   /*
   ** Nuxt.js dev-modules
   */
@@ -109,5 +104,9 @@ export default {
   server: {
     port: 8000,
     host: '0.0.0.0'
+  },
+  env: {
+    wordpressApiBaseUrl: 'http://apiconsilio.local/wp-json/wp/v2/',
+    proxyApiBaseUrl: process.env.NODE_ENV === 'production' ? 'https://consilio.com.br/wp-json/wp/v2' : 'http://apiconsilio.local/wp-json/wp/v2/'
   }
 }
