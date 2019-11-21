@@ -1,7 +1,10 @@
 import request from "axios";
 
+setTimeout(console.log.bind(console, "%c Desenvolvido por Humberto Martins (Agência Consilio) %c", "background: #0c2939;color:#FFF;padding:5px;line-height: 8px;border-radius: 5px;font-family:Poppins;font-weight: 600;", ""));
+console.log("");
+
 export default {
-  baseUrl: "http://apiconsilio.local/wp-json/wp/v2/",
+  baseUrl: "https://api.consilio.com.br/wp-json/wp/v2/",
 
   /**
    * Return a custom type slider
@@ -16,8 +19,6 @@ export default {
         const data = [...response.data];
         if (response.status === 200 && response.data.length > 0) {
           const filtered = {
-            total: response.headers["x-wp-total"],
-            totalPages: response.headers["x-wp-totalpages"],
             data: data.map(item => ({
               id: item.id,
               title: item.title.rendered,

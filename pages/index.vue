@@ -1,12 +1,12 @@
 <template>
-  <slider />
+  <slides />
 </template>
 
 <script>
-import Slider from "@/components/home/Slider.vue";
+import Slides from "@/components/home/Slides.vue";
 export default {
   components: {
-    Slider
+    Slides
   }
 };
 </script>

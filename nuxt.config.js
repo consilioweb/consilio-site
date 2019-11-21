@@ -48,7 +48,11 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    {
+      src: '@/plugins/parallax.js'
+    }
+  ],
   /*
   ** Nuxt.js dev-modules
   */
@@ -60,26 +64,15 @@ export default {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/amp',
-    'bootstrap-vue/nuxt'
   ],
   /*
   ** Bootstrap configuration
   */
-  bootstrapVue: {
-    css: false,
-    bvCSS: false,
-    componentPlugins: [
-      'FormPlugin',
-      'FormCheckboxPlugin',
-      'FormInputPlugin',
-      'FormRadioPlugin',
-      'ModalPlugin'
-    ]
-  },
   /*
   ** Build configuration
   */
   build: {
+    extractCSS: true,
   },
   manifest: {
     name: "Agência Consilio",
@@ -105,8 +98,10 @@ export default {
     port: 8000,
     host: '0.0.0.0'
   },
-  env: {
-    wordpressApiBaseUrl: 'http://apiconsilio.local/wp-json/wp/v2/',
-    proxyApiBaseUrl: process.env.NODE_ENV === 'production' ? 'https://consilio.com.br/wp-json/wp/v2' : 'http://apiconsilio.local/wp-json/wp/v2/'
-  }
+  axios: {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  },
 }
