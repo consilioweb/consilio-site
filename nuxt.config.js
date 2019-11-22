@@ -104,4 +104,7 @@ export default {
       'Content-Type': 'application/json',
     },
   },
+  generate: {
+    dir: 'consilio'
+  },
 }

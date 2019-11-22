@@ -22,12 +22,12 @@
           >
             <parallax-element style="z-index: 20;" :parallaxStrength="10" :type="'translation'">
               <div class="slide__title">
-                <h1>{{ slide.title.rendered }}</h1>
+                <h1>{{ slide.title }}</h1>
               </div>
             </parallax-element>
-            <div v-if="slide.content.rendered" class="slide__img" v-html="slide.content.rendered"></div>
+            <div v-if="slide.content" class="slide__img" v-html="slide.content"></div>
             <div v-else class="slide__img">
-              <img v-if="slide.quick_img != ''" alt="slide" :src="slide.quick_img" />
+              <img v-if="slide.img != ''" alt="slide" :src="slide.img" />
             </div>
           </div>
         </transition-group>
@@ -81,7 +81,7 @@
             class="dots"
             :style="current > 0 ? 'left: 0px;' : 'left: -50px;'"
             :current-slide="current"
-            :data-slides-count="'0' + slides.length"
+            :data-slides-count="'0' + this.length"
           >
             <li
               v-for="(slide,index) of slides"
@@ -96,18 +96,12 @@
 </template>
 
 <script>
-import axios from "axios";
-import api from "@/api/index";
 export default {
   name: "Slides",
-  props: {
-    slider: { type: Array }
-  },
+  props: ["slides", "length"],
   data() {
     return {
-      slides: {},
       current: 0,
-      count: 0,
       timer: 0,
       percent: 0,
       interval: 0,
@@ -118,33 +112,19 @@ export default {
     };
   },
   mounted() {
-    this.getData();
+    this.secondLast = this.length - 1;
     this.playslides[0] = this.slides[0];
     this.playslides[1] = this.slides[1];
     this.start();
   },
   methods: {
-    getData() {
-      axios
-        .get("http://apiconsilio.local/wp-json/wp/v2/slider")
-        .then(response => {
-          this.slides = response.data;
-          this.count = response.data.length;
-          this.secondLast = response.data.length - 1;
-        });
-      JSON.stringify({
-        filter: { status: "publish" },
-        sort: { _created: 1 },
-        populate: 1
-      });
-    },
     incrementSlide(val) {
-      if (val > 0 && this.current + val < this.slides.length) {
+      if (val > 0 && this.current + val < this.length) {
         this.current += val;
       } else if (val > 0) {
         this.current = 0;
       } else if (val < 0 && this.current + val < 0) {
-        this.current = this.slides.length - 1;
+        this.current = this.length - 1;
       } else {
         this.current += val;
       }
@@ -168,7 +148,7 @@ export default {
     },
     process() {
       this.current++;
-      if (this.current >= this.slides.length) {
+      if (this.current >= this.length) {
         this.current = 0;
       }
       this.playslides[this.current % 2] = this.slides[this.current];

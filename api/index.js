@@ -4,26 +4,22 @@ setTimeout(console.log.bind(console, "%c Desenvolvido por Humberto Martins (Agê
 console.log("");
 
 export default {
-  baseUrl: "https://api.consilio.com.br/wp-json/wp/v2/",
+  baseUrl: "http://api.consilio.com.br/wp-json/wp/v2/",
 
-  /**
-   * Return a custom type slider
-   * @param  string slug custom type slug (e.g. 'sample-slider')
-   * @return Promise Filtered response
-   */
-  getSlides() {
-    console.log("Request to Slides");
+  getMainMenu() {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
-      request.get(`slider`).then(response => {
+      request.get("menu-principal").then(response => {
         const data = [...response.data];
         if (response.status === 200 && response.data.length > 0) {
           const filtered = {
             data: data.map(item => ({
               id: item.id,
-              title: item.title.rendered,
-              content: item.content.rendered,
-              slug: item.slug
+              title: item.title,
+              status: item.post_status,
+              order: item.menu_order,
+              url: item.url,
+              target: item.target
             }))
           };
           resolve(filtered);
@@ -33,11 +29,30 @@ export default {
       });
     });
   },
-  /**
-   * Return a single page
-   * @param  string slug Page slug (e.g. 'sample-page')
-   * @return Promise Filtered response
-   */
+
+  getSlides() {
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      request.get("slider").then(response => {
+        const data = [...response.data];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            data: data.map(item => ({
+              id: item.id,
+              title: item.title.rendered,
+              content: item.content.rendered,
+              slug: item.slug,
+              img: item.quick_img
+            }))
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+
   getPage(slug) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
@@ -63,11 +78,6 @@ export default {
       });
     });
   },
-  /**
-   * Return a single post
-   * @param  string slug Post slug (e.g. 'hello-world')
-   * @return Promise Filtered response
-   */
   getPost(slug) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
@@ -93,11 +103,7 @@ export default {
       });
     });
   },
-  /**
-   * Return all posts (paginated)
-   * @param  string slug Post slug (e.g. 'hello-world')
-   * @return Promise Filtered response
-   */
+
   getPosts() {
     console.log("Request to posts");
     return new Promise((resolve, reject) => {
@@ -123,11 +129,6 @@ export default {
       });
     });
   },
-  /**
-   * Returns category data and all posts under it (paginated)
-   * @param  string slug Category slug (e.g. 'news')
-   * @return Promise Filtered response
-   */
   getCategory(slug) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;

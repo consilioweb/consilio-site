@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="icon-menu" :class="this.getMenuStats ? 'activeC' : ''">
+    <div class="icon-menu" :class="this.getStatsMainMenu ? 'activeC' : ''">
       <button
-        @click="$store.commit('menu/TOGGLE')"
-        :class="this.getMenuStats ? 'active' : ''"
+        @click="$store.commit('menus/TOGGLE_STATS_MAIN_MENU')"
+        :class="this.getStatsMainMenu ? 'active' : ''"
         class="btn-burger open-nav-main"
       >
         Menu
@@ -35,8 +35,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import menuModule from "@/store/menu";
+import { mapGetters } from "vuex";
 
 import FacebookIcon from "vue-material-design-icons/Facebook.vue";
 import InstagramIcon from "vue-material-design-icons/Instagram.vue";
@@ -53,7 +52,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getMenuStats: "menu/getMenuStats"
+      getStatsMainMenu: "menus/getStatsMainMenu"
     })
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <div id="open-menu" class="menu-overlay">
-    <nuxt-link to @click.native="$store.commit('menu/CLOSE')">
+    <nuxt-link to @click.native="$store.commit('menus/CLOSE_MAIN_MENU')">
       <div class="menu__close">
         <p>fechar menu</p>
       </div>
@@ -8,7 +8,7 @@
     <nav class="menu">
       <ul class="menu__content">
         <n-link
-          v-for="(item, index) in itemsMenu"
+          v-for="(item, index) in mainMenu"
           :key="index"
           @mouseover.native="getOver(item.title)"
           class="menu__title--link"
@@ -36,38 +36,17 @@
 </template>
 
 <script>
-import axios from "axios";
-import api from "@/api/index";
-import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import menuModule from "@/store/menu";
-
 export default {
-  name: "MenuFull",
+  name: "Menu",
+  props: ["mainMenu"],
   data() {
     return {
-      itemsMenu: {},
-      countItems: 0,
       itemOver: ""
     };
-  },
-  mounted() {
-    this.getData();
   },
   methods: {
     getOver(item) {
       this.itemOver = item;
-    },
-    getData() {
-      axios
-        .get("http://apiconsilio.local/wp-json/wp/v2/menu-principal")
-        .then(response => {
-          this.itemsMenu = response.data;
-          this.countItems = response.data.length;
-        });
-      JSON.stringify({
-        filter: { post_status: "publish" },
-        populate: 1
-      });
     }
   }
 };

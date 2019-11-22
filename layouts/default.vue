@@ -2,38 +2,34 @@
   <main>
     <Header />
     <transition name="fade">
-      <menu-full v-if="this.getMenuStats"></menu-full>
+      <Menu :main-menu="mainMenu" v-if="statsMainMenu" />
     </transition>
-    <side-menu />
+    <side-bar />
     <div v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
     <nuxt />
   </main>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import RegisterStoreModule from "@/mixins/RegisterStoreModule";
-import menuModule from "@/store/menu";
-import Header from "@/components/Header.vue";
-import SideMenu from "@/components/Side-menu.vue";
-import MenuFull from "@/components/Menu-full.vue";
-import BottomPlug from "@/components/Bottom-plug.vue";
+import { mapState, mapGetters } from "vuex";
+import Header from "@/components/header.vue";
+import SideBar from "@/components/side-bar.vue";
+import Menu from "@/components/menu.vue";
+import BottomPlug from "@/components/bottom-plug.vue";
 
 export default {
-  mixins: [RegisterStoreModule],
-  created() {
-    this.registerStoreModule("menu", menuModule);
-  },
-  computed: {
-    ...mapGetters({
-      getMenuStats: "menu/getMenuStats"
-    })
-  },
   components: {
     Header,
-    MenuFull,
-    SideMenu,
+    Menu,
+    SideBar,
     BottomPlug
+  },
+  computed: {
+    ...mapState("menus", ["mainMenu"]),
+    ...mapGetters({
+      statsMainMenu: "menus/getStatsMainMenu",
+      lengthMainMenu: "menus/lengthMainMenu"
+    })
   }
 };
 </script>

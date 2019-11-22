@@ -1,12 +1,19 @@
 <template>
-  <slides />
+  <slides :slides="slides" :length="lengthSlides" />
 </template>
 
 <script>
-import Slides from "@/components/home/Slides.vue";
+import { mapState, mapGetters } from "vuex";
+import slides from "@/components/home/slides.vue";
 export default {
   components: {
-    Slides
+    slides
+  },
+  computed: {
+    ...mapState("slides", ["slides"]),
+    ...mapGetters({
+      lengthSlides: "slides/lengthSlides"
+    })
   }
 };
 </script>
