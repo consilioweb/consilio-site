@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="side-bar">
     <div class="icon-menu" :class="this.getStatsMainMenu ? 'activeC' : ''">
       <button
         @click="$store.commit('menus/TOGGLE_STATS_MAIN_MENU')"
@@ -12,7 +12,7 @@
         <span class="l3"></span>
       </button>
     </div>
-    <section class="menu-side">
+    <div class="menu-side">
       <div class="aside-social">
         <n-link to="#" class="item-social">
           <facebook-icon />
@@ -30,7 +30,7 @@
           <linkedin-icon />
         </n-link>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -59,39 +59,39 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./assets/scss/_reset.scss";
-@import "./assets/scss/_fonts.scss";
 @import "./assets/scss/_variables.scss";
 @import "./assets/scss/_flexbox.scss";
 
 .menu-side {
-  width: 40px;
-  height: 100%;
-  right: 0;
   position: fixed;
+  bottom: 0;
+  right: inherit;
+  left: inherit;
+  height: 40px;
+  width: 100%;
+  padding: 10px;
   background: $white;
-  padding: 50px 20px 50px 20px;
   @include flexbox;
-  @include justify-content(center);
-  @include align-items(flex-end);
+  @include flex-direction(row);
+  @include align-items(center);
+  @include justify-content(flex-end);
   z-index: 10;
-  @media screen and (max-width: $break_sm) {
-    bottom: 0;
-    right: inherit;
-    left: inherit;
-    height: 40px;
-    width: 100%;
-    padding: 10px;
-    @include flex-direction(row);
-    @include align-items(center);
-    @include justify-content(flex-end);
+  @media screen and (min-width: $break-md) {
+    width: 30px;
+    height: 100%;
+    right: 0;
+    padding: 50px 20px 50px 20px;
+    @include align-items(flex-end);
+    @include justify-content(center);
+  }
+  @media screen and (min-width: $break-lg) {
+    width: 40px;
   }
 }
 .aside-social {
-  padding-bottom: 120px;
   @include flexbox;
   @include flex-direction(column);
-  @media screen and (max-width: $break-sm) {
+  @media screen and (max-width: $break-md) {
     padding: 0px;
     @include flex-direction(row);
     padding-right: 10%;
@@ -100,7 +100,7 @@ export default {
 .aside-social svg {
   fill: $tertiary;
   width: 16px;
-  @media screen and (max-width: $break-sm) {
+  @media screen and (max-width: $break-md) {
     padding-left: 10px;
     vertical-align: middle;
   }
@@ -108,20 +108,24 @@ export default {
 
 .icon-menu {
   position: fixed;
-  right: 28px;
-  top: 50px;
   flex: 1;
+  left: 20px;
+  bottom: 8px;
+  top: initial;
   @include justify-content(center);
   z-index: 999999;
-  @media screen and (max-width: $break_sm) {
-    left: 20px;
-    bottom: 8px;
-    top: initial;
-    &.activeC {
-      top: 50px;
-      right: 27px;
-      left: inherit;
-    }
+  &.activeC {
+    top: 50px;
+    right: 27px;
+    left: inherit;
+  }
+  @media screen and (min-width: $break-md) {
+    top: 50px;
+    right: 23px;
+    left: inherit;
+  }
+  @media screen and (min-width: $break-lg) {
+    right: 27px;
   }
 }
 .icon-menu .btn-burger {

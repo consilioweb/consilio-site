@@ -12,8 +12,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "./assets/scss/_reset.scss";
-@import "./assets/scss/_fonts.scss";
 @import "./assets/scss/_variables.scss";
 @import "./assets/scss/_flexbox.scss";
 
@@ -26,7 +24,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: absolute;
   background-color: rgba(255, 255, 255, 0);
   z-index: 9;
   box-sizing: border-box;

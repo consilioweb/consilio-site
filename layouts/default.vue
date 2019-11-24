@@ -1,12 +1,15 @@
 <template>
   <main>
     <Header />
+    <side-bar />
+
     <transition name="fade">
       <Menu :main-menu="mainMenu" v-if="statsMainMenu" />
     </transition>
-    <side-bar />
-    <div v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
-    <nuxt />
+    <parallax-container>
+      <div v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
+      <nuxt />
+    </parallax-container>
   </main>
 </template>
 

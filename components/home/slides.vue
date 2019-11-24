@@ -1,6 +1,6 @@
 <template>
-  <div id="slides">
-    <parallax-container class="height__100">
+  <section>
+    <div id="slides">
       <div class="slides">
         <div class="slides__text-rotate">
           <span>consilio</span>
@@ -91,8 +91,8 @@
           </ul>
         </div>
       </div>
-    </parallax-container>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -163,26 +163,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/_reset.scss";
-@import "./assets/scss/_fonts.scss";
 @import "./assets/scss/_variables.scss";
 @import "./assets/scss/_flexbox.scss";
 
-html {
-  overflow-x: hidden;
+section {
+  position: relative;
 }
-body {
-  background: $gray_light;
-  font-family: "Poppins", sans-serif;
-  transition: all 0.5s ease-in-out;
-}
-img {
-  color: $primary;
-  size: 10px;
-  font-size: 13px !important;
-  text-decoration: underline;
-}
-
 .height__100 {
   height: 100%;
 }
@@ -190,13 +176,13 @@ img {
   display: none;
 }
 #slides {
-  position: absolute;
+  position: relative;
   left: 0;
   display: flex;
   flex-flow: column;
   z-index: 999;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: 8;
   &:after {
     background: $secondary;
@@ -251,7 +237,6 @@ img {
 }
 .slide__title h1 {
   color: $primary;
-  font-size: 75px;
   font-family: "Montserrat";
   font-weight: 900;
   font-size: 40px;
@@ -261,9 +246,6 @@ img {
   }
   @media screen and (min-width: $break-md) {
     font-size: 60px;
-  }
-  @media screen and (min-width: $break-lg) {
-    font-size: 80px;
   }
   @media screen and (min-width: $break-xl) {
     font-size: 80px;

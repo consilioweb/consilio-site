@@ -8,7 +8,7 @@ export default {
     title: 'Agência Consilio | Comunicação que reúne relacionamentos e resultados.',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1.0' },
       { hid: 'description', name: 'description', content: 'Somos uma agência para quem desejar ter resultados e vê nas mídias digitais (Google, Facebook, Instagram e outros) o seu meio de alcançar os objetivos.' },
       {
         hid: 'twitter:card',
@@ -51,6 +51,9 @@ export default {
   plugins: [
     {
       src: '@/plugins/parallax.js'
+    },
+    {
+      src: '@/plugins/svg-icon.js'
     }
   ],
   /*
@@ -72,7 +75,17 @@ export default {
   ** Build configuration
   */
   build: {
-    extractCSS: true,
+    extend(config, context) {
+      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
+      svgRule.exclude = /(\/assets\/icons\/svg)/
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        include: /(\/assets\/icons\/svg)/,
+        use: [{ loader: 'svg-sprite-loader', options: { symbolId: 'icon-[name]' } }]
+      })
+    },
+    extractCSS: true
   },
   manifest: {
     name: "Agência Consilio",

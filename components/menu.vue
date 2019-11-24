@@ -62,8 +62,6 @@ export default {
   opacity: 0;
 }
 
-@import "./assets/scss/_reset.scss";
-@import "./assets/scss/_fonts.scss";
 @import "./assets/scss/_variables.scss";
 @import "./assets/scss/_flexbox.scss";
 
