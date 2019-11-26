@@ -86,6 +86,6 @@ export default {
   }
 }
 svg {
-  padding-left: 20px;
+  padding-left: 35px;
 }
 </style>

@@ -16,36 +16,28 @@
 @import "./assets/scss/_flexbox.scss";
 
 header {
-  top: 50px;
-  left: 0;
   height: 70px;
-  width: 100vw;
-  padding: 0 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0);
-  z-index: 9;
-  box-sizing: border-box;
+  margin: 10% 5%;
+  @include flexbox;
+  @include justify-content(space-around);
+  width: -webkit-fill-available;
+  z-index: 99;
+  @media screen and (min-width: $break-md) {
+    margin: 5% 13% 10% 10%;
+  }
 }
-header img {
+header .logo {
+  @include flexbox;
+  flex: 1;
+}
+header .logo img {
   height: 30px;
 }
 header .button-top {
-  margin-right: 0;
-  @media screen and (min-width: $break-sm) {
-    margin-right: 15%;
-  }
-  @media screen and (min-width: $break-md) {
-    margin-right: 10%;
-  }
-  @media screen and (min-width: $break-lg) {
-    margin-right: 10%;
-  }
-  @media screen and (min-width: $break-xl) {
-    margin-right: 10%;
-  }
+  @include flexbox;
+  flex: 1;
+  @include justify-content(flex-end);
 }
 header button {
   height: 40px;

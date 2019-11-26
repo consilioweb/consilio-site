@@ -176,12 +176,9 @@ section {
   display: none;
 }
 #slides {
-  position: relative;
-  left: 0;
-  display: flex;
-  flex-flow: column;
+  @include flexbox;
   z-index: 999;
-  width: 100vw;
+  margin: 0 13% 10% 10%;
   height: 100vh;
   z-index: 8;
   &:after {
@@ -214,14 +211,13 @@ section {
     top: 35%;
   }
   @media screen and (min-width: $break-md) {
-    right: 48%;
+    right: 45%;
     top: 35%;
   }
 }
 
 .slide__content {
   position: absolute;
-  width: 100%;
   height: 100%;
   @include flexbox;
   @include align-items(center);
@@ -255,10 +251,10 @@ section {
   position: absolute;
   z-index: 11;
   height: 100%;
+  right: -10%;
   @include flexbox;
   @include align-items(center);
   @media screen and (min-width: $break-sm) {
-    right: 10%;
   }
 }
 #slides .slide__img img {
@@ -433,22 +429,18 @@ section {
 #slides .slides {
   width: 100vw;
   height: 100%;
-  box-sizing: border-box;
-  padding: 0 5%;
   position: relative;
   font-size: 40px;
   display: flex;
   transition: all 400ms;
   @media (min-width: $break-md) {
     font-size: 80px;
-    margin: inherit;
   }
   @media (min-width: $break-md) {
     font-size: 100px;
   }
   @media (min-width: $break-lg) {
     font-size: 140px;
-    margin: 0 auto;
   }
 
   .animated {

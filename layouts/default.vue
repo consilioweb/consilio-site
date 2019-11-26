@@ -2,7 +2,6 @@
   <main>
     <Header />
     <side-bar />
-
     <transition name="fade">
       <Menu :main-menu="mainMenu" v-if="statsMainMenu" />
     </transition>

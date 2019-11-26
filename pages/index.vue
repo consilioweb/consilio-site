@@ -3,6 +3,7 @@
     <slides :slides="slides" :length="lengthSlides" />
     <about />
     <methodology />
+    <cases />
   </div>
 </template>
 
@@ -10,12 +11,14 @@
 import { mapState, mapGetters } from "vuex";
 import slides from "@/components/home/slides.vue";
 import about from "@/components/home/about.vue";
+import cases from "@/components/home/cases.vue";
 import methodology from "@/components/home/methodology.vue";
 export default {
   components: {
     slides,
     about,
-    methodology
+    methodology,
+    cases
   },
   computed: {
     ...mapState("slides", ["slides"]),

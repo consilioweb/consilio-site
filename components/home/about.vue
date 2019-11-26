@@ -16,7 +16,9 @@
         <p>A Agência Consilio conta com um time multidisciplinar focado em construir pontes entre o marketing digital e seus resultados. Acreditamos intensamente que ações isoladas, sem um objetivo estratégico, não surtirão efeitos. Como, por exemplo, usar apenas Google Ads, redes sociais, ou site.</p>
         <p>Através dos incansáveis estudos da nossa equipe em busca de soluções efetivas, nós criamos uma metodologia com a finalidade de elaborar ações do marketing digital para a sua empresa. Somos especializados em estratégias digitais, associando tecnologia e relacionamento com um único objetivo: resultados reais.</p>
       </div>
-      <button-shadow :title="buttonShadow" />
+      <div class="about__text--button">
+        <button-shadow :title="buttonShadow" />
+      </div>
     </div>
   </section>
 </template>
@@ -41,25 +43,21 @@ export default {
 
 .about {
   position: relative;
-  width: 100%;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  margin: 5%;
   @include flexbox;
   @include align-items(center);
   @include flex-direction(column);
-  padding: 100px 5% 50px 5%;
   @media screen and (min-width: $break-md) {
     @include flex-direction(row);
-    padding-right: 13%;
+    margin: 10% 13% 10% 10%;
   }
 }
 .about__text {
   @include align-items(center);
-  width: 50%;
-  padding: 0px 0px 0px 8%;
-  @media screen and (max-width: $break-md) {
-    width: 100%;
-    padding: 80px;
+  @include justify-content(center);
+  margin: 10% 0% 10% 0;
+  @media screen and (min-width: $break-md) {
+    margin: 0 0 0 10%;
   }
 }
 .about__text--title h2 {
@@ -71,21 +69,15 @@ export default {
     text-align: left;
   }
 }
-.about__text--content {
-  padding-bottom: 20px;
-}
 .about__text--content p {
   color: $tertiary;
   padding: 10px 0;
   text-align: justify;
 }
 .about__img {
-  min-width: 50%;
-  max-width: 50%;
-  position: relative;
-  @media screen and (max-width: $break-md) {
-    min-width: inherit;
-    max-width: inherit;
+  min-width: 100%;
+  @media screen and (min-width: $break-md) {
+    min-width: 52%;
   }
 }
 .about__img img {
@@ -109,9 +101,17 @@ export default {
   transform: translate(38%, 10%) rotate(-90deg);
   right: 48%;
   top: 35%;
-  @media screen and (min-width: $break-sm) {
-    right: 90%;
-    top: 40%;
+  @media screen and (min-width: $break-md) {
+    right: 100%;
+    top: 30%;
+  }
+}
+.about__text--button {
+  @include flexbox;
+  @include justify-content(center);
+  margin: 20px 0;
+  @media screen and (min-width: $break-md) {
+    @include justify-content(left);
   }
 }
 </style>
