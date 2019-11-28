@@ -54,6 +54,9 @@ export default {
     },
     {
       src: '@/plugins/svg-icon.js'
+    },
+    {
+      src: '@/plugins/carousel.js', mode: 'client'
     }
   ],
   /*
@@ -76,6 +79,7 @@ export default {
   */
   build: {
     extend(config, context) {
+      config.resolve.alias["vue$"] = "vue/dist/vue.esm.js"
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
       svgRule.exclude = /(\/assets\/icons\/svg)/
 

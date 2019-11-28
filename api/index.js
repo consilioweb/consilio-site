@@ -4,7 +4,7 @@ setTimeout(console.log.bind(console, "%c Desenvolvido por Humberto Martins (Agê
 console.log("");
 
 export default {
-  baseUrl: "http://api.consilio.com.br/wp-json/wp/v2/",
+  baseUrl: "http://apiconsilio.local/wp-json/wp/v2/",
 
   getMainMenu() {
     return new Promise((resolve, reject) => {
@@ -53,6 +53,30 @@ export default {
     });
   },
 
+  getCases() {
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      request.get("case").then(response => {
+        const data = [...response.data];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            data: data.map(item => ({
+              id: item.id,
+              title: item.title.rendered,
+              content: item.content.rendered,
+              slug: item.slug,
+              img: item.quick_img,
+              client: item.client
+            }))
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+
   getPage(slug) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
@@ -60,16 +84,16 @@ export default {
         const data = [...response.data][0];
         if (response.status === 200 && response.data.length > 0) {
           const filtered = {
-            content: data.content.rendered,
-            author: data.author,
+            id: data.id,
             date: data.date,
             date_gmt: data.date_gmt,
-            excerpt: data.excerpt.rendered,
-            featured_media: data.featured_media,
-            guid: data.guid.rendered,
-            link: data.link,
             slug: data.slug,
-            title: data.title.rendered
+            status: data.status,
+            title: data.title.rendered,
+            excerpt: data.excerpt.rendered,
+            link: data.link,
+            content: data.content.rendered,
+            author: data.author,
           };
           resolve(filtered);
         } else {

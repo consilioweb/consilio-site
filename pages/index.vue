@@ -3,7 +3,7 @@
     <slides :slides="slides" :length="lengthSlides" />
     <about />
     <methodology />
-    <cases />
+    <cases :cases="cases" :length="lengthCases" />
   </div>
 </template>
 
@@ -22,8 +22,10 @@ export default {
   },
   computed: {
     ...mapState("slides", ["slides"]),
+    ...mapState("cases", ["cases"]),
     ...mapGetters({
-      lengthSlides: "slides/lengthSlides"
+      lengthSlides: "slides/lengthSlides",
+      lengthCases: "cases/lengthCases"
     })
   }
 };

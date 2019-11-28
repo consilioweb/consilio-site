@@ -19,7 +19,8 @@
     "axios": "^0.19.0",
     "nuxt": "^2.0.0",
     "vue-material-design-icons": "^4.1.0",
-    "vue-mouse-parallax": "^1.2.2"
+    "vue-mouse-parallax": "^1.2.2",
+    "vue-tiny-slider": "^0.1.39"
   },
   "devDependencies": {
     "eslint": "^6.6.0",

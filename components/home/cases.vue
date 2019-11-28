@@ -1,45 +1,77 @@
 <template>
   <section class="cases">
-    <div class="cases__title">
-      <parallax-element :parallaxStrength="-15" :type="'translation'">
-        <h2>cases</h2>
-      </parallax-element>
-      <span class="cases__title--bg">portfólio</span>
-    </div>
-    <div class="cases__content">
-      <div class="card-carousel">
-        <div class="card-carousel__item" v-bind:style="style" v-on:click="centerSelf">
-          <div class="card-carousel__item--cover">
-            <img src="@/assets/img/implantes.png" />
-          </div>
-          <div class="card-carousel__item--title">
-            <h3>Grupo Sorrir</h3>
-          </div>
-          <div class="card-carousel__item--button">
-            <button-shadow :title="buttonShadow" />
-          </div>
-        </div>
-        <div class="card-carousel__item active" v-bind:style="style" v-on:click="centerSelf">
-          <div class="card-carousel__item--cover">
-            <img src="@/assets/img/invisalign.png" />
-          </div>
-          <div class="card-carousel__item--title">
-            <h3>Afeto Odontologia</h3>
-          </div>
-          <div class="card-carousel__item--button">
-            <button-shadow :title="buttonShadow" />
-          </div>
-        </div>
-        <div class="card-carousel__item" v-bind:style="style" v-on:click="centerSelf">
-          <div class="card-carousel__item--cover">
-            <img src="@/assets/img/facetas.png" />
-          </div>
-          <div class="card-carousel__item--title">
-            <h3>Odonto Design</h3>
-          </div>
-          <div class="card-carousel__item--button">
-            <button-shadow :title="buttonShadow" />
-          </div>
+    <div class="cases__container">
+      <div class="cases__title">
+        <parallax-element :parallaxStrength="-15" :type="'translation'">
+          <h2>cases</h2>
+        </parallax-element>
+        <span class="cases__title--bg">portfólio</span>
+      </div>
+      <div class="cases__content">
+        <div class="card-carousel" ref="card-carousel">
+          <client-only>
+            <ul
+              class="controls controls__carousel"
+              id="slider-dots"
+              aria-label="Navegação do carssousel"
+              tabindex="0"
+            >
+              <li
+                @click="prev"
+                class="prev"
+                data-controls="prev"
+                aria-controls="customize"
+                tabindex="-1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 48.52 48.52"
+                >
+                  <circle class="svgplay__circle" cx="24.26" cy="24.26" r="22.5" />
+                  <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
+                </svg>
+              </li>
+              <li
+                @click="next"
+                class="next"
+                data-controls="next"
+                aria-controls="customize"
+                tabindex="-1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 48.52 48.52"
+                >
+                  <circle class="svgplay__circle" cx="24.26" cy="24.26" r="22.5" />
+                  <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
+                </svg>
+              </li>
+            </ul>
+            <carousel ref="carousel" v-bind="carouselOptions">
+              <div
+                class="card-carousel__item"
+                ref="card-carousel__item"
+                v-for="(item, index) in cases"
+                :key="index"
+              >
+                <div class="card-carousel__item--cover">
+                  <img
+                    v-if="item.img != ''"
+                    :alt="'Imagem destaque do case '+item.client"
+                    :src="item.img"
+                  />
+                </div>
+                <div class="card-carousel__item--title">
+                  <h3>{{ item.client }}</h3>
+                </div>
+                <div class="card-carousel__item--button">
+                  <button-shadow :title="buttonShadow" />
+                </div>
+              </div>
+            </carousel>
+          </client-only>
         </div>
       </div>
     </div>
@@ -50,133 +82,67 @@
 import ButtonShadow from "@/components/button-shadow";
 
 export default {
+  name: "Cases",
+  props: ["cases", "length"],
   components: {
     ButtonShadow
   },
-  data() {
-    return {
-      buttonShadow: "Ver Case",
-      zIndex: 0,
-      xtrans: 0,
-      ytrans: 0,
-      scale: 1,
-      opacity: 1
-    };
-  },
-  computed: {
-    style() {
-      return {
-        transition: "transform 0.5s, opacity 0.5s",
-        transform: this.transform,
-        "z-index": this.zIndex,
-        opacity: this.opacity
-      };
-    },
-    transform() {
-      return [
-        `translate(${this.xtrans - 50}%, ${this.ytrans - 50}%)`,
-        `scale(${this.scale})`
-      ].join(" ");
+  data: () => ({
+    buttonShadow: "Ver Case",
+    carouselOptions: {
+      loop: true,
+      controls: false,
+      autoplay: true,
+      mouseDrag: true,
+      autoplayHoverPause: true,
+      center: true,
+      nav: false,
+      startIndex: 1,
+      autoplayButtonOutput: false,
+      arrowKeys: true,
+      preventActionWhenRunning: true,
+      autoplayTimeout: 2500,
+      controlsContainer: "#slider-dots"
     }
-  },
+  }),
   methods: {
-    centerSelf() {
-      this.arrange(this.$children.indexOf(this));
+    getInfo: function(event) {
+      this.$refs.carousel.slider.getInfo();
     },
-    _mod: (n, m) => ((n % m) + m) % m,
-
-    // Distribute elements so that they align with the selected elemenent in the center
-    arrange(centerIndex) {
-      const center = this.$children[centerIndex];
-      const half = (this.$children.length - 1) / 2;
-
-      // Items that will be displayed to the left of the item at centerIndex
-      const before = [];
-      // Keep adding items before until half the non-centerIndex items have been added
-      for (let i = centerIndex - 1; before.length < half; i--) {
-        // this._mod is used to emulate a toroidal array by mapping elements below index 0 or beyond
-        // the max index to elements in the valid array range
-        before.push(this.$children[this._mod(i, this.$children.length)]);
-      }
-
-      // Items that will be displayed to the right of the item at centerIndex
-      const after = [];
-      for (
-        let i = centerIndex + 1;
-        after.length < this.$children.length - before.length - 1;
-        i++
-      ) {
-        after.push(this.$children[this._mod(i, this.$children.length)]);
-      }
-
-      // Position all elements
-
-      // Position center
-      center.xtrans = 0;
-      center.scale = 1;
-      center.opacity = 1;
-      center.zIndex = Math.max(before.length, after.length) + 1;
-
-      // Position elements to left and right
-      [before, after].forEach((list, listIndex) => {
-        console.log(+1);
-        // Tracks the amount by which the parent was translated
-        let parentTrans = 0;
-
-        // Apply styles for each element in selected list
-        list.forEach((item, i) => {
-          // Set size
-          item.scale = 0.8 ** (i + 1);
-          // Set x offset. Negative for before, positive for after
-          const absolute = 105 * item.scale * 1.125 + parentTrans;
-          parentTrans = absolute; // Update how much parent was translated by
-          item.xtrans = (listIndex == 0 ? -1 : 1) * absolute;
-          // Set opacity
-          item.opacity = Math.max(1 - 0.25 * (i / 2 + 1) ** 2, 0);
-          // Set z-index
-          item.zIndex = Math.max(before.length, after.length) - i;
-        });
-      });
+    prev: function(event) {
+      this.$refs.carousel.slider.goTo("prev");
+    },
+    next: function(event) {
+      this.$refs.carousel.slider.goTo("next");
     }
-  },
-  fetch(createElement) {
-    return createElement(
-      "div",
-      {
-        class: "cases__content",
-        ref: "cases__content"
-      },
-      this.$slots.default.map(el => createElement("card-carousel__item", [el]))
-    );
-  },
-
-  // Begin by centering the first element in the carousel
-  mounted() {
-    this.arrange(0);
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "./assets/scss/_variables.scss";
 @import "./assets/scss/_flexbox.scss";
+@import "tiny-slider/src/tiny-slider.scss";
 
 .cases {
   position: relative;
+}
+.cases__container {
   margin: 5%;
   @include flexbox;
   @include align-items(center);
   @include flex-direction(column);
+  @include flex-flow(wrap);
   @media screen and (min-width: $break-md) {
+    @include flex-direction(row);
     margin: 10% 13% 10% 10%;
   }
 }
 .cases__title {
   @include flexbox;
   @include justify-content(center);
+  width: 100%;
   padding-bottom: 30px;
-  margin: 0 auto;
-  flex: 1;
 }
 
 .cases__title--bg {
@@ -200,8 +166,8 @@ export default {
 .card-carousel {
   @include flexbox;
   @include flex-direction(column);
-  position: absolute;
-  width: 110vw;
+  position: relative;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   @media screen and (min-width: $break-md) {
     @include flex-direction(row);
   }
@@ -212,27 +178,32 @@ export default {
   opacity: 0.3;
   @include flexbox;
   @include align-items(center);
+  @include justify-content(center);
   @include flex-direction(column);
   background: $secondary;
   flex: 1;
-  padding: 30px;
-  margin: 5%;
+  padding: 0px;
   position: relative;
-  min-height: 450px;
+  min-height: 530px;
   height: 100%;
-  width: calc(130% - 3rem);
-  justify-content: flex-end;
+  -webkit-touch-callout: none; /* iPhone OS, Safari */
+  -webkit-user-select: none; /* Chrome, Safari 3 */
+  -khtml-user-select: none; /* Safari 2 */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  user-select: none; /* Possível implementação no futuro */
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   @media screen and (min-width: $break-md) {
-    margin: 0% 5%;
-    padding: 30px;
+    //margin: 0% 5%;
+    padding: 0px;
   }
   & h3 {
     color: #2f2f2f;
   }
-  &.active {
+  &.tns-slide-active {
     filter: inherit;
     opacity: 1;
-    &.active h3 {
+    &.tns-slide-active h3 {
       color: $white !important;
     }
   }
@@ -246,6 +217,7 @@ export default {
   width: 100%;
   width: calc(130% - 3rem);
   margin-left: -10%;
+  margin-top: -30px;
 }
 .card-carousel__item--title {
   position: absolute;
@@ -264,6 +236,99 @@ export default {
 .card-carousel__item--button {
   position: absolute;
   bottom: 50px;
+  left: 50px;
   transform: scale(0.8);
+}
+
+.tns-slider > .tns-item {
+  box-sizing: inherit !important;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.tns-slider {
+  @include flexbox;
+  margin: 0 auto;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.tns-item {
+  margin: 10px 3em 0 3em;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.controls__carousel {
+  z-index: 999;
+  @media screen and (min-width: $break-sm) {
+    margin: initial;
+  }
+}
+.svgplay__circle,
+.svgplay__line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 3px;
+}
+
+.svgplay__line {
+  stroke: $primary;
+  transform: rotate(90deg);
+  transform-origin: center center;
+}
+
+.next svg {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+.prev svg {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.prev,
+.next {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  color: $gray_light;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 0px;
+  text-align: center;
+  top: calc(50% - 20px);
+  z-index: 9999;
+  -webkit-box-shadow: 1px 13px 41px -4px rgba(46, 61, 98, 0.15);
+  -moz-box-shadow: 1px 13px 41px -4px rgba(46, 61, 98, 0.15);
+  box-shadow: 1px 13px 41px -4px rgba(46, 61, 98, 0.15);
+  outline: none;
+  & svg {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    cursor: pointer;
+  }
+  &:hover {
+    background: transparent;
+    color: #fff;
+    transform: scale(1.2);
+    -webkit-box-shadow: 1px 13px 41px 5px rgba(46, 61, 98, 0.19);
+    -moz-box-shadow: 1px 13px 41px 5px rgba(46, 61, 98, 0.19);
+    box-shadow: 1px 13px 41px 5px rgba(46, 61, 98, 0.19);
+    outline: none;
+  }
+  &:active {
+    transform: translate(0, 3px) scale(1.2);
+    outline: none;
+  }
+}
+.prev {
+  left: -20px;
+  opacity: 1;
+}
+.next {
+  right: -20px;
+  margin-left: auto;
+  text-indent: 2px;
+}
+.tns-ovh {
+  overflow: inherit !important;
 }
 </style>
