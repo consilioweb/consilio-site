@@ -16,13 +16,7 @@
               aria-label="Navegação do carssousel"
               tabindex="0"
             >
-              <li
-                @click="prev"
-                class="prev"
-                data-controls="prev"
-                aria-controls="customize"
-                tabindex="-1"
-              >
+              <li @click="prev" class="prev" data-controls="prev" tabindex="-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -32,13 +26,7 @@
                   <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
                 </svg>
               </li>
-              <li
-                @click="next"
-                class="next"
-                data-controls="next"
-                aria-controls="customize"
-                tabindex="-1"
-              >
+              <li @click="next" class="next" data-controls="next" tabindex="-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -61,13 +49,14 @@
                     v-if="item.img != ''"
                     :alt="'Imagem destaque do case '+item.client"
                     :src="item.img"
+                    class="card-carousel--img"
                   />
                 </div>
                 <div class="card-carousel__item--title">
                   <h3>{{ item.client }}</h3>
                 </div>
                 <div class="card-carousel__item--button">
-                  <button-shadow :title="buttonShadow" />
+                  <button-shadow :text="textButton" />
                 </div>
               </div>
             </carousel>
@@ -88,7 +77,7 @@ export default {
     ButtonShadow
   },
   data: () => ({
-    buttonShadow: "Ver Case",
+    textButton: "Ver Case",
     carouselOptions: {
       loop: true,
       controls: false,
@@ -97,12 +86,13 @@ export default {
       autoplayHoverPause: true,
       center: true,
       nav: false,
-      startIndex: 1,
+      startIndex: 0,
       autoplayButtonOutput: false,
       arrowKeys: true,
+      controlsContainer: "#slider-dots",
+      speed: 2000,
+      autoplayTimeout: 4000,
       preventActionWhenRunning: true,
-      autoplayTimeout: 2500,
-      controlsContainer: "#slider-dots"
     }
   }),
   methods: {
@@ -119,13 +109,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./assets/scss/_variables.scss";
 @import "./assets/scss/_flexbox.scss";
-@import "tiny-slider/src/tiny-slider.scss";
 
 .cases {
   position: relative;
+  width: 100vw;
 }
 .cases__container {
   margin: 5%;
@@ -150,24 +140,30 @@ export default {
   white-space: nowrap;
   color: $primary;
   opacity: 0.04;
-  font-size: 180px;
+  font-size: 80px;
   font-family: "Montserrat";
   font-weight: 900;
   z-index: -2;
-  top: -5%;
+  top: 10px;
+  text-align: center;
+  @media screen and (min-width: $break-md) {
+    font-size: 180px;
+    top: -5%;
+  }
 }
 .cases__content {
   @include flexbox;
   @include justify-content(center);
   padding-bottom: 30px;
   position: relative;
-  margin: 0 auto;
+  @media screen and (min-width: $break-md) {
+    margin: 0 auto;
+  }
 }
 .card-carousel {
   @include flexbox;
   @include flex-direction(column);
   position: relative;
-  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   @media screen and (min-width: $break-md) {
     @include flex-direction(row);
   }
@@ -180,11 +176,12 @@ export default {
   @include align-items(center);
   @include justify-content(center);
   @include flex-direction(column);
+  transition: all 2s ease-in-out;
   background: $secondary;
   flex: 1;
   padding: 0px;
   position: relative;
-  min-height: 530px;
+  min-height: 450px;
   height: 100%;
   -webkit-touch-callout: none; /* iPhone OS, Safari */
   -webkit-user-select: none; /* Chrome, Safari 3 */
@@ -192,17 +189,25 @@ export default {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
   user-select: none; /* Possível implementação no futuro */
-  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  @media screen and (min-width: $break-md) {
+    overflow: inherit;
+  }
   @media screen and (min-width: $break-md) {
     //margin: 0% 5%;
     padding: 0px;
+    min-height: 530px;
   }
   & h3 {
     color: #2f2f2f;
+
+    transition: all 2s ease-in-out;
   }
   &.tns-slide-active {
     filter: inherit;
     opacity: 1;
+    overflow: inherit;
+    transition: all 2s ease-in-out;
     &.tns-slide-active h3 {
       color: $white !important;
     }
@@ -216,42 +221,55 @@ export default {
 .card-carousel__item--cover img {
   width: 100%;
   width: calc(130% - 3rem);
-  margin-left: -10%;
-  margin-top: -30px;
+  margin-top: -10px;
+  @media screen and (min-width: $break-md) {
+    margin-left: -10%;
+    margin-top: -30px;
+  }
 }
 .card-carousel__item--title {
   position: absolute;
-  left: 70px;
+  left: 40px;
   bottom: 100px;
+  @media screen and (min-width: $break-md) {
+    left: 70px;
+  }
 }
 .card-carousel__item--title h3 {
-  font-size: 60px;
+  font-size: 50px;
   font-family: "Montserrat";
   font-weight: 900;
   display: flex;
   padding-bottom: 20px;
   line-height: 1.1;
   text-shadow: 4px 4px 17px rgba(46, 61, 98, 0.23);
+  @media screen and (min-width: $break-md) {
+    font-size: 60px;
+  }
 }
 .card-carousel__item--button {
   position: absolute;
   bottom: 50px;
-  left: 50px;
+  left: 20px;
   transform: scale(0.8);
+  @media screen and (min-width: $break-md) {
+    left: 50px;
+  }
 }
 
 .tns-slider > .tns-item {
   box-sizing: inherit !important;
-  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .tns-slider {
   @include flexbox;
   margin: 0 auto;
-  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .tns-item {
-  margin: 10px 3em 0 3em;
-  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin: 10px 2em 0 2em;
+  @media screen and (min-width: $break-md) {
+    @include flex-direction(row);
+    margin: 10px 3em 0 3em;
+  }
 }
 
 .controls__carousel {
@@ -300,10 +318,14 @@ export default {
   box-shadow: 1px 13px 41px -4px rgba(46, 61, 98, 0.15);
   outline: none;
   & svg {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     cursor: pointer;
+    @media screen and (min-width: $break-md) {
+      width: 40px;
+      height: 40px;
+    }
   }
   &:hover {
     background: transparent;
@@ -320,13 +342,19 @@ export default {
   }
 }
 .prev {
-  left: -20px;
+  left: -10px;
   opacity: 1;
+  @media screen and (min-width: $break-md) {
+    left: -20px;
+  }
 }
 .next {
-  right: -20px;
+  right: -10px;
   margin-left: auto;
   text-indent: 2px;
+  @media screen and (min-width: $break-md) {
+    right: -20px;
+  }
 }
 .tns-ovh {
   overflow: inherit !important;

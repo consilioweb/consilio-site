@@ -27,12 +27,13 @@
             </parallax-element>
             <div v-if="slide.content" class="slide__img" v-html="slide.content"></div>
             <div v-else class="slide__img">
-              <img v-if="slide.img != ''" alt="slide" :src="slide.img" />
+              <img v-if="slide.img != ''" :alt="slide.title" :src="slide.img" />
             </div>
           </div>
         </transition-group>
         <div class="controls__slides">
           <button
+            aria-label="Anterior"
             role="button"
             aria-hidden="true"
             :class="current == 0 ? 'display__none' : ''"
@@ -55,6 +56,7 @@
             </svg>
           </button>
           <button
+            aria-label="Próximo"
             role="button"
             :class="current == secondLast ? 'display__none' : ''"
             class="next"
@@ -168,6 +170,8 @@ export default {
 
 section {
   position: relative;
+  width: 100vw;
+  overflow: hidden;
 }
 .height__100 {
   height: 100%;
@@ -182,7 +186,11 @@ section {
   height: 100vh;
   z-index: 8;
   &:after {
-    background: $secondary;
+    background-image: radial-gradient(
+      circle farthest-corner at 10% 20%,
+      rgba(118, 145, 161, 1) 0%,
+      rgba(88, 99, 113, 1) 90.1%
+    );
     width: 50%;
     height: 100%;
     content: "";
@@ -345,7 +353,7 @@ section {
   cursor: pointer;
   line-height: 0px;
   text-align: center;
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   & svg {
     width: 30px;
     height: 30px;
@@ -383,7 +391,7 @@ section {
   position: relative;
   margin: 0 auto;
   border-radius: 10px;
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   &:before {
     content: "01";
     font-size: 13px;
@@ -414,7 +422,7 @@ section {
     background: #ffffff;
     display: inline-block;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1) 0s;
+    transition: all 1s cubic-bezier(0.2, 1, 0.3, 1) 0s;
     border-radius: 5px;
     &.active {
       background: $primary;
@@ -432,7 +440,7 @@ section {
   position: relative;
   font-size: 40px;
   display: flex;
-  transition: all 400ms;
+  transition: all 1s;
   @media (min-width: $break-md) {
     font-size: 80px;
   }
@@ -444,18 +452,18 @@ section {
   }
 
   .animated {
-    transition: all 400ms;
+    transition: all 1s;
     position: absolute;
-    animation: acrossIn 0.4s ease-out both;
+    animation: acrossIn 1s ease-out both;
   }
 
   .slide__in {
     opacity: 0;
-    animation: acrossIn 0.4s ease-out both;
+    animation: acrossIn 1s ease-out both;
   }
 
   .slide__in__active {
-    transition-delay: 150ms;
+    transition-delay: 250ms;
   }
 
   .slide__out {

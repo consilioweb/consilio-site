@@ -4,20 +4,19 @@
       <span>agência</span>
     </div>
     <div class="about__img">
-      <img src="@/assets/img/about-img.png" />
+      <img src="@/assets/img/about-img.png" alt="Por que a Consilio?" />
     </div>
     <div class="about__text">
       <div class="about__text--title">
         <parallax-element :parallaxStrength="-10" :type="'translation'">
-          <h2>Por que a consilio?</h2>
+          <h2>{{about.title}}</h2>
         </parallax-element>
       </div>
       <div class="about__text--content">
-        <p>A Agência Consilio conta com um time multidisciplinar focado em construir pontes entre o marketing digital e seus resultados. Acreditamos intensamente que ações isoladas, sem um objetivo estratégico, não surtirão efeitos. Como, por exemplo, usar apenas Google Ads, redes sociais, ou site.</p>
-        <p>Através dos incansáveis estudos da nossa equipe em busca de soluções efetivas, nós criamos uma metodologia com a finalidade de elaborar ações do marketing digital para a sua empresa. Somos especializados em estratégias digitais, associando tecnologia e relacionamento com um único objetivo: resultados reais.</p>
+        <span v-html="about.excerpt"></span>
       </div>
       <div class="about__text--button">
-        <button-shadow :title="buttonShadow" />
+        <button-shadow :text="textButton" :url="'a-consilio'" />
       </div>
     </div>
   </section>
@@ -26,12 +25,14 @@
 <script>
 import ButtonShadow from "@/components/button-shadow";
 export default {
+  name: "About",
+  props: ["about"],
   components: {
     ButtonShadow
   },
   data() {
     return {
-      buttonShadow: "Saiba Mais"
+      textButton: "Saiba Mais"
     };
   }
 };
@@ -68,6 +69,9 @@ export default {
   @media screen and (min-width: $break-md) {
     text-align: left;
   }
+}
+.about__text--content {
+  color: $primary;
 }
 .about__text--content p {
   color: $tertiary;
@@ -109,7 +113,7 @@ export default {
 .about__text--button {
   @include flexbox;
   @include justify-content(center);
-  margin: 20px 0;
+  margin: 30px 0;
   @media screen and (min-width: $break-md) {
     @include justify-content(left);
   }

@@ -4,7 +4,9 @@
 @import "_variables.scss";
 
 // Base
-html {
+html,
+body {
+  max-width: 100%;
   overflow-x: hidden;
 }
 body {
@@ -16,15 +18,19 @@ p {
   font-family: Quicksand, sans-serif;
   margin: 0;
   font-size: 13px;
-  color: $primary;
   font-weight: 500;
   line-height: 24px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Montserrat, sans-serif;
 }
 
 h2 {
   color: $primary;
   font-size: 40px;
-  font-family: "Montserrat";
   font-weight: 900;
   display: flex;
   padding-bottom: 20px;
@@ -42,6 +48,10 @@ h2 {
     font-size: 70px;
   }
 }
+a {
+  cursor: pointer !important;
+  outline: none;
+}
 
 // Animation page transition
 .fade-enter-active,
@@ -51,4 +61,10 @@ h2 {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+// Bug correction
+.tns-liveregion.tns-visually-hidden {
+  opacity: 0;
+  display: none;
 }

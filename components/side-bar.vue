@@ -6,11 +6,12 @@
         :class="this.getStatsMainMenu ? 'active' : ''"
         class="btn-burger open-nav-main"
       >
-        Menu
+        menu
         <span class="l1"></span>
         <span class="l2"></span>
         <span class="l3"></span>
       </button>
+      <p>menu</p>
     </div>
     <div class="menu-side">
       <div class="aside-social">
@@ -114,6 +115,21 @@ export default {
   top: initial;
   @include justify-content(center);
   z-index: 999999;
+  & p {
+    opacity: 0;
+    position: absolute;
+    right: 13px;
+    -ms-transform: translate(50%, 50%) rotate(-90deg);
+    -webkit-transform: translate(50%, 50%) rotate(-90deg);
+    transform: translate(50%, 50%) rotate(-90deg);
+    transition: opacity 800ms ease-in-out;
+    color: $tertiary;
+  }
+  &:not(.activeC) p {
+  }
+  &:not(.activeC):hover p {
+    opacity: 1;
+  }
   &.activeC {
     top: 50px;
     right: 27px;

@@ -5,27 +5,27 @@ const namespaced = true;
 
 // State
 const state = () => ({
-  cases: [],
+  clients: [],
 })
 
 // Getters
 const getters = {
-  lengthCases: state => state.cases.length,
+  lengthClients: state => state.clients.length,
 }
 
 // Mutations
 const mutations = {
-  GET_CASES: (state, payload) => {
-    state.cases = payload;
+  GET_CLIENTS: (state, payload) => {
+    state.clients = payload;
   }
 }
 
 // Actions
 const actions = {
-  async getCases({ commit }) {
-    await api.getCases()
+  async getClients({ commit }) {
+    await api.getClients()
       .then(res => {
-        commit("GET_CASES", res.data)
+        commit("GET_CLIENTS", res.data)
       })
   },
 }

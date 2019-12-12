@@ -2,19 +2,23 @@
   <header>
     <div class="logo">
       <n-link to="/">
-        <img src="@/assets/img/logo.svg" alt="logo" />
+        <svg-icon name="logo" :style="'color:'+colorLogo" width="200" height="40" />
       </n-link>
     </div>
     <div class="button-top">
-      <button>Diagnóstico Gratuito</button>
+      <button :class="{ hover: buttonHover }">Diagnóstico Gratuito</button>
     </div>
   </header>
 </template>
+<script>
+export default {
+  props: ["colorLogo", "buttonHover"],
+};
+</script>
 
 <style lang="scss" scoped>
 @import "./assets/scss/_variables.scss";
 @import "./assets/scss/_flexbox.scss";
-
 header {
   height: 70px;
   position: absolute;
@@ -30,9 +34,6 @@ header {
 header .logo {
   @include flexbox;
   flex: 1;
-}
-header .logo img {
-  height: 30px;
 }
 header .button-top {
   @include flexbox;
@@ -60,8 +61,14 @@ header button {
   @media screen and (min-width: $break-lg) {
     width: 180px;
   }
-  @media screen and (min-width: $break-xl) {
-    width: 180px;
-  }
+}
+.hover {
+  background: $white;
+  color: $secondary;
+}
+.hover:hover {
+  border: 2px solid $secondary;
+  background: $white;
+  color: $secondary;
 }
 </style>

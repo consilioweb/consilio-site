@@ -5,27 +5,26 @@ const namespaced = true;
 
 // State
 const state = () => ({
-  cases: [],
+  about: {}
 })
 
 // Getters
 const getters = {
-  lengthCases: state => state.cases.length,
 }
 
 // Mutations
 const mutations = {
-  GET_CASES: (state, payload) => {
-    state.cases = payload;
+  GET_ABOUT: (state, payload) => {
+    state.about = payload;
   }
 }
 
 // Actions
 const actions = {
-  async getCases({ commit }) {
-    await api.getCases()
+  async getAbout({ commit }) {
+    await api.getPage("a-consilio")
       .then(res => {
-        commit("GET_CASES", res.data)
+        commit("GET_ABOUT", res);
       })
   },
 }

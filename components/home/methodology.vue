@@ -97,7 +97,7 @@
         <div class="methodology__card">
           <div class="methodology__card--number">1</div>
           <div class="methodology__card--icon">
-            <svg-icon icon-class="laptop" />
+            <svg-icon name="icons/laptop" />
           </div>
           <div class="methodology__card--title">
             <h3>Redes Sociais</h3>
@@ -109,13 +109,13 @@
             </p>
           </div>
           <div class="methodology__card--button">
-            <svg-icon icon-class="right-arrow" />
+            <svg-icon name="icons/right-arrow" />
           </div>
         </div>
         <div class="methodology__card">
           <div class="methodology__card--number">2</div>
           <div class="methodology__card--icon">
-            <svg-icon icon-class="presentation" />
+            <svg-icon name="icons/presentation" />
           </div>
           <div class="methodology__card--title">
             <h3>Campanhas</h3>
@@ -127,13 +127,13 @@
             </p>
           </div>
           <div class="methodology__card--button">
-            <svg-icon icon-class="right-arrow" />
+            <svg-icon name="icons/right-arrow" />
           </div>
         </div>
         <div class="methodology__card">
           <div class="methodology__card--number">3</div>
           <div class="methodology__card--icon">
-            <svg-icon icon-class="target" />
+            <svg-icon name="icons/target" />
           </div>
           <div class="methodology__card--title">
             <h3>Website</h3>
@@ -146,13 +146,13 @@
             </p>
           </div>
           <div class="methodology__card--button">
-            <svg-icon icon-class="right-arrow" />
+            <svg-icon name="icons/right-arrow" />
           </div>
         </div>
         <div class="methodology__card">
           <div class="methodology__card--number">4</div>
           <div class="methodology__card--icon">
-            <svg-icon icon-class="coin" />
+            <svg-icon name="icons/coin"/>
           </div>
           <div class="methodology__card--title">
             <h3>Automação</h3>
@@ -165,12 +165,12 @@
             </p>
           </div>
           <div class="methodology__card--button">
-            <svg-icon icon-class="right-arrow" />
+            <svg-icon name="icons/right-arrow" />
           </div>
         </div>
       </div>
       <div class="methodology__button">
-        <button-shadow :title="buttonShadow" />
+        <button-shadow :text="textButton" />
       </div>
     </div>
   </section>
@@ -185,7 +185,7 @@ export default {
   },
   data() {
     return {
-      buttonShadow: "Saiba Mais"
+      textButton: "Saiba Mais"
     };
   }
 };
@@ -232,8 +232,8 @@ export default {
   min-width: 90px;
   margin: 1.5%;
   flex: 1;
-  padding: 40px 50px;
-  transition: all 0.35s ease;
+  padding: 40px 30px 40px 50px;
+  transition: all 1s ease;
   position: relative;
   counter-increment: item;
   @media screen and (min-width: $break-lg) {
@@ -293,44 +293,48 @@ export default {
 }
 .methodology__card--icon {
   padding-bottom: 20px;
+  transition: all 1s ease;
 }
 .methodology__card--icon svg {
   width: 60px;
   height: 60px;
   fill: $secondary;
-  transition: all 0.35s ease;
+  transition: all 1s ease;
 }
 .methodology__card--title {
+  transition: all 1s ease;
   padding: 20px 0;
 }
 .methodology__card--title h3 {
   font-family: Poppins, sans-serif;
+  transition: all 1s ease;
   font-size: 18px;
   font-weight: 600;
   color: $dark_blue;
-  transition: all 0.35s ease;
 }
 .methodology__card--description {
+  transition: all 1s ease;
   padding: 10px 0;
 }
 .methodology__card--description p {
   color: $tertiary;
   font-family: Poppins, sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.8rem;
-  transition: all 0.35s ease;
+  transition: all 1s ease;
 }
 .methodology__card--button {
   @include flexbox;
   @include flex-grow(1);
   @include flex-direction(column-reverse);
+  transition: all 1s ease;
+  margin-top: 10px;
 }
 .methodology__card--button svg {
   width: 25px;
   height: 25px;
   fill: #bcbfc7;
-  transition: all 0.35s ease;
 }
 .shape {
   position: absolute;
@@ -407,5 +411,9 @@ export default {
   @include justify-content(center);
   width: 100%;
   padding-top: 50px;
+  padding-bottom: 50px;
+  @media screen and (min-width: $break-md) {
+    padding-bottom: 0px;
+  }
 }
 </style>
