@@ -17,41 +17,67 @@
     </div>
     <div class="inner__txt">
       <div class="content__title">
-        <p>Lorem ipsum dolor sit</p>
-        <h3>id laboriosam et voluptatem</h3>
+        <p>{{ about.custom_fields["titulo-info"] }}</p>
+        <h3>{{ about.custom_fields["sub-titulo-info"] }}</h3>
       </div>
       <div class="box--primary shadow-box">
         <ul>
-          <li v-for="(group, index) in groups" :key="index">
+          <li v-for="(group, index) in collapse" :key="index">
             <a
               @click="activeItem = index"
               :class="activeItem === index ? 'active' : ''"
-            >{{group.name}}</a>
+            >{{group.about_box_title}}</a>
           </li>
         </ul>
       </div>
       <div class="content__tx--sx">
-        <div v-for="(group, index) in groups" :key="index" v-show="activeItem === index">
-          <p v-text="group.desc"></p>
-          <button-shadow class="button" :text="textButton" :url="group.url"></button-shadow>
+        <div v-for="(group, index) in collapse" :key="index" v-show="activeItem === index">
+          <p v-text="group.about_box_desc"></p>
+          <button-shadow class="button" :text="textButton" :url="group.about_box_url"></button-shadow>
         </div>
       </div>
     </div>
     <div class="inner__video" style="--aspect-ratio: 16/9;">
-      <iframe
-        class="shadow-box"
-        src="https://player.vimeo.com/video/86469286/?autoplay=1&loop=1&muted=1&title=false&transparent=true&byline=false"
-        frameborder="0"
-        allow="autoplay; fullscreen"
-        allowfullscreen
-      ></iframe>
+      <div v-html="about.custom_fields['incorporacao-video']"></div>
     </div>
     <div class="inner__team">
       <div class="inner__team--title">
-        <parallax-element :parallaxStrength="-15" :type="'translation'">
+        <parallax-element :parallaxStrength="10" :type="'translation'">
           <h2>equipe</h2>
         </parallax-element>
         <span class="inner__team--title-bg">nosso time</span>
+      </div>
+      <div class="inner__team--content">
+        <section class="teammates">
+          <div class="col-lg-4 team" v-for="(member, index) in team.slice().reverse()" :key="index">
+            <figure>
+              <img :src="member.img" alt />
+              <figcaption>
+                <span class="number">0{{index + 1}}</span>
+                <div class="social-links">
+                  <a
+                    v-if="member.custom_fields.facebook_team"
+                    :href="'https://fb.com/'+member.custom_fields.facebook_team"
+                  >Fb.</a>
+                  <a
+                    v-if="member.custom_fields.instagram_team"
+                    :href="'https://instagram.com/'+member.custom_fields.instagram_team"
+                  >Ins.</a>
+                  <a
+                    v-if="member.custom_fields.twitter_team"
+                    :href="'https://twitter.com/'+member.custom_fields.twitter_team"
+                  >Tw.</a>
+                  <a
+                    v-if="member.custom_fields.linkedin_team"
+                    :href="'https://linkedin.com/in/'+member.custom_fields.linkedin_team"
+                  >In.</a>
+                </div>
+                <h3 class="name">{{ member.title }}</h3>
+                <span class="job">{{ member.custom_fields.position_team }}</span>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
       </div>
     </div>
     <clients :clients="clients" :length="lengthClients" />
@@ -59,28 +85,7 @@
   </section>
 </template>
 <script>
-var groups = {
-  "GROUP A": {
-    name: "GROUP A",
-    desc:
-      "Veniam nulla deserunt eum optio non, suscipit odio et nam pariatur, reprehenderit accusamus possimus inventore recusandae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nulla deserunt eum optio non, suscipit odio et nam pariatur, reprehenderit accusamus possimus inventore recusandae. Quo nam amet commodi quaerat animi reprehenderit accusamus possimus inventore recusandae.",
-    url: "#"
-  },
-  "GROUP B": {
-    name: "GROUP B",
-    desc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nulla deserunt eum optio non, suscipit odio et nam pariatur, reprehenderit accusamus possimus inventore recusandae. Quo nam amet commodi quaerat animi reprehenderit accusamus possimus inventore recusandae. Veniam nulla deserunt eum optio non, suscipit odio et nam pariatur, reprehenderit accusamus possimus inventore recusandae.",
-    url: "#"
-  },
-  "GROUP C": {
-    name: "GROUP C",
-    desc:
-      "Quo nam amet commodi quaerat animi reprehenderit accusamus possimus inventore recusandae. Veniam nulla deserunt eum optio non, suscipit odio et nam pariatur, reprehenderit accusamus possimus inventore recusandae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nulla deserunt eum optio non, suscipit odio et nam pariatur, reprehenderit accusamus possimus inventore recusandae.",
-    url: "#"
-  }
-};
-
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 import clients from "@/components/home/clients.vue";
 import newsletter from "@/components/home/newsletter.vue";
 import ButtonShadow from "@/components/button-shadow";
@@ -94,22 +99,27 @@ export default {
   data() {
     return {
       textButton: "Ir para",
-      groups: groups,
-      activeItem: "GROUP A"
+      activeItem: 0
     };
   },
   computed: {
-    ...mapState("clients", ["clients"]),
+    collapse() {
+      return this.about.custom_fields["collapse-info"];
+    },
+    ...mapState({
+      clients: state => state.clients.clients,
+      about: state => state.about.about,
+      team: state => state.team.team
+    }),
     ...mapGetters({
       lengthClients: "clients/lengthClients"
     })
   },
-  created() {
-    if (this.$store.state.buttonHover === false) {
-      return this.$store.commit("HOVER_BUTTON_HEADER", true);
-    } else {
-      return this.$store.commit("HOVER_BUTTON_HEADER", false);
-    }
+  async fetch({ store, params }) {
+    await store.dispatch("team/getTeam", params);
+  },
+  mounted() {
+    this.$store.commit("HOVER_BUTTON_HEADER", true);
   },
   head() {
     return {
@@ -184,8 +194,10 @@ export default {
   }
   &__video {
     margin: 5%;
+    padding: 50px 0 50px 0;
     @media screen and (min-width: $break-md) {
       margin: 5% 13% 5% 10%;
+      padding: 0;
     }
     & iframe {
       width: 100%;
@@ -197,7 +209,7 @@ export default {
     position: relative;
     margin: 5%;
     @media screen and (min-width: $break-md) {
-      margin: 5% 13% 10% 10%;
+      margin: 5% 13% 0% 10%;
     }
     &--title {
       @include flexbox;
@@ -221,32 +233,45 @@ export default {
         top: -5%;
       }
     }
+    &--content {
+      position: relative;
+    }
   }
 }
 .content__title {
   z-index: 1;
   position: relative;
   & p {
-    position: absolute;
-    top: 60px;
-    left: 50px;
+    position: relative;
+    top: 50px;
     font-family: Quicksand, sans-serif;
     margin: 0;
     font-size: 16px;
     color: $secondary;
+    text-align: center;
+    @media screen and (min-width: $break-md) {
+      position: absolute;
+      top: 60px;
+      left: 50px;
+      text-align: left;
+    }
   }
   & h3 {
-    position: absolute;
+    position: relative;
+    top: 80px;
     color: $primary;
-    top: 90px;
-    left: 50px;
     font-size: 40px;
     line-height: 40px;
     margin: 0;
-    width: 60%;
+    text-align: center;
     @media screen and (min-width: $break-md) {
+      width: 60%;
       font-size: 60px;
       line-height: 60px;
+      position: absolute;
+      top: 90px;
+      left: 50px;
+      text-align: left;
     }
   }
 }
@@ -267,14 +292,13 @@ export default {
   }
   & ul {
     width: 100%;
-    padding-left: 50px;
-    padding-bottom: 30px;
+    padding: 0 20px;
+    padding-bottom: 50px;
     z-index: 3;
     flex-direction: row;
     @media screen and (min-width: $break-md) {
       width: 50%;
-      padding-left: 0px;
-      padding-bottom: 0px;
+      padding: 0 50px;
     }
     display: flex;
   }
@@ -282,6 +306,8 @@ export default {
     font-size: 14px;
     font-weight: 600;
     flex: 1;
+    @include flexbox();
+    @include justify-content(center);
     & a {
       color: $secondary;
       position: relative;
@@ -309,13 +335,15 @@ export default {
   }
 }
 .content__tx--sx {
-  padding-top: 300px;
+  padding-top: 230px;
   width: 100%;
   z-index: -1;
+  text-align: center;
   @media screen and (min-width: $break-md) {
     padding-top: 320px;
-    padding-left: 50%;
+    float: right;
     width: 50%;
+    text-align: left;
   }
   & .button {
     z-index: 15;
@@ -449,6 +477,111 @@ export default {
   text-shadow: rgba(0, 0, 0, 0.8) 0 0 30px, rgba(0, 0, 0, 0.8) 0 0 80px,
     black 0 0 150px, black 0 0 150px, black 0 0 250px, black 0 0 250px,
     white -0.15em 0.4em 250px;
+}
+
+/**
+* Equipe
+*/
+.teammates {
+  @include flexbox;
+  @include flex-flow(wrap);
+  padding-top: 50px;
+}
+.teammates .team {
+  padding-bottom: 10px;
+}
+.teammates .team figure {
+  position: relative;
+}
+.teammates .team figure img {
+  width: 100%;
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+}
+.teammates .team figure figcaption {
+  position: absolute;
+  top: 0;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+.teammates .team figure figcaption .number {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 26px;
+  font-weight: 500;
+}
+.teammates .team figure figcaption .job {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  font-weight: 500;
+  font-size: 18px;
+  transform: rotate(90deg) translate(30px, 30px);
+  -webkit-transform: rotate(90deg) translate(30px, 30px);
+  -moz-transform: rotate(90deg) translate(30px, 30px);
+  -ms-transform: rotate(90deg) translate(30px, 30px);
+  -o-transform: rotate(90deg) translate(30px, 30px);
+  transform-origin: right;
+  opacity: 0;
+  transition: all ease 0.3s;
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  -ms-transition: all ease 0.3s;
+  -o-transition: all ease 0.3s;
+}
+.teammates .team figure figcaption .name {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.teammates .team figure figcaption .social-links {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity ease 0.3s;
+  -webkit-transition: opacity ease 0.3s;
+  -moz-transition: opacity ease 0.3s;
+  -ms-transition: opacity ease 0.3s;
+  -o-transition: opacity ease 0.3s;
+}
+.teammates .team figure figcaption .social-links a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 15px;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
+.teammates .team figure:hover figcaption .social-links {
+  opacity: 1;
+}
+.teammates .team figure:hover figcaption .social-links a:hover {
+  opacity: 0.6;
+  transition: all ease 0.3s;
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  -ms-transition: all ease 0.3s;
+  -o-transition: all ease 0.3s;
+}
+.teammates .team figure:hover figcaption .job {
+  opacity: 1;
+  transform: rotate(90deg) translate(0px, 30px);
+  -webkit-transform: rotate(90deg) translate(0px, 30px);
+  -moz-transform: rotate(90deg) translate(0px, 30px);
+  -ms-transform: rotate(90deg) translate(0px, 30px);
+  -o-transform: rotate(90deg) translate(0px, 30px);
 }
 </style>
 

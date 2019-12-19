@@ -147,6 +147,12 @@ footer {
       flex-grow: 2;
       @include align-content(center);
     }
+    & ul {
+      padding: 0 20px;
+      @media screen and (min-width: $break-md) {
+        padding: initial;
+      }
+    }
     & li {
       line-height: 1.5rem;
     }
@@ -290,7 +296,10 @@ footer {
     color: #969696;
     padding-bottom: 10px;
     p {
-      text-align: justify;
+      text-align: center;
+      @media screen and (min-width: $break-md) {
+        text-align: justify;
+      }
     }
     & time {
       opacity: 0.5;

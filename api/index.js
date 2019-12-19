@@ -156,6 +156,30 @@ export default {
     });
   },
 
+  getTeam() {
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      request.get("team").then(response => {
+        const data = [...response.data];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            data: data.map(item => ({
+              id: item.id,
+              title: item.title.rendered,
+              content: item.content.rendered,
+              slug: item.slug,
+              img: item.quick_img,
+              custom_fields: item.custom_fields
+            }))
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+
   getClients() {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
@@ -195,6 +219,7 @@ export default {
             link: data.link,
             content: data.content.rendered,
             author: data.author,
+            custom_fields: data.custom_fields
           };
           resolve(filtered);
         } else {

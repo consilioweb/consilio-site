@@ -38,8 +38,12 @@ export default {
   },
   /*
   ** Customize the progress-bar color
+  ** Loading page: '@/components/loading.vue'
   */
-  loading: { color: '#fff' },
+  loading: {
+    color: '#46505e',
+    height: '3px'
+  },
   /*
   ** Global CSS
   */
@@ -72,6 +76,7 @@ export default {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/svg-sprite',
+    '@nuxtjs/proxy'
   ],
   /*
   ** SVG Sprite configuration
@@ -114,21 +119,32 @@ export default {
   ** Axios configuration
   */
   axios: {
+    proxy: true,
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+	    'Access-Control-Allow-Origin': '*,*',
+	  },
+    proxyHeaders: false,
+    credentials: false,
+    baseURL: 'https://api.consilio.com.br/',
+  },
+  proxy: {
+    '/api/': { 
+      target: 'https://api.consilio.com.br/', 
+      pathRewrite: {'^/api': ''}, 
+      changeOrigin: true 
+    }
   },
   /*
   ** Generate configuration
   */
   generate: {
+    fallback: true,
     dir: 'consilio',
     interval: 1000,
     routes() {
       return Promise.all([
-        axios.get("https://api.consilio.com.br/wp-json/wp/v2/posts?per_page=100&page=1&_embed=1"),
-        axios.get("https://api.consilio.com.br/wp-json/wp/v2/pages?per_page=100&page=1&_embed=1")
+        axios.get(process.env.baseUrl+"/posts?per_page=100&page=1&_embed=1"),
+        axios.get(process.env.baseUrl+"/pages?per_page=100&page=1&_embed=1")
       ]).then((data) => {
         const posts = data[0]
         const pages = data[1]
@@ -145,6 +161,25 @@ export default {
         }))
       })
     }
+  },
+  /*
+  ** Handle external assets
+  */
+  workbox: {
+    runtimeCaching: [
+      {
+        urlPattern: 'https://fonts.googleapis.com/.*',
+        handler: 'cacheFirst',
+        method: 'GET',
+        strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+      },
+      {
+        urlPattern: 'https://fonts.gstatic.com/.*',
+        handler: 'cacheFirst',
+        method: 'GET',
+        strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+      }
+    ]
   },
   /*
   ** Build configuration
@@ -166,6 +201,6 @@ export default {
   ** ENV
   */
   env: {
-    baseUrl: 'https://api.consilio.com.br/wp-json/wp/v2/'
+    baseUrl: 'http://192.168.1.2:8000/api/wp-json/wp/v2/'
   }
 }

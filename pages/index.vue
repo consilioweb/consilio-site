@@ -28,7 +28,7 @@ import cta from "@/components/home/cta.vue";
 import newsletter from "@/components/home/newsletter.vue";
 
 export default {
-  created() {
+  mounted() {
     this.$store.commit("LOGO_HEADER_PRIMARY");
     this.$store.commit("HOVER_BUTTON_HEADER", false);
   },
