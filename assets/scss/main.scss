@@ -51,6 +51,28 @@ h2 {
 a {
   cursor: pointer !important;
   outline: none;
+  color: $primary;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+::-webkit-input-placeholder {
+  color: #b3b3b3;
+}
+::-moz-placeholder {
+  color: #b3b3b3;
+}
+:-ms-input-placeholder {
+  color: #b3b3b3;
+}
+:-moz-placeholder {
+  color: #b3b3b3;
+}
+::selection {
+  color: $white;
+  background: $primary;
 }
 
 // Animation page transition

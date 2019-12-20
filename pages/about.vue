@@ -4,7 +4,7 @@
       <div id="fly-in" class="inner__header">
         <div>
           <span>
-            <h1>Por que a Consilio?</h1>
+            <h1>{{about.title}}</h1>
             <div class="shape">
               <div class="perspective">
                 <span class="render">i</span>
@@ -128,7 +128,7 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "About our company Nuxt.js "
+          content: this.$options.filters.stripped(this.about.excerpt)
         }
       ]
     };
@@ -175,10 +175,10 @@ export default {
       margin: 0 auto;
       position: absolute;
       border-radius: 50%;
-      background-image: radial-gradient(
-        circle farthest-corner at 10% 20%,
-        rgba(118, 145, 161, 1) 0%,
-        rgba(88, 99, 113, 1) 90.1%
+      background-image: linear-gradient(
+        106.7deg,
+        rgba(255, 199, 67, 1) 103.7%,
+        rgba(255, 247, 200, 1) 120.7%
       );
       @media screen and (min-width: $break-md) {
         left: 30%;

@@ -62,6 +62,9 @@ export default {
     },
     {
       src: '@/plugins/mixins.js'
+    },
+    {
+      src: '@/plugins/filters.js'
     }
   ],
   /*
@@ -201,6 +204,7 @@ export default {
   ** ENV
   */
   env: {
-    baseUrl: 'http://192.168.1.2:8000/api/wp-json/wp/v2/'
+    baseUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/wp-json/wp/v2/' : 'https://site.consilio.com.br/api/wp-json/wp/v2/'
+
   }
 }

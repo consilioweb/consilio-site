@@ -73,7 +73,7 @@ export default {
   padding: 10px;
   background: $white;
   @include flexbox;
-  @include flex-direction(row);
+  @include flex-direction(row-reverse);
   @include align-items(center);
   @include justify-content(flex-end);
   z-index: 10;
@@ -110,7 +110,7 @@ export default {
 .icon-menu {
   position: fixed;
   flex: 1;
-  left: 20px;
+  right: 30px;
   bottom: 8px;
   top: initial;
   @include justify-content(center);

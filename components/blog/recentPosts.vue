@@ -252,11 +252,11 @@ export default {
       position: absolute;
       z-index: 0;
       transition: all 1s ease-in-out;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     &:hover figure {
       opacity: 1;
-      background-size: cover;
-      background-repeat: no-repeat;
       background-position: center;
     }
     &:hover .feed-blog__card--meta {

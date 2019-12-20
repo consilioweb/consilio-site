@@ -2,7 +2,7 @@
   <header>
     <div class="logo">
       <n-link to="/">
-        <svg-icon name="logo" :style="'color:'+colorLogo" width="200" height="40" />
+        <svg-icon name="logo" :style="'color:'+colorLogo" width="180" height="40" />
       </n-link>
     </div>
     <div class="button-top">

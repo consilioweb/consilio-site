@@ -12,7 +12,7 @@ import axios from "axios";
 export default {
   validate({ params }) {
     return !isNaN(+params.id);
-          },
+  },
   async asyncData({ params, error }) {
     const { data } = await axios.get(
       `http://apiconsilio.local/wp-json/wp/v2/posts/${+params.id}`
