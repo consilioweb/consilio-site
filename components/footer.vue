@@ -26,7 +26,7 @@
     <div class="column __feed-blog">
       <h2>Últimas postagens</h2>
       <ul role="list">
-        <li role="listitem" v-for="(post, index) in posts.slice(0, 3)" :key="index">
+        <li role="listitem" v-for="(post, index) in recent.slice(0, 3)" :key="index">
           <n-link :to="'/blog/'+post.slug">
             <article>
               <p v-html="toLimitChars(post.title, 60)"></p>
@@ -83,7 +83,7 @@ export default {
     toLimitChars: Function
   },
   computed: {
-    ...mapState("posts", ["posts"]),
+    ...mapState("posts", ["recent"]),
     ...mapGetters({
       lengthPosts: "posts/lengthPosts"
     })

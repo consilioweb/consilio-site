@@ -120,10 +120,11 @@ export default {
   },
   mounted() {
     this.$store.commit("HOVER_BUTTON_HEADER", true);
+    this.$store.commit("LOGO_HEADER_PRIMARY", true);
   },
   head() {
     return {
-      title: "Por que a Consilio? | Agência Consilio",
+      title: this.$options.filters.stripped(this.about.title)+` | Agência Consilio`,
       meta: [
         {
           hid: "description",

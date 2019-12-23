@@ -4,7 +4,7 @@
     <about :about="about" />
     <methodology />
     <cases :cases="cases" :length="lengthCases" />
-    <recent-posts :posts="posts" :length="lengthPosts" />
+    <recent-posts :posts="recent" :length="lengthPosts" />
     <testimonials :testimonials="testimonials" :length="lengthTestimonials" />
     <clients :clients="clients" :length="lengthClients" />
     <cta
@@ -46,7 +46,7 @@ export default {
   computed: {
     ...mapState("slides", ["slides"]),
     ...mapState("cases", ["cases"]),
-    ...mapState("posts", ["posts"]),
+    ...mapState("posts", ["recent"]),
     ...mapState("about", ["about"]),
     ...mapState("testimonials", ["testimonials"]),
     ...mapState("clients", ["clients"]),

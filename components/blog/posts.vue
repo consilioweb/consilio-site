@@ -1,31 +1,40 @@
 <template>
   <section class="feed-blog">
     <div class="feed-blog__container">
-      <article v-for="(post, index) in posts" :key="index" class="feed-blog__content">
-        <n-link class="feed-blog__card" :to="'/blog/'+post.slug">
-          <figure :style="'background-image: url('+post.img+')'"></figure>
-          <div class="feed-blog__card--meta">
-            <span v-html="shortTimestamp(post.date)"></span>
-            <span>•</span>
-            <span>
-              <img :alt="post.author_name" :src="post.author_img" />
-            </span>
-            <span v-html="post.author_name"></span>
-          </div>
-          <div class="feed-blog__card--title">
-            <h1>{{post.title}}</h1>
-          </div>
-          <div class="feed-blog__card--content" v-html="post.excerpt"></div>
-          <div class="feed-blog__card--button">
-            <svg-icon name="icons/right-arrow" />
-          </div>
-        </n-link>
-      </article>
+      <client-only>
+        <article v-for="(post, index) in articles" :key="index" class="feed-blog__content">
+          <n-link class="feed-blog__card" :to="'/blog/'+post.slug">
+            <figure :style="'background-image: url('+post.img+')'"></figure>
+            <div class="feed-blog__card--meta">
+              <span v-html="shortTimestamp(post.date)"></span>
+              <span>•</span>
+              <span>
+                <img :alt="post.author_name" :src="post.author_img" />
+              </span>
+              <span v-html="post.author_name"></span>
+            </div>
+            <div class="feed-blog__card--title">
+              <h1>{{post.title}}</h1>
+            </div>
+            <div class="feed-blog__card--content" v-html="post.excerpt"></div>
+            <div class="feed-blog__card--button">
+              <svg-icon name="icons/right-arrow" />
+            </div>
+          </n-link>
+        </article>
+        <infinite-loading v-if="posts.length" spinner="waveDots" @infinite="infiniteScroll">
+          <div slot="no-more">Chegou ao fim! :)</div>
+          <div slot="no-results">Não existe resultados.</div>
+        </infinite-loading>
+      </client-only>
     </div>
   </section>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from "vuex";
+import _ from "lodash";
+
 export default {
   name: "posts",
   props: ["posts", "length"],
@@ -34,8 +43,36 @@ export default {
   },
   data() {
     return {
+      articles: [], //_.cloneDeep(this.posts)
       page: 1
     };
+  },
+  async mounted() {
+    await this.$nextTick(() => {
+      this.$nuxt.$loading.start();
+
+      setTimeout(() => this.$nuxt.$loading.finish(), 500);
+    });
+  },
+  methods: {
+    infiniteScroll($state) {
+      setTimeout(() => {
+        if (this.page <= this.$store.state.posts.totalPages) {
+          this.page++;
+
+          this.$store.dispatch("posts/getPosts", {
+            page: this.page,
+            per_page: 5
+          });
+
+          this.posts.forEach(item => this.articles.push(item));
+
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      }, 1000);
+    }
   }
 };
 </script>
@@ -51,7 +88,7 @@ export default {
     display: flex;
     flex-flow: wrap;
     @media screen and (min-width: $break-md) {
-      margin: 10% 13% 10% 10%;
+      margin: 0% 13% 10% 10%;
       padding-top: 0px; // Correction
     }
   }
@@ -60,6 +97,12 @@ export default {
     flex: 1;
     position: relative;
     min-width: 350px;
+    &:nth-child(6n) {
+      min-width: 100%;
+    }
+    &:nth-child(7n) {
+      min-width: 50%;
+    }
     @media screen and (min-width: $break-md) {
       min-width: calc(100% / 3);
     }
@@ -77,6 +120,8 @@ export default {
     transition: all 1s ease-in-out;
     margin: 10px !important;
     position: relative;
+
+    overflow: hidden;
     &--meta {
       position: absolute;
       top: 0;
@@ -216,5 +261,13 @@ export default {
       text-shadow: 1px 1px 10px rgba(46, 61, 98, 0.6);
     }
   }
+}
+.infinite-loading-container {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  padding: 100px 0 0 0;
+  color: $primary;
+  font-size: 16px;
 }
 </style>

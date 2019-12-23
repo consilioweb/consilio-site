@@ -31,7 +31,7 @@ export default {
         dispatch('menus/getMainMenu', context),
         dispatch('slides/getSlides', context),
         dispatch('cases/getCases', context),
-        dispatch('posts/getPosts', context),
+        dispatch('posts/getRecent', context),
         dispatch('about/getAbout', context),
         dispatch('testimonials/getTestimonials', context),
         dispatch('clients/getClients', context),

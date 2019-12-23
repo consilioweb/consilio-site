@@ -1,44 +1,55 @@
-import api from "@/api/index"
+import api from "@/api/index";
 
 // Enable module namespaced
 const namespaced = true;
 
 // State
 const state = () => ({
+  post: {},
   posts: [],
-  post: {}
-})
+  recent: [],
+  total: 0,
+  totalPages: 0
+});
 
 // Getters
 const getters = {
   lengthPosts: state => state.posts.length,
-}
+};
 
 // Mutations
 const mutations = {
-  GET_POSTS: (state, payload) => {
-    state.posts = payload;
+  GET_POSTS: (state, { data, total, totalPages }) => {
+    state.posts = data;
+    state.total = total;
+    state.totalPages = totalPages;
   },
   GET_POST: (state, payload) => {
     state.post = payload;
+  },
+  FETCHED_RECENT: (state, payload) => {
+    state.recent = payload;
   }
-}
+};
 
 // Actions
 const actions = {
-  async getPosts({ commit }) {
-    await api.getPosts()
-      .then(res => {
-        commit("GET_POSTS", res.data)
-      })
+  async getPosts({ commit }, { page, per_page }) {
+    await api.getPosts(page, per_page).then(res => {
+      commit("GET_POSTS", res);
+    });
   },
-  async getPost({ commit }) {
-    await api.getPost(slug)
-      .then(res => {
-        commit("GET_POST", res.data)
-      })
+  async getRecent({ commit }, { page, per_page }) {
+    await api.getPosts(page, per_page).then(res => {
+      commit("FETCHED_RECENT", res.data);
+    });
   },
-}
+  async getPost({ commit }, slug) {
+    await api.getPost(slug).then(res => {
+      commit("GET_POST", res.data);
+    });
+  }
+};
 
 // Export default
 export default {
@@ -48,4 +59,4 @@ export default {
   actions,
   mutations,
   strict: true
-}
+};

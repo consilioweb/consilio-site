@@ -25,10 +25,12 @@ const actions = {
   },
 }
 
+const debug = process.env.NODE_ENV !== 'production'
+
 export default {
   namespaced,
   state,
   actions,
   mutations,
-  strict: true
+  strict: debug
 }

@@ -131,7 +131,8 @@
 <script>
 export default {
   mounted() {
-    this.$store.commit("HOVER_BUTTON_HEADER", true);
+    this.$store.commit("HOVER_BUTTON_HEADER", false);
+    this.$store.commit("LOGO_HEADER_PRIMARY", true);
   }
 };
 </script>

@@ -1,6 +1,13 @@
 import request from "axios";
 
-setTimeout(console.log.bind(console, "%c Desenvolvido por Humberto Martins {Agência Consilio} %c", "background: #0c2939;color:#FFF;padding:5px;line-height: 8px;border-radius: 5px;font-family:Poppins;font-weight: 600;", ""));
+setTimeout(
+  console.log.bind(
+    console,
+    "%c Desenvolvido por Humberto Martins {Agência Consilio} %c",
+    "background: #0c2939;color:#FFF;padding:5px;line-height: 8px;border-radius: 5px;font-family:Poppins;font-weight: 600;",
+    ""
+  )
+);
 console.log("");
 
 export default {
@@ -145,7 +152,8 @@ export default {
               slug: item.slug,
               img: item.quick_img,
               customer_testimonial: item.customer_testimonial,
-              complement_customer_testimonial: item.complement_customer_testimonial
+              complement_customer_testimonial:
+                item.complement_customer_testimonial
             }))
           };
           resolve(filtered);
@@ -255,35 +263,43 @@ export default {
     });
   },
 
-  getPosts() {
+  getPosts(page, per_page) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
-      request.get(`posts?_embed`).then(response => {
-        const data = [...response.data];
-        if (response.status === 200 && response.data.length > 0) {
-          const filtered = {
-            total: response.headers["x-wp-total"],
-            totalPages: response.headers["x-wp-totalpages"],
-            data: data.map(item => ({
-              id: item.id,
-              title: item.title.rendered,
-              content: item.content.rendered,
-              excerpt: item.excerpt.rendered,
-              slug: item.slug,
-              date: item.date,
-              date_gmt: item.date_gmt,
-              author: item.author,
-              author_name: item._embedded.author[0].name,
-              author_img: item._embedded.author[0].avatar_urls["24"],
-              status: item.status,
-              img: item.quick_img
-            }))
-          };
-          resolve(filtered);
-        } else {
-          reject(response);
-        }
-      });
+      request
+        .get(`posts?_embed`, {
+          params: {
+            page: page ? page : 1,
+            per_page: per_page ? per_page : 5
+          }
+        })
+        .then(response => {
+          const data = [...response.data];
+          if (response.status === 200 && response.data.length > 0) {
+            const filtered = {
+              total: response.headers["x-wp-total"],
+              totalPages: response.headers["x-wp-totalpages"],
+              data: data.map(item => ({
+                id: item.id,
+                title: item.title.rendered,
+                content: item.content.rendered,
+                excerpt: item.excerpt.rendered,
+                slug: item.slug,
+                date: item.date,
+                date_gmt: item.date_gmt,
+                author: item.author,
+                author_name: item._embedded.author[0].name,
+                author_img: item._embedded.author[0].avatar_urls["24"],
+                status: item.status,
+                img: item.quick_img
+              }))
+            };
+            resolve(filtered);
+          } else {
+            reject(response);
+          }
+        })
+        .catch(error => console.log(error))
     });
   },
   getCategory(slug) {

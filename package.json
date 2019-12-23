@@ -19,6 +19,7 @@
     "axios": "^0.19.0",
     "moment": "^2.24.0",
     "nuxt": "^2.0.0",
+    "vue-infinite-loading": "^2.4.4",
     "vue-material-design-icons": "^4.4.0",
     "vue-mouse-parallax": "^1.2.2",
     "vue-tiny-slider": "^0.1.39"
