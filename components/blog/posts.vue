@@ -1,8 +1,13 @@
 <template>
   <section class="feed-blog">
-    <div class="feed-blog__container">
-      <client-only>
-        <article v-for="(post, index) in articles" :key="index" class="feed-blog__content">
+    <client-only>
+      <transition-group name="posts" tag="div" class="feed-blog__container">
+        <article
+          v-for="(post, index) in articles"
+          :key="index"
+          :id="post.id"
+          class="feed-blog__content"
+        >
           <n-link class="feed-blog__card" :to="'/blog/'+post.slug">
             <figure :style="'background-image: url('+post.img+')'"></figure>
             <div class="feed-blog__card--meta">
@@ -22,12 +27,12 @@
             </div>
           </n-link>
         </article>
-        <infinite-loading v-if="posts.length" spinner="waveDots" @infinite="infiniteScroll">
-          <div slot="no-more">Chegou ao fim! :)</div>
-          <div slot="no-results">Não existe resultados.</div>
-        </infinite-loading>
-      </client-only>
-    </div>
+      </transition-group>
+      <infinite-loading v-if="length" spinner="waveDots" @infinite="infiniteScroll">
+        <div slot="no-more">Chegou ao fim! :)</div>
+        <div slot="no-results">Não existe resultados.</div>
+      </infinite-loading>
+    </client-only>
   </section>
 </template>
 
@@ -37,14 +42,13 @@ import _ from "lodash";
 
 export default {
   name: "posts",
-  props: ["posts", "length"],
+  props: ["posts", "articles", "length", "category"],
   mixins: {
     shortTimestamp: Function
   },
   data() {
     return {
-      articles: [], //_.cloneDeep(this.posts)
-      page: 1
+      page: 0
     };
   },
   async mounted() {
@@ -62,7 +66,8 @@ export default {
 
           this.$store.dispatch("posts/getPosts", {
             page: this.page,
-            per_page: 5
+            per_page: 5,
+            filter: this.category
           });
 
           this.posts.forEach(item => this.articles.push(item));
@@ -81,6 +86,32 @@ export default {
 @import "./assets/scss/_variables.scss";
 @import "./assets/scss/_flexbox.scss";
 
+.posts {
+  backface-visibility: hidden;
+  transform-origin: 10% 50%;
+  z-index: 1;
+  &-move {
+    transition: all 600ms ease-in-out 50ms;
+  }
+  &-enter-active {
+    transition: all 300ms ease-out;
+  }
+
+  &-leave-active {
+    transition: all 200ms ease-in;
+    position: absolute;
+    z-index: 0;
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+  &-enter {
+    transform: scale(0.9);
+  }
+}
+
 .feed-blog {
   &__container {
     margin: 5%;
@@ -88,7 +119,7 @@ export default {
     display: flex;
     flex-flow: wrap;
     @media screen and (min-width: $break-md) {
-      margin: 0% 13% 10% 10%;
+      margin: 0% 13% 80px 10%;
       padding-top: 0px; // Correction
     }
   }
@@ -266,7 +297,7 @@ export default {
   display: flex;
   width: 100vw;
   justify-content: center;
-  padding: 100px 0 0 0;
+  padding: 0 0 100px 0;
   color: $primary;
   font-size: 16px;
 }

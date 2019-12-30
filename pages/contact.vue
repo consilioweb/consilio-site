@@ -62,45 +62,78 @@
         <h3>Preencha o formulário</h3>
       </div>
       <div class="box shadow">
-        <form>
+        <form class="form-contact" ref="form" @submit.prevent="send">
           <div class="form__container">
             <div class="form__input">
               <label>Primeiro nome *</label>
-              <input type="text" name="firstname" placeholder />
+              <input
+                type="text"
+                v-model="form.firstname"
+                name="firstname"
+                :class="response ? 'disabled' : ''"
+                :disabled="response ? 'disabled' : ''"
+                required
+                placeholder
+              />
             </div>
           </div>
           <div class="form__container">
             <div class="form__input">
               <label>E-mail *</label>
-              <input type="email" name="email" placeholder />
+              <input
+                type="email"
+                v-model="form.email"
+                name="email"
+                :class="response ? 'disabled' : ''"
+                required
+                placeholder
+              />
             </div>
           </div>
           <div class="form__container">
             <div class="form__input">
               <label>Telefone *</label>
-              <input type="text" name="phone" placeholder />
+              <input
+                type="text"
+                v-model="form.phone"
+                name="phone"
+                :class="response ? 'disabled' : ''"
+                required
+                placeholder
+              />
             </div>
           </div>
           <div class="form__container">
             <div class="form__input">
               <label>Sobre o que gostaria de falar?*</label>
-              <select>
-                <option name="subject" value selected="selected">Selecione o assunto</option>
-                <option value="comercial">Comercial</option>
-                <option value="negozio">Financeiro</option>
-                <option value="azienda">Falar com consultor</option>
-                <option value="azienda">Diagnóstico gratuito</option>
+              <select
+                name="subject"
+                v-model="form.subject"
+                :class="response ? 'disabled' : ''"
+                required
+              >
+                <option value selected="selected">Selecione o assunto</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Falar com consultor">Falar com consultor</option>
+                <option value="Diagnóstico gratuito">Diagnóstico gratuito</option>
               </select>
             </div>
           </div>
           <div class="form__container">
             <div class="form__input">
               <label>Sua mensagem *</label>
-              <textarea name="message" />
+              <textarea
+                v-model="form.message"
+                name="message"
+                :class="response ? 'disabled' : ''"
+                required
+              />
             </div>
           </div>
           <div class="form__confirm">
             <div class="form__checkbox">
+              <!--
               <input id="privacyInput" type="checkbox" />
               <label for="privacyInput">
                 Enviando esse formulário concordo com as
@@ -109,8 +142,50 @@
                   target="_blank"
                 >políticas de privacidade</a> do site.
               </label>
+              -->
+              <p class="response" v-if="response" v-html="response"></p>
             </div>
-            <button type="submit" class="btn">Enviar</button>
+            <button
+              type="submit"
+              :class="[response ? 'disabled' : '', submit.loading ? 'loading' : '', submit.done ? 'done' : '']"
+              class="submit"
+            >
+              <span>
+                <svg>
+                  <use xlink:href="#circle" />
+                </svg>
+                <svg>
+                  <use xlink:href="#arrow" />
+                </svg>
+                <svg>
+                  <use xlink:href="#check" />
+                </svg>
+              </span>
+              <ul>
+                <li>Enviar</li>
+                <li>Enviando</li>
+                <li>Enviado</li>
+              </ul>
+            </button>
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+              <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="circle">
+                <circle cx="8" cy="8" r="7.5" />
+              </symbol>
+              <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="arrow">
+                <path
+                  d="m8.75 17.612v4.638c0 .324.208.611.516.713.077.025.156.037.234.037.234 0 .46-.11.604-.306l2.713-3.692z"
+                />
+                <path
+                  d="m23.685.139c-.23-.163-.532-.185-.782-.054l-22.5 11.75c-.266.139-.423.423-.401.722.023.3.222.556.505.653l6.255 2.138 13.321-11.39-10.308 12.419 10.483 3.583c.078.026.16.04.242.04.136 0 .271-.037.39-.109.19-.116.319-.311.352-.53l2.75-18.5c.041-.28-.077-.558-.307-.722z"
+                />
+              </symbol>
+              <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="check">
+                <path
+                  id="test"
+                  d="M4.76499011,6.7673683 L8.2641848,3.26100386 C8.61147835,2.91299871 9.15190114,2.91299871 9.49919469,3.26100386 C9.51164115,3.27347582 9.52370806,3.28637357 9.53537662,3.29967699 C9.83511755,3.64141434 9.81891834,4.17816549 9.49919469,4.49854425 L5.18121271,8.82537365 C4.94885368,9.05820878 4.58112654,9.05820878 4.34876751,8.82537365 L2.50080531,6.97362503 C2.48835885,6.96115307 2.47629194,6.94825532 2.46462338,6.93495189 C2.16488245,6.59321455 2.18108166,6.0564634 2.50080531,5.73608464 C2.84809886,5.3880795 3.38852165,5.3880795 3.7358152,5.73608464 L4.76499011,6.7673683 Z"
+                />
+              </symbol>
+            </svg>
           </div>
         </form>
       </div>
@@ -129,7 +204,73 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
+  data() {
+    return {
+      response: "",
+      status: "",
+      submit: {
+        loading: false,
+        done: false
+      },
+      form: {
+        firstname: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: ""
+      }
+    };
+  },
+  methods: {
+    test(e) {
+      let self = this;
+      this.submit.loading = true;
+      console.log("Loading " + this.submit.loading);
+      setTimeout(function() {
+        self.submit.done = true;
+        console.log("Done " + self.submit.done);
+        setTimeout(function() {
+          self.submit.loading = false;
+          self.submit.done = false;
+          console.log("Loading " + self.submit.loading);
+          console.log("Done " + self.submit.done);
+        }, 3200);
+      }, 2000);
+    },
+    async send(e) {
+      if (typeof window.FormData !== "function") {
+        return;
+      }
+      const formData = new FormData(this.$refs.form);
+      await axios
+        .post(
+          "/api/wp-json/contact-form-7/v1/contact-forms/5674565/feedback",
+          formData
+        )
+        .then(res => {
+          let self = this;
+          this.submit.loading = true;
+          setTimeout(function() {
+            e.preventDefault();
+            e.target.reset();
+            self.submit.done = true;
+            setTimeout(function() {
+              self.response = res.data.message;
+              self.status = res.data.status;
+
+              self.submit.loading = false;
+              self.submit.done = false;
+            }, 3200);
+          }, 2000);
+        })
+        .catch(error => {
+          this.response = "Error: " + error.response;
+          console.log("Error --> " + error);
+        });
+    }
+  },
   mounted() {
     this.$store.commit("HOVER_BUTTON_HEADER", false);
     this.$store.commit("LOGO_HEADER_PRIMARY", true);
@@ -396,6 +537,202 @@ export default {
 }
 .column {
   flex: 1;
+}
+.response {
+  color: white;
+  text-align: center;
+  padding: 0 20px;
+}
+.disabled {
+  filter: grayscale(1);
+  cursor: not-allowed;
+}
+$background: $primary;
+$success: #3fdc75;
+
+.submit {
+  height: 40px;
+  align-self: center;
+  font-family: Poppins, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  background: $background;
+  box-shadow: 0 4px 20px rgba($background, 0.15);
+  line-height: 20px;
+  padding: 10px;
+  border-radius: 22px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+  span {
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    margin: 0 4px 0 0;
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: "";
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: $background;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    svg {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      left: 50%;
+      top: 50%;
+      margin: -6px 0 0 -6px;
+      z-index: 1;
+      &:nth-child(1) {
+        width: 20px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        fill: none;
+        margin: 0;
+        stroke: #fff;
+        stroke-width: 1px;
+        stroke-dashoffset: 47.124 * 2;
+        stroke-dasharray: 47.124;
+      }
+      &:nth-child(2) {
+        fill: $background;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      &:nth-child(3) {
+        fill: $background;
+        transform: translateY(20px);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          opacity 0.3s ease;
+      }
+    }
+  }
+  &:hover {
+    box-shadow: 0 8px 24px rgba($background, 0.15);
+    span {
+      svg {
+        &:nth-child(2) {
+          transform: translateY(-20px);
+        }
+        &:nth-child(3) {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+  &:active {
+    transform: scale(0.94);
+    box-shadow: 0 4px 16px rgba($success, 0.18);
+  }
+  &.loading {
+    span {
+      background: none;
+      transition: background 0.1s ease 0.3s;
+      &:before {
+        transform: scale(1);
+      }
+      svg {
+        &:nth-child(1) {
+          animation: turn 1.6s linear infinite forwards,
+            path 1.6s linear infinite forwards;
+        }
+        &:nth-child(2) {
+          transform: translateY(-20px);
+        }
+        &:nth-child(3) {
+          opacity: 0;
+          transform: translateY(0) scale(0.6);
+        }
+      }
+    }
+    ul {
+      transform: rotateX(120deg);
+    }
+    &.done {
+      background: $success;
+      box-shadow: 0 4px 20px rgba($success, 0.15);
+      span {
+        background: #fff;
+        transition: background 0.1s ease 0s;
+        &:before {
+          background: $success;
+          transform: scale(0);
+        }
+        svg {
+          &:nth-child(1) {
+            animation: none;
+          }
+          &:nth-child(3) {
+            fill: $success;
+            opacity: 1;
+            transform: scale(1);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+                0.3s,
+              opacity 0.4s ease 0.25s;
+          }
+        }
+      }
+      ul {
+        transform: rotateX(240deg);
+      }
+    }
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 20px;
+    width: 70px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+    li {
+      --rotateX: 0deg;
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      transform-origin: 50% 50%;
+      transform: rotateX(var(--rotateX)) translateZ(0px);
+      &:nth-child(2) {
+        --rotateX: -120deg;
+      }
+      &:nth-child(3) {
+        --rotateX: -240deg;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+@keyframes turn {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes path {
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 </style>
 

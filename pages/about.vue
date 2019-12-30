@@ -124,7 +124,9 @@ export default {
   },
   head() {
     return {
-      title: this.$options.filters.stripped(this.about.title)+` | Agência Consilio`,
+      title:
+        this.$options.filters.stripped(this.about.title) +
+        ` | Agência Consilio`,
       meta: [
         {
           hid: "description",
@@ -517,7 +519,7 @@ export default {
 .teammates .team figure figcaption .job {
   position: absolute;
   bottom: 20px;
-  right: 10px;
+  right: 3px;
   font-weight: 500;
   font-size: 18px;
   transform: rotate(90deg) translate(30px, 30px);

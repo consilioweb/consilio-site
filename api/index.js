@@ -253,7 +253,11 @@ export default {
             guid: data.guid.rendered,
             link: data.link,
             slug: data.slug,
-            title: data.title.rendered
+            title: data.title.rendered,
+            categories: data.categories,
+            tags: data.tags,
+            post_categories: data.post_categories,
+            post_tags: data.post_tags
           };
           resolve(filtered);
         } else {
@@ -263,14 +267,16 @@ export default {
     });
   },
 
-  getPosts(page, per_page) {
+  getPosts(page, per_page, filter) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
+      console.log("page " + page + " per " + per_page + " filter " + filter);
       request
         .get(`posts?_embed`, {
           params: {
             page: page ? page : 1,
-            per_page: per_page ? per_page : 5
+            per_page: per_page ? per_page : 5,
+            "filter[category_name]": filter
           }
         })
         .then(response => {
@@ -291,7 +297,11 @@ export default {
                 author_name: item._embedded.author[0].name,
                 author_img: item._embedded.author[0].avatar_urls["24"],
                 status: item.status,
-                img: item.quick_img
+                img: item.quick_img,
+                categories: item.categories,
+                tags: item.tags,
+                post_categories: item.post_categories,
+                post_tags: item.post_tags
               }))
             };
             resolve(filtered);
@@ -299,7 +309,7 @@ export default {
             reject(response);
           }
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
     });
   },
   getCategory(slug) {
@@ -338,15 +348,50 @@ export default {
         });
     });
   },
-  getCategories(slug) {
+  getCategories(page, per_page) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
-      return request.get(`categories`).then(response => {
-        const data = [...response.data];
-        if (response.status === 200 && response.data.length > 0) {
-          resolve(data);
-        }
-      });
+      return request
+        .get(`categories`, {
+          params: {
+            page: page ? page : 1,
+            per_page: per_page
+          }
+        })
+        .then(response => {
+          const data = [...response.data];
+          if (response.status === 200 && response.data.length > 0) {
+            const filtered = {
+              total: response.headers["x-wp-total"],
+              totalPages: response.headers["x-wp-totalpages"],
+              data: data
+            };
+            resolve(filtered);
+          }
+        });
+    });
+  },
+  getTags(page, per_page) {
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      return request
+        .get(`tags`, {
+          params: {
+            page: page ? page : 1,
+            per_page: per_page
+          }
+        })
+        .then(response => {
+          const data = [...response.data];
+          if (response.status === 200 && response.data.length > 0) {
+            const filtered = {
+              total: response.headers["x-wp-total"],
+              totalPages: response.headers["x-wp-totalpages"],
+              data: data
+            };
+            resolve(filtered);
+          }
+        });
     });
   }
 };

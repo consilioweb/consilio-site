@@ -252,7 +252,7 @@ section {
     font-size: 60px;
   }
   @media screen and (min-width: $break-xl) {
-    font-size: 80px;
+    font-size: 70px;
   }
 }
 #slides .slide__img {

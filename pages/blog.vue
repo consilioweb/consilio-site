@@ -18,68 +18,285 @@
                 <a href="/">Home</a>
               </li>
               <li class="nav-share" role="menuitem">
-                <a href="#">Compartilhar</a>
-              </li>
-              <li class="nav-signup" role="menuitem">
-                <a href="#">Registrar-se</a>
+                <a href="#" @click="modal = !modal">Informações</a>
               </li>
             </ul>
           </div>
           <div class="nav-right">
-            <div class="common-links">
-              <div class="dropdown">
-                <a class="common-link" href="#" target="_blank" rel="noopener">Categorias</a>
-                <div class="dropdown-content">
-                  <a href="#">Link 1</a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div>
-              </div>
-              <div class="dropdown">
-                <a class="common-link" href="#" target="_blank" rel="noopener">Tags especiais</a>
-                <div class="dropdown-content">
-                  <a href="#">Link 1</a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div>
-              </div>
-              <div class="common-link link-search" href="#" target="_blank" rel="noopener">
-                <input type="text" placeholder="Buscar..." />
-                <div class="search"></div>
-              </div>
+            <menu class="nav__controls">
+              <li
+                v-for="(active, menu) in menus"
+                class="nav__label"
+                :class="{
+          'nav__label--active' : active,
+          'nav__label--filter': activeFilters[menu].length
+        }"
+                @click="setMenu(menu, active)"
+                :key="menu"
+              >{{ menu }}</li>
+
+              <li class="nav__label nav__label--clear" @click="clearAllFilters">Limpar filtros</li>
+            </menu>
+          </div>
+
+          <transition name="modal">
+            <section v-if="modal" class="modal" @click="modal = false">
+              <article class="modal__content" @click.stop>
+                <h4 class="modal__title">For the full tutorial</h4>
+                <h4 class="modal__title">that goes with this pen</h4>
+
+                <h5 class="modal__link" @click="modal = false">
+                  <a
+                    href="https://snipcart.com/blog/vuejs-transitions-animations"
+                    target="_blank"
+                  >Creating Vue.js Transitions &amp; Animations</a>
+                </h5>
+
+                <button class="modal__close" @click="modal = false">&times;</button>
+              </article>
+            </section>
+          </transition>
+
+          <div class="common-links">
+            <div class="common-link link-search" href="#" target="_blank" rel="noopener">
+              <input type="text" placeholder="Buscar..." />
+              <div class="search"></div>
             </div>
           </div>
         </nav>
       </div>
     </header>
-    <posts class="section__post" :posts="this.$store.state.posts.posts" :length="lengthPosts" />
+    <div class="section__filters">
+      <transition-group name="dropdown" tag="section" class="dropdown __card" :style="dropdown">
+        <menu
+          v-for="(options, filter) in filters"
+          class="filters"
+          v-show="menus[filter]"
+          ref="menu"
+          :key="filter"
+        >
+          <template>
+            <li
+              :key="option"
+              v-for="(active, option) in options"
+              class="filters__item"
+              :class="{ 'filters__item--active': active }"
+              @click="setFilter(filter, option)"
+            >{{ option }}</li>
+          </template>
+        </menu>
+      </transition-group>
+    </div>
+    <posts
+      class="section__post"
+      :posts="posts"
+      :articles="filtered"
+      :category="this.activeFilters.categories[0]"
+      :length="lengthPosts"
+    />
   </section>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
+import api from "@/api/index";
+import _ from "lodash";
 import posts from "@/components/blog/posts.vue";
 
 export default {
   components: {
     posts
   },
-  mounted() {
-    this.$store.commit("HOVER_BUTTON_HEADER", true);
-    this.$store.commit("LOGO_HEADER_WHITE", true);
+  data() {
+    return {
+      modal: false,
+      todosposts: {},
+      articles: [],
+      filtered: [],
+      dropdown: { height: 0 },
+      filters: { categories: {}, tags: {} },
+      menus: { categories: false, tags: false }
+    };
   },
+
   async fetch({ store, params }) {
-    return await store.dispatch("posts/getPosts", {
+    let posts = store.dispatch("posts/getPosts", {
       page: 1,
       per_page: 5
     });
+    let categories = store.dispatch("categories/getCategories", {
+      page: 1,
+      per_page: 5
+    });
+    let tags = await store.dispatch("tags/getTags", {
+      page: 1,
+      per_page: 5
+    });
+
+    return Promise.all([posts, categories, tags])
+      .then(() => {
+        return (
+          (this.posts = posts),
+          (this.categories = categories),
+          (this.tags = tags)
+        );
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  },
+  watch: {
+    list(index, from) {},
+    activeMenu(index, from) {
+      if (index === from) return;
+
+      this.$nextTick(() => {
+        if (!this.$refs.menu || !this.$refs.menu[index]) {
+          this.dropdown.height = 0;
+        } else {
+          this.dropdown.height = `${this.$refs.menu[index].clientHeight +
+            16}px`;
+        }
+      });
+    }
+  },
+  methods: {
+    setFilter(filter, option) {
+      if (filter === "test") {
+        this.filters[filter][option] = !this.filters[filter][option];
+      } else {
+        setTimeout(() => {
+          this.clearFilter(filter, option, this.filters[filter][option]);
+        }, 100);
+      }
+    },
+
+    clearFilter(filter, except, active) {
+      Object.keys(this.filters[filter]).forEach(option => {
+        this.filters[filter][option] = except === option && !active;
+      });
+    },
+
+    clearAllFilters() {
+      Object.keys(this.filters).forEach(this.clearFilter);
+    },
+
+    setMenu(menu, active) {
+      Object.keys(this.menus).forEach(tab => {
+        this.menus[tab] = !active && tab === menu;
+      });
+    }
   },
   computed: {
+    allPosts() {
+      api.getPosts().then(posts => {
+        let totalPages = posts.totalPages;
+        let allResults = posts.data;
+        for (let i = 2; i <= totalPages; i++) {
+          api
+            .getPosts(i, 5)
+            .then(response => {
+              return response.data;
+            })
+            .then(moreresults => {
+              allResults = allResults.concat(moreresults);
+              this.todosposts = allResults;
+            });
+        }
+      });
+    },
+
+    allCategories() {
+      api.getCategories().then(categories => {
+        let totalPages = categories.totalPages;
+        let allResults = categories.data;
+        for (let i = 2; i <= totalPages; i++) {
+          api
+            .getCategories(i)
+            .then(response => {
+              return response.data;
+            })
+            .then(moreresults => {
+              allResults = allResults.concat(moreresults);
+              allResults.forEach(({ name, id }) => {
+                this.$set(this.filters.categories, name, false);
+              });
+            });
+        }
+      });
+    },
+
+    allTags() {
+      api.getTags().then(tags => {
+        let totalPages = tags.totalPages;
+        let allResults = tags.data;
+        for (let i = 2; i <= totalPages; i++) {
+          api
+            .getTags(i)
+            .then(response => {
+              return response.data;
+            })
+            .then(moreresults => {
+              allResults = allResults.concat(moreresults);
+              allResults.forEach(({ name, id }) => {
+                this.$set(this.filters.tags, name, false);
+              });
+            });
+        }
+      });
+    },
+
+    activeMenu() {
+      return Object.keys(this.menus).reduce(
+        ($$, set, i) => (this.menus[set] ? i : $$),
+        -1
+      );
+    },
+
+    list() {
+      let { categories, tags } = this.activeFilters;
+
+      api
+        .getPosts(1, 5, categories[0])
+        .then(posts => {
+          return (this.filtered = posts.data);
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+
+      return !categories.length;
+
+      /*
+      return this.todosposts.filter(({ post_categories, post_tags }) => {
+        if (tags.length && !~post_tags.indexOf(tags[0])) return false;
+        return (
+          !categories.length ||
+          categories.every(cat => ~post_categories.indexOf(cat))
+        );
+      });
+      */
+    },
+
+    activeFilters() {
+      let { categories, tags } = this.filters;
+
+      return {
+        categories: Object.keys(categories).filter(c => categories[c]),
+        tags: Object.keys(tags).filter(t => tags[t])
+      };
+    },
     ...mapState("posts", ["posts"]),
     ...mapState("posts", ["recent"]),
+    ...mapState("categories", ["categories"]),
+    ...mapState("tags", ["tags"]),
     ...mapGetters({
       lengthPosts: "posts/lengthPosts"
     })
+  },
+  mounted() {
+    this.$store.commit("HOVER_BUTTON_HEADER", true);
+    this.$store.commit("LOGO_HEADER_WHITE", true);
   }
 };
 </script>
@@ -92,7 +309,6 @@ section {
   @include flexbox;
   @include flex-direction(column);
   position: relative;
-  width: 100%;
 }
 svg {
   height: 16px;
@@ -166,10 +382,9 @@ header {
       }
     }
   }
-  nav {
+  & nav {
     @include flexbox();
     @include flex-direction(column);
-    margin: 0 0 0 -12px;
     padding: 0;
     list-style: none;
     @media screen and (min-width: $break-md) {
@@ -177,21 +392,19 @@ header {
       top: -70px;
       display: flex;
       @include flex-direction(row);
-      @include align-items(flex-start);
     }
-    @include justify-content(space-between);
     @include align-items(center);
     position: relative;
     z-index: 300;
     & .nav {
       position: relative;
       z-index: 300;
-      -ms-flex-pack: justify;
-      justify-content: space-between;
-      -ms-flex-align: start;
-      align-items: flex-start;
-      height: 40px;
       font-size: 1.2rem;
+    }
+    & .nav-right,
+    .nav-left {
+      display: flex;
+      flex-wrap: nowrap;
     }
     & .nav,
     .nav-left {
@@ -202,81 +415,25 @@ header {
       -ms-overflow-scrolling: touch;
       -webkit-overflow-scrolling: touch;
       margin-right: 10px;
-      letter-spacing: 0.4px;
       white-space: nowrap;
     }
     & .nav-right {
-      height: 40px;
+      flex: 1;
+      justify-content: flex-end;
     }
     & .nav-right,
     .common-links {
-      flex-shrink: 0;
+      padding-top: 3px;
       @include flexbox();
-      @include align-items(center);
       & a {
         font-size: 14px;
       }
-      & .dropdown {
-        position: relative;
-        display: inline-block;
-      }
-
-      & .dropdown-content {
-        position: absolute;
-        background-color: #fff;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
-        z-index: 999;
-        max-height: 0px;
-        min-width: 160px;
-        transition: all 0.5s ease-out;
-        overflow: hidden;
-      }
-
-      & .dropdown-content a {
-        color: black;
-        background-color: #fff;
-        padding: 10px 16px;
-        text-decoration: none;
-        display: block;
-        font-size: 13px !important;
-      }
-
-      & .dropdown-content a:hover {
-        background-color: rgba(118, 145, 161, 0.3);
-      }
-
-      & .dropdown:hover .dropdown-content {
-        max-height: 500px;
-        min-width: 160px;
-        transition: all 0.5s ease-in;
-        padding: 10px 0;
-      }
-
-      & .dropdown:hover .dropbtn {
-        background-color: #f9f9f9;
-        border-bottom: 1px solid #e0e0e0;
-        transition: max-height 0.25s ease-in;
-      }
-    }
-    & .common-link {
-      @include flexbox();
-      @include align-items(center);
-      @include justify-content(center);
-      margin: 0;
-      padding: 10px;
-      color: #fff;
-      opacity: 0.9;
     }
     & .nav li a {
-      padding: 10px 12px;
+      padding: 0px 12px;
       color: #fff;
       opacity: 0.9;
       font-size: 14px;
-    }
-    & .nav li,
-    .nav li a {
-      display: block;
-      margin: 0;
     }
     & .link-search {
       padding-left: 30px;
@@ -331,7 +488,6 @@ header {
         }
       }
       input {
-        left: 10px;
         position: relative;
         margin: auto;
         width: 32px;
@@ -395,9 +551,283 @@ header {
   }
 }
 .section__post {
-  margin-top: -70px;
   position: relative;
   z-index: 10;
+}
+.section__filters {
+  margin: 0% 5% 0% 5%;
+  @media screen and (min-width: $break-md) {
+    margin: 0% 13% 10px 10%;
+    margin-top: -70px;
+  }
+}
+.__card {
+  @include flexbox;
+  @include flex-direction(column);
+  -webkit-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+  -moz-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+  box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+  background: $white;
+  flex: 1;
+  transition: all 1s ease-in-out;
+  position: relative;
+  z-index: 999;
+  height: 0px;
+  margin: 0px 10px;
+}
+
+.nav {
+  display: flex;
+  white-space: nowrap;
+
+  &__controls {
+    display: flex;
+  }
+
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor;
+  }
+
+  &__label {
+    position: relative;
+    margin-left: 1rem;
+    text-transform: capitalize;
+    z-index: 1;
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0.9;
+
+    &::after {
+      content: "\00d7";
+      display: inline-block;
+      color: transparent;
+      width: 0.5rem;
+      font-weight: 400;
+      transform: scale(0);
+      transition: transform 150ms ease-in-out;
+      padding-left: 5px;
+    }
+
+    &--clear {
+      color: #f68185;
+      opacity: 0;
+      display: none;
+      transform: translate3d(-25%, 0, 0);
+      pointer-events: none;
+      transition: all 275ms ease-in-out;
+    }
+
+    &--filter ~ &--clear {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      pointer-events: auto;
+      display: block;
+    }
+
+    &--filter::after,
+    &--active::after {
+      transform: scale(1);
+    }
+
+    &--filter::after {
+      content: "\2022";
+      color: #46d2c4;
+    }
+
+    &--active::after {
+      content: "\00d7";
+      color: #f68185;
+    }
+  }
+}
+
+.dropdown {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 350ms;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    background-image: linear-gradient(to top, white, rgba(white, 0));
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-leave,
+  &-enter-to {
+    opacity: 1;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    position: absolute;
+    width: 100%;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  &-enter-active {
+    transition-delay: 100ms;
+  }
+}
+
+.filters {
+  padding: 20px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+
+  &__item {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #c5d0d1;
+    border-radius: 0px;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    cursor: pointer;
+    transition: all 275ms;
+    color: $primary;
+
+    &:hover {
+      border-color: $secondary;
+    }
+
+    &--active {
+      color: white;
+      border-color: $secondary;
+      background-color: $secondary;
+    }
+  }
+
+  &__rating {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0;
+  }
+
+  &__range {
+    width: 200px;
+    margin-top: 1rem;
+    color: inherit;
+
+    &::-webkit-slider-thumb {
+      width: 0.8rem;
+      height: 0.8rem;
+      margin-top: calc(-0.4rem + 2px);
+      border-radius: 100%;
+      background-color: currentColor;
+    }
+
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 4px;
+      background-image: linear-gradient(to right, white, $secondary);
+    }
+  }
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(white, 0.6);
+  z-index: 1;
+  color: $primary;
+
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 350ms;
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-leave,
+  &-enter-to {
+    opacity: 1;
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 500px;
+    min-height: 250px;
+    padding: 1.5rem 1rem;
+    background-color: white;
+    border: 1px solid #c5d0d1;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0.5rem 1.75rem -0.25rem rgba($primary, 0.4);
+  }
+
+  &__title {
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+
+  &__link {
+    margin-top: 1.5rem;
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 300;
+    z-index: 0;
+
+    &::after {
+      content: "";
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: currentColor;
+      z-index: -1;
+      transition: background-color 225ms ease-out;
+    }
+
+    &:hover::after {
+      background-color: $secondary;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0.25rem;
+    right: 1rem;
+    font-size: 1.75rem;
+    font-weight: 400;
+    opacity: 0.5;
+    transition: opacity 150ms ease-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 </style>
 

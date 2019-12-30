@@ -92,7 +92,7 @@ export default {
       controlsContainer: "#slider-dots",
       speed: 2000,
       autoplayTimeout: 4000,
-      preventActionWhenRunning: true,
+      preventActionWhenRunning: true
     }
   }),
   methods: {
@@ -115,7 +115,6 @@ export default {
 
 .cases {
   position: relative;
-  width: 100vw;
 }
 .cases__container {
   margin: 5%;
@@ -156,6 +155,7 @@ export default {
   @include justify-content(center);
   padding-bottom: 30px;
   position: relative;
+  margin: 0 auto;
   @media screen and (min-width: $break-md) {
     margin: 0 auto;
   }
