@@ -267,22 +267,25 @@ export default {
     });
   },
 
-  getPosts(page, per_page, filter) {
+  getPosts(page, per_page, category, tag) {
+    let self = this;
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
-      console.log("page " + page + " per " + per_page + " filter " + filter);
+      const params = {
+        params: {
+          ...(page ? { page: page } : { page: 1 }),
+          ...(per_page ? { per_page: per_page } : { per_page: 5 }),
+          ...(category ? { "filter[category_name]": category } : {}),
+          ...(tag ? { "filter[tag]": tag } : {})
+        }
+      };
       request
-        .get(`posts?_embed`, {
-          params: {
-            page: page ? page : 1,
-            per_page: per_page ? per_page : 5,
-            "filter[category_name]": filter
-          }
-        })
+        .get(`posts?_embed`, params)
         .then(response => {
           const data = [...response.data];
           if (response.status === 200 && response.data.length > 0) {
             const filtered = {
+              response_status: response.status,
               total: response.headers["x-wp-total"],
               totalPages: response.headers["x-wp-totalpages"],
               data: data.map(item => ({
@@ -307,9 +310,11 @@ export default {
             resolve(filtered);
           } else {
             reject(response);
+            console.log("Erro (promisse): " + error);
           }
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error) && false);
+      return true;
     });
   },
   getCategory(slug) {
@@ -351,47 +356,49 @@ export default {
   getCategories(page, per_page) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
-      return request
-        .get(`categories`, {
-          params: {
-            page: page ? page : 1,
-            per_page: per_page
-          }
-        })
-        .then(response => {
-          const data = [...response.data];
-          if (response.status === 200 && response.data.length > 0) {
-            const filtered = {
-              total: response.headers["x-wp-total"],
-              totalPages: response.headers["x-wp-totalpages"],
-              data: data
-            };
-            resolve(filtered);
-          }
-        });
+      const params = {
+        params: {
+          ...(page ? { page: page } : { page: 1 }),
+          ...(per_page ? { per_page: per_page } : { per_page: 5 })
+        }
+      };
+      return request.get(`categories`, params).then(response => {
+        const data = [...response.data];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            total: response.headers["x-wp-total"],
+            totalPages: response.headers["x-wp-totalpages"],
+            data: data
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
     });
   },
   getTags(page, per_page) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
-      return request
-        .get(`tags`, {
-          params: {
-            page: page ? page : 1,
-            per_page: per_page
-          }
-        })
-        .then(response => {
-          const data = [...response.data];
-          if (response.status === 200 && response.data.length > 0) {
-            const filtered = {
-              total: response.headers["x-wp-total"],
-              totalPages: response.headers["x-wp-totalpages"],
-              data: data
-            };
-            resolve(filtered);
-          }
-        });
+      const params = {
+        params: {
+          ...(page ? { page: page } : { page: 1 }),
+          ...(per_page ? { per_page: per_page } : { per_page: 5 })
+        }
+      };
+      return request.get(`tags`, params).then(response => {
+        const data = [...response.data];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            total: response.headers["x-wp-total"],
+            totalPages: response.headers["x-wp-totalpages"],
+            data: data
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
     });
   }
 };

@@ -89,10 +89,10 @@
     </div>
     <posts
       class="section__post"
-      :posts="posts"
-      :articles="filtered"
       :category="this.activeFilters.categories[0]"
-      :length="lengthPosts"
+      :tag="this.activeFilters.tags[0]"
+      :totalPages="totalPages"
+      ref="posts"
     />
   </section>
 </template>
@@ -110,8 +110,7 @@ export default {
   data() {
     return {
       modal: false,
-      todosposts: {},
-      articles: [],
+      totalPages: 0,
       filtered: [],
       dropdown: { height: 0 },
       filters: { categories: {}, tags: {} },
@@ -120,10 +119,6 @@ export default {
   },
 
   async fetch({ store, params }) {
-    let posts = store.dispatch("posts/getPosts", {
-      page: 1,
-      per_page: 5
-    });
     let categories = store.dispatch("categories/getCategories", {
       page: 1,
       per_page: 5
@@ -133,13 +128,9 @@ export default {
       per_page: 5
     });
 
-    return Promise.all([posts, categories, tags])
+    return Promise.all([categories, tags])
       .then(() => {
-        return (
-          (this.posts = posts),
-          (this.categories = categories),
-          (this.tags = tags)
-        );
+        return (this.categories = categories), (this.tags = tags);
       })
       .catch(error => {
         console.log(error.message);
@@ -155,41 +146,15 @@ export default {
           this.dropdown.height = 0;
         } else {
           this.dropdown.height = `${this.$refs.menu[index].clientHeight +
-            16}px`;
+            27}px`;
         }
       });
     }
   },
   methods: {
-    setFilter(filter, option) {
-      if (filter === "test") {
-        this.filters[filter][option] = !this.filters[filter][option];
-      } else {
-        setTimeout(() => {
-          this.clearFilter(filter, option, this.filters[filter][option]);
-        }, 100);
-      }
-    },
-
-    clearFilter(filter, except, active) {
-      Object.keys(this.filters[filter]).forEach(option => {
-        this.filters[filter][option] = except === option && !active;
-      });
-    },
-
-    clearAllFilters() {
-      Object.keys(this.filters).forEach(this.clearFilter);
-    },
-
-    setMenu(menu, active) {
-      Object.keys(this.menus).forEach(tab => {
-        this.menus[tab] = !active && tab === menu;
-      });
-    }
-  },
-  computed: {
     allPosts() {
       api.getPosts().then(posts => {
+        this.totalPages = posts.totalPages;
         let totalPages = posts.totalPages;
         let allResults = posts.data;
         for (let i = 2; i <= totalPages; i++) {
@@ -245,7 +210,33 @@ export default {
         }
       });
     },
+    setFilter(filter, option) {
+      if (filter === "test") {
+        this.filters[filter][option] = !this.filters[filter][option];
+      } else {
+        setTimeout(() => {
+          this.clearFilter(filter, option, this.filters[filter][option]);
+        }, 100);
+      }
+    },
 
+    clearFilter(filter, except, active) {
+      Object.keys(this.filters[filter]).forEach(option => {
+        this.filters[filter][option] = except === option && !active;
+      });
+    },
+
+    clearAllFilters() {
+      Object.keys(this.filters).forEach(this.clearFilter);
+    },
+
+    setMenu(menu, active) {
+      Object.keys(this.menus).forEach(tab => {
+        this.menus[tab] = !active && tab === menu;
+      });
+    }
+  },
+  computed: {
     activeMenu() {
       return Object.keys(this.menus).reduce(
         ($$, set, i) => (this.menus[set] ? i : $$),
@@ -257,7 +248,7 @@ export default {
       let { categories, tags } = this.activeFilters;
 
       api
-        .getPosts(1, 5, categories[0])
+        .getPosts(1, 5, categories[0], tags[0])
         .then(posts => {
           return (this.filtered = posts.data);
         })
@@ -265,7 +256,7 @@ export default {
           console.log(error.message);
         });
 
-      return !categories.length;
+      return !tags.length || !categories.length;
 
       /*
       return this.todosposts.filter(({ post_categories, post_tags }) => {
@@ -286,15 +277,16 @@ export default {
         tags: Object.keys(tags).filter(t => tags[t])
       };
     },
-    ...mapState("posts", ["posts"]),
-    ...mapState("posts", ["recent"]),
+    ...mapState("posts", ["recent"])
+    /*
     ...mapState("categories", ["categories"]),
     ...mapState("tags", ["tags"]),
-    ...mapGetters({
-      lengthPosts: "posts/lengthPosts"
-    })
+    */
   },
   mounted() {
+    this.allPosts();
+    this.allCategories();
+    this.allTags();
     this.$store.commit("HOVER_BUTTON_HEADER", true);
     this.$store.commit("LOGO_HEADER_WHITE", true);
   }
@@ -682,7 +674,7 @@ header {
 }
 
 .filters {
-  padding: 20px 30px;
+  padding: 30px 50px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;

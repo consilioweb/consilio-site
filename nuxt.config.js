@@ -99,12 +99,13 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    "~/plugins/axios",
     {
       src: "@/plugins/parallax.js"
     },
     {
       src: "@/plugins/carousel.js",
-      mode: "client"
+      ssr: false
     },
     {
       src: "@/plugins/mixins.js"
@@ -124,7 +125,12 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/pwa", "@nuxtjs/svg-sprite", "@nuxtjs/proxy"],
+  modules: [
+    "@nuxtjs/pwa",
+    "@nuxtjs/svg-sprite",
+    "@nuxtjs/proxy",
+    "@nuxtjs/axios"
+  ],
   /*
    ** SVG Sprite configuration
    */
@@ -172,7 +178,7 @@ export default {
     },
     proxyHeaders: false,
     credentials: false,
-    baseURL: "https://api.consilio.com.br/"
+    baseURL: "http://localhost:8000/"
   },
   proxy: {
     "/api/": {
@@ -255,6 +261,6 @@ export default {
     baseUrl:
       process.env.NODE_ENV === "development"
         ? "http://localhost:8000/api/wp-json/wp/v2/"
-        : "https://site.consilio.com.br/api/wp-json/wp/v2/"
+        : "http://localhost:8000/api/wp-json/wp/v2/"
   }
 };
