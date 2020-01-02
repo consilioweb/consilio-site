@@ -146,7 +146,7 @@ export default {
   svgSprite: {
     input: "~/assets/svg",
     output: "~/assets/svg/sprite",
-    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
+    //publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
   },
   /**
    * PWA configuration
@@ -267,7 +267,7 @@ export default {
     splitChunks: {
       layouts: true
     },
-    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
+    //publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
