@@ -133,8 +133,8 @@ export default {
    */
   svgSprite: {
     input: "~/assets/svg",
-    output: "~/assets/svg/sprite"
-    //publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
+    output: "~/assets/svg/sprite",
+    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
   },
   /**
    * PWA configuration
@@ -255,7 +255,7 @@ export default {
     splitChunks: {
       layouts: true
     },
-    //publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
+    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     extend(config, ctx) {
       if (ctx.dev && ctx.isClient) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
@@ -265,33 +265,31 @@ export default {
           loader: "eslint-loader",
           exclude: /(node_modules)/
         });
+        const svgRule = config.module.rules.find(rule =>
+          rule.test.test(".svg")
+        );
+        svgRule.test = /\.(png|jpe?g|gif|webp)$/;
+        config.module.rules.push({
+          test: /\.svg$/,
+          use: [
+            {
+              loader: "svg-sprite-loader",
+              options: {
+                extract: true,
+                spriteFilename: "icons.svg"
+              }
+            },
+            {
+              loader: "svgo-loader",
+              options: {
+                plugins: [{ removeViewbox: false }]
+              }
+            }
+          ]
+        });
+        // Uncomment this line to show all the loaders used by Webpack.
+        config.module.rules.map(rule => console.log(">>>>>>>>>>>>", rule));
       }
-      /**
-       * Initialise SVG Sprites
-       */
-      // Excludes /assets/svg from url-loader
-      const svgRule = config.module.rules.find(rule => rule.test.test(".svg"));
-      svgRule.test = /\.(png|jpe?g|gif|webp)$/;
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: [
-          {
-            loader: "svg-sprite-loader",
-            options: {
-              extract: true,
-              spriteFilename: "icons.svg"
-            }
-          },
-          {
-            loader: "svgo-loader",
-            options: {
-              plugins: [{ removeViewbox: false }]
-            }
-          }
-        ]
-      });
-      // Uncomment this line to show all the loaders used by Webpack.
-      config.module.rules.map(rule => console.log(">>>>>>>>>>>>", rule));
     }
     //extractCSS: true
   },
