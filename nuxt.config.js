@@ -194,13 +194,12 @@ export default {
    ** Axios configuration
    */
   axios: {
-    proxy: true,
+    proxy: process.env.NODE_ENV === "development" ? true : false,
     headers: {
       "Access-Control-Allow-Origin": "*,*"
     },
     proxyHeaders: false,
-    credentials: false,
-    baseURL: "http://localhost:8000/"
+    credentials: false
   },
   proxy: {
     "/api/": {
@@ -268,7 +267,7 @@ export default {
     splitChunks: {
       layouts: true
     },
-    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
+    //publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
