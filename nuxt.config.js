@@ -1,18 +1,5 @@
 const axios = require("axios");
 
-const glob = require("glob");
-const path = require("path");
-
-var getDynamicRoutes = function() {
-  return [].concat(
-    glob
-      .sync("*.md", { cwd: "blog/" })
-      .map(filepath => `/blog/${path.basename(filepath, ".md")}`)
-  );
-};
-
-var dynamicPaths = getDynamicRoutes();
-
 export default {
   mode: "universal",
   /*
@@ -146,8 +133,7 @@ export default {
   svgSprite: {
     input: "~/assets/svg",
     output: "~/assets/svg/sprite",
-    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
-    defaultSprite: "icons"
+    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
   },
   /**
    * PWA configuration
@@ -272,16 +258,6 @@ export default {
     extend(config, ctx) {
       if (ctx.dev && ctx.isClient) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
-        config.module.rules.push({
-          enforce: "pre",
-          test: /.(js|vue)$/,
-          loader: "eslint-loader",
-          exclude: /(node_modules)/
-        });
-        const svgRule = config.module.rules.find(rule =>
-          rule.test.test(".svg")
-        );
-        svgRule.test = /\.(png|jpe?g|gif|webp)$/;
       }
       //config.module.rules.map(rule => console.log(">>>>>>>>>>>>", rule));
     }
