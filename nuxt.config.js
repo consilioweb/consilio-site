@@ -127,9 +127,9 @@ export default {
    */
   modules: [
     "@nuxtjs/pwa",
-    "@nuxtjs/svg-sprite",
     "@nuxtjs/proxy",
     "@nuxtjs/axios",
+    "@nuxtjs/svg-sprite",
     [
       "@nuxtjs/recaptcha",
       {
@@ -146,7 +146,6 @@ export default {
   svgSprite: {
     input: "~/assets/svg",
     output: "~/assets/svg/sprite",
-    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
   },
   /**
    * PWA configuration
@@ -272,6 +271,11 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
+      config.module.rules.push({
+        test: /\.svg$/,
+        include: [path.resolve(__dirname, "assets/svg")],
+        use: "svg-sprite-loader"
+      });
     }
     //extractCSS: true
   },
