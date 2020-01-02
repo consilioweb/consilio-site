@@ -1,19 +1,6 @@
 const axios = require("axios");
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
 
-const glob = require("glob");
-const path = require("path");
-
-var getDynamicRoutes = function() {
-  return [].concat(
-    glob
-      .sync("*.md", { cwd: "blog/" })
-      .map(filepath => `/blog/${path.basename(filepath, ".md")}`)
-  );
-};
-
-var dynamicPaths = getDynamicRoutes();
-
 export default {
   mode: "universal",
   /*
