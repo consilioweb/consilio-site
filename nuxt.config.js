@@ -146,7 +146,8 @@ export default {
   svgSprite: {
     input: "~/assets/svg",
     output: "~/assets/svg/sprite",
-    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
+    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
+    defaultSprite: "icons"
   },
   /**
    * PWA configuration
@@ -281,29 +282,9 @@ export default {
           rule.test.test(".svg")
         );
         svgRule.test = /\.(png|jpe?g|gif|webp)$/;
-        config.module.rules.push({
-          test: /\.svg$/,
-          use: [
-            {
-              loader: "svg-sprite-loader",
-              options: {
-                extract: true,
-                spriteFilename: "icons.svg"
-              }
-            },
-            {
-              loader: "svgo-loader",
-              options: {
-                plugins: [{ removeViewbox: false }]
-              }
-            }
-          ]
-        });
-        // Uncomment this line to show all the loaders used by Webpack.
-        config.module.rules.map(rule => console.log(">>>>>>>>>>>>", rule));
       }
+      //config.module.rules.map(rule => console.log(">>>>>>>>>>>>", rule));
     }
-    //extractCSS: true
   },
   /*
    ** ENV
