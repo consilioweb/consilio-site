@@ -185,7 +185,7 @@ export default {
     headers: {
       "Access-Control-Allow-Origin": "*,*"
     },
-    proxyHeaders: false,
+    proxyHeaders: true,
     credentials: false
   },
   proxy: {
@@ -256,11 +256,11 @@ export default {
     },
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     extend(config, ctx) {
-      if (ctx.dev && ctx.isClient) {
+      if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
-      //config.module.rules.map(rule => console.log(">>>>>>>>>>>>", rule));
     }
+    //extractCSS: true
   },
   /*
    ** ENV
