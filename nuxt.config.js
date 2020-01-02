@@ -145,7 +145,8 @@ export default {
    */
   svgSprite: {
     input: "~/assets/svg",
-    output: "~/assets/svg/sprite"
+    output: "~/assets/svg/sprite",
+    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
   },
   /**
    * PWA configuration
