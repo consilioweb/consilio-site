@@ -26,7 +26,7 @@ export default {
       {
         name: "viewport",
         content:
-          "width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1"
+          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1"
       },
       {
         hid: "description",
@@ -129,7 +129,16 @@ export default {
     "@nuxtjs/pwa",
     "@nuxtjs/svg-sprite",
     "@nuxtjs/proxy",
-    "@nuxtjs/axios"
+    "@nuxtjs/axios",
+    [
+      "@nuxtjs/recaptcha",
+      {
+        hideBadge: true,
+        language: "pt-br",
+        siteKey: "6LfilKUUAAAAACIMCe6ExvLXHgtRv2Dq7ydnzcEN",
+        version: 3
+      }
+    ]
   ],
   /*
    ** SVG Sprite configuration
@@ -137,6 +146,18 @@ export default {
   svgSprite: {
     input: "~/assets/svg",
     output: "~/assets/svg/sprite"
+  },
+  /**
+   * PWA configuration
+   */
+  pwa: {
+    meta: {
+      mobileAppIOS: true,
+      name: process.env.NODE_ENV.title,
+      description: process.env.NODE_ENV.description,
+      author: "Agência Consilio",
+      lang: "pt-br"
+    }
   },
   /*
    ** Manifest configuration
@@ -261,6 +282,6 @@ export default {
     baseUrl:
       process.env.NODE_ENV === "development"
         ? "http://localhost:8000/api/wp-json/wp/v2/"
-        : "http://localhost:8000/api/wp-json/wp/v2/"
+        : "https://site.consilio.com.br/api/wp-json/wp/v2/"
   }
 };

@@ -71,7 +71,6 @@
                 v-model="form.firstname"
                 name="firstname"
                 :class="response ? 'disabled' : ''"
-                :disabled="response ? 'disabled' : ''"
                 required
                 placeholder
               />
@@ -244,6 +243,12 @@ export default {
         return;
       }
       const formData = new FormData(this.$refs.form);
+      try {
+        const token = await this.$recaptcha.execute("login");
+        console.log("ReCaptcha token:", token);
+      } catch (error) {
+        console.log("Login error:", error);
+      }
       await axios
         .post(
           "/api/wp-json/contact-form-7/v1/contact-forms/5674565/feedback",
@@ -271,7 +276,8 @@ export default {
         });
     }
   },
-  mounted() {
+  async mounted() {
+    await this.$recaptcha.init();
     this.$store.commit("HOVER_BUTTON_HEADER", false);
     this.$store.commit("LOGO_HEADER_PRIMARY", true);
   }

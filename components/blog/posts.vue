@@ -7,7 +7,7 @@
         :id="post.id"
         class="feed-blog__content"
       >
-        <n-link class="feed-blog__card" :to="'/blog/'+post.slug">
+        <n-link class="feed-blog__card" :to="`/blog/${post.slug}`">
           <figure :style="'background-image: url('+post.img+')'"></figure>
           <div class="feed-blog__card--meta">
             <span v-html="shortTimestamp(post.date)"></span>
@@ -155,7 +155,6 @@ export default {
 
 .feed-blog {
   &__container {
-    margin: 5%;
     padding-top: 50px; // Correction
     display: flex;
     flex-flow: wrap;
@@ -169,6 +168,7 @@ export default {
     flex: 1;
     position: relative;
     min-width: 350px;
+    margin: 5%;
     &:nth-child(6n) {
       min-width: 100%;
     }
@@ -177,6 +177,7 @@ export default {
     }
     @media screen and (min-width: $break-md) {
       min-width: calc(100% / 3);
+      margin: initial;
     }
   }
   &__card {
@@ -190,10 +191,11 @@ export default {
     box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
     background: $white;
     transition: all 1s ease-in-out;
-    margin: 10px !important;
     position: relative;
-
     overflow: hidden;
+    @media screen and (min-width: $break-md) {
+      margin: 10px !important;
+    }
     &--meta {
       position: absolute;
       top: 0;

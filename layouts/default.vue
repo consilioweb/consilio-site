@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Scripts />
     <Header :colorLogo="colorLogo" :buttonHover="buttonHover" />
     <side-bar />
     <transition name="fade">
@@ -20,6 +21,7 @@ import Footer from "@/components/footer.vue";
 import SideBar from "@/components/side-bar.vue";
 import Menu from "@/components/menu.vue";
 import BottomPlug from "@/components/bottom-plug.vue";
+import Scripts from "@/components/scripts.vue";
 
 export default {
   components: {
@@ -27,7 +29,8 @@ export default {
     Footer,
     Menu,
     SideBar,
-    BottomPlug
+    BottomPlug,
+    Scripts
   },
   computed: {
     ...mapState("menus", ["mainMenu"]),

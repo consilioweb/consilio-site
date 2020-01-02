@@ -48,6 +48,7 @@ export default {
               global_css: data.global_css,
               google_analytics: data.google_analytics,
               google_tag_manager: data.google_tag_manager,
+              others_scripts: data.others_scripts,
               getAllCountArticle: data.getAllCountArticle,
               getAllCountCat: data.getAllCountCat,
               getAllCountPage: data.getAllCountPage,
@@ -240,7 +241,7 @@ export default {
   getPost(slug) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
-      request.get(`posts?slug=${slug}`).then(response => {
+      request.get(`posts?_embed&filter[name]=${slug}`).then(response => {
         const data = [...response.data][0];
         if (response.status === 200 && response.data.length > 0) {
           const filtered = {
@@ -257,7 +258,13 @@ export default {
             categories: data.categories,
             tags: data.tags,
             post_categories: data.post_categories,
-            post_tags: data.post_tags
+            post_tags: data.post_tags,
+            author_name: data._embedded.author[0].name,
+            author_img: data._embedded.author[0].avatar_urls["48"],
+            author_slug: data._embedded.author[0].slug,
+            author_description: data._embedded.author[0].description,
+            status: data.status,
+            img: data.quick_img
           };
           resolve(filtered);
         } else {

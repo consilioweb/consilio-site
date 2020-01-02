@@ -14,7 +14,7 @@ const state = () => ({
 
 // Getters
 const getters = {
-  lengthPosts: state => state.posts.length,
+  lengthPosts: state => state.posts.length
 };
 
 // Mutations
@@ -44,9 +44,9 @@ const actions = {
       commit("FETCHED_RECENT", res.data);
     });
   },
-  async getPost({ commit }, slug) {
+  async getPost({ commit }, { slug }) {
     await api.getPost(slug).then(res => {
-      commit("GET_POST", res.data);
+      commit("GET_POST", res);
     });
   }
 };

@@ -18,7 +18,7 @@
                 <a href="/">Home</a>
               </li>
               <li class="nav-share" role="menuitem">
-                <a href="#" @click="modal = !modal">Informações</a>
+                <a href="#" @click="modal = !modal">Autores</a>
               </li>
             </ul>
           </div>
@@ -42,14 +42,10 @@
           <transition name="modal">
             <section v-if="modal" class="modal" @click="modal = false">
               <article class="modal__content" @click.stop>
-                <h4 class="modal__title">For the full tutorial</h4>
-                <h4 class="modal__title">that goes with this pen</h4>
+                <h4 class="modal__title">Autores</h4>
 
                 <h5 class="modal__link" @click="modal = false">
-                  <a
-                    href="https://snipcart.com/blog/vuejs-transitions-animations"
-                    target="_blank"
-                  >Creating Vue.js Transitions &amp; Animations</a>
+                  <a href="#" target="_blank">Link</a>
                 </h5>
 
                 <button class="modal__close" @click="modal = false">&times;</button>
@@ -118,23 +114,15 @@ export default {
     };
   },
 
-  async fetch({ store, params }) {
-    let categories = store.dispatch("categories/getCategories", {
+  async asyncData({ store, params }) {
+    store.dispatch("categories/getCategories", {
       page: 1,
       per_page: 5
     });
-    let tags = await store.dispatch("tags/getTags", {
+    await store.dispatch("tags/getTags", {
       page: 1,
       per_page: 5
     });
-
-    return Promise.all([categories, tags])
-      .then(() => {
-        return (this.categories = categories), (this.tags = tags);
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
   },
   watch: {
     list(index, from) {},
@@ -283,12 +271,17 @@ export default {
     ...mapState("tags", ["tags"]),
     */
   },
-  mounted() {
-    this.allPosts();
+  async mounted() {
+    await this.allPosts();
     this.allCategories();
     this.allTags();
     this.$store.commit("HOVER_BUTTON_HEADER", true);
     this.$store.commit("LOGO_HEADER_WHITE", true);
+  },
+  head() {
+    return {
+      title: "Blog Consilio | Agência Consilio",
+    };
   }
 };
 </script>
@@ -301,6 +294,7 @@ section {
   @include flexbox;
   @include flex-direction(column);
   position: relative;
+  width: 100%;
 }
 svg {
   height: 16px;
@@ -359,6 +353,7 @@ header {
     max-height: 450px;
     margin-top: 50px;
     text-align: center;
+
     &--title {
       & h2 {
         position: relative;
@@ -376,7 +371,7 @@ header {
   }
   & nav {
     @include flexbox();
-    @include flex-direction(column);
+    @include flex-direction(row);
     padding: 0;
     list-style: none;
     @media screen and (min-width: $break-md) {
@@ -406,8 +401,10 @@ header {
       @include align-items(center);
       -ms-overflow-scrolling: touch;
       -webkit-overflow-scrolling: touch;
-      margin-right: 10px;
       white-space: nowrap;
+      @media screen and (min-width: $break-md) {
+        margin-right: 10px;
+      }
     }
     & .nav-right {
       flex: 1;

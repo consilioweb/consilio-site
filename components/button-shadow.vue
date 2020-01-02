@@ -1,5 +1,5 @@
 <template>
-  <a :href="slugToUrl(url)" class="btn -white">
+  <n-link :to="slugToUrl(url)" class="btn -white">
     {{text}}
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@
         d="M7.252,5.407 L2.147,8.541 C1.988,8.639 1.804,8.688 1.619,8.688 C1.466,8.688 1.313,8.655 1.173,8.587 C0.864,8.437 0.671,8.144 0.671,7.824 L0.671,1.553 C0.671,1.235 0.864,0.940 1.173,0.791 C1.482,0.640 1.857,0.658 2.147,0.836 L7.252,3.971 C7.514,4.132 7.671,4.401 7.671,4.688 C7.671,4.976 7.514,5.246 7.252,5.407 Z"
       />
     </svg>
-  </a>
+  </n-link>
 </template>
 
 <script>
@@ -21,7 +21,7 @@ export default {
   props: ["text", "url"],
   methods: {
     slugToUrl(slug) {
-      return `/${slug}`
+      return `/${slug}`;
     }
   }
 };
