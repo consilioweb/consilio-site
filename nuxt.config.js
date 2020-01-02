@@ -1,4 +1,5 @@
 const axios = require("axios");
+const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
 
 const glob = require("glob");
 const path = require("path");
@@ -145,7 +146,7 @@ export default {
    */
   svgSprite: {
     input: "~/assets/svg",
-    output: "~/assets/svg/sprite",
+    output: "~/assets/svg/sprite"
     //publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
   },
   /**
@@ -269,17 +270,45 @@ export default {
     },
     //publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     extend(config, ctx) {
-      if (ctx.isDev) {
+      if (ctx.dev && ctx.isClient) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
+        config.module.rules.push({
+          enforce: "pre",
+          test: /.(js|vue)$/,
+          loader: "eslint-loader",
+          exclude: /(node_modules)/
+        });
       }
+      /**
+       * Initialise SVG Sprites
+       */
+      // Excludes /assets/svg from url-loader
+      const svgRule = config.module.rules.find(rule => rule.test.test(".svg"));
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/;
       config.module.rules.push({
         test: /\.svg$/,
-        include: [path.resolve(__dirname, "assets/svg")],
-        loader: "svg-sprite-loader"
+        use: [
+          {
+            loader: "svg-sprite-loader",
+            options: {
+              extract: true,
+              spriteFilename: "icons.svg"
+            }
+          },
+          {
+            loader: "svgo-loader",
+            options: {
+              plugins: [{ removeViewbox: false }]
+            }
+          }
+        ]
       });
+      // Uncomment this line to show all the loaders used by Webpack.
+      config.module.rules.map(rule => console.log(">>>>>>>>>>>>", rule));
     }
     //extractCSS: true
   },
+  plugins: [new SpriteLoaderPlugin()],
   /*
    ** ENV
    */
