@@ -85,7 +85,7 @@
     </div>
     <posts
       class="section__post"
-      :category="this.activeFilters.categories[0]"
+      :category="this.activeFilters.categorias[0]"
       :tag="this.activeFilters.tags[0]"
       :totalPages="totalPages"
       ref="posts"
@@ -109,8 +109,8 @@ export default {
       totalPages: 0,
       filtered: [],
       dropdown: { height: 0 },
-      filters: { categories: {}, tags: {} },
-      menus: { categories: false, tags: false }
+      filters: { categorias: {}, tags: {} },
+      menus: { categorias: false, tags: false }
     };
   },
 
@@ -172,7 +172,7 @@ export default {
             .then(moreresults => {
               allResults = allResults.concat(moreresults);
               allResults.forEach(({ name, id }) => {
-                this.$set(this.filters.categories, name, false);
+                this.$set(this.filters.categorias, name, false);
               });
             });
         }
@@ -233,10 +233,10 @@ export default {
     },
 
     list() {
-      let { categories, tags } = this.activeFilters;
+      let { categorias, tags } = this.activeFilters;
 
       api
-        .getPosts(1, 5, categories[0], tags[0])
+        .getPosts(1, 5, categorias[0], tags[0])
         .then(posts => {
           return (this.filtered = posts.data);
         })
@@ -244,7 +244,7 @@ export default {
           console.log(error.message);
         });
 
-      return !tags.length || !categories.length;
+      return !tags.length || !categorias.length;
 
       /*
       return this.todosposts.filter(({ post_categories, post_tags }) => {
@@ -258,10 +258,10 @@ export default {
     },
 
     activeFilters() {
-      let { categories, tags } = this.filters;
+      let { categorias, tags } = this.filters;
 
       return {
-        categories: Object.keys(categories).filter(c => categories[c]),
+        categorias: Object.keys(categorias).filter(c => categorias[c]),
         tags: Object.keys(tags).filter(t => tags[t])
       };
     },
@@ -280,7 +280,7 @@ export default {
   },
   head() {
     return {
-      title: "Blog Consilio | Agência Consilio",
+      title: "Blog Consilio | Agência Consilio"
     };
   }
 };
@@ -546,7 +546,7 @@ header {
 .section__filters {
   margin: 0% 5% 0% 5%;
   @media screen and (min-width: $break-md) {
-    margin: 0% 13% 10px 10%;
+    margin: 0% calc(13% - -10px) 10px calc(10% + 10px);
     margin-top: -70px;
   }
 }
@@ -562,7 +562,6 @@ header {
   position: relative;
   z-index: 999;
   height: 0px;
-  margin: 0px 10px;
 }
 
 .nav {

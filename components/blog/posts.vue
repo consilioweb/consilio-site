@@ -109,7 +109,6 @@ export default {
       this.page = 1;
       this.list = [];
       this.infiniteId += 1;
-      console.log("Rodou changetype");
     }
   },
   watch: {
