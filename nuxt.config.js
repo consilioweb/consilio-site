@@ -185,7 +185,7 @@ export default {
     headers: {
       "Access-Control-Allow-Origin": "*,*"
     },
-    proxyHeaders: false,
+    proxyHeaders: true,
     credentials: false
   },
   proxy: {
