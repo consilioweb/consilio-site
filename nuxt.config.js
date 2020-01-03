@@ -274,6 +274,6 @@ export default {
     baseUrl:
       process.env.NODE_ENV === "development"
         ? "http://localhost:8000/api/wp-json/wp/v2/"
-        : "https://site.consilio.com.br/api/wp-json/wp/v2/"
+        : "http://198.58.109.236:8000/api/wp-json/wp/v2/"
   }
 };
