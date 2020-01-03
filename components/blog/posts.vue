@@ -20,7 +20,12 @@
           <div class="feed-blog__card--title">
             <h1>{{post.title}}</h1>
           </div>
-          <div class="feed-blog__card--content" v-html="post.excerpt"></div>
+          <div v-if="post.excerpt !== ''" class="feed-blog__card--content">
+            <p>{{ post.excerpt | striphtml }}</p>
+          </div>
+          <div v-else class="feed-blog__card--content">
+            <p>{{ toLimitChars(post.content, 200) | striphtml }}</p>
+          </div>
           <div class="feed-blog__card--button">
             <svg-icon name="icons/right-arrow" />
           </div>
@@ -235,7 +240,7 @@ export default {
       & p {
         font-family: Poppins, sans-serif;
         font-size: 13px;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 1.8rem;
       }
     }
@@ -316,9 +321,11 @@ export default {
     &:hover .feed-blog__card--title {
       transform: translate(-0%, 50%);
     }
+    /*
     &:hover .feed-blog__card--content p {
       display: none;
     }
+    */
     &:hover .feed-blog__card--title h1,
     &:hover .feed-blog__card--content p,
     &:hover .feed-blog__card--content {

@@ -320,8 +320,7 @@ export default {
             console.log("Erro (promisse): " + error);
           }
         })
-        .catch(error => console.log(error) && false);
-      return true;
+        .catch(error => console.log(error));
     });
   },
   getCategory(slug) {
@@ -366,7 +365,7 @@ export default {
       const params = {
         params: {
           ...(page ? { page: page } : { page: 1 }),
-          ...(per_page ? { per_page: per_page } : { per_page: 20 })
+          ...(per_page ? { per_page: per_page } : { per_page: 5 })
         }
       };
       return request.get(`categories`, params).then(response => {

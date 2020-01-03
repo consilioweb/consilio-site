@@ -522,7 +522,7 @@ article {
       display: none;
       @include flexbox();
       height: 100%;
-      padding-left: 20px;
+      padding-left: 30px;
       @media screen and (min-width: $break-md) {
         display: initial;
         width: 25%;
@@ -531,7 +531,7 @@ article {
       }
       & .posts_related_section {
         h3 {
-          font-family: Quicksand;
+          font-family: Quicksand, sans-serif;
           font-size: 15px;
           color: #586371;
           font-weight: 600;
@@ -651,8 +651,28 @@ article {
 article {
   & .__content {
     &--article {
+      & ul,
+      ol {
+        list-style-type: disc;
+        padding: 0 0 0 20px;
+        & li {
+          color: #2c3e50;
+          font-size: 15px;
+          line-height: 26px;
+          font-family: Poppins, sans-serif;
+          & span {
+            font-size: 15px;
+          }
+          & b {
+            font-weight: 600 !important;
+            color: $primary;
+          }
+        }
+        & li:not(:first-child) {
+          margin-top: 16px;
+        }
+      }
       & span {
-        font-weight: 500 !important;
         color: $primary;
       }
       & a {
@@ -660,7 +680,7 @@ article {
         transition: all 250ms ease-in-out;
         border-bottom: 1px dotted #becbdc;
         word-wrap: break-word;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
         & span {
           color: #4b5f7d;
         }
@@ -673,22 +693,55 @@ article {
       }
       & p {
         font-size: 15px;
-        padding-bottom: 30px !important;
-        & span {
-          font-weight: 500 !important;
+        padding: 15px 0px !important;
+        color: $primary;
+        font-family: Poppins, sans-serif;
+        & a {
+          color: #4b5f7d;
+          transition: all 250ms ease-in-out;
+          border-bottom: 1px dotted #becbdc;
+          word-wrap: break-word;
+          font-weight: 600 !important;
+          & span {
+            color: #4b5f7d;
+          }
+          &:visited {
+            color: #4b5f7d;
+          }
+          & span {
+            font-weight: 600 !important;
+          }
+        }
+        & b,
+        span {
+          font-family: Poppins, sans-serif;
+        }
+        & b {
+          font-weight: 600 !important;
+          color: $primary;
         }
       }
+      & h1,
+      h2,
+      h3,
+      h4 {
+        font-family: Quicksand, sans-serif;
+      }
       & h1 {
-        font-size: 20px;
+        font-size: 1.8em;
       }
       & h2 {
-        font-family: Quicksand, sans-serif;
+        font-size: 1.5em;
         font-weight: 600 !important;
-        font-size: 18px;
+      }
+      & h3 {
+        font-size: 1.3em;
       }
       & h3,
       h4 {
-        padding-bottom: 20px;
+        padding: 10px 0px;
+        color: $primary;
+        font-weight: 600 !important;
       }
       & img {
         width: 100%;
