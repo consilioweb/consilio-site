@@ -182,10 +182,12 @@ export default {
    */
   axios: {
     proxy: false,
+    /*
     headers: {
       "Access-Control-Allow-Origin": "*,*"
     },
     proxyHeaders: true,
+    */
     credentials: false
   },
   /*
