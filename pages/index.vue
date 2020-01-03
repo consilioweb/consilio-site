@@ -85,5 +85,6 @@ export default {
 
 #home {
   width: 100%;
+  overflow: hidden;
 }
 </style>

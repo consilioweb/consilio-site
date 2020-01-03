@@ -63,12 +63,10 @@
               <h3>Veja também</h3>
               <ul>
                 <li v-for="(related, index) in postsCategory" :key="index">
-                  <a>
-                    <figure
-                      :style="'background: url('+ related.img +')'"
-                    ></figure>
+                  <a :href="'/blog/'+related.slug">
+                    <figure :style="'background: url('+ related.img +')'"></figure>
                   </a>
-                  <a v-html="toLimitChars(related.title, 45)"></a>
+                  <a :href="'/blog/'+related.slug" v-html="toLimitChars(related.title, 45)"></a>
                 </li>
               </ul>
             </div>
@@ -124,22 +122,16 @@ export default {
     });
   },
   mounted() {
+    api
+      .getPosts(1, 5, this.post.post_categories[0])
+      .then(posts => {
+        return (this.postsCategory = posts.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
     this.$store.commit("HOVER_BUTTON_HEADER", false);
     this.$store.commit("LOGO_HEADER_WHITE", true);
-  },
-  computed: {
-    getPostsCategory() {
-      setTimeout(() => {
-        api
-          .getPosts(1, 5, this.post.post_categories[0])
-          .then(posts => {
-            return (this.postsCategory = posts.data);
-          })
-          .catch(error => {
-            console.log(error.message);
-          });
-      }, 1000);
-    }
   },
   head() {
     return {

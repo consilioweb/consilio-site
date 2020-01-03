@@ -247,9 +247,6 @@ export default {
    */
   build: {
     dir: "consilio",
-    splitChunks: {
-      layouts: true
-    },
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     extend(config, ctx) {
       if (ctx.isDev) {

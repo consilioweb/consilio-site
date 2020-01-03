@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="blog">
     <header :style="'background-image: url('+recent[0].img+')'">
       <div class="header__overlay"></div>
       <div class="inner">
@@ -290,11 +290,12 @@ export default {
 @import "@/assets/scss/_variables.scss";
 @import "@/assets/scss/_flexbox.scss";
 
-section {
+section.blog {
   @include flexbox;
   @include flex-direction(column);
   position: relative;
   width: 100%;
+  overflow: hidden;
 }
 svg {
   height: 16px;
