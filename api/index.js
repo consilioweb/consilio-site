@@ -366,7 +366,7 @@ export default {
       const params = {
         params: {
           ...(page ? { page: page } : { page: 1 }),
-          ...(per_page ? { per_page: per_page } : { per_page: 5 })
+          ...(per_page ? { per_page: per_page } : { per_page: 20 })
         }
       };
       return request.get(`categories`, params).then(response => {
@@ -390,7 +390,7 @@ export default {
       const params = {
         params: {
           ...(page ? { page: page } : { page: 1 }),
-          ...(per_page ? { per_page: per_page } : { per_page: 5 })
+          ...(per_page ? { per_page: per_page } : { per_page: 20 })
         }
       };
       return request.get(`tags`, params).then(response => {

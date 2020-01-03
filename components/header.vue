@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-  props: ["colorLogo", "buttonHover"],
+  props: ["colorLogo", "buttonHover"]
 };
 </script>
 
@@ -51,14 +51,17 @@ header button {
   transition: all 0.3s ease;
   font-family: "Quicksand";
   font-weight: 700;
+  font-size: 10px;
   &:hover {
     background: $white;
     color: $secondary;
   }
   @media screen and (min-width: $break-md) {
+    font-size: 12px;
     width: 150px;
   }
   @media screen and (min-width: $break-lg) {
+    font-size: 12px;
     width: 180px;
   }
 }

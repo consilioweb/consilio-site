@@ -170,9 +170,7 @@ form {
     @include flexbox;
     @include align-items(center);
     @include flex-direction(column);
-    @include flex-flow(wrap);
     @media screen and (min-width: $break-md) {
-      @include flex-direction(row);
       margin: 10% 13% 10% 10%;
     }
   }

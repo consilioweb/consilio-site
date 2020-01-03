@@ -181,16 +181,7 @@ export default {
    ** Axios configuration
    */
   axios: {
-    proxy: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-      "Access-Control-Allow-Headers":
-        "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
-    },
-    /*
-    proxyHeaders: true,
-    */
+    proxy: process.env.NODE_ENV === "development" ? true : false,
     credentials: false
   },
   proxy: {
@@ -273,7 +264,7 @@ export default {
   env: {
     baseUrl:
       process.env.NODE_ENV === "development"
-        ? "http://localhost:8000/api/wp-json/wp/v2/"
-        : "http://198.58.109.236:8000/api/wp-json/wp/v2/"
+        ? "http://192.168.1.2:8000/api/wp-json/wp/v2/"
+        : "https://api.consilio.com.br/api/wp-json/wp/v2/"
   }
 };

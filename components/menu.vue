@@ -75,12 +75,11 @@ export default {
 .menu {
   position: fixed;
   width: 100%;
-  height: calc(100vh - 140px);
-  margin-top: 70px;
+  height: 100%;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  flex-flow: row wrap;
+  @media screen and (min-width: $break-md) {
+  }
 }
 .menu__close {
   font-size: 12px;
@@ -102,14 +101,15 @@ export default {
   @include flexbox;
   @include justify-content(space-between);
   @include flex-wrap(wrap);
+  @include flex-direction(column);
   margin: 0 auto;
   width: 100vw;
-  height: 100%;
+  height: 80vh;
   padding: 0 5%;
   counter-reset: item;
   position: relative;
-  @media screen and (max-width: $break-lg) {
-    @include flex-direction(column);
+  @media screen and (min-width: $break-md) {
+    @include flex-direction(row);
     height: 70%;
   }
 }
@@ -300,7 +300,7 @@ export default {
   z-index: 11;
   transition: all 0.5s ease-in-out;
   -webkit-transition: all 0.5s ease-in-out;
-  transform: scale(0.8)
+  transform: scale(0.8);
 }
 
 .render {
@@ -327,8 +327,12 @@ export default {
     rgba(255, 255, 255, 0.6) -5px 2px 100px;
 }
 @keyframes reflect {
-	0% {transform: rotate(-180deg) rotateY(30deg);}
-	100% {transform: rotate(-180deg) rotateY(0deg);}
+  0% {
+    transform: rotate(-180deg) rotateY(30deg);
+  }
+  100% {
+    transform: rotate(-180deg) rotateY(0deg);
+  }
 }
 
 .render.reflect {

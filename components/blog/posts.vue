@@ -154,19 +154,17 @@ export default {
 
 .feed-blog {
   &__container {
-    padding-top: 50px; // Correction
     display: flex;
     flex-flow: wrap;
     @media screen and (min-width: $break-md) {
       margin: 0% 13% 80px 10%;
-      padding-top: 0px; // Correction
     }
   }
   &__content {
     display: flex;
     flex: 1;
     position: relative;
-    min-width: 350px;
+    //min-width: 350px;
     margin: 5%;
     &:nth-child(6n) {
       min-width: 100%;

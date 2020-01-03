@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="post_single">
     <header :style="'background-image: url('+post.img+')'">
       <div class="header__overlay"></div>
       <div class="inner">
@@ -54,7 +54,27 @@
     </header>
     <article>
       <figure :style="'background-image: url('+post.img+')'"></figure>
-      <div class="__content" v-html="post.content"></div>
+      <div class="__content">
+        <div class="__content--article" v-html="post.content"></div>
+        <aside class="__content--sidebar">
+          <div class="sidebar--content sticky">
+            <div class="banner_section"></div>
+            <div class="posts_related_section">
+              <h3>Veja também</h3>
+              <ul>
+                <li v-for="(related, index) in postsCategory" :key="index">
+                  <a>
+                    <figure
+                      :style="'background: url('+ related.img +')'"
+                    ></figure>
+                  </a>
+                  <a v-html="toLimitChars(related.title, 45)"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
       <section class="__footer">
         <section class="author-card">
           <n-link :to="'/blog/autor/'+post.author_slug">
@@ -84,10 +104,12 @@
 </template>
 
 <script>
+import api from "@/api/index";
 export default {
   data() {
     return {
-      post: this.$store.state.posts.post
+      post: this.$store.state.posts.post,
+      postsCategory: []
     };
   },
   validate({ params }) {
@@ -104,6 +126,20 @@ export default {
   mounted() {
     this.$store.commit("HOVER_BUTTON_HEADER", false);
     this.$store.commit("LOGO_HEADER_WHITE", true);
+  },
+  computed: {
+    getPostsCategory() {
+      setTimeout(() => {
+        api
+          .getPosts(1, 5, this.post.post_categories[0])
+          .then(posts => {
+            return (this.postsCategory = posts.data);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      }, 1000);
+    }
   },
   head() {
     return {
@@ -126,15 +162,33 @@ export default {
 @import "@/assets/scss/_variables.scss";
 @import "@/assets/scss/_flexbox.scss";
 
-section {
+.post_single {
   @include flexbox;
   @include flex-direction(column);
   position: relative;
+  width: 100%;
 }
 svg {
   height: 16px;
   fill: #fff;
   fill-rule: evenodd;
+}
+.sticky {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: 20px;
+  width: 100%;
+  align-self: flex-start;
+  @media all and (max-width: 600px) {
+    position: static !important;
+    float: none;
+    width: 100%;
+    padding-bottom: 0;
+    // resets the block to flow with the rest of the document at small screen widths
+  }
 }
 header {
   background-color: rgb(64, 12, 98);
@@ -183,11 +237,15 @@ header {
     @include flex-direction(column);
     @include justify-content(center);
     @include align-items(center);
-    padding: 90px 0px;
-    min-height: 300px;
-    max-height: 450px;
+    min-height: 100vh;
+    max-height: 600px;
     margin-top: 50px;
     text-align: center;
+    @media screen and (min-width: $break-md) {
+      min-height: 400px;
+      padding: 90px 0px;
+      max-height: 450px;
+    }
 
     &--title {
       padding: 0 30px;
@@ -455,9 +513,58 @@ article {
     }
   }
   & .__content {
+    @include flexbox();
     padding: 20px 30px 50px 30px;
+    box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+    margin-bottom: 50px;
     @media screen and (min-width: $break-md) {
       padding: 60px 50px 50px 50px;
+    }
+    &--article {
+      width: 100%;
+      @media screen and (min-width: $break-md) {
+        width: 75%;
+      }
+    }
+    &--sidebar {
+      display: none;
+      @include flexbox();
+      height: 100%;
+      padding-left: 20px;
+      @media screen and (min-width: $break-md) {
+        display: initial;
+        width: 25%;
+      }
+      & .banner_section {
+      }
+      & .posts_related_section {
+        h3 {
+          font-family: Quicksand;
+          font-size: 15px;
+          color: #586371;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        ul {
+          margin-top: 30px;
+          & li {
+            padding-bottom: 10px;
+            @include flexbox;
+            & a {
+              font-size: 14px;
+              line-height: 20px;
+            }
+            & figure {
+              width: 64px;
+              height: 64px;
+              border-radius: 5px;
+              margin-right: 10px;
+              background-size: cover !important;
+              background-position: center center !important;
+            }
+          }
+        }
+      }
     }
   }
   & .__comments {
@@ -525,7 +632,7 @@ article {
     & .author-card-button {
       display: block;
       padding: 9px 16px;
-      border: 1px solid #aebbc1;
+      border: 1px solid $secondary;
       color: $secondary;
       font-size: 13px;
       line-height: 1;
@@ -539,7 +646,8 @@ article {
 
     & .author-card-button:hover {
       border-color: $secondary;
-      color: $secondary;
+      background: $secondary;
+      color: $white;
       text-decoration: none;
     }
   }
@@ -550,36 +658,52 @@ article {
 @import "@/assets/scss/_flexbox.scss";
 article {
   & .__content {
-    & span {
-      font-weight: 500 !important;
-      color: $primary;
-    }
-    & a {
-      font-weight: 700 !important;
+    &--article {
       & span {
-        font-weight: 700 !important;
+        font-weight: 500 !important;
+        color: $primary;
       }
-    }
-    & p {
-      padding-bottom: 30px !important;
-    }
-    & h1 {
-      font-size: 20px;
-    }
-    & h2 {
-      font-family: Quicksand, sans-serif;
-      font-weight: 600 !important;
-      font-size: 18px;
-    }
-    & h3,
-    h4 {
-      padding-bottom: 20px;
-    }
-    & img {
-      width: 500px;
-      height: auto;
-      max-width: 100%;
-      max-height: 100%;
+      & a {
+        color: #4b5f7d;
+        transition: all 250ms ease-in-out;
+        border-bottom: 1px dotted #becbdc;
+        word-wrap: break-word;
+        font-weight: 700 !important;
+        & span {
+          color: #4b5f7d;
+        }
+        &:visited {
+          color: #4b5f7d;
+        }
+        & span {
+          font-weight: 700 !important;
+        }
+      }
+      & p {
+        font-size: 15px;
+        padding-bottom: 30px !important;
+        & span {
+          font-weight: 500 !important;
+        }
+      }
+      & h1 {
+        font-size: 20px;
+      }
+      & h2 {
+        font-family: Quicksand, sans-serif;
+        font-weight: 600 !important;
+        font-size: 18px;
+      }
+      & h3,
+      h4 {
+        padding-bottom: 20px;
+      }
+      & img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+      }
     }
   }
 }

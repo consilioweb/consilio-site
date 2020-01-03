@@ -185,7 +185,7 @@ export default {
         let allResults = tags.data;
         for (let i = 2; i <= totalPages; i++) {
           api
-            .getTags(i)
+            .getTags(i, 0)
             .then(response => {
               return response.data;
             })
@@ -371,14 +371,13 @@ header {
   }
   & nav {
     @include flexbox();
-    @include flex-direction(row);
-    padding: 0;
+    @include flex-direction(column);
     list-style: none;
+    top: -70px;
     @media screen and (min-width: $break-md) {
-      position: relative;
-      top: -70px;
-      display: flex;
       @include flex-direction(row);
+      position: relative;
+      display: flex;
     }
     @include align-items(center);
     position: relative;
@@ -392,6 +391,10 @@ header {
     .nav-left {
       display: flex;
       flex-wrap: nowrap;
+      padding-bottom: 20px;
+      @media screen and (min-width: $break-md) {
+        padding-bottom: initial;
+      }
     }
     & .nav,
     .nav-left {
@@ -425,11 +428,13 @@ header {
       font-size: 14px;
     }
     & .link-search {
-      padding-left: 30px;
       position: relative;
       margin: auto;
-      margin-right: 10px;
       height: 32px;
+      @media screen and (min-width: $break-md) {
+        margin-right: 10px;
+        padding-left: 30px;
+      }
       .search {
         position: absolute;
         margin: auto;
@@ -544,10 +549,9 @@ header {
   z-index: 10;
 }
 .section__filters {
-  margin: 0% 5% 0% 5%;
+  margin: -70px 5% 0% 5%;
   @media screen and (min-width: $break-md) {
-    margin: 0% calc(13% - -10px) 10px calc(10% + 10px);
-    margin-top: -70px;
+    margin: -70px calc(13% - -10px) 10px calc(10% + 10px);
   }
 }
 .__card {
