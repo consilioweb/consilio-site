@@ -98,7 +98,8 @@ export default {
       src: "@/plugins/mixins.js"
     },
     {
-      src: "@/plugins/filters.js"
+      src: "@/plugins/filters.js",
+      ssr: false
     },
     {
       src: "@/plugins/infinite-loading.js",
