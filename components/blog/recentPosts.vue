@@ -78,9 +78,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/_variables.scss";
-@import "./assets/scss/_flexbox.scss";
-
 .feed-blog {
   position: relative;
   width: 100vw;

@@ -28,9 +28,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/_variables.scss";
-@import "./assets/scss/_flexbox.scss";
-
 @mixin btn($background, $color) {
   font-family: Poppins, sans-serif;
   font-size: 12px;

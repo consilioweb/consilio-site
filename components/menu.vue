@@ -68,10 +68,6 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
-
-@import "./assets/scss/_variables.scss";
-@import "./assets/scss/_flexbox.scss";
-
 .menu {
   position: fixed;
   width: 100%;

@@ -118,6 +118,7 @@ export default {
     "@nuxtjs/proxy",
     "@nuxtjs/axios",
     "@nuxtjs/svg-sprite",
+    "@nuxtjs/style-resources",
     [
       "@nuxtjs/recaptcha",
       {
@@ -128,6 +129,18 @@ export default {
       }
     ]
   ],
+  /**
+   * Style Resources configuration
+   */
+  styleResources: {
+    scss: [
+      //"./assets/scss/_reset.scss",
+      //"./assets/scss/_fonts.scss",
+      //"./assets/scss/_flex.scss",
+      "./assets/scss/_flexbox.scss",
+      "./assets/scss/_variables.scss"
+    ]
+  },
   /*
    ** SVG Sprite configuration
    */
