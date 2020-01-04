@@ -1,6 +1,6 @@
 <template>
   <section class="post_single">
-    <header :style="'background-image: url('+post.img+')'">
+    <header :style="'background-image: url('+(post.img ? post.img : thumbnail_default)+')'">
       <div class="header__overlay"></div>
       <div class="inner">
         <div class="__content">
@@ -53,7 +53,7 @@
       </div>
     </header>
     <article>
-      <figure :style="'background-image: url('+post.img+')'"></figure>
+      <figure :style="'background-image: url('+(post.img ? post.img : thumbnail_default)+')'"></figure>
       <div class="__content">
         <div class="__content--article" v-html="post.content"></div>
         <aside class="__content--sidebar">
@@ -64,7 +64,9 @@
               <ul>
                 <li v-for="(related, index) in postsCategory" :key="index">
                   <a :href="'/blog/'+related.slug">
-                    <figure :style="'background: url('+ related.img +')'"></figure>
+                    <figure
+                      :style="'background: url('+ (related.img ? related.img : thumbnail_default) +')'"
+                    ></figure>
                   </a>
                   <a :href="'/blog/'+related.slug" v-html="toLimitChars(related.title, 45)"></a>
                 </li>
@@ -89,21 +91,16 @@
           <n-link class="author-card-button" :to="'/blog/autor/'+post.author_slug">Ler mais</n-link>
         </div>
       </section>
-      <section class="__comments">
-        <div
-          class="fb-comments"
-          :data-href="this.$axios.defaults.baseURL + 'blog/?slug=' + post.slug"
-          data-width="auto"
-          data-numposts="5"
-        ></div>
-      </section>
+      <comment-fb :urlPost="urlPost"></comment-fb>
     </article>
   </section>
 </template>
 
 <script>
 import api from "@/api/index";
+import CommentFb from "@/components/comment-fb";
 export default {
+  components: { CommentFb },
   data() {
     return {
       post: this.$store.state.posts.post,
@@ -120,6 +117,17 @@ export default {
     await store.dispatch("posts/getPost", {
       slug: slug
     });
+  },
+  computed: {
+    urlPost() {
+      return process.env.baseUrl + "blog/?slug=" + this.post.slug;
+    },
+    thumbnail_default() {
+      return this.$store.state.core.info.thumbnail_default;
+    }
+  },
+  beforeMount() {
+    this.$fb;
   },
   mounted() {
     api
@@ -141,7 +149,12 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: this.$options.filters.stripped(this.post.excerpt)
+          content: this.post.excerpt
+            ? this.$options.filters.stripped(this.post.excerpt)
+            : this.toLimitChars(
+                this.$options.filters.stripped(this.post.content),
+                160
+              )
         }
       ]
     };

@@ -11,7 +11,7 @@ setTimeout(
 console.log("");
 
 export default {
-  baseUrl: process.env.baseUrl,
+  baseUrl: process.env.apiBaseUrl,
 
   getInfo() {
     return new Promise((resolve, reject) => {
@@ -241,7 +241,12 @@ export default {
   getPost(slug) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
-      request.get(`posts?_embed&filter[name]=${slug}`).then(response => {
+      const params = {
+        params: {
+          ...(slug ? { "filter[name]": slug } : {})
+        }
+      };
+      request.get("posts?_embed", params).then(response => {
         const data = [...response.data][0];
         if (response.status === 200 && response.data.length > 0) {
           const filtered = {

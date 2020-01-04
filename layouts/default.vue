@@ -40,7 +40,7 @@ export default {
       statsMainMenu: "menus/getStatsMainMenu",
       lengthMainMenu: "menus/lengthMainMenu"
     })
-  }
+  },
 };
 </script>
 

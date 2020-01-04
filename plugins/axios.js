@@ -1,4 +1,6 @@
 export default function({ $axios, redirect }) {
+  $axios.defaults.baseURL = process.env.apiBaseUrl;
+
   $axios.onRequest(config => {
     if (config.method === "get") {
       config.data && (config.progress = config.data.progress);

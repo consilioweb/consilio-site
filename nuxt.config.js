@@ -1,5 +1,3 @@
-const axios = require("axios");
-
 export default {
   mode: "universal",
   /*
@@ -78,6 +76,20 @@ export default {
     color: "#46505e",
     height: "3px"
   },
+
+  /*
+   ** ENV
+   */
+  env: {
+    baseUrl:
+      process.env.NODE_ENV === "development"
+        ? "http://192.168.1.2:8000/"
+        : "https://site.consilio.com.br/",
+    apiBaseUrl:
+      process.env.NODE_ENV === "development"
+        ? "http://192.168.1.2:8000/api/wp-json/wp/v2/"
+        : "https://api.consilio.com.br/wp-json/wp/v2/"
+  },
   /*
    ** Global CSS
    */
@@ -98,8 +110,7 @@ export default {
       src: "@/plugins/mixins.js"
     },
     {
-      src: "@/plugins/filters.js",
-      ssr: false
+      src: "@/plugins/filters.js"
     },
     {
       src: "@/plugins/infinite-loading.js",
@@ -196,7 +207,8 @@ export default {
    */
   axios: {
     proxy: process.env.NODE_ENV === "development" ? true : false,
-    credentials: false
+    credentials: false,
+    baseUrl: process.env.apiBaseUrl
   },
   proxy: {
     "/api/": {
@@ -211,31 +223,7 @@ export default {
   generate: {
     fallback: true,
     dir: "consilio",
-    interval: 1000,
-    routes() {
-      return Promise.all([
-        axios.get(process.env.baseUrl + "/posts?per_page=100&page=1&_embed=1"),
-        axios.get(process.env.baseUrl + "/pages?per_page=100&page=1&_embed=1")
-      ]).then(data => {
-        const posts = data[0];
-        const pages = data[1];
-        return posts.data
-          .map(post => {
-            return {
-              route: "/blog/" + post.slug,
-              payload: post
-            };
-          })
-          .concat(
-            pages.data.map(page => {
-              return {
-                route: page.slug,
-                payload: page
-              };
-            })
-          );
-      });
-    }
+    interval: 1000
   },
   /*
    ** Handle external assets
@@ -268,14 +256,5 @@ export default {
       }
     }
     //extractCSS: true
-  },
-  /*
-   ** ENV
-   */
-  env: {
-    baseUrl:
-      process.env.NODE_ENV === "development"
-        ? "http://192.168.1.2:8000/api/wp-json/wp/v2/"
-        : "https://api.consilio.com.br/wp-json/wp/v2/"
   }
 };

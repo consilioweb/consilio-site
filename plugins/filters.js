@@ -1,19 +1,10 @@
-import Vue from 'vue'
-
-Vue.filter('striphtml', function (value) {
-  var div = document.createElement("div");
-  div.innerHTML = value;
-  var text = div.textContent || div.innerText || "";
-  return text;
-});
+import Vue from "vue";
 
 Vue.filter("stripped", param => {
-  return param.replace(/<\/?[^>]+(>|$)/g, "")
+  if (!param) return "";
+  return param.replace(/<\/?[^>]+(>|$)/g, "");
 });
-
-
 Vue.filter("toUrlFormat", param => {
   let temp = param.replace(/[^a-zA-Z0-9\s\-]/g, "");
-
   return temp.replace(/\s+/g, "-").toLowerCase();
 });
