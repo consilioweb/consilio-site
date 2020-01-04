@@ -35,11 +35,12 @@
               <div class="feed-blog__card--title">
                 <h1>{{post.title}}</h1>
               </div>
+              <div class="feed-blog__card--content" v-html="post.excerpt"></div>
               <div v-if="post.excerpt !== ''" class="feed-blog__card--content">
-                <p>{{ post.excerpt | striphtml }}</p>
+                <p>{{ post.excerpt | stripped }}</p>
               </div>
               <div v-else class="feed-blog__card--content">
-                <p>{{ toLimitChars(post.content, 200) | striphtml }}</p>
+                <p>{{ toLimitChars(post.content, 200) | stripped }}</p>
               </div>
               <div class="feed-blog__card--button">
                 <svg-icon name="icons/right-arrow" />
@@ -277,9 +278,11 @@ export default {
       margin-top: 30%;
       margin-bottom: -30%;
     }
+    /*
     &:hover .feed-blog__card--content p {
       display: none;
     }
+    */
     &:hover .feed-blog__card--title h1,
     &:hover .feed-blog__card--content p,
     &:hover .feed-blog__card--content {

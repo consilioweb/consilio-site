@@ -8,7 +8,7 @@ Vue.filter('striphtml', function (value) {
 });
 
 Vue.filter("stripped", param => {
-  return param.replace(/<\/?[^>]+>/ig, "")
+  return param.replace(/<\/?[^>]+(>|$)/g, "")
 });
 
 
