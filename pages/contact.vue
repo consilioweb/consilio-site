@@ -197,6 +197,7 @@
         frameborder="0"
         style="border:0;"
         allowfullscreen
+        rel="noopener"
       ></iframe>
     </div>
   </section>
