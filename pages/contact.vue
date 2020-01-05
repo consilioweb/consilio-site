@@ -251,7 +251,7 @@ export default {
       }
       await axios
         .post(
-          "/api/wp-json/contact-form-7/v1/contact-forms/5674565/feedback",
+          `${process.env.PROXY_URL}wp-json/contact-form-7/v1/contact-forms/5674565/feedback`,
           formData
         )
         .then(res => {
