@@ -19,8 +19,9 @@ $ npm run start
 $ npm run generate
 ```
 
-Required .env file example:
+## Required .env file
 
+``` bash
 APP_NAME=Consilio
 HOST=0.0.0.0 #Host Nuxt (0.0.0.0 = auto)
 PORT=8000 #Port Nuxt
