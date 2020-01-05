@@ -4,7 +4,9 @@
       <span>agência</span>
     </div>
     <div class="about__img">
-      <img src="@/assets/img/about-img.png" alt="Por que a Consilio?" />
+      <client-only>
+        <img src="@/assets/img/about-img.png" alt="Por que a Consilio?" />
+      </client-only>
     </div>
     <div class="about__text">
       <div class="about__text--title">
