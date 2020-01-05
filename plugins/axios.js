@@ -1,5 +1,5 @@
 export default function({ $axios, redirect }) {
-  $axios.defaults.baseURL = process.env.apiBaseUrl;
+  $axios.defaults.baseURL = process.env.API_URL;
 
   $axios.onRequest(config => {
     if (config.method === "get") {

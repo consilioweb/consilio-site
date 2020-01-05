@@ -280,6 +280,46 @@ export default {
     await this.$recaptcha.init();
     this.$store.commit("HOVER_BUTTON_HEADER", false);
     this.$store.commit("LOGO_HEADER_PRIMARY", true);
+  },
+  head() {
+    return {
+      title: "Contato | Agência Consilio",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "Possui alguma dúvida? Preencha o formulário em nossa página de contato e tire suas dúvidas com nossa equipe de relacionamento. Conheça as soluções que temos para sua empresa."
+        },
+        {
+          hid: "twitter:card",
+          name: "twitter:card",
+          content: "Contato | Agência Consilio"
+        },
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content: "Contato | Agência Consilio"
+        },
+        {
+          hid: "twitter:description",
+          name: "twitter:description",
+          content:
+            "Possui alguma dúvida? Preencha o formulário em nossa página de contato e tire suas dúvidas com nossa equipe de relacionamento. Conheça as soluções que temos para sua empresa."
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: "Contato | Agência Consilio"
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content:
+            "Possui alguma dúvida? Preencha o formulário em nossa página de contato e tire suas dúvidas com nossa equipe de relacionamento. Conheça as soluções que temos para sua empresa."
+        }
+      ]
+    };
   }
 };
 </script>

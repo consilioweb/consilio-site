@@ -280,7 +280,42 @@ export default {
   },
   head() {
     return {
-      title: "Blog Consilio | Agência Consilio"
+      title: "Blog de Marketing Digital | Agência Consilio",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "O blog da Consilio é comprometido com seu desenvolvimento. Aqui você acompanha notícias, dicas e encontra os melhores artigos sobre Marketing Digital, redes sociais, geração de Leads, vendas, email marketing e muito mais. Acesse e confira!"
+        },
+        {
+          hid: "twitter:card",
+          name: "twitter:card",
+          content: "Blog de Marketing Digital | Agência Consilio"
+        },
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content: "Blog de Marketing Digital | Agência Consilio"
+        },
+        {
+          hid: "twitter:description",
+          name: "twitter:description",
+          content:
+            "O blog da Consilio é comprometido com seu desenvolvimento. Aqui você acompanha notícias, dicas e encontra os melhores artigos sobre Marketing Digital, redes sociais, geração de Leads, vendas, email marketing e muito mais. Acesse e confira!"
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: "Blog de Marketing Digital | Agência Consilio"
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content:
+            "O blog da Consilio é comprometido com seu desenvolvimento. Aqui você acompanha notícias, dicas e encontra os melhores artigos sobre Marketing Digital, redes sociais, geração de Leads, vendas, email marketing e muito mais. Acesse e confira!"
+        }
+      ]
     };
   }
 };

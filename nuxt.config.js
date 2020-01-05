@@ -1,3 +1,6 @@
+import axios from "axios";
+require("dotenv").config();
+
 export default {
   mode: "universal",
   /*
@@ -76,20 +79,6 @@ export default {
     color: "#46505e",
     height: "3px"
   },
-
-  /*
-   ** ENV
-   */
-  env: {
-    baseUrl:
-      process.env.NODE_ENV === "development"
-        ? "http://192.168.1.2:8000/"
-        : "https://site.consilio.com.br/",
-    apiBaseUrl:
-      process.env.NODE_ENV === "development"
-        ? "http://192.168.1.2:8000/api/wp-json/wp/v2/"
-        : "https://api.consilio.com.br/wp-json/wp/v2/"
-  },
   /*
    ** Global CSS
    */
@@ -120,12 +109,13 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/router-extras"],
+  buildModules: ["@nuxtjs/router-extras", ["@nuxtjs/dotenv"]],
   /*
    ** Nuxt.js modules
    */
   modules: [
     "@nuxtjs/pwa",
+    "@nuxtjs/sitemap",
     "@nuxtjs/proxy",
     "@nuxtjs/axios",
     "@nuxtjs/svg-sprite",
@@ -144,13 +134,7 @@ export default {
    * Style Resources configuration
    */
   styleResources: {
-    scss: [
-      //"./assets/scss/_reset.scss",
-      //"./assets/scss/_fonts.scss",
-      //"./assets/scss/_flex.scss",
-      "./assets/scss/_flexbox.scss",
-      "./assets/scss/_variables.scss"
-    ]
+    scss: ["./assets/scss/_flexbox.scss", "./assets/scss/_variables.scss"]
   },
   /*
    ** SVG Sprite configuration
@@ -159,6 +143,45 @@ export default {
     input: "~/assets/svg",
     output: "~/assets/svg/sprite",
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/"
+  },
+  /*
+   ** Sitemap configuration
+   */
+  sitemap: {
+    routes: callback => {
+      return axios
+        .get(process.env.API_URL + "routes")
+        .then(res => {
+          const routes = res.data.map(post => {
+            var entries;
+            if (post.type == "post") {
+              entries = `/blog/${post.slug}`;
+            }
+            if (post.type == "case") {
+              entries = `/case/${post.slug}`;
+            }
+            if (post.type == "page") {
+              entries = `/${post.slug}`;
+            }
+            if (post.type == "category") {
+              entries = `/blog/categoria/${post.slug}`;
+            }
+            if (post.type == "tag") {
+              entries = `/blog/tag/${post.slug}`;
+            }
+            return entries ? entries : "";
+          });
+          callback(null, routes);
+        })
+        .catch(callback);
+    },
+    exclude: ["/contact", "/about", "/_icons"],
+    hostname: process.env.BASE_URL,
+    path: "/sitemap.xml",
+    cacheTime: 1000 * 60 * 60 * 2,
+    trailingSlash: true,
+    gzip: true,
+    generate: false
   },
   /**
    * PWA configuration
@@ -199,20 +222,24 @@ export default {
    ** Server configuration
    */
   server: {
-    port: 8000,
-    host: "0.0.0.0"
+    port: process.env.PORT,
+    host: process.env.HOST
   },
+  /*
+   ** Server Middleware configuration
+   */
+  serverMiddleware: ["~/servermiddleware/seo.js"],
   /*
    ** Axios configuration
    */
   axios: {
     proxy: process.env.NODE_ENV === "development" ? true : false,
     credentials: false,
-    baseUrl: process.env.apiBaseUrl
+    baseUrl: process.env.API_URL
   },
   proxy: {
     "/api/": {
-      target: "https://api.consilio.com.br/",
+      target: process.env.PROXY_URL,
       pathRewrite: { "^/api": "" },
       changeOrigin: true
     }
@@ -248,11 +275,28 @@ export default {
    ** Build configuration
    */
   build: {
+    //analyze: true,
+    filenames: {
+      chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[chunkhash].js"),
+      img: ({ isDev }) => (isDev ? "[path][name].[ext]" : "img/[hash:7].[ext]")
+    },
     dir: "consilio",
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
+      }
+    },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: "styles",
+            test: /\.(css|vue)$/,
+            chunks: "all",
+            enforce: true
+          }
+        }
       }
     }
     //extractCSS: true

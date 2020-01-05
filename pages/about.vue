@@ -132,10 +132,41 @@ export default {
           hid: "description",
           name: "description",
           content: this.$options.filters.stripped(this.about.excerpt)
+        },
+        {
+          hid: "twitter:card",
+          name: "twitter:card",
+          content:
+            this.$options.filters.stripped(this.about.title) +
+            ` | Agência Consilio`
+        },
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content:
+            this.$options.filters.stripped(this.about.title) +
+            ` | Agência Consilio`
+        },
+        {
+          hid: "twitter:description",
+          name: "twitter:description",
+          content: this.$options.filters.stripped(this.about.excerpt)
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content:
+            this.$options.filters.stripped(this.about.title) +
+            ` | Agência Consilio`
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content: this.$options.filters.stripped(this.about.excerpt)
         }
       ]
     };
-  }
+  },
 };
 </script>
 

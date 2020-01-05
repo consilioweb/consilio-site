@@ -11,7 +11,7 @@ setTimeout(
 console.log("");
 
 export default {
-  baseUrl: process.env.apiBaseUrl,
+  baseUrl: process.env.API_URL,
 
   getInfo() {
     return new Promise((resolve, reject) => {
@@ -81,6 +81,28 @@ export default {
               order: item.menu_order,
               url: item.url,
               target: item.target
+            }))
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+
+  getRoutes() {
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      request.get("routes").then(response => {
+        const data = [...response.data];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            data: data.map(item => ({
+              id: item.id,
+              name: item.name,
+              type: item.type,
+              slug: item.slug
             }))
           };
           resolve(filtered);

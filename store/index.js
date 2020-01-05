@@ -42,7 +42,8 @@ export default {
         dispatch("about/getAbout", context),
         dispatch("testimonials/getTestimonials", context),
         dispatch("clients/getClients", context),
-        dispatch("core/getInfo", context)
+        dispatch("core/getInfo", context),
+        dispatch("core/getRoutes", context),
       ]);
     }
   }

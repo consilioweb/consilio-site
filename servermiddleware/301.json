@@ -1,0 +1,5 @@
+[
+  { "from": "/old", "to": "/new" },
+  { "from": "/veryold", "to": "/verynew" },
+  { "from": "/too-old", "to": "/new" }
+]

@@ -6,12 +6,16 @@ const namespaced = true;
 // States
 const state = () => ({
   info: {},
+  routes: []
 })
 
 // Mutations
 const mutations = {
   GET_INFO: (state, payload) => {
     return state.info = payload;
+  },
+  GET_ROUTES: (state, payload) => {
+    return state.routes = payload;
   }
 }
 
@@ -21,6 +25,12 @@ const actions = {
     await api.getInfo()
       .then(res => {
         commit("GET_INFO", res.data)
+      })
+  },
+  async getRoutes({ commit }) {
+    await api.getRoutes()
+      .then(res => {
+        commit("GET_ROUTES", res.data)
       })
   },
 }

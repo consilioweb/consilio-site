@@ -120,7 +120,7 @@ export default {
   },
   computed: {
     urlPost() {
-      return process.env.baseUrl + "blog/?slug=" + this.post.slug;
+      return process.env.BASE_URL + "blog/?slug=" + this.post.slug;
     },
     thumbnail_default() {
       return this.$store.state.core.info.thumbnail_default;
@@ -155,6 +155,53 @@ export default {
                 this.$options.filters.stripped(this.post.content),
                 160
               )
+        },
+        {
+          hid: "twitter:card",
+          name: "twitter:card",
+          content:
+            this.$options.filters.stripped(this.post.title) +
+            ` | Agência Consilio`
+        },
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content:
+            this.$options.filters.stripped(this.post.title) +
+            ` | Agência Consilio`
+        },
+        {
+          hid: "twitter:description",
+          name: "twitter:description",
+          content: this.post.excerpt
+            ? this.$options.filters.stripped(this.post.excerpt)
+            : this.toLimitChars(
+                this.$options.filters.stripped(this.post.content),
+                160
+              )
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content:
+            this.$options.filters.stripped(this.post.title) +
+            ` | Agência Consilio`
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content: this.post.excerpt
+            ? this.$options.filters.stripped(this.post.excerpt)
+            : this.toLimitChars(
+                this.$options.filters.stripped(this.post.content),
+                160
+              )
+        }
+      ],
+      link: [
+        {
+          rel: "canonical",
+          href: this.urlPost
         }
       ]
     };
