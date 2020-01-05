@@ -301,7 +301,7 @@ export default {
     });
   },
 
-  getPosts(page, per_page, category, tag) {
+  getPosts(page, per_page, category, tag, author) {
     let self = this;
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;
@@ -310,7 +310,8 @@ export default {
           ...(page ? { page: page } : { page: 1 }),
           ...(per_page ? { per_page: per_page } : { per_page: 5 }),
           ...(category ? { "filter[category_name]": category } : {}),
-          ...(tag ? { "filter[tag]": tag } : {})
+          ...(tag ? { "filter[tag]": tag } : {}),
+          ...(author ? { author: author } : {})
         }
       };
       request
@@ -426,6 +427,56 @@ export default {
             total: response.headers["x-wp-total"],
             totalPages: response.headers["x-wp-totalpages"],
             data: data
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+  getAuthors() {
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      return request.get("users").then(response => {
+        const data = [...response.data];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            response_status: response.status,
+            total: response.headers["x-wp-total"],
+            totalPages: response.headers["x-wp-totalpages"],
+            data: data.map(item => ({
+              id: item.id,
+              name: item.name,
+              description: item.description,
+              img: item.avatar_urls["96"],
+              slug: item.slug
+            }))
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+  getAuthor(slug) {
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      const params = {
+        params: {
+          ...(slug ? { slug: slug } : {})
+        }
+      };
+      return request.get("users", params).then(response => {
+        const data = [...response.data][0];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            img: data.avatar_urls["96"],
+            slug: data.slug
           };
           resolve(filtered);
         } else {

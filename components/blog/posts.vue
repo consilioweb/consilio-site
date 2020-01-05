@@ -21,10 +21,10 @@
             <h1>{{post.title}}</h1>
           </div>
           <div v-if="post.excerpt !== ''" class="feed-blog__card--content">
-            <p>{{ post.excerpt | stripped }}</p>
+            <p>{{ toLimitChars(post.excerpt, 150) | stripped }}</p>
           </div>
           <div v-else class="feed-blog__card--content">
-            <p>{{ toLimitChars(post.content, 200) | stripped }}</p>
+            <p>{{ toLimitChars(post.content, 150) | stripped }}</p>
           </div>
           <div class="feed-blog__card--button">
             <svg-icon name="icons/right-arrow" />
@@ -55,7 +55,7 @@ import _ from "lodash";
 
 export default {
   name: "posts",
-  props: ["category", "tag", "totalPages"],
+  props: ["totalPages", "category", "tag", "author"],
   mixins: {
     shortTimestamp: Function
   },
@@ -70,7 +70,13 @@ export default {
     infiniteScroll($state) {
       setTimeout(() => {
         api
-          .getPosts(this.page, 5, this.category, this.tag)
+          .getPosts(
+            this.page,
+            5,
+            this.category,
+            this.tag,
+            this.author ? this.author.id : ""
+          )
           .then(({ data }) => {
             if (this.page <= this.totalPages) {
               this.page += 1;

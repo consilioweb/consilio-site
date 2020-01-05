@@ -93,9 +93,10 @@
             <div class="form__input">
               <label>Telefone *</label>
               <input
-                type="text"
+                type="tel"
                 v-model="form.phone"
                 name="phone"
+                v-mask="['(##) ####-####', '(##) #####-####']"
                 :class="response ? 'disabled' : ''"
                 required
                 placeholder

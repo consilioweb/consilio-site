@@ -39,30 +39,29 @@
     <div class="column __contact">
       <h2>Onde estamos</h2>
       <p>
-        <a href="https://goo.gl/maps/fjZNVAUABAFH17qo8" target="_blank">
-          Concept Office - Av. do Comércio, 25
-          Sala 502 - Vila Maria Jose
-          Goiânia - GO, 74815-390
-        </a>
+        <a
+          href="https://goo.gl/maps/fjZNVAUABAFH17qo8"
+          rel="noopener"
+          target="_blank"
+        >{{ info.address }}</a>
       </p>
       <h2>Fale conosco</h2>
       <ul role="list">
         <li role="listitem">
-          <a href="tel: (62) 3100-1401">(62) 3100-1401</a>
+          <a :href="'tel:'+info.phone">{{ info.phone }}</a>
         </li>
         <li role="listitem">
-          <a href>(62) 99659-0375</a>
+          <a
+            :href="'https://api.whatsapp.com/send?1=pt_BR&phone=+55'+info.whatsapp"
+          >{{ info.whatsapp }}</a>
         </li>
         <li role="listitem">
-          <a href="mailto:contato@consilio.com.br">contato@consilio.com.br</a>
+          <a :href="'mailto:'+info.email">{{ info.email }}</a>
         </li>
       </ul>
     </div>
     <div class="__copyright">
-      <p>
-        Copyright 2020 ©
-        <a href="#">Agência Consilio</a> | Todos os direitos reservados.
-      </p>
+      <p v-html="info.copyright"></p>
     </div>
     <div class="__gyn">
       <p>
@@ -84,6 +83,7 @@ export default {
   },
   computed: {
     ...mapState("posts", ["recent"]),
+    ...mapState("core", ["info"]),
     ...mapGetters({
       lengthPosts: "posts/lengthPosts"
     })

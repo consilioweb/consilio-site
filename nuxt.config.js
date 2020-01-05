@@ -104,6 +104,9 @@ export default {
     {
       src: "@/plugins/infinite-loading.js",
       ssr: false
+    },
+    {
+      src: "@/plugins/mask.js"
     }
   ],
   /*

@@ -26,6 +26,7 @@
     "vue-infinite-loading": "^2.4.4",
     "vue-material-design-icons": "^4.4.0",
     "vue-mouse-parallax": "^1.2.2",
+    "vue-the-mask": "^0.11.1",
     "vue-tiny-slider": "^0.1.39"
   },
   "devDependencies": {

@@ -77,18 +77,18 @@
       </div>
       <section class="__footer">
         <section class="author-card">
-          <n-link :to="'/blog/autor/'+post.author_slug">
+          <n-link :to="'/blog/autores/'+post.author_slug">
             <img class="author-profile-image" :src="post.author_img" :alt="post.author_name" />
           </n-link>
           <section class="author-card-content">
             <h4 class="author-card-name">
-              <n-link :to="'/blog/autor/'+post.author_slug">{{post.author_name}}</n-link>
+              <n-link :to="'/blog/autores/'+post.author_slug">{{post.author_name}}</n-link>
             </h4>
             <p>{{post.author_description}}</p>
           </section>
         </section>
         <div class="post-full-footer-right">
-          <n-link class="author-card-button" :to="'/blog/autor/'+post.author_slug">Ler mais</n-link>
+          <n-link class="author-card-button" :to="'/blog/autores/'+post.author_slug">Ler mais</n-link>
         </div>
       </section>
       <comment-fb :urlPost="urlPost"></comment-fb>

@@ -5,7 +5,7 @@
       <div class="inner">
         <div class="__content">
           <div class="__content--title">
-            <h2>Blog</h2>
+            <h1>Blog</h1>
           </div>
           <div class="__content--description">
             <p>Acompanhe nossos artigos, pesquisas e sacadas aqui no Blog.</p>
@@ -44,9 +44,22 @@
               <article class="modal__content" @click.stop>
                 <h4 class="modal__title">Autores</h4>
 
-                <h5 class="modal__link" @click="modal = false">
-                  <a href="#" target="_blank">Link</a>
-                </h5>
+                <div class="modal__authors" v-for="author in authors" :key="author.id">
+                  <a :href="'/blog/autores/'+author.slug">
+                    <img :src="author.img" :alt="author.name" class="author-profile-image" />
+                  </a>
+                  <div class="author-card-content">
+                    <h4 class="author-card-name">
+                      <a :href="'/blog/autores/'+author.slug">{{author.name}}</a>
+                    </h4>
+                    <a :href="'/blog/autores/'+author.slug">
+                      <p v-if="author.description">{{ toLimitChars(author.description, 150) }}</p>
+                      <p
+                        v-else
+                      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod consequatur facere eos incidunt odio iure placeat illum, dolores, modi velit ea architecto ...</p>
+                    </a>
+                  </div>
+                </div>
 
                 <button class="modal__close" @click="modal = false">&times;</button>
               </article>
@@ -265,16 +278,14 @@ export default {
         tags: Object.keys(tags).filter(t => tags[t])
       };
     },
-    ...mapState("posts", ["recent"])
-    /*
-    ...mapState("categories", ["categories"]),
-    ...mapState("tags", ["tags"]),
-    */
+    ...mapState("posts", ["recent"]),
+    ...mapState("posts", ["authors"])
   },
   async mounted() {
     await this.allPosts();
     this.allCategories();
     this.allTags();
+    this.$store.dispatch("posts/getAuthors");
     this.$store.commit("HOVER_BUTTON_HEADER", true);
     this.$store.commit("LOGO_HEADER_WHITE", true);
   },
@@ -388,7 +399,8 @@ header {
     text-align: center;
 
     &--title {
-      & h2 {
+      & h1 {
+        font-size: 75px;
         position: relative;
         z-index: 6;
         color: $white;
@@ -767,7 +779,7 @@ header {
 }
 
 .modal {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -803,7 +815,7 @@ header {
     width: 90%;
     max-width: 500px;
     min-height: 250px;
-    padding: 1.5rem 1rem;
+    padding: 2.5rem 1rem;
     background-color: white;
     border: 1px solid #c5d0d1;
     border-radius: 12px;
@@ -814,6 +826,53 @@ header {
   &__title {
     font-weight: 400;
     font-size: 1.5rem;
+    padding-bottom: 20px;
+  }
+
+  &__authors {
+    @include flexbox;
+    @include align-items(center);
+    padding: 20px 0;
+    margin: 0px 40px;
+    border-bottom: 1px dotted rgba($secondary, 0.5);
+    & .author-card-content {
+      @include flexbox;
+      @include flex-direction(column);
+      @include align-items(flex-start);
+    }
+    & .author-profile-image {
+      margin-right: 15px;
+      min-width: 30px;
+      width: 45px;
+      height: 45px;
+      border-radius: 100%;
+    }
+
+    & .author-card-name {
+      padding-bottom: 5px;
+      font-size: 15px;
+    }
+
+    & .author-card-name a {
+      color: $primary;
+    }
+
+    & .author-card-name a:hover {
+      text-decoration: none;
+    }
+
+    & p {
+      text-align: left;
+      white-space: pre-wrap;
+      font-size: 13px;
+      padding-top: 10px;
+      margin: 0;
+      color: $secondary;
+      line-height: 1.3em;
+      @media screen and (min-width: $break-md) {
+        padding-top: initial;
+      }
+    }
   }
 
   &__link {
