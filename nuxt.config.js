@@ -109,11 +109,12 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/router-extras", "@nuxtjs/dotenv"],
+  buildModules: ["@nuxtjs/router-extras"],
   /*
    ** Nuxt.js modules
    */
   modules: [
+    "@nuxtjs/dotenv",
     "@nuxtjs/pwa",
     "@nuxtjs/sitemap",
     "@nuxtjs/proxy",

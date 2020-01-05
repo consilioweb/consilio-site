@@ -1,6 +1,6 @@
-# front-consilio
+# Front site Consilio
 
-> Front desenvolvido nas tecnologias VueJS + VueX+ VueRouter + NuxtJs + Axios para consumir API disponibilizada no WordPress.
+> Front desenvolvido nas tecnologia NuxtJs consumindo API disponibilizada no WordPress.
 
 ## Build Setup
 
@@ -23,11 +23,12 @@ $ npm run generate
 
 ``` bash
 APP_NAME=Consilio
-HOST=0.0.0.0 #Host Nuxt (0.0.0.0 = auto)
-PORT=8000 #Port Nuxt
-BASE_URL= #Base URL site
-API_URL= #Base API REST URL
-PROXY_URL= #Base API REST URL Proxy - Alternate CORS
+HOST=0.0.0.0 # host nuxt (0.0.0.0 = auto)
+PORT=8000 # port nuxt
+BASE_URL= # base url site
+API_URL= # base api rest url
+PROXY_URL= # base api rest url proxy - alternate cors
 ```
+
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
