@@ -69,7 +69,7 @@
           class="filters"
           v-show="menus[filter]"
           ref="menu"
-          :key="filter"
+          :key="filter+1"
         >
           <template>
             <li

@@ -3,7 +3,7 @@
     <transition-group name="posts" tag="div" class="feed-blog__container">
       <article
         v-for="(post, $index) in list"
-        :key="$index"
+        :key="$index+1"
         :id="post.id"
         class="feed-blog__content"
       >

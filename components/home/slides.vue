@@ -18,7 +18,7 @@
             class="slide__content"
             v-for="(slide, index) in slides"
             v-if="index === current"
-            :key="index"
+            :key="slide.id"
           >
             <parallax-element style="z-index: 20;" :parallaxStrength="10" :type="'translation'">
               <div class="slide__title">
