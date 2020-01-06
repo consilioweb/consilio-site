@@ -260,7 +260,17 @@ export default {
    ** Handle external assets
    */
   workbox: {
+    skipWaiting: true,
+    clientsClaim: true,
+    offline: false,
+    //dev: true,
     runtimeCaching: [
+      {
+        urlPattern: process.env.PROXY_URL + ".*",
+        handler: "cacheFirst",
+        method: "GET",
+        strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+      },
       {
         handler: "cacheFirst",
         urlPattern: "/_public/",
@@ -293,6 +303,11 @@ export default {
             maxEntries: 30
           }
         }
+      },
+      {
+        urlPattern: "/*",
+        handler: "networkFirst",
+        method: "GET"
       }
     ]
   },
