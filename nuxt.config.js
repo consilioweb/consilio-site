@@ -134,6 +134,19 @@ export default {
       }
     ]
   ],
+  /*
+   ** Render configuration
+   */
+  render: {
+    static: {
+      maxAge: "1y",
+      setHeaders(res, path) {
+        if (path.includes("sw.js")) {
+          res.setHeader("Cache-Control", "public, max-age=0");
+        }
+      }
+    }
+  },
   /**
    * Style Resources configuration
    */
@@ -192,6 +205,7 @@ export default {
    */
   pwa: {
     meta: {
+      viewport: "width=device-width, initial-scale=1, user-scalable=no",
       mobileAppIOS: true,
       name: process.env.NODE_ENV.title,
       description: process.env.NODE_ENV.description,
@@ -220,7 +234,8 @@ export default {
     ],
     theme_color: "#ffffff",
     background_color: "#ffffff",
-    display: "standalone"
+    display: "standalone",
+    viewport: "width=device-width, initial-scale=1"
   },
   /*
    ** Server configuration
@@ -273,7 +288,8 @@ export default {
       },
       {
         handler: "cacheFirst",
-        urlPattern: "/_public/",
+        urlPattern:
+          process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
         strategyOptions: {
           cacheName: "bundle-files",
           cacheExpiration: {
