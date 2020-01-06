@@ -23,12 +23,12 @@
         <article v-for="(post, index) in posts.slice(0, 3)" :key="index" class="feed-blog__content">
           <n-link :to="'/blog/'+post.slug">
             <div class="feed-blog__card">
-              <figure :style="'background-image: url('+post.img+')'"></figure>
+              <figure class="lazyload" :style="'background-image: url('+post.img+')'"></figure>
               <div class="feed-blog__card--meta">
                 <span v-html="shortTimestamp(post.date)"></span>
                 <span>•</span>
                 <span>
-                  <img :alt="post.author_name" :src="post.author_img" />
+                  <img class="lazyload" :alt="post.author_name" :src="post.author_img" />
                 </span>
                 <span v-html="post.author_name"></span>
               </div>
