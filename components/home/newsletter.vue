@@ -28,6 +28,7 @@
                   type="submit"
                   :class="[response ? 'disabled' : '', submit.loading ? 'loading' : '', submit.done ? 'done' : '']"
                   class="submit"
+                  name="submit"
                 >
                   <ul>
                     <li>ASSINAR</li>
