@@ -21,6 +21,7 @@
     "@nuxtjs/sitemap": "^2.0.1",
     "@nuxtjs/style-resources": "^1.0.0",
     "@nuxtjs/svg-sprite": "^0.4.6",
+    "lazysizes": "^5.2.0",
     "moment": "^2.24.0",
     "nuxt": "^2.0.0",
     "vue-infinite-loading": "^2.4.4",

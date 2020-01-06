@@ -44,7 +44,7 @@ header button {
   text-transform: lowercase;
   border-radius: 3px;
   border: 1px solid $white;
-  background: transparent;
+  background: $secondary;
   color: $white;
   transition: all 0.3s ease;
   font-family: "Quicksand";

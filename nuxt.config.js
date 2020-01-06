@@ -262,16 +262,37 @@ export default {
   workbox: {
     runtimeCaching: [
       {
-        urlPattern: "https://fonts.googleapis.com/.*",
         handler: "cacheFirst",
-        method: "GET",
-        strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        urlPattern: "/_public/",
+        strategyOptions: {
+          cacheName: "bundle-files",
+          cacheExpiration: {
+            maxAgeSeconds: 60 * 60 * 24 * 7,
+            maxEntries: 30
+          }
+        }
       },
       {
-        urlPattern: "https://fonts.gstatic.com/.*",
-        handler: "cacheFirst",
+        urlPattern: ".*fonts.googleapis.com/.*",
         method: "GET",
-        strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        strategyOptions: {
+          cacheName: "google-fonts-stylesheets"
+        }
+      },
+      {
+        handler: "cacheFirst",
+        urlPattern: ".*fonts.gstatic.com/.*",
+        method: "GET",
+        strategyOptions: {
+          cacheName: "google-fonts-webfonts",
+          cacheableResponse: {
+            statuses: [0, 200]
+          },
+          cacheExpiration: {
+            maxAgeSeconds: 60 * 60 * 24 * 365,
+            maxEntries: 30
+          }
+        }
       }
     ]
   },
@@ -289,6 +310,12 @@ export default {
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
+      }
+    },
+    extend(config, { isDev, isClient, loaders: { vue } }) {
+      if (isClient) {
+        vue.transformAssetUrls.img = ["data-src", "src"];
+        vue.transformAssetUrls.source = ["data-srcset", "srcset"];
       }
     },
     optimization: {

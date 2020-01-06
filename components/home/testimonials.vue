@@ -39,6 +39,7 @@
                         width="100%"
                         :xlink:href="item.img"
                         :alt="'Foto de '+item.title"
+                        class="lazyload"
                       />
                     </svg>
                     <svg
@@ -85,10 +86,10 @@
               tabindex="0"
             >
               <li @click="prev" class="prev" data-controls="prev">
-                 <svg-icon name="icons/left-arrow" />
+                <svg-icon name="icons/left-arrow" />
               </li>
               <li @click="next" class="next" data-controls="next">
-                 <svg-icon name="icons/right-arrow" />
+                <svg-icon name="icons/right-arrow" />
               </li>
             </ul>
           </client-only>

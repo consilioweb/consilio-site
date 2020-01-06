@@ -5,7 +5,7 @@
     </div>
     <div class="about__img">
       <client-only>
-        <img src="@/assets/img/about-img.png" alt="Por que a Consilio?" />
+        <img src="@/assets/img/about-img.png" class="lazyload" alt="Por que a Consilio?" />
       </client-only>
     </div>
     <div class="about__text">
