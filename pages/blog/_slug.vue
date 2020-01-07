@@ -128,6 +128,7 @@ export default {
   },
   beforeMount() {
     this.$fb;
+    this.$OneSignal;
   },
   mounted() {
     api
@@ -140,19 +141,7 @@ export default {
       });
     this.$store.commit("HOVER_BUTTON_HEADER", false);
     this.$store.commit("LOGO_HEADER_WHITE", true);
-    this.$OneSignal.push(async () => {
-      this.$OneSignal.isPushNotificationsEnabled(isEnabled => {
-        if (isEnabled) console.log("Push notifications are enabled!");
-        else console.log("Push notifications are not enabled yet.");
-      });
-      //use await
-      const isPushEnabled = await this.$OneSignal.isPushNotificationsEnabled();
-      if (isPushEnabled) {
-        console.log("Push notifications are enabled!");
-      } else {
-        console.log("Push notifications are not enabled yet.");
-      }
-    });
+    //this.$forceUpdate();
   },
   head() {
     return {
@@ -224,6 +213,17 @@ export default {
 
 
 <style lang="scss" scoped>
+.onesignal-customlink-container {
+  padding: 10px 20px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px dotted rgba(215, 215, 215, 0.3);
+  border-top: 1px dotted rgba(215, 215, 215, 0.3);
+  & .onesignal-customlink-explanation {
+    text-align: center;
+  }
+}
 .post_single {
   @include flexbox;
   @include flex-direction(column);
