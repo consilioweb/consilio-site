@@ -127,6 +127,7 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/svg-sprite",
     "@nuxtjs/style-resources",
+    "@nuxtjs/onesignal",
     [
       "@nuxtjs/recaptcha",
       {
@@ -137,6 +138,18 @@ export default {
       }
     ]
   ],
+  /**
+   * Options oneSignal configuration
+   */
+  oneSignal: {
+    init: {
+      appId: process.env.ONE_SIGNAL,
+      allowLocalhostAsSecureOrigin: true,
+      welcomeNotification: {
+        disable: false
+      }
+    }
+  },
   /*
    ** Render configuration
    */

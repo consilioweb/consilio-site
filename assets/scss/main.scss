@@ -91,3 +91,11 @@ select:focus {
   opacity: 0;
   display: none;
 }
+
+// Style loading lazyload
+img[lazy="loading"] {
+  display: flex;
+  align-items: center;
+  width: 30px !important;
+  height: 30px !important;
+}
