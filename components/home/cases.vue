@@ -45,12 +45,14 @@
                 :key="index"
               >
                 <div class="card-carousel__item--cover">
-                  <img
-                    v-if="item.img != ''"
-                    :alt="'Imagem destaque do case '+item.client"
-                    :src="item.img"
-                    class="card-carousel--img"
-                  />
+                  <client-only>
+                    <img
+                      v-if="item.img != ''"
+                      :alt="'Imagem destaque do case '+item.client"
+                      :src="item.img"
+                      class="card-carousel--img"
+                    />
+                  </client-only>
                 </div>
                 <div class="card-carousel__item--title">
                   <h3>{{ item.client }}</h3>

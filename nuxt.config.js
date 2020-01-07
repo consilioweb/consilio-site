@@ -331,7 +331,7 @@ export default {
    ** Build configuration
    */
   build: {
-    //analyze: true,
+    analyze: true,
     filenames: {
       chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[chunkhash].js"),
       img: ({ isDev }) => (isDev ? "[path][name].[ext]" : "img/[hash:7].[ext]")
@@ -341,25 +341,6 @@ export default {
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
-      }
-    },
-    extend(config, { isDev, isClient, loaders: { vue } }) {
-      if (isClient) {
-        vue.transformAssetUrls.img = ["data-src", "src"];
-        vue.transformAssetUrls.source = ["data-srcset", "srcset"];
-      }
-    },
-    /*
-     ** Run ESLint on save
-     */
-    extend(config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: "pre",
-          test: /\.(js|vue)$/,
-          loader: "eslint-loader",
-          exclude: /(node_modules)/
-        });
       }
     },
     optimization: {

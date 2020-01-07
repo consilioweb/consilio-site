@@ -27,7 +27,9 @@
             </parallax-element>
             <div v-if="slide.content" class="slide__img" v-html="slide.content"></div>
             <div v-else class="slide__img">
-              <img v-if="slide.img != ''" :alt="slide.title" :src="slide.img" />
+              <client-only>
+                <img v-if="slide.img != ''" :alt="slide.title" :src="slide.img" />
+              </client-only>
             </div>
           </div>
         </transition-group>

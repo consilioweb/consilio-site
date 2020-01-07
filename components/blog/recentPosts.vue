@@ -28,7 +28,9 @@
                 <span v-html="shortTimestamp(post.date)"></span>
                 <span>•</span>
                 <span>
-                  <img class="lazyload" :alt="post.author_name" :src="post.author_img" />
+                  <client-only>
+                    <img class="lazyload" :alt="post.author_name" :src="post.author_img" />
+                  </client-only>
                 </span>
                 <span v-html="post.author_name"></span>
               </div>
