@@ -33,16 +33,14 @@
                           />
                         </clipPath>
                       </g>
-                      <lazy-component @show="handler">
-                        <image
-                          :clip-path="'url(#testimonial-mask-'+index+')'"
-                          height="100%"
-                          width="100%"
-                          :xlink:href="item.img"
-                          :alt="'Foto de '+item.title"
-                          class="lazyload"
-                        />
-                      </lazy-component>
+                      <image
+                        :clip-path="'url(#testimonial-mask-'+index+')'"
+                        height="100%"
+                        width="100%"
+                        :xlink:href="item.img"
+                        :alt="'Foto de '+item.title"
+                        class="lazyload"
+                      />
                     </svg>
                     <svg
                       style="position: absolute;top: -20px;left: 20px;z-index: -1;"
@@ -132,11 +130,6 @@ export default {
     }
   }),
   methods: {
-    methods: {
-      handler(component) {
-        console.log("this component is showing");
-      }
-    },
     prev: function(event) {
       this.$refs.carousel.slider.goTo("prev");
     },
