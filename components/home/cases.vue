@@ -44,10 +44,9 @@
                 v-for="(item, index) in cases"
                 :key="index"
               >
-                <div class="card-carousel__item--cover">
+                <div class="card-carousel__item--cover" v-lazy-container="{ selector: 'img' }">
                   <client-only>
                     <img
-                      :src="item.img"
                       :data-src="item.img"
                       v-if="item.img != ''"
                       :alt="'Imagem destaque do case '+item.client"

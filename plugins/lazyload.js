@@ -8,6 +8,7 @@ Vue.use(VueLazyload, {
   preLoad: 1,
   //error: error,
   loading: loading,
-  attempt: 1,
-  lazyComponent: true
+  attempt: 3,
+  lazyComponent: true,
+  observer: true,
 });

@@ -142,7 +142,7 @@ export default {
    */
   render: {
     static: {
-      maxAge: "1y",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
       setHeaders(res, path) {
         if (path.includes("sw.js")) {
           res.setHeader("Cache-Control", "public, max-age=0");
