@@ -112,6 +112,7 @@ export default {
     textButton: "Ver Case",
     carouselOptions: {
       lazyload: true,
+      lazyloadSelector: ".lazyload",
       loop: true,
       controls: false,
       autoplay: false,
