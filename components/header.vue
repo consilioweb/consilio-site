@@ -2,6 +2,7 @@
   <header>
     <div class="logo">
       <n-link to="/">
+        Agência Consilio
         <svg-icon name="logo" :style="'color:'+colorLogo" width="180" height="40" />
       </n-link>
     </div>
@@ -32,6 +33,7 @@ header {
 header .logo {
   @include flexbox;
   flex: 1;
+  font-size: 0px;
 }
 header .button-top {
   @include flexbox;
