@@ -220,6 +220,7 @@ export default {
     name: "Agência Consilio",
     short_name: "Consilio",
     lang: "pt-BR",
+    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     icons: [
       {
         src: "/favicon/android-chrome-192x192.png",
@@ -277,8 +278,9 @@ export default {
   workbox: {
     skipWaiting: true,
     clientsClaim: true,
-    offline: false,
+    //offline: false,
     //dev: true,
+    publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     runtimeCaching: [
       {
         urlPattern: process.env.PROXY_URL + ".*",
@@ -331,8 +333,9 @@ export default {
    ** Build configuration
    */
   build: {
-    analyze: true,
+    //analyze: true,
     filenames: {
+      app: ({ isDev }) => (isDev ? "[name].[hash].js" : "[chunkhash].js"),
       chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[chunkhash].js"),
       img: ({ isDev }) => (isDev ? "[path][name].[ext]" : "img/[hash:7].[ext]")
     },
