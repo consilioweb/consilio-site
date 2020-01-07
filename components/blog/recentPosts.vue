@@ -23,7 +23,7 @@
         <article v-for="(post, index) in posts.slice(0, 3)" :key="index" class="feed-blog__content">
           <n-link :to="'/blog/'+post.slug">
             <div class="feed-blog__card">
-              <figure class="lazyload" :style="'background-image: url('+post.img+')'"></figure>
+              <figure v-lazy:background-image="post.img"></figure>
               <div class="feed-blog__card--meta">
                 <span v-html="shortTimestamp(post.date)"></span>
                 <span>•</span>

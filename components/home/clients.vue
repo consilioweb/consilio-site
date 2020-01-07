@@ -22,7 +22,7 @@
               >
                 <div class="clients-carousel__item--container">
                   <figure class="clients-carousel__item--img">
-                    <img :alt="client.title" :src="client.img" />
+                    <img :data-src="client.img" :alt="client.title" />
                   </figure>
                 </div>
               </div>
@@ -53,6 +53,7 @@ export default {
   props: ["clients", "length"],
   data: () => ({
     carouselOptions: {
+      lazyload: true,
       loop: true,
       controls: false,
       autoplay: false,

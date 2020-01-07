@@ -28,7 +28,7 @@
             <div v-if="slide.content" class="slide__img" v-html="slide.content"></div>
             <div v-else class="slide__img">
               <client-only>
-                <img v-if="slide.img != ''" :alt="slide.title" :src="slide.img" />
+                <img v-lazy="slide.img" v-if="slide.img != ''" :alt="slide.title" />
               </client-only>
             </div>
           </div>

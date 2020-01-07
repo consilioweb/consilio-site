@@ -107,6 +107,9 @@ export default {
     },
     {
       src: "@/plugins/mask.js"
+    },
+    {
+      src: "@/plugins/lazyload.js"
     }
   ],
   /*

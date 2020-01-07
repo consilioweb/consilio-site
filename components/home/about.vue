@@ -5,7 +5,7 @@
     </div>
     <div class="about__img">
       <client-only>
-        <img :src="about.img" class="lazyload" alt="Por que a Consilio?" />
+        <img v-lazy="about.img" class="lazyload" alt="Por que a Consilio?" />
       </client-only>
     </div>
     <div class="about__text">

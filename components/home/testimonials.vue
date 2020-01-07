@@ -111,6 +111,7 @@ export default {
   data: () => ({
     textButton: "Ver Case",
     carouselOptions: {
+      lazyload: true,
       loop: true,
       controls: false,
       autoplay: false,

@@ -47,9 +47,10 @@
                 <div class="card-carousel__item--cover">
                   <client-only>
                     <img
+                      :src="item.img"
+                      :data-src="item.img"
                       v-if="item.img != ''"
                       :alt="'Imagem destaque do case '+item.client"
-                      :src="item.img"
                       class="card-carousel--img"
                     />
                   </client-only>
@@ -81,6 +82,7 @@ export default {
   data: () => ({
     textButton: "Ver Case",
     carouselOptions: {
+      lazyload: true,
       loop: true,
       controls: false,
       autoplay: true,
