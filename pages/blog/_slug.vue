@@ -560,14 +560,13 @@ article {
   transition: all 1s ease-in-out;
   position: relative;
   z-index: 999;
-  height: 0px;
   margin: -70px 5% 0% 5%;
   @media screen and (min-width: $break-md) {
     margin: -70px 13% 10% 10%;
   }
   & figure {
     height: 300px;
-    display: inline-table;
+    display: block;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -577,7 +576,7 @@ article {
   }
   & .__content {
     @include flexbox();
-    padding: 20px 30px 50px 30px;
+    padding: 20px 30px 50px;
     box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
     margin-bottom: 50px;
     @media screen and (min-width: $break-md) {
