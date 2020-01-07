@@ -140,6 +140,19 @@ export default {
       });
     this.$store.commit("HOVER_BUTTON_HEADER", false);
     this.$store.commit("LOGO_HEADER_WHITE", true);
+    this.$OneSignal.push(async () => {
+      this.$OneSignal.isPushNotificationsEnabled(isEnabled => {
+        if (isEnabled) console.log("Push notifications are enabled!");
+        else console.log("Push notifications are not enabled yet.");
+      });
+      //use await
+      const isPushEnabled = await this.$OneSignal.isPushNotificationsEnabled();
+      if (isPushEnabled) {
+        console.log("Push notifications are enabled!");
+      } else {
+        console.log("Push notifications are not enabled yet.");
+      }
+    });
   },
   head() {
     return {
@@ -576,12 +589,12 @@ article {
       }
     }
     &--sidebar {
-      display: none;
       @include flexbox();
       height: 100%;
       padding-left: 30px;
+      display: none !important;
       @media screen and (min-width: $break-md) {
-        display: initial;
+        display: initial !important;
         width: 25%;
       }
       & .banner_section {

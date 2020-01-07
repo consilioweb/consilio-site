@@ -11,6 +11,7 @@ export default {
       "Agência Consilio | Comunicação que reúne relacionamentos e resultados.",
     meta: [
       { charset: "utf-8" },
+      { name: "HandheldFriendly", content: "true" },
       {
         name: "viewport",
         content:
@@ -247,12 +248,18 @@ export default {
         src: "/favicon/android-chrome-256x256.png",
         sizes: "256x256",
         type: "image/png"
+      },
+      {
+        src: "/favicon/512x512.png",
+        sizes: "512x512",
+        type: "image/png"
       }
     ],
     theme_color: "#ffffff",
     background_color: "#ffffff",
     display: "standalone",
-    viewport: "width=device-width, initial-scale=1"
+    viewport:
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   },
   /*
    ** Server configuration
