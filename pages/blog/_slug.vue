@@ -128,7 +128,8 @@ export default {
   },
   beforeMount() {
     this.$fb;
-    this.$OneSignal;
+    this.$forceUpdate();
+    //this.$OneSignal;
   },
   mounted() {
     api
@@ -589,7 +590,6 @@ article {
       }
     }
     &--sidebar {
-      @include flexbox();
       height: 100%;
       padding-left: 30px;
       display: none !important;
