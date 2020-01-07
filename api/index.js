@@ -250,6 +250,7 @@ export default {
             link: data.link,
             content: data.content.rendered,
             author: data.author,
+            img: data.quick_img,
             custom_fields: data.custom_fields
           };
           resolve(filtered);
