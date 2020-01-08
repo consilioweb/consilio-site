@@ -114,7 +114,7 @@ export default {
       const formData = new FormData(this.$refs.form);
       await axios
         .post(
-          "/api/wp-json/contact-form-7/v1/contact-forms/5674566/feedback",
+          `${process.env.PROXY_URL}wp-json/contact-form-7/v1/contact-forms/5674566/feedback`,
           formData
         )
         .then(res => {
