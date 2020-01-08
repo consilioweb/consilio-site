@@ -562,13 +562,15 @@ export default {
 
   &__close {
     position: absolute;
-    top: 0.25rem;
     right: 1rem;
     font-size: 1.75rem;
     font-weight: 400;
     opacity: 0.5;
     transition: opacity 150ms ease-out;
-
+    top: 2.25rem;
+    @media screen and (min-width: $break-md) {
+      top: 0.25rem;
+    }
     &:hover {
       opacity: 1;
     }
