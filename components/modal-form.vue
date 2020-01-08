@@ -508,8 +508,8 @@ export default {
     overflow: auto;
     height: 100%;
     @media screen and (min-width: $break-md) {
-      overflow: inherit;
-      height: inherit;
+      overflow: initial;
+      height: initial;
     }
   }
 
@@ -530,6 +530,9 @@ export default {
 
   &__form {
     width: 100%;
+    @media screen and (min-width: $break-md) {
+      width: initial;
+    }
   }
   &__footer {
   }
