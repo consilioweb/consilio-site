@@ -43,7 +43,8 @@
           href="https://goo.gl/maps/fjZNVAUABAFH17qo8"
           rel="noopener"
           target="_blank"
-        >{{ info.address }}</a>
+          v-html="info.address"
+        ></a>
       </p>
       <h2>Fale conosco</h2>
       <ul role="list">

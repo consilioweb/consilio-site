@@ -123,6 +123,7 @@
                         value
                         class="mauticform-input"
                         type="tel"
+                        v-mask="['(##) ####-####', '(##) #####-####']"
                       />
                       <span
                         class="mauticform-errormsg"

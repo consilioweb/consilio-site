@@ -19,40 +19,43 @@
     <div class="inner__content">
       <div class="column">
         <h3>Endereço</h3>
-        <p>
-          <br />Concept Office - Av. do Comércio
-          <br />25 - Sala 502
-          <br />Vila Maria Jose
-        </p>
+        <p v-html="info.address"></p>
       </div>
       <div class="column">
         <h3>Contato</h3>
         <p>
-          <br />
           <b>Telefone:</b>
-          <a href="tel:6231007916">(62) 3100-7916</a>
+          <a :href="'tel:'+info.phone">{{info.phone}}</a>
           <br />
-          <b>Celular:</b> (62) 99659-0375
+          <b>Celular:</b>
+          <a
+            :href="'https://api.whatsapp.com/send?1=pt_BR&phone=+55'+info.whatsapp"
+          >{{info.whatsapp}}</a>
           <br />
           <b>E-mail:</b>
-          <a href="mailto:#">contato@consilio.com.br</a>
+          <a :href="'mailto:'+info.email">{{info.email}}</a>
         </p>
       </div>
       <div class="column">
         <h3>Social</h3>
         <p>
-          <br />
           <b>Facebook:</b>
-          <a href="#">@agenciaconsilio</a>
+          <a :href="'https://fb.com/'+info.facebook" target="_blank">{{info.facebook}}</a>
           <br />
           <b>Instagram:</b>
-          <a href="#">@agenciaconsilio</a>
+          <a :href="'https://instagram.com/'+info.instagram" target="_blank">{{info.instagram}}</a>
           <br />
           <b>Linkedin:</b>
-          <a href="#">@agenciaconsilio</a>
+          <a
+            :href="'https://www.linkedin.com/company/'+info.linkedin"
+            target="_blank"
+          >{{info.linkedin}}</a>
           <br />
           <b>Youtube:</b>
-          <a href="#">@agenciaconsilio</a>
+          <a
+            :href="'https://www.youtube.com/channel/'+info.youtube"
+            target="_blank"
+          >{{info.youtube}}</a>
         </p>
       </div>
     </div>
@@ -205,6 +208,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 export default {
   data() {
@@ -223,6 +227,9 @@ export default {
         message: ""
       }
     };
+  },
+  computed: {
+    ...mapState("core", ["info"])
   },
   methods: {
     test(e) {
@@ -421,6 +428,7 @@ export default {
       font-family: Quicksand, sans-serif;
       color: $primary;
       font-weight: 600;
+      padding-bottom: 20px;
       padding-top: 30px;
       @media screen and (min-width: $break-md) {
         padding-top: 0px;

@@ -168,6 +168,12 @@ export default {
       }
     }
   },
+  /*
+   ** Router configuration
+   */
+  router: {
+    middleware: ["mautic"]
+  },
   /**
    * Style Resources configuration
    */

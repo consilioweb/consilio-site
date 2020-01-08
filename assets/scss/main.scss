@@ -99,3 +99,7 @@ img[lazy="loading"] {
   width: 30px !important;
   height: 30px !important;
 }
+
+img[alt] {
+  font-size: 0px;
+}

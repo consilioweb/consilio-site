@@ -24,6 +24,7 @@ import BottomPlug from "@/components/bottom-plug.vue";
 import Scripts from "@/components/scripts.vue";
 
 export default {
+  middleware: "mautic",
   components: {
     Header,
     Footer,
@@ -39,7 +40,19 @@ export default {
     ...mapGetters({
       statsMainMenu: "menus/getStatsMainMenu",
       lengthMainMenu: "menus/lengthMainMenu"
-    })
+    }),
+    fetchMsgGet() {
+      var query = location.search.slice(1);
+      var partes = query.split("&");
+      var data = {};
+      partes.forEach(function(parte) {
+        var chaveValor = parte.split("=");
+        var chave = chaveValor[0];
+        var valor = chaveValor[1];
+        data[chave] = valor;
+      });
+      return data.mauticMessage;
+    }
   },
   mounted() {
     this.$OneSignal.push(() => {
