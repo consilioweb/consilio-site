@@ -125,7 +125,7 @@ export default {
     this.secondLast = this.length - 1;
     this.playslides[0] = this.slides[0];
     this.playslides[1] = this.slides[1];
-    //this.start();
+    this.start();
   },
   methods: {
     incrementSlide(val) {
@@ -154,7 +154,7 @@ export default {
       clearInterval(this.interval);
       clearInterval(this.progress);
       clearInterval(this.percent);
-      //this.start();
+      this.start();
     },
     process() {
       this.current++;
@@ -162,7 +162,7 @@ export default {
         this.current = 0;
       }
       this.playslides[this.current % 2] = this.slides[this.current];
-      //this.restart();
+      this.restart();
     },
     going() {
       let time = new Date().getTime();
