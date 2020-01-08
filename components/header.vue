@@ -7,13 +7,25 @@
       </n-link>
     </div>
     <div class="button-top">
-      <button :class="{ hover: buttonHover }">Diagnóstico Gratuito</button>
+      <button
+        @click="$store.commit('TOOGLE_MODAL')"
+        :class="{ hover: buttonHover }"
+      >Diagnóstico Gratuito</button>
     </div>
+    <modal-form :modal="modal"></modal-form>
   </header>
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
-  props: ["colorLogo", "buttonHover"]
+  props: ["colorLogo", "buttonHover"],
+  components: {
+    modalForm: () => import("@/components/modal-form")
+  },
+  computed: {
+    ...mapState(["modal"])
+  }
 };
 </script>
 
@@ -25,7 +37,7 @@ header {
   @include flexbox;
   @include justify-content(space-around);
   width: -webkit-fill-available;
-  z-index: 99;
+  z-index: 96;
   @media screen and (min-width: $break-md) {
     margin: 5% 13% 10% 10%;
   }

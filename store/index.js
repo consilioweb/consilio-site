@@ -3,11 +3,15 @@ export default {
     return {
       colorLogo: "#586371",
       buttonHover: false,
+      modal: false,
       errorInformation: {
         code: "",
         message: ""
       }
     };
+  },
+  getters: {
+    getStatsModal: state => state.modal
   },
   mutations: {
     LOGO_HEADER_PRIMARY: state => {
@@ -30,9 +34,15 @@ export default {
     },
     UPDATE_ERROR_MESSAGE: (state, data) => {
       state.errorInformation = data;
+    },
+    TOOGLE_MODAL: state => {
+      state.modal = !state.modal;
     }
   },
   actions: {
+    async toogleModal({ commit }) {
+      await commit("TOOGLE_MODAL");
+    },
     nuxtServerInit({ dispatch }, context) {
       return Promise.all([
         dispatch("menus/getMainMenu", context),
@@ -43,7 +53,7 @@ export default {
         dispatch("testimonials/getTestimonials", context),
         dispatch("clients/getClients", context),
         dispatch("core/getInfo", context),
-        dispatch("core/getRoutes", context),
+        dispatch("core/getRoutes", context)
       ]);
     }
   }

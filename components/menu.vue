@@ -241,7 +241,7 @@ export default {
   height: 100%;
   right: 0;
   background-color: #fff;
-  z-index: 99999;
+  z-index: 97;
   align-items: center;
   justify-content: center;
 }

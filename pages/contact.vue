@@ -332,6 +332,7 @@ export default {
   @include flex-direction(column);
   width: 100%;
   position: relative;
+  overflow-x: hidden;
   &__text-rotate {
     position: absolute;
     white-space: nowrap;

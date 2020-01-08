@@ -123,7 +123,7 @@ export default {
   bottom: 8px;
   top: initial;
   @include justify-content(center);
-  z-index: 98;
+  z-index: 95;
   height: auto;
   @media screen and (min-width: $break-md) {
     height: 50%;

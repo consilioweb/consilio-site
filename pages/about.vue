@@ -227,6 +227,7 @@ export default {
   &__video {
     margin: 5%;
     padding: 50px 0 50px 0;
+    min-height: 500px;
     @media screen and (min-width: $break-md) {
       margin: 5% 13% 5% 10%;
       padding: 0;
