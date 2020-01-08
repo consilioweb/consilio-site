@@ -422,11 +422,10 @@ export default {
   & button {
     width: 100%;
     font-family: Poppins, sans-serif;
-    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     border-radius: 30px;
-    padding: 10px 35px;
+    padding: 10px 15px;
     margin-top: 30px;
     line-height: 1em;
     display: inline-block;
