@@ -15,28 +15,36 @@
     </div>
     <div class="menu-side">
       <div class="aside-social">
-        <n-link to="#" class="item-social">
+        <a :href="'https://fb.com/'+info.facebook" class="item-social" target="_blank">
           <facebook-icon />
-        </n-link>
-        <n-link to="#" class="item-social">
+        </a>
+        <a :href="'https://instagram.com/'+info.instagram" class="item-social" target="_blank">
           <instagram-icon />
-        </n-link>
-        <n-link to="#" class="item-social">
+        </a>
+        <a :href="'https://twitter.com/'+info.twitter" class="item-social" target="_blank">
           <twitter-icon />
-        </n-link>
-        <n-link to="#" class="item-social">
+        </a>
+        <a
+          :href="'https://www.youtube.com/channel/'+info.youtube"
+          class="item-social"
+          target="_blank"
+        >
           <youtube-icon />
-        </n-link>
-        <n-link to="#" class="item-social">
+        </a>
+        <a
+          :href="'https://www.linkedin.com/company/'+info.linkedin"
+          class="item-social"
+          target="_blank"
+        >
           <linkedin-icon />
-        </n-link>
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 import FacebookIcon from "vue-material-design-icons/Facebook.vue";
 import InstagramIcon from "vue-material-design-icons/Instagram.vue";
@@ -52,6 +60,7 @@ export default {
     LinkedinIcon
   },
   computed: {
+    ...mapState("core", ["info"]),
     ...mapGetters({
       getStatsMainMenu: "menus/getStatsMainMenu"
     })
@@ -102,6 +111,9 @@ export default {
     padding-left: 10px;
     vertical-align: middle;
   }
+  &:hover {
+    fill: $secondary;
+  }
 }
 
 .icon-menu {
@@ -111,7 +123,11 @@ export default {
   bottom: 8px;
   top: initial;
   @include justify-content(center);
-  z-index: 999999;
+  z-index: 98;
+  height: auto;
+  @media screen and (min-width: $break-md) {
+    height: 50%;
+  }
   & p {
     opacity: 0;
     position: absolute;

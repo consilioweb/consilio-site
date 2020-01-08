@@ -166,7 +166,7 @@ export default {
         }
       ]
     };
-  },
+  }
 };
 </script>
 
@@ -177,6 +177,7 @@ export default {
   width: 100%;
   position: relative;
   padding-top: 50px;
+  overflow-x: hidden;
   &__header {
     @include flexbox;
     @include flex(1);

@@ -1,5 +1,66 @@
 [
-  { "from": "/old", "to": "/new" },
-  { "from": "/veryold", "to": "/verynew" },
-  { "from": "/too-old", "to": "/new" }
+  {
+    "from": "/servicos",
+    "to": "/estrategias"
+  },
+  {
+    "from": "/portfolio",
+    "to": "/cases"
+  },
+  {
+    "from": "/project",
+    "to": "/cases" 
+  },
+  {
+    "from": "/quais-os-diferenciais-competitivos-da-sua-empresa",
+    "to": "/blog/quais-os-diferenciais-competitivos-da-sua-empresa"
+  },
+  {
+    "from": "/matriz-swot-fundamental-para-nortear-a-suas-estrategias",
+    "to": "/blog/matriz-swot-fundamental-para-nortear-a-suas-estrategias"
+  },
+  {
+    "from": "/conheca-o-lead-tracking-e-lead-scoring-ferramentas-presentes-na-automacao",
+    "to": "/blog/conheca-o-lead-tracking-e-lead-scoring-ferramentas-presentes-na-automacao"
+  },
+  {
+    "from": "/a-sua-empresa-esta-fazendo-um-bom-atendimento-conheca-12-dicas-para-melhora-lo-ainda-mais",
+    "to": "/blog/a-sua-empresa-esta-fazendo-um-bom-atendimento-conheca-12-dicas-para-melhora-lo-ainda-mais"
+  },
+  {
+    "from": "/a-automacao-na-gestao-de-leads-e-mail-e-sms-marketing",
+    "to": "/blog/a-automacao-na-gestao-de-leads-e-mail-e-sms-marketing"
+  },
+  {
+    "from": "/automacao-de-marketing-digital-o-caminho-para-a-sua-empresa-se-destacar-no-marketing-digital",
+    "to": "/blog/automacao-de-marketing-digital-o-caminho-para-a-sua-empresa-se-destacar-no-marketing-digital"
+  },
+  {
+    "from": "/9-dicas-para-voce-gravar-um-video-de-qualidade-pelo-celular",
+    "to": "/blog/9-dicas-para-voce-gravar-um-video-de-qualidade-pelo-celular"
+  },
+  {
+    "from": "/4-como-mensurar-os-melhores-caminhos-para-o-relacionamento-com-o-cliente",
+    "to": "/blog/4-como-mensurar-os-melhores-caminhos-para-o-relacionamento-com-o-cliente"
+  },
+  {
+    "from": "/3-seus-clientes-podem-se-tornar-embaixadores-da-sua-marca-saiba-como",
+    "to": "/blog/3-seus-clientes-podem-se-tornar-embaixadores-da-sua-marca-saiba-como"
+  },
+  {
+    "from": "/2-marketing-horizontal-a-estrategia-eficaz-para-encantar-e-fidelizar-os-clientes",
+    "to": "/blog/2-marketing-horizontal-a-estrategia-eficaz-para-encantar-e-fidelizar-os-clientes"
+  },
+  {
+    "from": "/importancia-de-usar-imagens-reais-em-publicacoes",
+    "to": "/blog/importancia-de-usar-imagens-reais-em-publicacoes"
+  },
+  {
+    "from": "/1-a-importancia-de-valorizar-e-mostrar-o-cliente-nas-midias",
+    "to": "/blog/1-a-importancia-de-valorizar-e-mostrar-o-cliente-nas-midias"
+  },
+  {
+    "from": "/3-pontos-importantes-para-o-seu-produto-servico-ser-viavel-atraves-das-midias-digitais",
+    "to": "/blog/3-pontos-importantes-para-o-seu-produto-servico-ser-viavel-atraves-das-midias-digitais"
+  }
 ]
