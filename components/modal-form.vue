@@ -285,7 +285,7 @@
                         id="mauticform_input_diagnosticogratuito_submit"
                         value
                         class="mauticform-button btn btn-default"
-                      >Solicitar diagnóstico gratuito agora</button>
+                      >Solicitar diagnóstico gratuito</button>
                     </div>
                   </div>
                 </div>
@@ -355,9 +355,9 @@ export default {
   @include flexbox;
   @include flex-direction(column);
   @media screen and (min-width: $break-md) {
+    padding-bottom: 7px;
     @include flex-direction(row);
   }
-  padding-bottom: 7px;
   white-space: nowrap;
   & label,
   select {
@@ -505,6 +505,12 @@ export default {
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 0.5rem 1.75rem -0.25rem rgba($primary, 0.4);
+    overflow: auto;
+    height: 100%;
+    @media screen and (min-width: $break-md) {
+      overflow: inherit;
+      height: inherit;
+    }
   }
 
   &__header {
@@ -523,6 +529,7 @@ export default {
   }
 
   &__form {
+    width: 100%;
   }
   &__footer {
   }
