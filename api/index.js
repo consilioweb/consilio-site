@@ -125,7 +125,8 @@ export default {
               title: item.title.rendered,
               content: item.content.rendered,
               slug: item.slug,
-              img: item.quick_img
+              img: item.quick_img,
+              custom_fields: item.custom_fields
             }))
           };
           resolve(filtered);

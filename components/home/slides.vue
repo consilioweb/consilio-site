@@ -20,17 +20,31 @@
             v-if="index === current"
             :key="slide.id"
           >
-            <parallax-element style="z-index: 20;" :parallaxStrength="10" :type="'translation'">
-              <div class="slide__title">
-                <h1>{{ slide.title }}</h1>
+            <parallax-element
+              class="slide__title"
+              style="z-index: 20;"
+              :parallaxStrength="10"
+              :type="'translation'"
+            >
+              <h1>{{ slide.title }}</h1>
+              <button-shadow
+                :text="slide.custom_fields['texto_do_botao']"
+                :url="slide.custom_fields['url_do_botao']"
+              />
+            </parallax-element>
+            <parallax-element
+              class="slide__img"
+              style="z-index: 20;"
+              :parallaxStrength="-10"
+              :type="'translation'"
+            >
+              <div v-if="slide.content" v-html="slide.content"></div>
+              <div v-else>
+                <client-only>
+                  <img v-lazy="slide.img" v-if="slide.img != ''" :alt="slide.title" />
+                </client-only>
               </div>
             </parallax-element>
-            <div v-if="slide.content" class="slide__img" v-html="slide.content"></div>
-            <div v-else class="slide__img">
-              <client-only>
-                <img v-lazy="slide.img" v-if="slide.img != ''" :alt="slide.title" />
-              </client-only>
-            </div>
           </div>
         </transition-group>
         <div class="controls__slides">
@@ -100,11 +114,16 @@
 </template>
 
 <script>
+import ButtonShadow from "@/components/button-shadow";
 export default {
   name: "Slides",
   props: ["slides", "length"],
+  components: {
+    ButtonShadow
+  },
   data() {
     return {
+      textButton: "Saiba Mais",
       current: 0,
       timer: 0,
       percent: 0,
@@ -119,7 +138,7 @@ export default {
     this.secondLast = this.length - 1;
     this.playslides[0] = this.slides[0];
     this.playslides[1] = this.slides[1];
-    //this.start();
+    this.start();
   },
   methods: {
     incrementSlide(val) {
@@ -231,23 +250,30 @@ section {
   height: 100%;
   @include flexbox;
   @include align-items(flex-start);
-  @media screen and (min-width: $break-sm) {
+  @include justify-content(center);
+  @media screen and (min-width: $break-md) {
     @include align-items(center);
+    @include justify-content(flex-start);
   }
 }
 
 .slide__title {
   @include flexbox;
+  @include flex-direction(column);
   @include align-items(center);
-  height: 100%;
   position: relative;
   z-index: 25;
   text-align: center;
   margin-top: 50%;
+
+  flex: 0;
   @media screen and (min-width: $break-md) {
+    @include align-items(flex-start);
     margin-top: inherit;
     width: 49%;
     text-align: left;
+
+    flex: auto;
   }
 }
 .slide__title h1 {
@@ -257,6 +283,7 @@ section {
   font-size: 40px;
   display: flex;
   text-shadow: 3px 3px 10px rgba(88, 99, 113, 0.42);
+  padding-bottom: 30px;
   @media screen and (min-width: $break-sm) {
     left: 0px;
   }
@@ -277,16 +304,17 @@ section {
   @include align-items(center);
   @media screen and (min-width: $break-sm) {
     height: 90%;
-    right: -10%;
-    top: 13%;
-    bottom: initial;
+    right: -5%;
+    top: 3%;
+    bottom: auto;
+    position: relative;
   }
 }
 #slides .slide__img img {
   width: 100%;
   @media screen and (min-width: $break-sm) {
     height: 100%;
-    width: auto;
+    //width: auto;
   }
 }
 #slides .controls__slides {
