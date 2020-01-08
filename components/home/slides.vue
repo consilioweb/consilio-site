@@ -119,7 +119,7 @@ export default {
     this.secondLast = this.length - 1;
     this.playslides[0] = this.slides[0];
     this.playslides[1] = this.slides[1];
-    this.start();
+    //this.start();
   },
   methods: {
     incrementSlide(val) {
@@ -169,7 +169,7 @@ export default {
 <style lang="scss" scoped>
 section {
   position: relative;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
 }
 .height__100 {
@@ -181,9 +181,12 @@ section {
 #slides {
   @include flexbox;
   z-index: 999;
-  margin: 0 13% 10% 10%;
   height: 100vh;
   z-index: 8;
+  margin: 0 5%;
+  @media screen and (min-width: $break-md) {
+    margin: 0 13% 10% 10%;
+  }
   &:after {
     background-image: radial-gradient(
       circle farthest-corner at 10% 20%,
@@ -227,45 +230,64 @@ section {
   position: absolute;
   height: 100%;
   @include flexbox;
-  @include align-items(center);
+  @include align-items(flex-start);
+  @media screen and (min-width: $break-sm) {
+    @include align-items(center);
+  }
 }
 
 .slide__title {
-  width: 40%;
+  @include flexbox;
+  @include align-items(center);
   height: 100%;
-  display: flex;
-  align-items: center;
   position: relative;
   z-index: 25;
+  text-align: center;
+  margin-top: 50%;
+  @media screen and (min-width: $break-md) {
+    margin-top: inherit;
+    width: 49%;
+    text-align: left;
+  }
 }
 .slide__title h1 {
-  color: $primary;
+  color: $white;
   font-family: "Montserrat";
   font-weight: 900;
   font-size: 40px;
   display: flex;
+  text-shadow: 3px 3px 10px rgba(88, 99, 113, 0.42);
   @media screen and (min-width: $break-sm) {
     left: 0px;
   }
   @media screen and (min-width: $break-md) {
-    font-size: 60px;
+    font-size: 50px;
+    color: $primary;
+    text-shadow: inherit;
   }
   @media screen and (min-width: $break-xl) {
-    font-size: 70px;
+    font-size: 60px;
   }
 }
 #slides .slide__img {
   position: absolute;
   z-index: 11;
-  height: 100%;
-  right: -10%;
+  bottom: 10%;
   @include flexbox;
   @include align-items(center);
   @media screen and (min-width: $break-sm) {
+    height: 90%;
+    right: -10%;
+    top: 13%;
+    bottom: initial;
   }
 }
 #slides .slide__img img {
-  height: 100%;
+  width: 100%;
+  @media screen and (min-width: $break-sm) {
+    height: 100%;
+    width: auto;
+  }
 }
 #slides .controls__slides {
   position: relative;
