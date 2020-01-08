@@ -34,7 +34,7 @@
             </parallax-element>
             <parallax-element
               class="slide__img"
-              style="z-index: 20;"
+              style="z-index: 19;"
               :parallaxStrength="-10"
               :type="'translation'"
             >
@@ -52,7 +52,6 @@
             aria-label="Anterior"
             role="button"
             aria-hidden="true"
-            :class="current == 0 ? 'display__none' : ''"
             class="prev"
             @click="incrementSlide(-1)"
           >
@@ -71,14 +70,7 @@
               <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
             </svg>
           </button>
-          <button
-            aria-label="Próximo"
-            role="button"
-            :class="current == secondLast ? 'display__none' : ''"
-            class="next"
-            :style="current > 0 ? 'right: 0px;' : 'right: 50px;'"
-            @click="incrementSlide(1)"
-          >
+          <button aria-label="Próximo" role="button" class="next" @click="incrementSlide(1)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -95,12 +87,7 @@
             </svg>
           </button>
 
-          <ul
-            class="dots"
-            :style="current > 0 ? 'left: 0px;' : 'left: -50px;'"
-            :current-slide="current"
-            :data-slides-count="'0' + this.length"
-          >
+          <ul class="dots" :current-slide="current" :data-slides-count="'0' + this.length">
             <li
               v-for="(slide,index) of slides"
               :class="index === current ? 'active' : ''"
@@ -138,7 +125,7 @@ export default {
     this.secondLast = this.length - 1;
     this.playslides[0] = this.slides[0];
     this.playslides[1] = this.slides[1];
-    this.start();
+    //this.start();
   },
   methods: {
     incrementSlide(val) {
@@ -167,7 +154,7 @@ export default {
       clearInterval(this.interval);
       clearInterval(this.progress);
       clearInterval(this.percent);
-      this.start();
+      //this.start();
     },
     process() {
       this.current++;
@@ -175,7 +162,7 @@ export default {
         this.current = 0;
       }
       this.playslides[this.current % 2] = this.slides[this.current];
-      this.restart();
+      //this.restart();
     },
     going() {
       let time = new Date().getTime();
@@ -265,15 +252,12 @@ section {
   z-index: 25;
   text-align: center;
   margin-top: 50%;
-
-  flex: 0;
+  flex: auto;
   @media screen and (min-width: $break-md) {
     @include align-items(flex-start);
     margin-top: inherit;
     width: 49%;
     text-align: left;
-
-    flex: auto;
   }
 }
 .slide__title h1 {
@@ -300,6 +284,7 @@ section {
   position: absolute;
   z-index: 11;
   bottom: 10%;
+  width: 100%;
   @include flexbox;
   @include align-items(center);
   @media screen and (min-width: $break-sm) {
@@ -308,6 +293,7 @@ section {
     top: 3%;
     bottom: auto;
     position: relative;
+    width: inherit;
   }
 }
 #slides .slide__img img {
