@@ -128,6 +128,16 @@ export default {
       }, 2000);
     },
     async send(e) {
+      axios.interceptors.response.use(
+        function(response) {
+          console.log("Response " + response);
+          return response;
+        },
+        function(error) {
+          console.log("Reponse Error " + error.response);
+          return Promise.reject(error);
+        }
+      );
       if (typeof window.FormData !== "function") {
         return;
       }
@@ -135,7 +145,11 @@ export default {
       await axios
         .post(
           "https://automacao.consilio.com.br/form/submit?formId=8",
-          formData
+          formData,
+          {
+            "Access-Control-Allow-Origin": "http://localhost:8000",
+            "Access-Control-Allow-Methods": "GET, POST"
+          }
         )
         .then(res => {
           let self = this;
