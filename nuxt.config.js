@@ -111,10 +111,6 @@ export default {
     },
     {
       src: "@/plugins/lazyload.js"
-    },
-    {
-      src: "@/plugins/mautic.js",
-      ssr: false
     }
   ],
   /*
@@ -137,9 +133,9 @@ export default {
       "@nuxtjs/recaptcha",
       {
         hideBadge: true,
-        language: "pt-br",
+        lang: "pt-BR",
         siteKey: "6LfilKUUAAAAACIMCe6ExvLXHgtRv2Dq7ydnzcEN",
-        version: 3
+        version: 2
       }
     ]
   ],

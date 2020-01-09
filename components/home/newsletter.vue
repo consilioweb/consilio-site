@@ -14,13 +14,33 @@
           <div class="card__content">
             <p>Cadastre-se e receba as últimas novidades da agência consilio</p>
             <form ref="form" @submit.prevent="send">
+              <div style="display:none;">
+                <input
+                  type="hidden"
+                  name="mauticform[formId]"
+                  id="mauticform_newsletter_id"
+                  value="8"
+                />
+                <input
+                  type="hidden"
+                  name="mauticform[return]"
+                  id="mauticform_newsletter_return"
+                  value
+                />
+                <input
+                  type="hidden"
+                  name="mauticform[formName]"
+                  id="mauticform_newsletter_name"
+                  value="newsletter"
+                />
+              </div>
               <div class="input-wrapper">
                 <label for="email">E-mail:</label>
                 <input
                   v-model="form.email"
                   aria-label="email"
                   id="email"
-                  name="email"
+                  name="mauticform[email]"
                   type="text"
                   placeholder="Endereço de e-mail"
                 />
@@ -114,7 +134,7 @@ export default {
       const formData = new FormData(this.$refs.form);
       await axios
         .post(
-          `${process.env.PROXY_URL}wp-json/contact-form-7/v1/contact-forms/5674566/feedback`,
+          "https://automacao.consilio.com.br/form/submit?formId=8",
           formData
         )
         .then(res => {

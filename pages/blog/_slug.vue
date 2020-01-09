@@ -718,6 +718,9 @@ article {
 article {
   & .__content {
     &--article {
+      .has-text-align-right {
+        text-align: right;
+      }
       & ul,
       ol {
         list-style-type: disc;
@@ -763,6 +766,9 @@ article {
         padding: 15px 0px !important;
         color: $primary;
         font-family: Poppins, sans-serif;
+        & em {
+          font-style: italic;
+        }
         & a {
           color: #4b5f7d;
           transition: all 250ms ease-in-out;
@@ -780,10 +786,12 @@ article {
           }
         }
         & b,
-        span {
+        span,
+        strong {
           font-family: Poppins, sans-serif;
         }
-        & b {
+        & b,
+        strong {
           font-weight: 600 !important;
           color: $primary;
         }
@@ -793,9 +801,11 @@ article {
       h3,
       h4 {
         font-family: Quicksand, sans-serif;
+        color: $primary;
       }
       & h1 {
         font-size: 1.8em;
+        font-weight: 700;
       }
       & h2 {
         font-size: 1.5em;
