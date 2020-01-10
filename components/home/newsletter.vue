@@ -141,7 +141,7 @@ export default {
               "Access-Control-Allow-Origin": `${process.env.BASE_URL}`,
               "Access-Control-Allow-Methods": "GET,POST",
               "Content-Type": "multipart/form-data",
-              "Access-Control-Allow-Credentials": true
+              "Access-Control-Allow-Credentials": "true"
             }
           }
         )
