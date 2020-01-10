@@ -128,16 +128,6 @@ export default {
       }, 2000);
     },
     async send(e) {
-      axios.interceptors.response.use(
-        function(response) {
-          console.log("Response " + response);
-          return response;
-        },
-        function(error) {
-          console.log("Reponse Error " + error.response);
-          return Promise.reject(error);
-        }
-      );
       if (typeof window.FormData !== "function") {
         return;
       }
@@ -148,11 +138,8 @@ export default {
           formData,
           {
             headers: {
-              "Access-Control-Allow-Headers":
-                "Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin",
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET,POST",
-              "Access-Control-Allow-Credentials": false,
               "Content-Type": "multipart/form-data"
             }
           }

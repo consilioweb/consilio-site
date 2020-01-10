@@ -139,7 +139,8 @@ export default {
         hideBadge: true,
         lang: "pt-BR",
         siteKey: "6LfilKUUAAAAACIMCe6ExvLXHgtRv2Dq7ydnzcEN",
-        version: 2
+        version: 2,
+        size: "invisible"
       }
     ]
   ],
