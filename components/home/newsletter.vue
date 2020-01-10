@@ -138,9 +138,10 @@ export default {
           formData,
           {
             headers: {
-              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Origin": `${process.env.BASE_URL}`,
               "Access-Control-Allow-Methods": "GET,POST",
-              "Content-Type": "multipart/form-data"
+              "Content-Type": "multipart/form-data",
+              "Access-Control-Allow-Credentials": true
             }
           }
         )
