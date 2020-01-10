@@ -111,6 +111,10 @@ export default {
     },
     {
       src: "@/plugins/lazyload.js"
+    },
+    {
+      src: "@/plugins/mautic.js",
+      ssr: false
     }
   ],
   /*
@@ -167,9 +171,11 @@ export default {
   /*
    ** Router configuration
    */
+  /*
   router: {
     middleware: ["mautic"]
   },
+  */
   /**
    * Style Resources configuration
    */

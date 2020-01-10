@@ -2,7 +2,7 @@
   <section class="cases">
     <div class="cases__container">
       <div class="cases__title">
-        <parallax-element :parallaxStrength="-15" :type="'translation'">
+        <parallax-element :strength="-15" :type="'translate'">
           <h2>cases</h2>
         </parallax-element>
         <span class="cases__title--bg">portfólio</span>

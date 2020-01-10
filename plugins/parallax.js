@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import { ParallaxContainer, ParallaxElement } from 'vue-mouse-parallax'
+import Vue from "vue";
+import { KinesisContainer, KinesisElement } from "vue-kinesis";
 
-Vue.component('parallax-container', ParallaxContainer)
-Vue.component('parallax-element', ParallaxElement)
+Vue.component("parallax-container", KinesisContainer);
+Vue.component("parallax-element", KinesisElement);

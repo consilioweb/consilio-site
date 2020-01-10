@@ -10,7 +10,7 @@
     </div>
     <div class="about__text">
       <div class="about__text--title">
-        <parallax-element :parallaxStrength="-10" :type="'translation'">
+        <parallax-element :strength="-10" :type="'translate'">
           <h2>{{about.title}}</h2>
         </parallax-element>
       </div>

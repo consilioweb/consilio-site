@@ -89,7 +89,7 @@
         </svg>
       </div>
       <div class="methodology__title">
-        <parallax-element :parallaxStrength="10" :type="'translation'">
+        <parallax-element :strength="10" :type="'translate'">
           <h2>metodologia</h2>
         </parallax-element>
       </div>
@@ -152,7 +152,7 @@
         <div class="methodology__card">
           <div class="methodology__card--number">4</div>
           <div class="methodology__card--icon">
-            <svg-icon name="icons/coin"/>
+            <svg-icon name="icons/coin" />
           </div>
           <div class="methodology__card--title">
             <h3>Automação</h3>

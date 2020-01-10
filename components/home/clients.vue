@@ -2,7 +2,7 @@
   <section class="clients">
     <div class="clients__container">
       <div class="clients__title">
-        <parallax-element :parallaxStrength="5" :type="'translation'">
+        <parallax-element :strength="5" :type="'translate'">
           <h2>
             nossos
             <br />clientes

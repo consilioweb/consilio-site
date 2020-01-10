@@ -14,7 +14,7 @@
     </div>
     <div class="feed-blog__container">
       <div class="feed-blog__title">
-        <parallax-element :parallaxStrength="15" :type="'translation'">
+        <parallax-element :strength="15" :type="'translate'">
           <h2>blog</h2>
         </parallax-element>
         <span class="feed-blog__title--bg">explorar</span>

@@ -23,8 +23,8 @@
             <parallax-element
               class="slide__title"
               style="z-index: 20;"
-              :parallaxStrength="10"
-              :type="'translation'"
+              :strength="10"
+              :type="'translate'"
             >
               <h1>{{ slide.title }}</h1>
               <button-shadow
@@ -35,8 +35,8 @@
             <parallax-element
               class="slide__img"
               style="z-index: 19;"
-              :parallaxStrength="-10"
-              :type="'translation'"
+              :strength="-10"
+              :type="'translate'"
             >
               <div v-if="slide.content" v-html="slide.content"></div>
               <div v-else>

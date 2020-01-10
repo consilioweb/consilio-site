@@ -42,7 +42,7 @@
     </div>
     <div class="inner__team">
       <div class="inner__team--title">
-        <parallax-element :parallaxStrength="10" :type="'translation'">
+        <parallax-element :strength="10" :type="'translate'">
           <h2>equipe</h2>
         </parallax-element>
         <span class="inner__team--title-bg">nosso time</span>

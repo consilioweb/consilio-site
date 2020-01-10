@@ -2,7 +2,7 @@
   <section class="testimonial">
     <div class="testimonial__container">
       <div class="testimonial__title">
-        <parallax-element :parallaxStrength="5" :type="'translation'">
+        <parallax-element :strength="5" :type="'translate'">
           <h2>depoimentos</h2>
         </parallax-element>
       </div>

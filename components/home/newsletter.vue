@@ -2,7 +2,7 @@
   <section class="newsletter">
     <div class="newsletter__container">
       <div class="newsletter__title">
-        <parallax-element :parallaxStrength="5" :type="'translation'">
+        <parallax-element :strength="5" :type="'translate'">
           <h2>
             Receba
             <br />novidades
@@ -147,8 +147,14 @@ export default {
           "https://automacao.consilio.com.br/form/submit?formId=8",
           formData,
           {
-            "Access-Control-Allow-Origin": "http://localhost:8000",
-            "Access-Control-Allow-Methods": "GET, POST"
+            headers: {
+              "Access-Control-Allow-Headers":
+                "Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin",
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET,POST",
+              "Access-Control-Allow-Credentials": false,
+              "Content-Type": "multipart/form-data"
+            }
           }
         )
         .then(res => {
