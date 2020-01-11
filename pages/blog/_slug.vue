@@ -19,13 +19,6 @@
               </li>
             </ul>
             <span>•</span>
-            <ul class="author">
-              <p>
-                <b>Autor(a):</b>
-                {{post.author_name}}
-              </p>
-            </ul>
-            <span>•</span>
             <time class="time">
               <p>
                 <b>Postado em:</b>
@@ -58,7 +51,21 @@
         <div class="__content--article" v-html="post.content"></div>
         <aside class="__content--sidebar">
           <div class="sidebar--content sticky">
-            <div class="banner_section"></div>
+            <div class="about_post">
+              <div class="about_post--content">
+                <span>
+                  <img :src="post.author_img" height="48" width="48" :alt="post.author_name" />
+                </span>
+                <span>
+                  Por:
+                  <b>{{post.author_name}}</b>
+                </span>
+                <span>
+                  <p v-html="longTimestamp(post.date)"></p>
+                </span>
+                <span>{{readingTime}}</span>
+              </div>
+            </div>
             <div class="posts_related_section">
               <h3>Veja também</h3>
               <ul>
@@ -119,6 +126,10 @@ export default {
     });
   },
   computed: {
+    readingTime() {
+      let words = this.post.content.split(" ").length + 1;
+      return `${Math.ceil(words / 200)} min. de leitura`;
+    },
     urlPost() {
       return process.env.BASE_URL + "blog/?slug=" + this.post.slug;
     },
@@ -589,23 +600,50 @@ article {
       }
     }
     &--sidebar {
-      height: 100%;
       padding-left: 30px;
       display: none !important;
       @media screen and (min-width: $break-md) {
         display: initial !important;
         width: 25%;
       }
+      & h3 {
+        font-family: Quicksand, sans-serif;
+        font-size: 15px;
+        color: #586371;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
       & .banner_section {
       }
-      & .posts_related_section {
-        h3 {
-          font-family: Quicksand, sans-serif;
-          font-size: 15px;
-          color: #586371;
-          font-weight: 600;
-          text-transform: uppercase;
+      & .about_post {
+        @include flexbox;
+        @include flex-direction(column);
+        font-size: 14px;
+        line-height: 14px;
+        padding-bottom: 10px;
+        color: $primary;
+        &--content {
+          @include flexbox;
+          @include flex-direction(column);
+          margin-top: 20px;
+          margin-bottom: 30px;
+          & img {
+            border-radius: 50%;
+          }
+          & span {
+            padding-bottom: 5px;
+          }
         }
+        & b {
+          font-weight: 600;
+          padding-right: 5px;
+        }
+        & a {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+      & .posts_related_section {
         ul {
           margin-top: 30px;
           & li {
@@ -644,6 +682,7 @@ article {
     & .author-card {
       @include flexbox();
       @include flex-direction(row);
+      @include align-items(center);
     }
 
     & .author-card .author-profile-image {

@@ -58,18 +58,26 @@
                   <a
                     v-if="member.custom_fields.facebook_team"
                     :href="'https://fb.com/'+member.custom_fields.facebook_team"
+                    target="_blank"
+                    rel="noopener"
                   >Fb.</a>
                   <a
                     v-if="member.custom_fields.instagram_team"
                     :href="'https://instagram.com/'+member.custom_fields.instagram_team"
+                    target="_blank"
+                    rel="noopener"
                   >Ins.</a>
                   <a
                     v-if="member.custom_fields.twitter_team"
                     :href="'https://twitter.com/'+member.custom_fields.twitter_team"
+                    target="_blank"
+                    rel="noopener"
                   >Tw.</a>
                   <a
                     v-if="member.custom_fields.linkedin_team"
                     :href="'https://linkedin.com/in/'+member.custom_fields.linkedin_team"
+                    target="_blank"
+                    rel="noopener"
                   >In.</a>
                 </div>
                 <h3 class="name">{{ member.title }}</h3>

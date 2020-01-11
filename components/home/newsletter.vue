@@ -140,8 +140,7 @@ export default {
             headers: {
               "Access-Control-Allow-Origin": `${process.env.BASE_URL}`,
               "Access-Control-Allow-Methods": "GET,POST",
-              "Content-Type": "multipart/form-data",
-              "Access-Control-Allow-Credentials": "true"
+              "Content-Type": "multipart/form-data"
             }
           }
         )

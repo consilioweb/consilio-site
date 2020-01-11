@@ -25,36 +25,48 @@
         <h3>Contato</h3>
         <p>
           <b>Telefone:</b>
-          <a :href="'tel:'+info.phone">{{info.phone}}</a>
+          <a :href="'tel:'+info.phone" target="_blank" rel="noopener">{{info.phone}}</a>
           <br />
           <b>Celular:</b>
           <a
             :href="'https://api.whatsapp.com/send?1=pt_BR&phone=+55'+info.whatsapp"
+            target="_blank"
+            rel="noopener"
           >{{info.whatsapp}}</a>
           <br />
           <b>E-mail:</b>
-          <a :href="'mailto:'+info.email">{{info.email}}</a>
+          <a :href="'mailto:'+info.email" target="_blank" rel="noopener">{{info.email}}</a>
         </p>
       </div>
       <div class="column">
         <h3>Social</h3>
         <p>
           <b>Facebook:</b>
-          <a :href="'https://fb.com/'+info.facebook" target="_blank">{{info.facebook}}</a>
+          <a
+            :href="'https://fb.com/'+info.facebook"
+            target="_blank"
+            rel="noopener"
+          >{{info.facebook}}</a>
           <br />
           <b>Instagram:</b>
-          <a :href="'https://instagram.com/'+info.instagram" target="_blank">{{info.instagram}}</a>
+          <a
+            :href="'https://instagram.com/'+info.instagram"
+            target="_blank"
+            rel="noopener"
+          >{{info.instagram}}</a>
           <br />
           <b>Linkedin:</b>
           <a
             :href="'https://www.linkedin.com/company/'+info.linkedin"
             target="_blank"
+            rel="noopener"
           >{{info.linkedin}}</a>
           <br />
           <b>Youtube:</b>
           <a
             :href="'https://www.youtube.com/channel/'+info.youtube"
             target="_blank"
+            rel="noopener"
           >{{info.youtube}}</a>
         </p>
       </div>

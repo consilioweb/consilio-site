@@ -15,19 +15,35 @@
     </div>
     <div class="menu-side">
       <div class="aside-social">
-        <a :href="'https://fb.com/'+info.facebook" class="item-social" target="_blank">
+        <a
+          :href="'https://fb.com/'+info.facebook"
+          class="item-social"
+          target="_blank"
+          rel="noopener"
+        >
           <facebook-icon />
         </a>
-        <a :href="'https://instagram.com/'+info.instagram" class="item-social" target="_blank">
+        <a
+          :href="'https://instagram.com/'+info.instagram"
+          class="item-social"
+          target="_blank"
+          rel="noopener"
+        >
           <instagram-icon />
         </a>
-        <a :href="'https://twitter.com/'+info.twitter" class="item-social" target="_blank">
+        <a
+          :href="'https://twitter.com/'+info.twitter"
+          class="item-social"
+          target="_blank"
+          rel="noopener"
+        >
           <twitter-icon />
         </a>
         <a
           :href="'https://www.youtube.com/channel/'+info.youtube"
           class="item-social"
           target="_blank"
+          rel="noopener"
         >
           <youtube-icon />
         </a>
@@ -35,6 +51,7 @@
           :href="'https://www.linkedin.com/company/'+info.linkedin"
           class="item-social"
           target="_blank"
+          rel="noopener"
         >
           <linkedin-icon />
         </a>
