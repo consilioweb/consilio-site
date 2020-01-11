@@ -96,7 +96,8 @@ export default {
       controlsContainer: "#slider-dots",
       speed: 2000,
       autoplayTimeout: 4000,
-      preventActionWhenRunning: true
+      preventActionWhenRunning: true,
+      preventScrollOnTouch: "auto"
     }
   }),
   methods: {
@@ -216,16 +217,14 @@ export default {
 }
 .card-carousel__item--cover {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 .card-carousel__item--cover img {
-  width: 100%;
-  width: calc(130% - 3rem);
   margin-top: -10px;
   @media screen and (min-width: $break-md) {
-    margin-left: -10%;
-    margin-top: -30px;
+    margin-top: -180px;
+    margin-left: 70px;
   }
 }
 .card-carousel__item--title {
