@@ -10,6 +10,7 @@
     <cta
       title="Marketing Digital inteligente e feito por quem respira comunicação digital."
       textButton="DIAGNÓSTICO GRATUITO"
+      urlButton="#"
     />
     <newsletter />
   </div>

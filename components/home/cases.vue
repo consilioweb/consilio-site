@@ -79,7 +79,7 @@ export default {
     ButtonShadow
   },
   data: () => ({
-    textButton: "Ver Case",
+    textButton: "Em breve",
     carouselOptions: {
       lazyload: true,
       lazyloadSelector: ".lazyload",

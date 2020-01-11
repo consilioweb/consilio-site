@@ -19,7 +19,7 @@
         </h1>
       </div>
       <div class="cta__button">
-        <button-shadow :text="textButton" />
+        <button-shadow @click="$store.commit('TOOGLE_MODAL')" :url="urlButton" :text="textButton" />
       </div>
     </div>
   </section>
@@ -30,7 +30,7 @@ import ButtonShadow from "@/components/button-shadow";
 
 export default {
   name: "cta",
-  props: ["title", "textButton"],
+  props: ["title", "textButton", "urlButton"],
   components: {
     ButtonShadow
   }
