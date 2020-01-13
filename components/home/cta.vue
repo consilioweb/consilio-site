@@ -19,7 +19,7 @@
         </h1>
       </div>
       <div class="cta__button">
-        <button-shadow @click="$store.commit('TOOGLE_MODAL')" :url="urlButton" :text="textButton" />
+        <button-shadow :url="urlButton" :text="textButton" />
       </div>
     </div>
   </section>

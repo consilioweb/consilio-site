@@ -85,7 +85,7 @@ export default {
       lazyloadSelector: ".lazyload",
       loop: true,
       controls: false,
-      autoplay: true,
+      autoplay: false,
       mouseDrag: true,
       autoplayHoverPause: true,
       center: true,
@@ -158,6 +158,7 @@ export default {
   padding-bottom: 30px;
   position: relative;
   margin: 0 auto;
+  width: 100%;
   @media screen and (min-width: $break-md) {
     margin: 0 auto;
   }
@@ -236,7 +237,7 @@ export default {
   }
 }
 .card-carousel__item--title h3 {
-  font-size: 50px;
+  font-size: 40px;
   font-family: "Montserrat";
   font-weight: 900;
   display: flex;
@@ -244,7 +245,7 @@ export default {
   line-height: 1.1;
   text-shadow: 4px 4px 17px rgba(46, 61, 98, 0.23);
   @media screen and (min-width: $break-md) {
-    font-size: 60px;
+    font-size: 50px;
   }
 }
 .card-carousel__item--button {
@@ -268,7 +269,7 @@ export default {
   margin: 10px 2em 0 2em;
   @media screen and (min-width: $break-md) {
     @include flex-direction(row);
-    margin: 10px 3em 0 3em;
+    margin: 10px 2.5em 0 2.5em;
   }
 }
 

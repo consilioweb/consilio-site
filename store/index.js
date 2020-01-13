@@ -37,11 +37,17 @@ export default {
     },
     TOOGLE_MODAL: state => {
       state.modal = !state.modal;
+    },
+    OPEN_MODAL: state => {
+      state.modal = true;
     }
   },
   actions: {
     async toogleModal({ commit }) {
       await commit("TOOGLE_MODAL");
+    },
+    async openModal({ commit }) {
+      await commit("OPEN_MODAL");
     },
     nuxtServerInit({ dispatch }, context) {
       return Promise.all([

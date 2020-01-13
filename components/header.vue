@@ -12,7 +12,6 @@
         :class="{ hover: buttonHover }"
       >Diagnóstico Gratuito</button>
     </div>
-    <modal-form :modal="modal"></modal-form>
   </header>
 </template>
 <script>
@@ -20,9 +19,6 @@ import { mapState } from "vuex";
 
 export default {
   props: ["colorLogo", "buttonHover"],
-  components: {
-    modalForm: () => import("@/components/modal-form")
-  },
   computed: {
     ...mapState(["modal"])
   }

@@ -1,6 +1,7 @@
 <template>
   <main>
     <Scripts />
+    <Modal v-if="modal" />
     <Header :colorLogo="colorLogo" :buttonHover="buttonHover" />
     <side-bar />
     <transition name="fade">
@@ -22,6 +23,7 @@ import SideBar from "@/components/side-bar.vue";
 import Menu from "@/components/menu.vue";
 import BottomPlug from "@/components/bottom-plug.vue";
 import Scripts from "@/components/scripts.vue";
+import Modal from "@/components/modal-form.vue";
 
 export default {
   middleware: "mautic",
@@ -31,12 +33,14 @@ export default {
     Menu,
     SideBar,
     BottomPlug,
-    Scripts
+    Scripts,
+    Modal
   },
   computed: {
     ...mapState("menus", ["mainMenu"]),
     ...mapState(["colorLogo"]),
     ...mapState(["buttonHover"]),
+    ...mapState(["modal"]),
     ...mapGetters({
       statsMainMenu: "menus/getStatsMainMenu",
       lengthMainMenu: "menus/lengthMainMenu"
@@ -55,6 +59,9 @@ export default {
     }
   },
   mounted() {
+    if (this.$route.path === "/diagnostico-gratuito") {
+      return this.$store.commit("TOOGLE_MODAL");
+    }
     this.$OneSignal.push(() => {
       this.$OneSignal.isPushNotificationsEnabled(isEnabled => {
         if (isEnabled) {
@@ -64,6 +71,13 @@ export default {
         }
       });
     });
+  },
+  watch: {
+    "$route.path": function() {
+      if (this.$route.path === "/diagnostico-gratuito") {
+        return this.$store.commit("TOOGLE_MODAL");
+      }
+    }
   }
 };
 </script>

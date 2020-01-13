@@ -1,7 +1,7 @@
 <template>
   <section>
     <transition name="modal">
-      <div v-if="modal" class="modal" @click="$store.commit('TOOGLE_MODAL')">
+      <div class="modal" @click="$store.commit('TOOGLE_MODAL')">
         <div class="modal__content" @click.stop>
           <header class="modal__header">
             <h1>
@@ -322,10 +322,12 @@
 
 <script>
 export default {
-  props: ["modal"],
+  name: "modal"
+  /*
   beforeDestroy() {
-    $store.commit("TOOGLE_MODAL");
+    this.$store.commit("TOOGLE_MODAL");
   }
+  */
 };
 </script>
 
@@ -473,7 +475,7 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: rgba(white, 0.6);
-  z-index: 1;
+  z-index: 999;
   color: $primary;
 
   &-enter-active,

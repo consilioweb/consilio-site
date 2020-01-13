@@ -10,7 +10,7 @@
     <cta
       title="Marketing Digital inteligente e feito por quem respira comunicação digital."
       textButton="DIAGNÓSTICO GRATUITO"
-      urlButton="#"
+      urlButton="diagnostico-gratuito"
     />
     <newsletter />
   </div>
@@ -78,3 +78,12 @@ export default {
   overflow: hidden;
 }
 </style>
+
+<router>
+  {
+    path: '/',
+    alias: [
+      '/diagnostico-gratuito'
+    ]
+  }
+</router>
