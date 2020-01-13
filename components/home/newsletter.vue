@@ -48,7 +48,7 @@
                   type="submit"
                   :class="[response ? 'disabled' : '', submit.loading ? 'loading' : '', submit.done ? 'done' : '']"
                   class="submit"
-                  name="submit"
+                  aria-label="enviar"
                 >
                   <ul>
                     <li>ASSINAR</li>

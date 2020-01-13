@@ -21,7 +21,7 @@
       </div>
       <div class="feed-blog__content">
         <article v-for="(post, index) in posts.slice(0, 3)" :key="index" class="feed-blog__content">
-          <n-link :to="'/blog/'+post.slug">
+          <n-link :to="'/blog/'+post.slug" :aria-label="'Artigo: '+post.title">
             <div class="feed-blog__card">
               <figure v-lazy:background-image="post.img"></figure>
               <div class="feed-blog__card--meta">
