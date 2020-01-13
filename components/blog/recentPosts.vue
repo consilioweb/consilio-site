@@ -37,12 +37,9 @@
               <div class="feed-blog__card--title">
                 <h1>{{post.title}}</h1>
               </div>
-              <div class="feed-blog__card--content" v-html="post.excerpt"></div>
-              <div v-if="post.excerpt !== ''" class="feed-blog__card--content">
-                <p>{{ post.excerpt | stripped }}</p>
-              </div>
-              <div v-else class="feed-blog__card--content">
-                <p>{{ toLimitChars(post.content, 200) | stripped }}</p>
+              <div class="feed-blog__card--content">
+                <p v-if="post.excerpt">{{ toLimitChars(post.excerpt, 200) | stripped }}</p>
+                <p v-else>{{ toLimitChars(post.content, 200) | stripped }}</p>
               </div>
               <div class="feed-blog__card--button">
                 <svg-icon name="icons/right-arrow" />
