@@ -773,7 +773,8 @@ article {
           & span {
             font-size: 15px;
           }
-          & b {
+          & b,
+          strong {
             font-weight: 600 !important;
             color: $primary;
           }
