@@ -10,17 +10,29 @@
             </h1>
             <p>Preencha as informações abaixo e receba um diagnóstico gratuito sobre o marketing digital da sua empresa.</p>
           </header>
-          <div class="modal__form">
+          <div class="modal__form" v-if="!response">
             <div id="mauticform_wrapper_diagnosticogratuito" class="mauticform_wrapper">
-              <form
-                autocomplete="false"
-                role="form"
-                method="post"
-                action="https://automacao.consilio.com.br/form/submit?formId=7"
-                id="mauticform_diagnosticogratuito"
-                data-mautic-form="diagnosticogratuito"
-                enctype="multipart/form-data"
-              >
+              <form ref="modal" @submit.prevent="send">
+                <div style="display:none;">
+                  <input
+                    type="hidden"
+                    name="mauticform[formId]"
+                    id="mauticform_diagnosticogratuito_id"
+                    value="7"
+                  />
+                  <input
+                    type="hidden"
+                    name="mauticform[return]"
+                    id="mauticform_diagnosticogratuito_return"
+                    value
+                  />
+                  <input
+                    type="hidden"
+                    name="mauticform[formName]"
+                    id="mauticform_diagnosticogratuito_name"
+                    value="diagnosticogratuito"
+                  />
+                </div>
                 <div class="mauticform-error" id="mauticform_diagnosticogratuito_error"></div>
                 <div class="mauticform-message" id="mauticform_diagnosticogratuito_message"></div>
                 <div class="mauticform-innerform">
@@ -312,7 +324,9 @@
               </form>
             </div>
           </div>
-          <footer class="modal__footer"></footer>
+          <footer class="modal__footer">
+            <p class="response" v-if="response" v-html="response"></p>
+          </footer>
           <button class="modal__close" @click="$store.commit('TOOGLE_MODAL')">&times;</button>
         </div>
       </div>
@@ -321,8 +335,42 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "modal"
+  name: "modal",
+  data() {
+    return {
+      response: "",
+      status: ""
+    };
+  },
+  methods: {
+    async send(e) {
+      if (typeof window.FormData !== "function") {
+        return;
+      }
+      const formData = new FormData(this.$refs.modal);
+      await axios
+        .post(
+          "https://automacao.consilio.com.br/form/submit?formId=7",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "X-Requested-With": "XMLHttpRequest"
+            }
+          }
+        )
+        .then(res => {
+          this.response =
+            "Você acaba de solicitar gratuitamente um diagnóstico de marketing digital, nossa equipe recebeu sua solicitação e já está trabalhando nesse documento, em no máximo 24 horas um de nossos especialistas entrará em contato para te apresentar. <br><br> <b>Você deu o primeiro passo para entender o marketing digital de verdade.</b> 🚀";
+        })
+        .catch(error => {
+          this.response = "Error: " + error.status + " " + error.response;
+          console.log("Error --> " + error);
+        });
+    }
+  }
   /*
   beforeDestroy() {
     this.$store.commit("TOOGLE_MODAL");
@@ -537,6 +585,9 @@ export default {
     }
   }
   &__footer {
+    & .response {
+      padding: 40px;
+    }
   }
 
   &__link {

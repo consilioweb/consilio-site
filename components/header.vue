@@ -33,7 +33,7 @@ header {
   @include flexbox;
   @include justify-content(space-around);
   width: -webkit-fill-available;
-  z-index: 96;
+  z-index: 90;
   @media screen and (min-width: $break-md) {
     margin: 5% 13% 10% 10%;
   }
