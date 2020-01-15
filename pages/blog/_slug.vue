@@ -5,7 +5,7 @@
       <div class="inner">
         <div class="__content">
           <div class="__content--title">
-            <h2>{{post.title}}</h2>
+            <h1 v-html="post.title"></h1>
           </div>
           <div class="__content--description">
             <ul class="categories">
@@ -326,11 +326,12 @@ header {
       @media screen and (min-width: $break-md) {
         padding: 0 100px;
       }
-      & h2 {
+      & h1 {
         position: relative;
         z-index: 6;
         color: $white;
         font-size: 35px;
+        padding-bottom: 20px;
         @media screen and (min-width: $break-md) {
           font-size: 45px;
         }

@@ -35,7 +35,7 @@
                 <span v-html="post.author_name"></span>
               </div>
               <div class="feed-blog__card--title">
-                <h1>{{post.title}}</h1>
+                <h1 v-html="post.title"></h1>
               </div>
               <div class="feed-blog__card--content">
                 <p v-if="post.excerpt">{{ toLimitChars(post.excerpt, 200) | stripped }}</p>
