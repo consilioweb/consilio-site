@@ -43,19 +43,19 @@ export default {
 <style lang="scss" scoped>
 .about {
   position: relative;
-  margin: 5%;
-  @include flexbox;
+  @include inline-flex;
   @include align-items(center);
   @include flex-direction(column);
+  margin: 10% 5%;
   @media screen and (min-width: $break-md) {
+    margin: 5% 13% 5% 10%;
     @include flex-direction(row);
-    margin: 10% 13% 10% 10%;
   }
 }
 .about__text {
   @include align-items(center);
   @include justify-content(center);
-  margin: 10% 0% 10% 0;
+  margin: 10% 0 0 0;
   @media screen and (min-width: $break-md) {
     margin: 0 0 0 10%;
   }
@@ -112,7 +112,7 @@ export default {
 .about__text--button {
   @include flexbox;
   @include justify-content(center);
-  margin: 30px 0;
+  margin: 30px 0 0 0;
   @media screen and (min-width: $break-md) {
     @include justify-content(left);
   }

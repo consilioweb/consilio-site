@@ -1,9 +1,32 @@
 <template>
   <div id="home">
     <slides :slides="slides" :length="lengthSlides" />
+    <!-- A Consilio -->
     <about :about="about" />
-    <methodology />
-    <cases :cases="cases" :length="lengthCases" />
+    <!-- Metodologia -->
+    <section class="methodology">
+      <div class="methodology__title">
+        <parallax-element :strength="10" :type="'translate'">
+          <h2>metodologia</h2>
+        </parallax-element>
+      </div>
+      <methodology />
+      <div class="methodology__button">
+        <button-shadow :text="buttonMethodology" />
+      </div>
+    </section>
+    <!-- Cases -->
+    <section class="cases">
+      <div class="cases__wrapper">
+        <div class="cases__title">
+          <parallax-element :strength="-15" :type="'translate'">
+            <h2>cases</h2>
+          </parallax-element>
+          <span class="cases__title--bg">portfólio</span>
+        </div>
+        <cases :cases="cases" :length="lengthCases" />
+      </div>
+    </section>
     <recent-posts :posts="recent" :length="lengthPosts" />
     <testimonials :testimonials="testimonials" :length="lengthTestimonials" />
     <clients :clients="clients" :length="lengthClients" />
@@ -20,6 +43,11 @@
 import { mapState, mapGetters } from "vuex";
 
 export default {
+  data() {
+    return {
+      buttonMethodology: "Saiba Mais"
+    };
+  },
   mounted() {
     this.$initMautic();
     this.$store.commit("LOGO_HEADER_PRIMARY");
@@ -34,7 +62,8 @@ export default {
     testimonials: () => import("@/components/home/testimonials.vue"),
     clients: () => import("@/components/home/clients.vue"),
     cta: () => import("@/components/home/cta.vue"),
-    newsletter: () => import("@/components/home/newsletter.vue")
+    newsletter: () => import("@/components/home/newsletter.vue"),
+    ButtonShadow: () => import("@/components/button-shadow")
   },
   computed: {
     ...mapState("slides", ["slides"]),
@@ -76,6 +105,56 @@ export default {
 #home {
   width: 100%;
   overflow: hidden;
+}
+.methodology {
+  @include inline-flex;
+  @include align-items(center);
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include flex-flow(wrap);
+  position: relative;
+  margin: 10% 5%;
+  @media screen and (min-width: $break-md) {
+    @include flex-direction(row);
+    margin: 5% 13% 5% 10%;
+  }
+}
+.cases {
+  margin: 10% 5%;
+  @media screen and (min-width: $break-md) {
+    margin: 5% 13% 5% 10%;
+  }
+  &__wrapper {
+    @include inline-flex;
+    @include align-items(center);
+    @include flex-direction(column);
+    @include justify-content(center);
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+  }
+  &__title {
+    @include flexbox;
+    @include justify-content(center);
+    width: 100%;
+    padding-bottom: 30px;
+    &--bg {
+      position: absolute;
+      white-space: nowrap;
+      color: $primary;
+      opacity: 0.04;
+      font-size: 80px;
+      font-family: "Montserrat";
+      font-weight: 900;
+      z-index: -2;
+      top: 10px;
+      text-align: center;
+      @media screen and (min-width: $break-md) {
+        font-size: 180px;
+        top: -5%;
+      }
+    }
+  }
 }
 </style>
 

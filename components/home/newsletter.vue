@@ -49,6 +49,7 @@
                   :class="[response ? 'disabled' : '', submit.loading ? 'loading' : '', submit.done ? 'done' : '']"
                   class="submit"
                   aria-label="enviar"
+                  v-on:click="submit.loading = true"
                 >
                   <ul>
                     <li>ASSINAR</li>
@@ -85,7 +86,7 @@
                   </symbol>
                 </svg>
               </div>
-              <p class="response" v-if="response">{{status}}: {{response}}</p>
+              <p class="response" v-if="response">{{response}}</p>
             </form>
           </div>
         </div>
@@ -138,30 +139,27 @@ export default {
           formData,
           {
             headers: {
-              "Access-Control-Allow-Origin": `${process.env.BASE_URL}`,
-              "Access-Control-Allow-Methods": "GET,POST",
-              "Content-Type": "multipart/form-data"
+              "Content-Type": "multipart/form-data",
+              "X-Requested-With": "XMLHttpRequest"
             }
           }
         )
         .then(res => {
           let self = this;
-          this.submit.loading = true;
           setTimeout(function() {
-            e.preventDefault();
-            e.target.reset();
             self.submit.done = true;
             setTimeout(function() {
-              self.response = res.data.message;
+              self.response =
+                "Obrigado por assinar nossa newsletter, a partir de agora estará por dentro do mundo do marketing digital de perfomance! 🚀";
               self.status = res.data.status;
 
               self.submit.loading = false;
               self.submit.done = false;
-            }, 3200);
-          }, 2000);
+            }, 500);
+          }, 300);
         })
         .catch(error => {
-          this.response = "Error: " + error.response;
+          this.response = "Error: " + error.status + " " + error.response;
           console.log("Error --> " + error);
         });
     }

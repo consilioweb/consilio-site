@@ -257,6 +257,7 @@ section {
     @include align-items(flex-start);
     margin-top: inherit;
     width: 49%;
+    min-width: 49%;
     text-align: left;
   }
 }

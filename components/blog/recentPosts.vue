@@ -79,7 +79,7 @@ export default {
 <style lang="scss" scoped>
 .feed-blog {
   position: relative;
-  width: 100vw;
+  width: 100%;
   &__container {
     margin: 5%;
     @include flexbox;
@@ -119,7 +119,7 @@ export default {
   &__content {
     @include flexbox;
     @include justify-content(center);
-    padding-bottom: 30px;
+    //padding-bottom: 30px;
     position: relative;
     margin: 1.5%;
     flex: 1;

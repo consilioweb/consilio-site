@@ -40,7 +40,6 @@ export default {
 <style lang="scss" scoped>
 .cta {
   position: relative;
-  width: 100vw;
   &__container {
     margin: 5%;
     @include flexbox;

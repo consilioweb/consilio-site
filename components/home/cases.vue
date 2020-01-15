@@ -1,72 +1,62 @@
 <template>
-  <section class="cases">
-    <div class="cases__container">
-      <div class="cases__title">
-        <parallax-element :strength="-15" :type="'translate'">
-          <h2>cases</h2>
-        </parallax-element>
-        <span class="cases__title--bg">portfólio</span>
-      </div>
-      <div class="cases__content">
-        <div class="card-carousel" ref="card-carousel">
-          <client-only>
-            <ul
-              class="controls controls__carousel"
-              id="slider-dots"
-              aria-label="Navegação do carssousel"
-              tabindex="0"
+  <div class="cases__content">
+    <div class="card-carousel" ref="card-carousel">
+      <client-only>
+        <ul
+          class="controls controls__carousel"
+          id="slider-dots"
+          aria-label="Navegação do carssousel"
+          tabindex="0"
+        >
+          <li @click="prev" class="prev" data-controls="prev" tabindex="-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 48.52 48.52"
             >
-              <li @click="prev" class="prev" data-controls="prev" tabindex="-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  viewBox="0 0 48.52 48.52"
-                >
-                  <circle class="svgplay__circle" cx="24.26" cy="24.26" r="22.5" />
-                  <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
-                </svg>
-              </li>
-              <li @click="next" class="next" data-controls="next" tabindex="-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  viewBox="0 0 48.52 48.52"
-                >
-                  <circle class="svgplay__circle" cx="24.26" cy="24.26" r="22.5" />
-                  <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
-                </svg>
-              </li>
-            </ul>
-            <carousel ref="carousel" v-bind="carouselOptions">
-              <div
-                class="card-carousel__item"
-                ref="card-carousel__item"
-                v-for="(item, index) in cases"
-                :key="index"
-              >
-                <div class="card-carousel__item--cover" v-lazy-container="{ selector: 'img' }">
-                  <client-only>
-                    <img
-                      :data-src="item.img"
-                      v-if="item.img != ''"
-                      :alt="'Imagem destaque do case '+item.client"
-                      class="card-carousel--img lazyload"
-                    />
-                  </client-only>
-                </div>
-                <div class="card-carousel__item--title">
-                  <h3>{{ item.client }}</h3>
-                </div>
-                <div class="card-carousel__item--button">
-                  <button-shadow :text="textButton" />
-                </div>
-              </div>
-            </carousel>
-          </client-only>
-        </div>
-      </div>
+              <circle class="svgplay__circle" cx="24.26" cy="24.26" r="22.5" />
+              <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
+            </svg>
+          </li>
+          <li @click="next" class="next" data-controls="next" tabindex="-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 48.52 48.52"
+            >
+              <circle class="svgplay__circle" cx="24.26" cy="24.26" r="22.5" />
+              <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
+            </svg>
+          </li>
+        </ul>
+        <carousel ref="carousel" v-bind="carouselOptions">
+          <div
+            class="card-carousel__item"
+            ref="card-carousel__item"
+            v-for="(item, index) in cases"
+            :key="index"
+          >
+            <div class="card-carousel__item--cover" v-lazy-container="{ selector: 'img' }">
+              <client-only>
+                <img
+                  :data-src="item.img"
+                  v-if="item.img != ''"
+                  :alt="'Imagem destaque do case '+item.client"
+                  class="card-carousel--img lazyload"
+                />
+              </client-only>
+            </div>
+            <div class="card-carousel__item--title">
+              <h3>{{ item.client }}</h3>
+            </div>
+            <div class="card-carousel__item--button">
+              <button-shadow :text="textButton" />
+            </div>
+          </div>
+        </carousel>
+      </client-only>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -115,43 +105,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cases {
-  position: relative;
-}
-.cases__container {
-  margin: 5%;
-  @include flexbox;
-  @include align-items(center);
-  @include flex-direction(column);
-  @include flex-flow(wrap);
-  @media screen and (min-width: $break-md) {
-    @include flex-direction(row);
-    margin: 10% 13% 10% 10%;
-  }
-}
-.cases__title {
-  @include flexbox;
-  @include justify-content(center);
-  width: 100%;
-  padding-bottom: 30px;
-}
-
-.cases__title--bg {
-  position: absolute;
-  white-space: nowrap;
-  color: $primary;
-  opacity: 0.04;
-  font-size: 80px;
-  font-family: "Montserrat";
-  font-weight: 900;
-  z-index: -2;
-  top: 10px;
-  text-align: center;
-  @media screen and (min-width: $break-md) {
-    font-size: 180px;
-    top: -5%;
-  }
-}
 .cases__content {
   @include flexbox;
   @include justify-content(center);

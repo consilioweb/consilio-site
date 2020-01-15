@@ -312,7 +312,7 @@ export default {
    ** Handle external assets
    */
   workbox: {
-    skipWaiting: true,
+    skipWaiting: false,
     clientsClaim: true,
     //offline: false,
     //dev: true,
@@ -371,7 +371,7 @@ export default {
   build: {
     //analyze: true,
     filenames: {
-      app: ({ isDev }) => (isDev ? "[name].[hash].js" : "[chunkhash].js"),
+      app: ({ isDev }) => (isDev ? "[name].js" : "[chunkhash].js"),
       chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[chunkhash].js"),
       img: ({ isDev }) => (isDev ? "[path][name].[ext]" : "img/[hash:7].[ext]")
     },

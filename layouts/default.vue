@@ -55,12 +55,15 @@ export default {
         var valor = chaveValor[1];
         data[chave] = valor;
       });
-      return data.mauticMessage;
+      return data;
     }
   },
   mounted() {
     if (this.$route.path === "/diagnostico-gratuito") {
       return this.$store.commit("TOOGLE_MODAL");
+    }
+    if ("serviceWorker" in navigator && !navigator.serviceWorker.controller) {
+      navigator.serviceWorker.register("/OneSignalSDKWorker.js");
     }
     this.$OneSignal.push(() => {
       this.$OneSignal.isPushNotificationsEnabled(isEnabled => {
