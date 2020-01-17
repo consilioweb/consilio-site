@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="container__full">
     <div class="logo">
       <n-link to="/">
         Agência Consilio
@@ -27,16 +27,12 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  height: 70px;
-  position: absolute;
-  margin: 10% 5%;
   @include flexbox;
   @include justify-content(space-around);
+  height: 70px;
+  position: absolute;
   width: -webkit-fill-available;
   z-index: 90;
-  @media screen and (min-width: $break-md) {
-    margin: 5% 13% 10% 10%;
-  }
 }
 header .logo {
   @include flexbox;

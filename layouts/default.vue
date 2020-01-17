@@ -10,8 +10,8 @@
     <parallax-container tag="section">
       <div v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
       <nuxt />
+      <Footer />
     </parallax-container>
-    <Footer />
   </main>
 </template>
 
@@ -89,5 +89,6 @@ export default {
 section {
   display: flex;
   position: relative;
+  flex-direction: column;
 }
 </style>

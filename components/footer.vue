@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="container__full">
     <div class="column __about">
       <svg-icon name="logo" class="logo" width="230" height="50" />
     </div>
@@ -98,17 +98,15 @@ export default {
   color: $primary;
 }
 footer {
-  position: relative;
-  margin: 5%;
   @include flexbox;
   @include flex-flow(wrap);
   @include flex-direction(column);
+  position: relative;
   overflow: inherit !important;
   text-align: center;
   padding-bottom: 200px;
   @media screen and (min-width: $break-md) {
     @include flex-direction(row);
-    margin: 0% 13% 0% 10%;
   }
   & .__about {
     padding-left: 0;
@@ -257,7 +255,6 @@ footer {
   @media screen and (min-width: $break-md) {
     padding: 0 20px;
     width: inherit;
-    margin: 5px;
     @include align-items(flex-start);
   }
   & h2 {

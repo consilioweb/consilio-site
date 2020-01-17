@@ -79,6 +79,11 @@
                 </li>
               </ul>
             </div>
+            <div class="banner_section">
+              <a @click="$store.commit('TOOGLE_MODAL')">
+                <img src="@/assets/img/banners/1.gif" />
+              </a>
+            </div>
           </div>
         </aside>
       </div>
@@ -128,7 +133,7 @@ export default {
   computed: {
     readingTime() {
       let words = this.post.content.split(" ").length + 1;
-      return `${Math.ceil(words / 200)} min. de leitura`;
+      return `${Math.ceil(words / 150)} min. de leitura`;
     },
     urlPost() {
       return process.env.BASE_URL + "blog/?slug=" + this.post.slug;
@@ -601,6 +606,7 @@ article {
       }
     }
     &--sidebar {
+      position: relative;
       padding-left: 30px;
       display: none !important;
       @media screen and (min-width: $break-md) {
@@ -614,7 +620,9 @@ article {
         font-weight: 600;
         text-transform: uppercase;
       }
-      & .banner_section {
+      & .banner_section img {
+        padding-top: 20px;
+        width: 100%;
       }
       & .about_post {
         @include flexbox;
@@ -627,7 +635,7 @@ article {
           @include flexbox;
           @include flex-direction(column);
           margin-top: 20px;
-          margin-bottom: 30px;
+          margin-bottom: 15px;
           & img {
             border-radius: 50%;
           }
@@ -646,7 +654,7 @@ article {
       }
       & .posts_related_section {
         ul {
-          margin-top: 30px;
+          margin-top: 20px;
           & li {
             padding-bottom: 10px;
             @include flexbox;

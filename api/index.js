@@ -353,6 +353,99 @@ export default {
         .catch(error => console.log(error));
     });
   },
+
+  getStrategy(slug) {
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      const params = {
+        params: {
+          ...(slug ? { "filter[name]": slug } : {})
+        }
+      };
+      request.get("strategy?_embed", params).then(response => {
+        const data = [...response.data][0];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            content: data.content.rendered,
+            author: data.author,
+            date: data.date,
+            date_gmt: data.date_gmt,
+            excerpt: data.excerpt.rendered,
+            featured_media: data.featured_media,
+            guid: data.guid.rendered,
+            link: data.link,
+            slug: data.slug,
+            title: data.title.rendered,
+            categories: data.categories,
+            tags: data.tags,
+            //post_categories: data.post_categories,
+            //post_tags: data.post_tags,
+            author_name: data._embedded.author[0].name,
+            author_img: data._embedded.author[0].avatar_urls["48"],
+            author_slug: data._embedded.author[0].slug,
+            author_description: data._embedded.author[0].description,
+            status: data.status,
+            img: data.quick_img
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+
+  getStrategies(page, per_page, category, tag, author) {
+    let self = this;
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      const params = {
+        params: {
+          ...(page ? { page: page } : { page: 1 }),
+          ...(per_page ? { per_page: per_page } : { per_page: 5 }),
+          ...(category ? { "filter[category_name]": category } : {}),
+          ...(tag ? { "filter[tag]": tag } : {}),
+          ...(author ? { author: author } : {})
+        }
+      };
+      request
+        .get(`strategy?_embed`, params)
+        .then(response => {
+          const data = [...response.data];
+          if (response.status === 200 && response.data.length > 0) {
+            const filtered = {
+              response_status: response.status,
+              total: response.headers["x-wp-total"],
+              totalPages: response.headers["x-wp-totalpages"],
+              data: data.map(item => ({
+                id: item.id,
+                title: item.title.rendered,
+                content: item.content.rendered,
+                excerpt: item.excerpt.rendered,
+                slug: item.slug,
+                date: item.date,
+                date_gmt: item.date_gmt,
+                author: item.author,
+                author_name: item._embedded.author[0].name,
+                author_img: item._embedded.author[0].avatar_urls["24"],
+                status: item.status,
+                img: item.quick_img,
+                categories: item.categories,
+                tags: item.tags
+                //post_categories: item.post_categories,
+                //post_tags: item.post_tags
+              }))
+            };
+            resolve(filtered);
+          } else {
+            reject(response);
+            console.log("Erro (promisse): " + error);
+          }
+        })
+        .catch(error => console.log(error));
+    });
+  },
+
   getCategory(slug) {
     return new Promise((resolve, reject) => {
       request.defaults.baseURL = this.baseUrl;

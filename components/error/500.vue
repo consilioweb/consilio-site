@@ -1,5 +1,5 @@
 <template>
-  <div class="error-404">
+  <div class="error-500 container__full">
     <div class="text">
       <p>500</p>
       <span>
@@ -78,21 +78,14 @@ export default {
   width: 100%;
   height: 100vh;
   position: relative;
-  margin: 5%;
-  @media screen and (min-width: $break-md) {
-    margin: 0 13% 0 10%;
-  }
 }
 </style>
 <style lang="scss" scoped>
-.error-404 {
+.error-500 {
   display: flex;
   width: 100%;
   position: relative;
-  margin: 5%;
-  @media screen and (min-width: $break-md) {
-    margin: 0 13% 0 10%;
-  }
+  width: 100%;
 }
 
 /*/////////////////// rules */
