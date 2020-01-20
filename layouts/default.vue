@@ -26,7 +26,6 @@ import Scripts from "@/components/scripts.vue";
 import Modal from "@/components/modal-form.vue";
 
 export default {
-  middleware: "mautic",
   components: {
     Header,
     Footer,
@@ -59,6 +58,7 @@ export default {
     }
   },
   mounted() {
+    this.$initMautic();
     if (this.$route.path === "/diagnostico-gratuito") {
       return this.$store.commit("TOOGLE_MODAL");
     }

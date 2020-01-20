@@ -91,7 +91,6 @@ export default {
     };
   },
   mounted() {
-    this.$initMautic();
     this.$store.commit("LOGO_HEADER_PRIMARY");
     this.$store.commit("HOVER_BUTTON_HEADER", false);
   },
