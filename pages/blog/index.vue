@@ -723,7 +723,6 @@ header {
   &__item {
     margin-top: 0.5rem;
     margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
     padding: 0.25rem 0.5rem;
     border: 1px solid #c5d0d1;
     border-radius: 0px;
@@ -783,7 +782,7 @@ header {
   justify-content: center;
   align-items: center;
   background-color: rgba(white, 0.6);
-  z-index: 1;
+  z-index: 99;
   color: $primary;
 
   &-enter-active,
@@ -822,6 +821,8 @@ header {
     font-weight: 400;
     font-size: 1.5rem;
     padding-bottom: 20px;
+    font-family: Quicksand, sans-serif;
+    font-weight: 600;
   }
 
   &__authors {
@@ -844,6 +845,7 @@ header {
     }
 
     & .author-card-name {
+      font-family: Quicksand, sans-serif;
       padding-bottom: 5px;
       font-size: 15px;
     }

@@ -60,6 +60,7 @@ export default {
 }
 .about__text--title h2 {
   text-align: center;
+  margin-bottom: 20px;
   @media screen and (min-width: $break-sm) {
     text-align: center;
   }

@@ -18,7 +18,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus fugiat veritatis aliquid, officiis architecto rem, quam deserunt, iste minima quae debitis ad facere non blanditiis. Nesciunt voluptatem ipsum voluptatum beatae?</p>
       </div>
     </header>
-    <div class="container__full stategies">
+    <div class="stategies container__full">
       <n-link
         :to="'estrategias/'+strategy.slug"
         v-for="(strategy,index) in strategies"
@@ -37,7 +37,7 @@
         </div>
       </n-link>
     </div>
-    <div class="container__full partners">
+    <div class="partners container__full">
       <div class="shape">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 280 280">
           <path fill="#586371">
@@ -106,11 +106,13 @@
         class="footer"
       >Acima você conhecerá as tecnologias e parceiros que estão sendo utilizados, requisitados, que participam ou se envolvem com os projetos de nossos clientes.</p>
     </div>
-    <cta
-      title="Marketing Digital inteligente e feito por quem respira comunicação digital."
-      textButton="DIAGNÓSTICO GRATUITO"
-      urlButton="diagnostico-gratuito"
-    />
+    <section class="container__full">
+      <cta
+        title="Marketing Digital inteligente e feito por quem respira comunicação digital."
+        textButton="DIAGNÓSTICO GRATUITO"
+        urlButton="diagnostico-gratuito"
+      />
+    </section>
   </section>
 </template>
 

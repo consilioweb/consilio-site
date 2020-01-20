@@ -136,7 +136,7 @@ export default {
   }
 }
 .clients-carousel {
-  width: inherit;
+  width: 100%;
   &__controls {
     z-index: 999;
     margin-top: 50px;

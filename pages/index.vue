@@ -15,7 +15,7 @@
         </div>
         <methodology />
         <div class="methodology__button">
-          <button-shadow :text="buttonMethodology" />
+          <button-shadow :text="buttonMethodology" :url="urlMethodology" />
         </div>
       </div>
     </section>
@@ -86,7 +86,8 @@ import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      buttonMethodology: "Saiba Mais"
+      buttonMethodology: "Saiba Mais",
+      urlMethodology: "metodologia"
     };
   },
   mounted() {

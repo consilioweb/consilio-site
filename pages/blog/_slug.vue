@@ -158,7 +158,6 @@ export default {
       });
     this.$store.commit("HOVER_BUTTON_HEADER", false);
     this.$store.commit("LOGO_HEADER_WHITE", true);
-    //this.$forceUpdate();
   },
   head() {
     return {
@@ -703,6 +702,7 @@ header {
     }
 
     & .author-card-name {
+      font-family: Quicksand, sans-serif;
       margin: 8px 0 2px;
       padding: 0;
       font-size: 20px;
