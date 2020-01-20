@@ -7,7 +7,10 @@
       <h2>Estratégias</h2>
       <ul role="list">
         <li role="listitem" v-for="(strategy, index) in strategies" :key="index">
-          <n-link :to="strategy.slug">{{strategy.title}}</n-link>
+          <n-link
+            :to="'estrategias/'+strategy.slug"
+            :aria-label="'Estratégia: '+strategy.title"
+          >{{strategy.title}}</n-link>
         </li>
       </ul>
     </div>
@@ -15,7 +18,7 @@
       <h2>Últimas postagens</h2>
       <ul role="list">
         <li role="listitem" v-for="(post, index) in recent.slice(0, 3)" :key="index">
-          <n-link :to="'/blog/'+post.slug">
+          <n-link :to="'/blog/'+post.slug" :aria-label="'Artigo: '+post.title">
             <article>
               <p v-html="toLimitChars(post.title, 60)"></p>
               <time v-html="longTimestamp(post.date)"></time>
@@ -32,16 +35,18 @@
           rel="noopener"
           target="_blank"
           v-html="info.address"
+          aria-label="Onde estamos"
         ></a>
       </p>
       <h2>Fale conosco</h2>
       <ul role="list">
         <li role="listitem">
-          <a :href="'tel:'+info.phone">{{ info.phone }}</a>
+          <a :href="'tel:'+info.phone" aria-label="Fale conosco">{{ info.phone }}</a>
         </li>
         <li role="listitem">
           <a
             :href="'https://api.whatsapp.com/send?1=pt_BR&phone=+55'+info.whatsapp"
+            aria-label="Fale conosco"
           >{{ info.whatsapp }}</a>
         </li>
         <li role="listitem">

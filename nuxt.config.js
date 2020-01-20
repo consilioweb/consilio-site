@@ -12,11 +12,12 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "HandheldFriendly", content: "true" },
+      { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       {
         name: "viewport",
         content:
-          "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
+          "initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
       },
       {
         hid: "description",
