@@ -18,35 +18,52 @@ body {
 }
 p {
   font-family: Quicksand, sans-serif;
-  margin: 0;
   font-size: 13px;
   font-weight: 500;
   line-height: 24px;
 }
+blockquote {
+  display: block;
+  margin: 1em 40px;
+}
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
   font-family: Montserrat, sans-serif;
+}
+h1 {
+  font-size: 40px;
+  @media screen and (min-width: $break-md) {
+    font-size: 50px;
+  }
 }
 h2 {
   color: $primary;
   font-size: 40px;
   font-weight: 900;
   display: flex;
-  padding-bottom: 20px;
   line-height: 1.1;
-  @media screen and (min-width: $break-sm) {
-    font-size: 40px;
-  }
   @media screen and (min-width: $break-md) {
-    font-size: 45px;
-  }
-  @media screen and (min-width: $break-lg) {
     font-size: 50px;
   }
-  @media screen and (min-width: $break-xl) {
-    font-size: 50px;
-  }
+}
+h3 {
+  font-size: 1.17em;
+}
+h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+h5 {
+  font-size: 0.83em;
+  font-weight: 600;
+}
+h6 {
+  font-size: 0.67em;
+  font-weight: 600;
 }
 a {
   cursor: pointer !important;
@@ -99,6 +116,192 @@ select:focus {
   }
 }
 
+.article {
+  &__content {
+    &--article {
+      color: $primary;
+      width: 100%;
+      & span,
+      b,
+      strong,
+      p,
+      a,
+      li {
+        font-family: Poppins, sans-serif;
+      }
+      & sup {
+        top: -0.5em;
+      }
+      & pre {
+        font-family: monospace, monospace;
+        font-size: 1em;
+        white-space: pre-wrap;
+        padding: 20px;
+      }
+      & ul,
+      ol {
+        list-style-type: disc;
+        padding: 0 0 0 20px;
+        & li {
+          font-size: 15px;
+          line-height: 36px;
+          & span {
+            font-size: 15px;
+          }
+        }
+      }
+      & code,
+      kbd,
+      samp {
+        font-family: monospace, monospace;
+        font-size: 1em;
+      }
+      & table {
+        margin: 1em 0;
+        min-width: 300px;
+        width: 100%;
+
+        & tr {
+          border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
+        }
+
+        & th {
+          display: none;
+        }
+
+        & td {
+          display: block;
+
+          &:first-child {
+            padding-top: 0.5em;
+          }
+          &:last-child {
+            padding-bottom: 0.5em;
+          }
+
+          &:before {
+            content: attr(data-th) ": ";
+            font-weight: bold;
+            width: 6.5em;
+            display: inline-block;
+            @media (min-width: $break-md) {
+              display: none;
+            }
+          }
+        }
+
+        th,
+        td {
+          text-align: left;
+
+          @media (min-width: $break-md) {
+            display: table-cell;
+            padding: 0.25em 0.5em;
+
+            &:first-child {
+              padding-left: 0;
+            }
+
+            &:last-child {
+              padding-right: 0;
+            }
+          }
+        }
+      }
+      & table {
+        background: rgba($secondary, 0.08);
+        overflow: hidden;
+        & tr {
+          border-color: rgba($secondary, 0.5);
+        }
+        & th,
+        td {
+          margin: 0.5em 1em;
+          @media (min-width: $break-md) {
+            padding: 0.7em !important;
+          }
+        }
+      }
+
+      & a {
+        color: #4b5f7d;
+        transition: all 250ms ease-in-out;
+        border-bottom: 1px dotted #becbdc;
+        word-wrap: break-word;
+        font-weight: 600 !important;
+        & span {
+          color: #4b5f7d;
+        }
+        &:visited {
+          color: #4b5f7d;
+        }
+      }
+      & ul ul ul {
+        list-style-type: square;
+      }
+      & ul ul {
+        list-style-type: circle;
+      }
+      ol {
+        list-style-type: decimal;
+      }
+      & ul {
+        list-style-type: disc;
+      }
+      & big {
+        font-size: larger;
+      }
+      & del {
+        text-decoration: line-through;
+      }
+      & p {
+        font-size: 15px;
+        padding: 15px 0px !important;
+      }
+      & em,
+      cite,
+      var {
+        font-style: italic;
+      }
+      & b,
+      strong {
+        font-weight: 600 !important;
+      }
+      & h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: Quicksand, sans-serif;
+        color: $primary;
+        font-weight: 900 !important;
+        margin: 0.85em 0;
+      }
+      & h1 {
+        font-size: 1.8em;
+      }
+      & h2 {
+        font-size: 1.5em;
+      }
+      & h3 {
+        font-size: 1.3em;
+      }
+      & img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        padding: 10px 0;
+      }
+      & .has-text-align-right {
+        text-align: right;
+      }
+    }
+  }
+}
+
 // Animation page transition
 .fade-enter-active,
 .fade-leave-active {
@@ -110,6 +313,10 @@ select:focus {
 }
 
 // Bug correction
+.tns-inner {
+  margin: 0 auto !important;
+  width: 100%;
+}
 .tns-liveregion.tns-visually-hidden {
   opacity: 0;
   display: none;

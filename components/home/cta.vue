@@ -29,7 +29,6 @@ export default {
 .cta {
   position: relative;
   &__container {
-    margin: 5%;
     @include flexbox;
     @include align-items(center);
     @include flex-direction(column);
@@ -38,7 +37,6 @@ export default {
     padding-bottom: 80px; // Correction
     @media screen and (min-width: $break-md) {
       @include flex-direction(row);
-      margin: 10% 13% 10% 10%;
       padding-top: 0px; // Correction
       padding-bottom: 0px; // Correction
     }
@@ -50,7 +48,7 @@ export default {
     @include align-items(center);
     width: 100%;
     @media screen and (min-width: $break-md) {
-      padding: 0 19%;
+      padding: 0 11%;
     }
     & h1 {
       text-align: center;

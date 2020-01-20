@@ -32,18 +32,21 @@
         </n-link>
       </article>
     </transition-group>
+
     <client-only>
-      <infinite-loading
-        spinner="waveDots"
-        :identifier="infiniteId"
-        @infinite="infiniteScroll"
-        ref="infiniteLoading"
-      >
-        <div slot="no-more">Chegamos ao fim! Continue navegando. :)</div>
-        <div
-          slot="no-results"
-        >Ops, não existe resultados com esses filtros. Vamos tentar outra vez? :)</div>
-      </infinite-loading>
+      <div class="container__full">
+        <infinite-loading
+          spinner="waveDots"
+          :identifier="infiniteId"
+          @infinite="infiniteScroll"
+          ref="infiniteLoading"
+        >
+          <div slot="no-more">Chegamos ao fim! Continue navegando. :)</div>
+          <div
+            slot="no-results"
+          >Ops, não existe resultados com esses filtros. Vamos tentar outra vez? :)</div>
+        </infinite-loading>
+      </div>
     </client-only>
   </section>
 </template>
@@ -165,7 +168,7 @@ export default {
     display: flex;
     flex-flow: wrap;
     @media screen and (min-width: $break-md) {
-      margin: 0% 13% 80px 10%;
+      margin: 0% calc(10% + #{$distance_sb}) 5% 10%;
     }
   }
   &__content {
@@ -345,10 +348,9 @@ export default {
 }
 .infinite-loading-container {
   display: flex;
-  width: 100vw;
   justify-content: center;
-  padding: 0 0 100px 0;
   color: $primary;
   font-size: 16px;
+  width: 100%;
 }
 </style>

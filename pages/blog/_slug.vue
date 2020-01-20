@@ -45,11 +45,11 @@
         </nav>
       </div>
     </header>
-    <article>
+    <article class="article">
       <figure :style="'background-image: url('+(post.img ? post.img : thumbnail_default)+')'"></figure>
-      <div class="__content">
-        <div class="__content--article" v-html="post.content"></div>
-        <aside class="__content--sidebar">
+      <div class="article__content">
+        <div class="article__content--article" v-html="post.content"></div>
+        <aside class="article__content--sidebar">
           <div class="sidebar--content sticky">
             <div class="about_post">
               <div class="about_post--content">
@@ -136,7 +136,7 @@ export default {
       return `${Math.ceil(words / 150)} min. de leitura`;
     },
     urlPost() {
-      return process.env.BASE_URL + "blog/?slug=" + this.post.slug;
+      return process.env.BASE_URL + "blog/" + this.post.slug;
     },
     thumbnail_default() {
       return this.$store.state.core.info.thumbnail_default;
@@ -566,7 +566,7 @@ header {
     }
   }
 }
-article {
+.article {
   @include flexbox;
   @include flex-direction(column);
   -webkit-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
@@ -591,7 +591,7 @@ article {
       height: 500px;
     }
   }
-  & .__content {
+  &__content {
     @include flexbox();
     padding: 20px 30px 50px;
     box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
@@ -758,123 +758,6 @@ article {
       background: $secondary;
       color: $white;
       text-decoration: none;
-    }
-  }
-}
-</style>
-<style lang="scss">
-article {
-  & .__content {
-    &--article {
-      .has-text-align-right {
-        text-align: right;
-      }
-      & ul,
-      ol {
-        list-style-type: disc;
-        padding: 0 0 0 20px;
-        & li {
-          color: #2c3e50;
-          font-size: 15px;
-          line-height: 26px;
-          font-family: Poppins, sans-serif;
-          & span {
-            font-size: 15px;
-          }
-          & b,
-          strong {
-            font-weight: 600 !important;
-            color: $primary;
-          }
-        }
-        & li:not(:first-child) {
-          margin-top: 16px;
-        }
-      }
-      & span {
-        color: $primary;
-      }
-      & a {
-        color: #4b5f7d;
-        transition: all 250ms ease-in-out;
-        border-bottom: 1px dotted #becbdc;
-        word-wrap: break-word;
-        font-weight: 600 !important;
-        & span {
-          color: #4b5f7d;
-        }
-        &:visited {
-          color: #4b5f7d;
-        }
-        & span {
-          font-weight: 700 !important;
-        }
-      }
-      & p {
-        font-size: 15px;
-        padding: 15px 0px !important;
-        color: $primary;
-        font-family: Poppins, sans-serif;
-        & em {
-          font-style: italic;
-        }
-        & a {
-          color: #4b5f7d;
-          transition: all 250ms ease-in-out;
-          border-bottom: 1px dotted #becbdc;
-          word-wrap: break-word;
-          font-weight: 600 !important;
-          & span {
-            color: #4b5f7d;
-          }
-          &:visited {
-            color: #4b5f7d;
-          }
-          & span {
-            font-weight: 600 !important;
-          }
-        }
-        & b,
-        span,
-        strong {
-          font-family: Poppins, sans-serif;
-        }
-        & b,
-        strong {
-          font-weight: 600 !important;
-          color: $primary;
-        }
-      }
-      & h1,
-      h2,
-      h3,
-      h4 {
-        font-family: Quicksand, sans-serif;
-        color: $primary;
-      }
-      & h1 {
-        font-size: 1.8em;
-        font-weight: 700;
-      }
-      & h2 {
-        font-size: 1.5em;
-        font-weight: 600 !important;
-      }
-      & h3 {
-        font-size: 1.3em;
-      }
-      & h3,
-      h4 {
-        padding: 10px 0px;
-        color: $primary;
-        font-weight: 600 !important;
-      }
-      & img {
-        width: 100%;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
-      }
     }
   }
 }

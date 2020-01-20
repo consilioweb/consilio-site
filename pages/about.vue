@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="inner__txt">
+    <div class="inner__txt container__full">
       <div class="content__title">
         <p>{{ about.custom_fields["titulo-info"] }}</p>
         <h3>{{ about.custom_fields["sub-titulo-info"] }}</h3>
@@ -37,10 +37,10 @@
         </div>
       </div>
     </div>
-    <div class="inner__video" style="--aspect-ratio: 16/9;">
+    <div class="inner__video container__full" style="--aspect-ratio: 16/9;">
       <div v-html="about.custom_fields['incorporacao-video']"></div>
     </div>
-    <div class="inner__team">
+    <div class="inner__team container__full">
       <div class="inner__team--title">
         <parallax-element :strength="10" :type="'translate'">
           <h2>equipe</h2>
@@ -88,7 +88,9 @@
         </section>
       </div>
     </div>
-    <clients :clients="clients" :length="lengthClients" />
+    <section class="clients">
+      <clients :clients="clients" :length="lengthClients" class="container__full" />
+    </section>
     <newsletter />
   </section>
 </template>
@@ -227,19 +229,9 @@ export default {
   }
   &__txt {
     position: relative;
-    margin: 5%;
-    @media screen and (min-width: $break-md) {
-      margin: 0% 13% 5% 10%;
-    }
   }
   &__video {
-    margin: 5%;
-    padding: 50px 0 50px 0;
     min-height: 500px;
-    @media screen and (min-width: $break-md) {
-      margin: 5% 13% 5% 10%;
-      padding: 0;
-    }
     & iframe {
       width: 100%;
       height: 100%;
@@ -248,10 +240,6 @@ export default {
   }
   &__team {
     position: relative;
-    margin: 5%;
-    @media screen and (min-width: $break-md) {
-      margin: 5% 13% 0% 10%;
-    }
     &--title {
       @include flexbox;
       @include justify-content(center);
@@ -404,12 +392,6 @@ export default {
       text-align: left;
     }
   }
-}
-.newsletter {
-  margin-top: -10% !important;
-}
-.newsletter {
-  margin-top: -10% !important;
 }
 
 // Sombra
@@ -623,6 +605,10 @@ export default {
   -moz-transform: rotate(90deg) translate(0px, 30px);
   -ms-transform: rotate(90deg) translate(0px, 30px);
   -o-transform: rotate(90deg) translate(0px, 30px);
+}
+.clients {
+  width: 100%;
+  display: inline-block;
 }
 </style>
 

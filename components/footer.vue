@@ -6,20 +6,8 @@
     <div class="column __strategy">
       <h2>Estratégias</h2>
       <ul role="list">
-        <li role="listitem">
-          <n-link to>Mídias online</n-link>
-        </li>
-        <li role="listitem">
-          <n-link to>Conteúdos</n-link>
-        </li>
-        <li role="listitem">
-          <n-link to>Campanhas</n-link>
-        </li>
-        <li role="listitem">
-          <n-link to>Websites</n-link>
-        </li>
-        <li role="listitem">
-          <n-link to>Landing page</n-link>
+        <li role="listitem" v-for="(strategy, index) in strategies" :key="index">
+          <n-link :to="strategy.slug">{{strategy.title}}</n-link>
         </li>
       </ul>
     </div>
@@ -85,6 +73,7 @@ export default {
   computed: {
     ...mapState("posts", ["recent"]),
     ...mapState("core", ["info"]),
+    ...mapState("strategies", ["strategies"]),
     ...mapGetters({
       lengthPosts: "posts/lengthPosts"
     })
@@ -115,8 +104,9 @@ footer {
     }
   }
   & .__strategy {
+    white-space: nowrap;
     @media screen and (min-width: $break-md) {
-      flex-grow: 0;
+      flex-grow: 1;
     }
     & a {
       position: relative;
@@ -263,7 +253,7 @@ footer {
     color: $primary;
     font-weight: 600;
     text-transform: uppercase;
-    margin: 20px 0 0px 0px;
+    margin: 20px 0 20px 0px;
     padding-top: 30px;
     @media screen and (min-width: $break-md) {
       padding-top: 0px;

@@ -378,8 +378,6 @@ export default {
             title: data.title.rendered,
             categories: data.categories,
             tags: data.tags,
-            //post_categories: data.post_categories,
-            //post_tags: data.post_tags,
             author_name: data._embedded.author[0].name,
             author_img: data._embedded.author[0].avatar_urls["48"],
             author_slug: data._embedded.author[0].slug,

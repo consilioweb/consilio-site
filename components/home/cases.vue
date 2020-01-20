@@ -73,14 +73,15 @@ export default {
     carouselOptions: {
       lazyload: true,
       lazyloadSelector: ".lazyload",
-      loop: true,
+      loop: false,
       controls: false,
       autoplay: false,
       mouseDrag: true,
       autoplayHoverPause: true,
       center: true,
       nav: false,
-      startIndex: 0,
+      gutter: 30,
+      startIndex: 2,
       autoplayButtonOutput: false,
       arrowKeys: true,
       controlsContainer: "#slider-dots",
@@ -108,10 +109,7 @@ export default {
 .cases__content {
   @include flexbox;
   @include justify-content(center);
-  padding-bottom: 30px;
   position: relative;
-  margin: 0 auto;
-  width: 100%;
   @media screen and (min-width: $break-md) {
     margin: 0 auto;
   }
@@ -119,7 +117,6 @@ export default {
 .card-carousel {
   @include flexbox;
   @include flex-direction(column);
-  position: relative;
   @media screen and (min-width: $break-md) {
     @include flex-direction(row);
   }
@@ -299,7 +296,7 @@ export default {
   left: -10px;
   opacity: 1;
   @media screen and (min-width: $break-md) {
-    left: -20px;
+    left: -10px;
   }
 }
 .next {
@@ -307,7 +304,7 @@ export default {
   margin-left: auto;
   text-indent: 2px;
   @media screen and (min-width: $break-md) {
-    right: -20px;
+    right: -10px;
   }
 }
 .tns-ovh {

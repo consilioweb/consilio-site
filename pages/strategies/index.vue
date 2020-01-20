@@ -19,7 +19,12 @@
       </div>
     </header>
     <div class="container__full stategies">
-      <div v-for="(strategy,index) in strategies" :key="index" class="card__white">
+      <n-link
+        :to="'estrategias/'+strategy.slug"
+        v-for="(strategy,index) in strategies"
+        :key="index"
+        class="card__white"
+      >
         <div class="strategy">
           <div class="strategy--text">
             <img
@@ -30,7 +35,7 @@
             <span v-html="strategy.excerpt"></span>
           </div>
         </div>
-      </div>
+      </n-link>
     </div>
     <div class="container__full partners">
       <div class="shape">

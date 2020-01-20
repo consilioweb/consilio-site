@@ -222,7 +222,7 @@ export default {
         })
         .catch(callback);
     },
-    exclude: ["/contact", "/about", "/_icons"],
+    exclude: ["/contact", "/about", "/strategies", "/_icons"],
     hostname: process.env.BASE_URL,
     path: "/sitemap.xml",
     cacheTime: 1000 * 60 * 60 * 2,

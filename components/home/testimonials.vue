@@ -1,102 +1,93 @@
 <template>
-  <section class="testimonial">
-    <div class="testimonial__container">
-      <div class="testimonial__title">
-        <parallax-element :strength="5" :type="'translate'">
-          <h2>depoimentos</h2>
-        </parallax-element>
-      </div>
-      <div class="testimonial__content">
-        <div class="testimonial-carousel" ref="testimonial-carousel">
-          <client-only>
-            <carousel ref="carousel" v-bind="carouselOptions">
-              <div
-                class="testimonial-carousel__item"
-                ref="testimonial-carousel__item"
-                v-for="(item, index) in testimonials"
-                :key="index"
-              >
-                <div class="testimonial-carousel__item--container">
-                  <figure class="testimonial-carousel__item--img">
-                    <svg
-                      viewBox="0 0 300 300"
-                      width="300"
-                      height="300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xlink="http://www.w3.org/1999/xlink"
-                      version="1.1"
-                    >
-                      <g>
-                        <clipPath :id="'testimonial-mask-'+index">
-                          <path
-                            d="M299.86 153.63C295.23 191.11 272.1 254.05 149.93 288.29C68.49 311.12 22.52 294.77 12.03 239.24C-4.01 178.77 -4.01 121.39 12.03 67.1C36.09 -14.34 102.73 -6.59 178.16 21.75C253.59 50.09 304.49 116.15 299.86 153.63Z"
-                          />
-                        </clipPath>
-                      </g>
-                      <image
-                        :clip-path="'url(#testimonial-mask-'+index+')'"
-                        height="100%"
-                        width="100%"
-                        :xlink:href="item.img"
-                        :alt="'Foto de '+item.title"
-                        class="lazyload"
+  <div class="testimonial__content">
+    <div class="testimonial-carousel" ref="testimonial-carousel">
+      <client-only>
+        <carousel ref="carousel" v-bind="carouselOptions">
+          <div
+            class="testimonial-carousel__item"
+            ref="testimonial-carousel__item"
+            v-for="(item, index) in testimonials"
+            :key="index"
+          >
+            <div class="testimonial-carousel__item--container">
+              <figure class="testimonial-carousel__item--img">
+                <svg
+                  viewBox="0 0 300 300"
+                  width="300"
+                  height="300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xlink="http://www.w3.org/1999/xlink"
+                  version="1.1"
+                >
+                  <g>
+                    <clipPath :id="'testimonial-mask-'+index">
+                      <path
+                        d="M299.86 153.63C295.23 191.11 272.1 254.05 149.93 288.29C68.49 311.12 22.52 294.77 12.03 239.24C-4.01 178.77 -4.01 121.39 12.03 67.1C36.09 -14.34 102.73 -6.59 178.16 21.75C253.59 50.09 304.49 116.15 299.86 153.63Z"
                       />
-                    </svg>
-                    <svg
-                      style="position: absolute;top: -20px;left: 20px;z-index: -1;"
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      preserveAspectRatio="xMidYMid meet"
-                      viewBox="0 0 300 300"
-                      width="300"
-                      height="300"
-                    >
-                      <defs>
-                        <path
-                          d="M299.86 153.63C295.23 191.11 272.1 254.05 149.93 288.29C68.49 311.12 22.52 294.77 12.03 239.24C-4.01 178.77 -4.01 121.39 12.03 67.1C36.09 -14.34 102.73 -6.59 178.16 21.75C253.59 50.09 304.49 116.15 299.86 153.63Z"
-                          :id="'g4SpPpRG0-'+index"
-                        />
-                      </defs>
-                      <use
-                        :xlink:href="'#g4SpPpRG0-'+index"
-                        opacity="1"
-                        fill="#ffffff"
-                        fill-opacity="1"
-                      />
-                    </svg>
-                  </figure>
-                  <div class="testimonial-carousel__item--content">
-                    <div class="testimonial-carousel__item--content--head">
-                      <h3>{{ item.title }}</h3>
-                    </div>
-                    <div class="testimonial-carousel__item--content--content" v-html="item.content"></div>
-                    <div class="testimonial-carousel__item--content--footer">
-                      <b>{{ item.customer_testimonial }}</b>
-                      | {{ item.complement_customer_testimonial }}
-                    </div>
-                  </div>
+                    </clipPath>
+                  </g>
+                  <image
+                    :clip-path="'url(#testimonial-mask-'+index+')'"
+                    height="100%"
+                    width="100%"
+                    :xlink:href="item.img"
+                    :alt="'Foto de '+item.title"
+                    class="lazyload"
+                  />
+                </svg>
+                <svg
+                  style="position: absolute;top: -20px;left: 20px;z-index: -1;"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 300 300"
+                  width="300"
+                  height="300"
+                >
+                  <defs>
+                    <path
+                      d="M299.86 153.63C295.23 191.11 272.1 254.05 149.93 288.29C68.49 311.12 22.52 294.77 12.03 239.24C-4.01 178.77 -4.01 121.39 12.03 67.1C36.09 -14.34 102.73 -6.59 178.16 21.75C253.59 50.09 304.49 116.15 299.86 153.63Z"
+                      :id="'g4SpPpRG0-'+index"
+                    />
+                  </defs>
+                  <use
+                    :xlink:href="'#g4SpPpRG0-'+index"
+                    opacity="1"
+                    fill="#ffffff"
+                    fill-opacity="1"
+                  />
+                </svg>
+              </figure>
+              <div class="testimonial-carousel__item--content">
+                <div class="testimonial-carousel__item--content--head">
+                  <h3>{{ item.title }}</h3>
+                </div>
+                <div class="testimonial-carousel__item--content--content" v-html="item.content"></div>
+                <div class="testimonial-carousel__item--content--footer">
+                  <b>{{ item.customer_testimonial }}</b>
+                  | {{ item.complement_customer_testimonial }}
                 </div>
               </div>
-            </carousel>
-            <ul
-              class="controls testimonial-carousel__controls"
-              id="testimonials-dots"
-              aria-label="Navegação do carousel"
-              tabindex="0"
-            >
-              <li @click="prev" class="prev" data-controls="prev">
-                <svg-icon name="icons/left-arrow" />
-              </li>
-              <li @click="next" class="next" data-controls="next">
-                <svg-icon name="icons/right-arrow" />
-              </li>
-            </ul>
-          </client-only>
-        </div>
-      </div>
+            </div>
+          </div>
+        </carousel>
+        <ul
+          class="controls testimonial-carousel__controls"
+          id="testimonials-dots"
+          aria-label="Navegação do carousel"
+          tabindex="0"
+        >
+          <li @click="prev" class="prev" data-controls="prev">
+            <svg-icon name="icons/left-arrow" />
+          </li>
+          <li @click="next" class="next" data-controls="next">
+            <svg-icon name="icons/right-arrow" />
+          </li>
+        </ul>
+      </client-only>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -144,34 +135,11 @@ export default {
 @import "tiny-slider/src/tiny-slider";
 
 .testimonial {
-  position: relative;
-  &__container {
-    margin: 5%;
-    @include flexbox;
-    @include align-items(center);
-    @include flex-direction(column);
-    @include flex-flow(wrap);
-    padding-top: 30px; // Correction
-    @media screen and (min-width: $break-md) {
-      @include flex-direction(row);
-      margin: 10% 13% 10% 10%;
-      padding-top: 0px; // Correction
-    }
-  }
-  &__title {
-    @include flexbox;
-    @include justify-content(center);
-    width: 100%;
-    padding-bottom: 10px;
-  }
   &__content {
-    @include flexbox;
-    @include justify-content(center);
     padding-bottom: 30px;
     position: relative;
     margin: 1.5%;
     flex: 1;
-    width: 100%;
     overflow: hidden;
     padding: 10px 0 80px 0;
     @media screen and (min-width: $break-md) {
@@ -181,7 +149,6 @@ export default {
   &__footer {
     @include flexbox;
     @include justify-content(center);
-    width: 100%;
     padding-top: 20px;
   }
 }

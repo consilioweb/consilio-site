@@ -2,7 +2,7 @@
   <section class="blog">
     <header :style="'background-image: url('+recent[0].img+')'">
       <div class="header__overlay"></div>
-      <div class="inner">
+      <div class="container__full">
         <div class="__content">
           <div class="__content--title">
             <h1>Blog</h1>
@@ -282,6 +282,7 @@ export default {
     ...mapState("posts", ["authors"])
   },
   async mounted() {
+    this.$forceUpdate();
     await this.allPosts();
     this.allCategories();
     this.allTags();
@@ -380,12 +381,6 @@ header {
     -moz-transition: all 0.4s ease-in-out 0s;
     transition: all 0.4s ease-in-out 0s;
     z-index: 5;
-  }
-  & .inner {
-    margin: 0% 5% 0% 5%;
-    @media screen and (min-width: $break-md) {
-      margin: 0% 13% 0% 10%;
-    }
   }
   & .__content {
     @include flexbox();
@@ -596,7 +591,7 @@ header {
 .section__filters {
   margin: -70px 5% 0% 5%;
   @media screen and (min-width: $break-md) {
-    margin: -70px calc(13% - -10px) 10px calc(10% + 10px);
+    margin: -130px calc(10% + #{$distance_sb} + 10px) 10px calc(10% + 10px);
   }
 }
 .__card {

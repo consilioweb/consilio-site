@@ -20,7 +20,11 @@
         <span class="feed-blog__title--bg">explorar</span>
       </div>
       <div class="feed-blog__content">
-        <article v-for="(post, index) in posts.slice(0, 3)" :key="index" class="feed-blog__content">
+        <article
+          v-for="(post, index) in posts.slice(0, 3)"
+          :key="index"
+          class="feed-blog__content--post"
+        >
           <n-link :to="'/blog/'+post.slug" :aria-label="'Artigo: '+post.title">
             <div class="feed-blog__card">
               <figure v-lazy:background-image="post.img"></figure>
@@ -79,9 +83,7 @@ export default {
 <style lang="scss" scoped>
 .feed-blog {
   position: relative;
-  width: 100%;
   &__container {
-    margin: 5%;
     @include flexbox;
     @include align-items(center);
     @include flex-direction(column);
@@ -89,7 +91,6 @@ export default {
     padding-top: 50px; // Correction
     @media screen and (min-width: $break-md) {
       @include flex-direction(row);
-      margin: 10% 13% 10% 10%;
       padding-top: 0px; // Correction
     }
   }
@@ -97,7 +98,7 @@ export default {
     @include flexbox;
     @include justify-content(center);
     width: 100%;
-    padding-bottom: 10px;
+    padding-bottom: 50px;
 
     &--bg {
       position: absolute;
@@ -121,18 +122,30 @@ export default {
     @include justify-content(center);
     //padding-bottom: 30px;
     position: relative;
-    margin: 1.5%;
     flex: 1;
     @include flex-direction(column);
     @media screen and (min-width: $break-md) {
       @include flex-direction(row);
+    }
+    &--post {
+      @include flexbox;
+      @include justify-content(center);
+      margin: 0 0.5rem 1rem 0.5rem;
+      @media screen and (min-width: $break-lg) {
+        &:first-child {
+          margin-left: 0px;
+        }
+        &:last-child {
+          margin-right: 0px;
+        }
+      }
     }
   }
   &__footer {
     @include flexbox;
     @include justify-content(center);
     width: 100%;
-    padding-top: 20px;
+    padding-top: 50px;
     padding-bottom: 50px;
     @media screen and (min-width: $break-md) {
       padding-bottom: 0px;

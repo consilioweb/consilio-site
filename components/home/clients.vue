@@ -1,50 +1,48 @@
 <template>
-  <section class="clients">
-    <div class="clients__container">
-      <div class="clients__title">
-        <parallax-element :strength="5" :type="'translate'">
-          <h2>
-            nossos
-            <br />clientes
-          </h2>
-        </parallax-element>
-        <span>Já tiveram resultados conosco</span>
-      </div>
-      <div class="clients__content">
-        <div class="clients-carousel" ref="clients-carousel">
-          <client-only>
-            <carousel ref="carousel" v-bind="carouselOptions">
-              <div
-                class="clients-carousel__item"
-                ref="clients-carousel__item"
-                v-for="(client, index) in clients"
-                :key="index"
-              >
-                <div class="clients-carousel__item--container">
-                  <figure class="clients-carousel__item--img">
-                    <img :data-src="client.img" :alt="client.title" class="lazyload" />
-                  </figure>
-                </div>
-              </div>
-            </carousel>
-            <ul
-              class="controls clients-carousel__controls"
-              id="clients-dots"
-              aria-label="Navegação do carousel"
-              tabindex="0"
+  <div>
+    <div class="clients__title">
+      <parallax-element :strength="5" :type="'translate'">
+        <h2>
+          nossos
+          <br />clientes
+        </h2>
+      </parallax-element>
+      <span>Já tiveram resultados conosco</span>
+    </div>
+    <div class="clients__content">
+      <div class="clients-carousel" ref="clients-carousel">
+        <client-only>
+          <carousel ref="carousel" v-bind="carouselOptions">
+            <div
+              class="clients-carousel__item"
+              ref="clients-carousel__item"
+              v-for="(client, index) in clients"
+              :key="index"
             >
-              <li @click="prev" class="prev" data-controls="prev">
-                <svg-icon name="icons/left-arrow" />
-              </li>
-              <li @click="next" class="next" data-controls="next">
-                <svg-icon name="icons/right-arrow" />
-              </li>
-            </ul>
-          </client-only>
-        </div>
+              <div class="clients-carousel__item--container">
+                <figure class="clients-carousel__item--img">
+                  <img :data-src="client.img" :alt="client.title" class="lazyload" />
+                </figure>
+              </div>
+            </div>
+          </carousel>
+          <ul
+            class="controls clients-carousel__controls"
+            id="clients-dots"
+            aria-label="Navegação do carousel"
+            tabindex="0"
+          >
+            <li @click="prev" class="prev" data-controls="prev">
+              <svg-icon name="icons/left-arrow" />
+            </li>
+            <li @click="next" class="next" data-controls="next">
+              <svg-icon name="icons/right-arrow" />
+            </li>
+          </ul>
+        </client-only>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -100,26 +98,11 @@ export default {
 @import "tiny-slider/src/tiny-slider";
 
 .clients {
-  position: relative;
-  &__container {
-    margin: 5%;
-    @include flexbox;
-    @include align-items(center);
-    @include flex-direction(column);
-    @include flex-flow(wrap);
-    padding: 80px 0 50px 0; // Correction
-    @media screen and (min-width: $break-md) {
-      @include flex-direction(row);
-      margin: 10% 13% 10% 10%;
-      padding: 0px 0; // Correction
-    }
-  }
   &__title {
     @include flexbox;
     @include justify-content(center);
     @include flex-direction(column);
     @include align-items(center);
-    width: 100%;
     padding-bottom: 10px;
     & h2 {
       text-align: center;
@@ -139,7 +122,6 @@ export default {
     position: relative;
     margin: 1.5%;
     flex: 1;
-    width: 100%;
     overflow: hidden;
     padding: 40px 0 20px 0;
     @media screen and (min-width: $break-md) {

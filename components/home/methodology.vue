@@ -191,13 +191,13 @@ export default {};
   box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
   background: $white;
   min-width: 90px;
-  margin: 1.5%;
+  margin: 0 0.5rem 1rem 0.5rem;
   flex: 1;
   padding: 30px 30px 30px 50px;
   transition: all 1s ease;
   position: relative;
   counter-increment: item;
-  @media screen and (min-width: $break-lg) {
+  @media screen and (min-width: $break-md) {
     &:first-child {
       margin-left: 0px;
     }
@@ -331,7 +331,7 @@ export default {};
   }
 }
 .waves {
-  width: 120% !important;
+  width: 140% !important;
   bottom: 33%;
   position: absolute;
   z-index: -1;

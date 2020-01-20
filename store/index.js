@@ -55,6 +55,7 @@ export default {
         dispatch("slides/getSlides", context),
         dispatch("cases/getCases", context),
         dispatch("posts/getRecent", context),
+        dispatch("strategies/getStrategies", context),
         dispatch("about/getAbout", context),
         dispatch("testimonials/getTestimonials", context),
         dispatch("clients/getClients", context),

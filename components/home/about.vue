@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <div class="about">
     <div class="about__bg">
       <span>agência</span>
     </div>
@@ -21,7 +21,7 @@
         <button-shadow :text="textButton" :url="'a-consilio'" />
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -46,9 +46,7 @@ export default {
   @include inline-flex;
   @include align-items(center);
   @include flex-direction(column);
-  margin: 10% 5%;
   @media screen and (min-width: $break-md) {
-    margin: 5% 13% 5% 10%;
     @include flex-direction(row);
   }
 }
@@ -80,7 +78,7 @@ export default {
 .about__img {
   min-width: 100%;
   @media screen and (min-width: $break-md) {
-    min-width: 52%;
+    min-width: 54%;
   }
 }
 .about__img img {

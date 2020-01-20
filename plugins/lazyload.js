@@ -6,9 +6,10 @@ import loading from "../assets/svg/loading.svg";
 
 Vue.use(VueLazyload, {
   preLoad: 1,
-  //error: error,
+  src: "https://via.placeholder.com/300/000000/FFFFFF/?text=consilio",
+  error: "https://via.placeholder.com/300/000000/FFFFFF/?text=consilio",
   loading: loading,
   attempt: 3,
   lazyComponent: true,
-  observer: true,
+  observer: true
 });

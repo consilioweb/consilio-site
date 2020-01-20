@@ -1,5 +1,5 @@
 <template>
-  <section class="newsletter">
+  <section class="newsletter container__full">
     <div class="newsletter__container">
       <div class="newsletter__title">
         <parallax-element :strength="5" :type="'translate'">
@@ -190,13 +190,9 @@ form {
     }
   }
   &__container {
-    margin: 5%;
     @include flexbox;
     @include align-items(center);
     @include flex-direction(column);
-    @media screen and (min-width: $break-md) {
-      margin: 10% 13% 10% 10%;
-    }
   }
   &__title {
     @include flexbox;
