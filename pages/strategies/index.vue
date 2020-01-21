@@ -56,49 +56,49 @@
       </div>
       <div class="content">
         <div class="content__box">
-          <img src="~/assets/img/partners/iclips.png" />
+          <img v-lazy="require('~/assets/img/partners/iclips.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/amazonses.png" />
+          <img v-lazy="require('~/assets/img/partners/amazonses.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/googlepartner.png" />
+          <img v-lazy="require('~/assets/img/partners/googlepartner.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/facebookpartner.png" />
+          <img v-lazy="require('~/assets/img/partners/facebookpartner.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/configr.png" />
+          <img v-lazy="require('~/assets/img/partners/configr.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/laravel.png" />
+          <img v-lazy="require('~/assets/img/partners/laravel.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/mautic.png" />
+          <img v-lazy="require('~/assets/img/partners/mautic.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/nodejs.png" />
+          <img v-lazy="require('~/assets/img/partners/nodejs.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/rockcontent.png" />
+          <img v-lazy="require('~/assets/img/partners/rockcontent.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/vuejs.png" />
+          <img v-lazy="require('~/assets/img/partners/vuejs.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/nuxtjs.png" />
+          <img v-lazy="require('~/assets/img/partners/nuxtjs.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/pwa.png" />
+          <img v-lazy="require('~/assets/img/partners/pwa.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/hubspot.png" />
+          <img v-lazy="require('~/assets/img/partners/hubspot.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/wordpress.png" />
+          <img v-lazy="require('~/assets/img/partners/wordpress.png')" />
         </div>
         <div class="content__box">
-          <img src="~/assets/img/partners/gocache.png" />
+          <img v-lazy="require('~/assets/img/partners/gocache.png')" />
         </div>
       </div>
 
