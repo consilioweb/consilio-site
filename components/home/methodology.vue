@@ -257,8 +257,8 @@ export default {};
   transition: all 1s ease;
 }
 .methodology__card--icon svg {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   fill: $secondary;
   transition: all 1s ease;
 }
@@ -269,7 +269,7 @@ export default {};
 .methodology__card--title h3 {
   font-family: Poppins, sans-serif;
   transition: all 1s ease;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: $dark_blue;
 }
@@ -282,7 +282,7 @@ export default {};
   font-family: Poppins, sans-serif;
   font-size: 13px;
   font-weight: 400;
-  line-height: 1.8rem;
+  line-height: 22px;
   transition: all 1s ease;
 }
 .methodology__card--button {
@@ -303,7 +303,7 @@ export default {};
   width: 100vw;
   height: auto;
   top: 0;
-  transform: translate(70%, 50%);
+  transform: translate(60%, 50%);
 }
 .shape svg {
   height: 700px;
@@ -332,7 +332,7 @@ export default {};
 }
 .waves {
   width: 140% !important;
-  bottom: 33%;
+  bottom: 25%;
   position: absolute;
   z-index: -1;
   transform: scale(1.2) translate(-2%, -50%);
