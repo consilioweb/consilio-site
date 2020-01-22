@@ -185,7 +185,88 @@
             <span>O que ela pode te oferecer?</span>
           </h3>
         </div>
-        <div class="fifth__container--content"></div>
+        <div class="fifth__container--content">
+          <div class="collapse">
+            <input type="checkbox" id="block-1" />
+            <label class="card__white" for="block-1">
+              Gerenciar Leads
+              <svg-icon name="icons/down-chevron" />
+            </label>
+            <div class="content">
+              <p>1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="checkbox" id="block-2" />
+            <label class="card__white" for="block-2">
+              Integração como CRM
+              <svg-icon name="icons/down-chevron" />
+            </label>
+            <div class="content">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="checkbox" id="block-3" />
+            <label class="card__white" for="block-3">
+              Campanhas
+              <svg-icon name="icons/down-chevron" />
+            </label>
+            <div class="content">
+              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="checkbox" id="block-4" />
+            <label class="card__white" for="block-4">
+              Lead Scoring
+              <svg-icon name="icons/down-chevron" />
+            </label>
+            <div class="content">
+              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="checkbox" id="block-5" />
+            <label class="card__white" for="block-5">
+              Lead Tracking
+              <svg-icon name="icons/down-chevron" />
+            </label>
+            <div class="content">
+              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="checkbox" id="block-6" />
+            <label class="card__white" for="block-6">
+              Personalizar campos e criar formulários
+              <svg-icon name="icons/down-chevron" />
+            </label>
+            <div class="content">
+              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="checkbox" id="block-7" />
+            <label class="card__white" for="block-7">
+              Jornada do Cliente
+              <svg-icon name="icons/down-chevron" />
+            </label>
+            <div class="content">
+              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="checkbox" id="block-8" />
+            <label class="card__white" for="block-8">
+              Disparo de E-mail Marketing / SMS
+              <svg-icon name="icons/down-chevron" />
+            </label>
+            <div class="content">
+              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <section class="sixth">
@@ -670,6 +751,61 @@ export default {
       }
     }
     &--content {
+      @include flexbox;
+      @include flex-flow(wrap row);
+      .collapse:nth-child(2n) {
+        @media screen and (min-width: $break-md) {
+          margin-right: 0;
+        }
+      }
+      .collapse {
+        margin: 0 1em;
+        flex: 1;
+        @media screen and (min-width: $break-md) {
+          min-width: 40%;
+        }
+        input,
+        .content {
+          opacity: 0;
+          height: 0;
+          overflow: hidden;
+          color: rgba($primary, 0.8);
+          transition: all 1s ease-in-out;
+          & p {
+            padding: 20px;
+          }
+        }
+        label {
+          @include flexbox;
+          @include align-items(center);
+          margin: 2px 0;
+          padding: 20px;
+          color: $primary;
+          font-size: 14px;
+          position: relative;
+          & svg {
+            width: 15px;
+            height: 15px;
+            right: 20px;
+            position: absolute;
+            fill: $secondary;
+            transition: all 0.5s ease-in-out;
+          }
+        }
+        input:checked {
+          & ~ .content {
+            opacity: 1;
+            height: auto;
+            transition: all 0.5s ease-in-out;
+          }
+          & ~ label {
+            box-shadow: 0px 0px 35px -1px rgba(46, 61, 98, 0.3);
+            & svg {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
     }
   }
 }
