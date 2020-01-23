@@ -25,6 +25,7 @@
     "@nuxtjs/svg-sprite": "^0.4.7",
     "moment": "^2.24.0",
     "nuxt": "^2.11.0",
+    "nuxt-ssr-cache": "^1.5.1",
     "nuxt-start": "^2.11.0",
     "vue-infinite-loading": "^2.4.4",
     "vue-kinesis": "^1.0.2",

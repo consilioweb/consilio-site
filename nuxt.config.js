@@ -151,8 +151,34 @@ export default {
         max: 10000,
         maxAge: 1000 * 60 * 60
       }
-    ]
+    ],
+    "nuxt-ssr-cache"
   ],
+
+  /**
+   * Cache configuration
+   */
+  cache: {
+    useHostPrefix: false,
+    pages: [
+      "/metodologia",
+      "/estrategias",
+      "/contato",
+      /^\/blog\/\d+$/,
+      /^\/$/
+    ],
+    key(route, context) {
+      // custom function to return cache key, when used previous
+      // properties (useHostPrefix, pages) are ignored. return
+      // falsy value to bypass the cache
+    },
+    store: {
+      type: "memory",
+      max: 100,
+      ttl: 10 * 60
+    }
+  },
+
   /**
    * Options oneSignal configuration
    */
