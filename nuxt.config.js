@@ -144,6 +144,13 @@ export default {
         version: 2,
         size: "invisible"
       }
+    ],
+    [
+      "@nuxtjs/component-cache",
+      {
+        max: 10000,
+        maxAge: 1000 * 60 * 60
+      }
     ]
   ],
   /**

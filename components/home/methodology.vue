@@ -167,7 +167,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "methodology"
+};
 </script>
 
 <style lang="scss" scoped>

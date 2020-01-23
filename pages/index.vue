@@ -22,7 +22,7 @@
     <!-- Cases -->
     <section class="cases">
       <div class="cases__wrapper">
-        <div class="container__full">
+        <div class="cases__container container__full">
           <div class="cases__title">
             <parallax-element :strength="-15" :type="'translate'">
               <h2>cases</h2>
@@ -170,6 +170,9 @@ export default {
     @include flex-direction(column);
     @include justify-content(center);
     width: 100%;
+  }
+  &__container {
+    position: relative;
   }
   &__title {
     @include flexbox;
