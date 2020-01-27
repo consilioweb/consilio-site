@@ -412,9 +412,13 @@ export default {
   build: {
     //analyze: true,
     filenames: {
-      app: ({ isDev }) => (isDev ? "[name].js" : "[chunkhash].js"),
-      chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[chunkhash].js"),
-      img: ({ isDev }) => (isDev ? "[path][name].[ext]" : "img/[hash:7].[ext]")
+      app: ({ isDev }) => (isDev ? "[name].js" : "[contenthash].js"),
+      chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[contenthash].js"),
+      css: ({ isDev }) => (isDev ? "[name].css" : "[contenthash].css"),
+      font: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "fonts/[contenthash:7].[ext]",
+      img: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "img/[contenthash:7].[ext]"
     },
     dir: "consilio",
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
@@ -434,7 +438,7 @@ export default {
           }
         }
       }
-    },
-    extractCSS: true
+    }
+    //extractCSS: true
   }
 };
