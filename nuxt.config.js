@@ -1,5 +1,5 @@
 import axios from "axios";
-const webpack = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
 require("dotenv").config();
 
 export default {
@@ -428,6 +428,13 @@ export default {
       }
     },
     optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          parallel: true,
+          cache: true
+        })
+      ],
       splitChunks: {
         cacheGroups: {
           styles: {

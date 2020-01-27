@@ -7,8 +7,8 @@
     <transition name="fade">
       <Menu :main-menu="mainMenu" v-if="statsMainMenu" />
     </transition>
+    <div v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
     <parallax-container tag="section">
-      <div v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
       <nuxt />
       <Footer />
     </parallax-container>
