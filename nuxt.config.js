@@ -1,5 +1,5 @@
 import axios from "axios";
-import webpack from "webpack";
+const webpack = require("webpack");
 require("dotenv").config();
 
 export default {
@@ -123,7 +123,11 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/router-extras"],
+  buildModules: ["@nuxtjs/router-extras", "@nuxtjs/moment"],
+  moment: {
+    defaultLocale: "pt-br",
+    locales: ["pt-br"]
+  },
   /*
    ** Nuxt.js modules
    */
@@ -418,7 +422,6 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
-      config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
     },
     optimization: {
       splitChunks: {

@@ -1,5 +1,4 @@
 import Vue from "vue";
-import moment from "moment/src/moment";
 
 Vue.mixin({
   methods: {
@@ -11,8 +10,8 @@ Vue.mixin({
      * @return {String} formatted date
      */
     shortTimestamp(date) {
-      let article = moment(date).locale("pt-br");
-      let today = moment(new Date()).locale("pt-br");
+      let article = this.$moment(date);
+      let today = this.$moment(new Date());
 
       if (today.diff(article) > 518400000) {
         return article.format("D MMM");
@@ -26,7 +25,7 @@ Vue.mixin({
      * @return {String} formatted date
      */
     longTimestamp(date) {
-      return moment(date)
+      return this.$moment(date)
         .locale("pt-br")
         .format("D [de] MMMM [de] YYYY");
     },
