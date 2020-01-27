@@ -353,12 +353,18 @@ export default {
    ** Handle external assets
    */
   workbox: {
-    skipWaiting: false,
+    skipWaiting: true,
     clientsClaim: true,
-    //offline: false,
+    offline: false,
     //dev: true,
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     runtimeCaching: [
+      {
+        urlPattern: "https://cdn.jsdelivr.net/.*",
+        handler: "cacheFirst",
+        method: "GET",
+        strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+      },
       {
         urlPattern: process.env.PROXY_URL + ".*",
         handler: "cacheFirst",
