@@ -1,4 +1,5 @@
 import axios from "axios";
+import webpack from "webpack";
 require("dotenv").config();
 
 export default {
@@ -417,8 +418,8 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
+      config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
     },
-    plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
     optimization: {
       splitChunks: {
         cacheGroups: {
