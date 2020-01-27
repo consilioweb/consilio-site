@@ -285,6 +285,7 @@ export default {
     name: "Agência Consilio",
     short_name: "Consilio",
     lang: "pt-BR",
+    start_url: "/",
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     icons: [
       {
@@ -417,6 +418,7 @@ export default {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
     },
+    plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
     optimization: {
       splitChunks: {
         cacheGroups: {
