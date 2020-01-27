@@ -54,7 +54,6 @@
 <script>
 import { mapState, mapGetters, mapMutations } from "vuex";
 import api from "@/api/index";
-import _ from "lodash";
 
 export default {
   name: "posts",

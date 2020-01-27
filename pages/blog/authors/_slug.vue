@@ -213,6 +213,7 @@ header {
         padding-bottom: 15px;
         font-family: Quicksand, sans-serif;
         font-weight: 600;
+        font-size: 40px;
       }
       & h2 {
         color: $white;

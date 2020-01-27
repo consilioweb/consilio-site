@@ -109,7 +109,6 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import api from "@/api/index";
-import _ from "lodash";
 import posts from "@/components/blog/posts.vue";
 
 export default {
