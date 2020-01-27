@@ -270,16 +270,184 @@
       </div>
     </section>
     <section class="sixth">
-      <div class="sixth__container container__full"></div>
+      <div class="sixth__container container__full">
+        <div class="sixth__container--title">
+          <h2>Como a consilio vai realmente impactar seus resultados</h2>
+        </div>
+        <div class="sixth__container--content">
+          <div class="step-first">
+            <div class="funnel-desc funnel-desc--left">
+              <h4>Atração</h4>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat in incidunt ipsum.</p>
+              <ul>
+                <li data-tooltip="Facebook">
+                  <svg-icon name="icons/facebook" />
+                </li>
+                <li data-tooltip="Instagram">
+                  <svg-icon name="icons/instagram" />
+                </li>
+                <li data-tooltip="Linkedin">
+                  <svg-icon name="icons/linkedin" />
+                </li>
+                <li data-tooltip="Google">
+                  <svg-icon name="icons/adwords" />
+                </li>
+                <li data-tooltip="Blog">
+                  <svg-icon name="icons/rss" />
+                </li>
+              </ul>
+            </div>
+            <svg class="funnel-title" viewBox="0 0 300 140">
+              <defs>
+                <path
+                  id="curve"
+                  d="M40,180c0-60.751,49.248-110,110-110c60.751,0,110,49.249,110,110"
+                />
+              </defs>
+              <text fill="white">
+                <textPath xlink:href="#curve" text-anchor="middle" startOffset="50%">1º Atração</textPath>
+              </text>
+            </svg>
+            <svg-icon class="funnel-bg" name="step-funnel" />
+          </div>
+          <div class="step-second">
+            <div class="funnel-desc funnel-desc--right">
+              <h4>Conversão</h4>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat in incidunt ipsum.</p>
+              <ul>
+                <li data-tooltip="Formulários">
+                  <format-line-style-icon :size="16" />
+                </li>
+                <li data-tooltip="Chatbot">
+                  <forum-icon :size="16" />
+                </li>
+                <li data-tooltip="WhatsApp">
+                  <svg-icon name="icons/whatsapp" />
+                </li>
+                <li data-tooltip="Landing Page">
+                  <monitor-screenshot-icon :size="16" />
+                </li>
+              </ul>
+            </div>
+            <svg class="funnel-title" viewBox="0 0 300 140">
+              <defs>
+                <path
+                  id="curve"
+                  d="M40,180c0-60.751,49.248-110,110-110c60.751,0,110,49.249,110,110"
+                />
+              </defs>
+              <text fill="white">
+                <textPath xlink:href="#curve" text-anchor="middle" startOffset="50%">2º Conversão</textPath>
+              </text>
+            </svg>
+            <svg-icon class="funnel-bg" name="step-funnel" />
+          </div>
+          <div class="step-third">
+            <div class="funnel-desc funnel-desc--left">
+              <h4>Nutrição</h4>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat in incidunt ipsum.</p>
+              <ul>
+                <li data-tooltip="Conteúdos de valor">
+                  <playlist-star-icon :size="16" />
+                </li>
+                <li data-tooltip="Remarketing">
+                  <refresh-icon :size="16" />
+                </li>
+                <li data-tooltip="Focus (Pop-up interno)">
+                  <flag-icon :size="16" />
+                </li>
+                <li data-tooltip="Lead scoring (pontuação)">
+                  <finance-icon :size="16" />
+                </li>
+              </ul>
+            </div>
+            <svg class="funnel-title" viewBox="0 0 300 140">
+              <defs>
+                <path
+                  id="curve"
+                  d="M40,180c0-60.751,49.248-110,110-110c60.751,0,110,49.249,110,110"
+                />
+              </defs>
+              <text fill="white">
+                <textPath xlink:href="#curve" text-anchor="middle" startOffset="50%">3º Nutrição</textPath>
+              </text>
+            </svg>
+            <svg-icon class="funnel-bg" name="step-funnel" />
+          </div>
+          <div class="step-fourth">
+            <div class="funnel-desc funnel-desc--right">
+              <h4>Oportunidades</h4>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat in incidunt ipsum.</p>
+              <ul>
+                <li data-tooltip="CRM">
+                  <account-plus-icon :size="16" />
+                </li>
+                <li data-tooltip="Follow-up">
+                  <handshake-icon :size="16" />
+                </li>
+                <li data-tooltip="Treinamento">
+                  <human-male-male-icon :size="16" />
+                </li>
+              </ul>
+            </div>
+            <svg class="funnel-title" viewBox="0 0 300 140">
+              <defs>
+                <path id="curve" d="M100,200 Q300,78 563,89 Q924,100 1044,199" />
+              </defs>
+              <text fill="white">
+                <textPath
+                  xlink:href="#curve"
+                  text-anchor="middle"
+                  startOffset="50%"
+                >4º Oportunidades</textPath>
+              </text>
+            </svg>
+            <svg-icon class="funnel-bg" name="step-funnel" />
+          </div>
+        </div>
+        <div class="sixth__container--footer">
+          <h3>
+            <span>Métricas</span>
+          </h3>
+          <p>
+            Uma automação de marketing nada mais é que um software que permite de maneira programável,
+            escalável e personalizada criar um ecossistema de relacionamentos com um cliente ou potencial cliente.
+            Compreendendo a jornada de compra do seu cliente é possível promover ações decisivas.
+          </p>
+        </div>
+      </div>
+      <newsletter />
     </section>
   </div>
 </template>
 
 <script>
 import methodology from "@/components/home/methodology.vue";
+import newsletter from "@/components/home/newsletter.vue";
+import ForumIcon from "vue-material-design-icons/Forum.vue";
+import FormatLineStyleIcon from "vue-material-design-icons/FormatLineStyle.vue";
+import MonitorScreenshotIcon from "vue-material-design-icons/MonitorScreenshot.vue";
+import PlaylistStarIcon from "vue-material-design-icons/PlaylistStar.vue";
+import RefreshIcon from "vue-material-design-icons/Refresh.vue";
+import FlagIcon from "vue-material-design-icons/Flag.vue";
+import FinanceIcon from "vue-material-design-icons/Finance.vue";
+import AccountPlusIcon from "vue-material-design-icons/AccountPlus.vue";
+import HandshakeIcon from "vue-material-design-icons/Handshake.vue";
+import HumanMaleMaleIcon from "vue-material-design-icons/HumanMaleMale.vue";
 export default {
   components: {
-    methodology
+    methodology,
+    newsletter,
+    ForumIcon,
+    FormatLineStyleIcon,
+    MonitorScreenshotIcon,
+    PlaylistStarIcon,
+    RefreshIcon,
+    FlagIcon,
+    FinanceIcon,
+    AccountPlusIcon,
+    HandshakeIcon,
+    HumanMaleMaleIcon
   },
   data: () => ({
     carouselOptions: {
@@ -712,6 +880,7 @@ export default {
   }
 }
 .fifth {
+  @include inline-flex;
   position: relative;
   &__container {
     &--title {
@@ -760,9 +929,9 @@ export default {
       }
       .collapse {
         margin: 0 1em;
-        flex: 1;
         @media screen and (min-width: $break-md) {
           min-width: 40%;
+          flex: 1;
         }
         input,
         .content {
@@ -783,6 +952,7 @@ export default {
           color: $primary;
           font-size: 14px;
           position: relative;
+          cursor: pointer;
           & svg {
             width: 15px;
             height: 15px;
@@ -810,6 +980,171 @@ export default {
   }
 }
 .sixth {
+  @include inline-flex;
+  @include flex-direction(column);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  &__container {
+    &--title {
+      text-align: center;
+      padding: 0 0 30px 0;
+      @media screen and (min-width: $break-md) {
+        padding: 0 60px 50px 60px;
+      }
+    }
+    &--content {
+      @include flexbox;
+      @include flex-direction(column);
+      @include align-items(center);
+      margin: 50px 0 0 0;
+      & .funnel-desc {
+        position: absolute;
+        width: 315px;
+        margin-top: -50px;
+        &--left {
+          right: 350px;
+        }
+        &--right {
+          left: 350px;
+          text-align: right;
+          & ul {
+            @include flex-direction(row-reverse);
+            & li {
+              margin: 0 0.25em 0 0.25em;
+            }
+            & li:first-child {
+              margin: 0 0 0 0.25em !important;
+            }
+            & li:last-child {
+              margin: 0 0.25em 0 0 !important;
+            }
+          }
+          &::after {
+            margin-left: -25%;
+          }
+        }
+        &::after {
+          @include flexbox;
+          content: "";
+          border-bottom: 1px $secondary dotted;
+          margin-top: 15px;
+          width: 125%;
+        }
+        & h4 {
+          color: $primary;
+          font-family: "Quicksand", sans-serif;
+          font-weight: 600;
+          font-size: 18px;
+          padding-bottom: 10px;
+        }
+        & p {
+          color: rgba($primary, 0.8);
+          padding-bottom: 10px;
+        }
+        & ul {
+          @include flexbox;
+          & li {
+            @include align-items(center);
+            @include justify-content(center);
+            background: #fff;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            padding: 10px;
+            margin: 0 0.25em 0 0.25em;
+            box-shadow: 0px 5px 15px -1px rgba(46, 61, 98, 0.1);
+            cursor: pointer;
+            &:hover {
+              box-shadow: 0px 5px 25px -1px rgba(46, 61, 98, 0.3);
+            }
+          }
+          & li:first-child {
+            margin: 0 0.25em 0 0;
+          }
+          & li:last-child {
+            margin: 0 0 0 0.25em;
+          }
+        }
+        & svg,
+        & .material-design-icon svg,
+        & .material-design-icon {
+          fill: rgba($primary, 0.6);
+          color: rgba($primary, 0.6);
+          width: 16px;
+          height: 16px;
+        }
+      }
+      & .funnel-title {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        transform: scale(2.1);
+        font-size: 7px;
+        font-weight: 600;
+      }
+      & .step-first {
+        position: relative;
+        & .funnel-bg {
+          fill: #94b0bf;
+          transform: scale(1.2);
+        }
+      }
+      & .step-second {
+        position: relative;
+        margin-top: -50px;
+        & .funnel-bg {
+          fill: #b1cbdc;
+          transform: scale(1.1);
+        }
+      }
+      & .step-third {
+        position: relative;
+        margin-top: -60px;
+        & .funnel-bg {
+          fill: #7892a2;
+          transform: scale(1);
+        }
+      }
+      & .step-fourth {
+        position: relative;
+        margin-top: -65px;
+        & .funnel-bg {
+          fill: #4f6a7a;
+          transform: scale(0.9);
+        }
+      }
+    }
+    &--footer {
+      text-align: center;
+      padding: 0;
+      @media screen and (min-width: $break-md) {
+        padding: 30px 150px;
+      }
+      & h3 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        color: $primary;
+        display: initial;
+        font-size: 28px;
+        display: initial;
+        span {
+          width: calc(100%);
+          background-image: linear-gradient(
+            transparent calc(100% - 10px),
+            rgba(88, 99, 113, 0.08) 10px
+          );
+          background-repeat: no-repeat;
+          background-size: 100% 90%;
+          transition: background-size 1s;
+        }
+      }
+      & p {
+        margin-top: 25px;
+        color: rgba($primary, 0.8);
+      }
+    }
+  }
 }
 
 /**

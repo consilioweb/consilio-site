@@ -238,6 +238,18 @@ export default {
     }
   },
   computed: {
+    fecthURL() {
+      var query = window.location.pathname.slice(1);
+      var partes = query.split("/");
+      var data = {};
+      partes.forEach(function(parte) {
+        var chaveValor = parte.split("/");
+        var chave = chaveValor[0];
+        var valor = false;
+        data[chave] = valor;
+      });
+      return data;
+    },
     activeMenu() {
       return Object.keys(this.menus).reduce(
         ($$, set, i) => (this.menus[set] ? i : $$),
@@ -917,7 +929,10 @@ header {
     path: '/blog',
     alias: [
       '/explorar',
-      '/posts'
+      '/posts',
+      '/blog/categoria',
+      '/blog/categoria/:name',
+      '/blog/tags'
     ]
   }
 </router>

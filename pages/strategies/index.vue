@@ -15,7 +15,7 @@
           </div>
         </div>
         <h1>bem definidas!</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus fugiat veritatis aliquid, officiis architecto rem, quam deserunt, iste minima quae debitis ad facere non blanditiis. Nesciunt voluptatem ipsum voluptatum beatae?</p>
+        <p>Você pode encontrar pessoas falando “estratégias” de diversas formas, mas é com a gente que você vai encontrar o significado!</p>
       </div>
     </header>
     <div class="stategies container__full">

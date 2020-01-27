@@ -1,5 +1,3 @@
-import "vue-material-design-icons/styles.css";
-
 document.documentElement.addEventListener(
   "touchstart",
   function(event) {
