@@ -404,11 +404,6 @@ export default {
             maxEntries: 30
           }
         }
-      },
-      {
-        urlPattern: "/*",
-        handler: "networkFirst",
-        method: "GET"
       }
     ]
   },
