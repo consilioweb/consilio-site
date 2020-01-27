@@ -445,7 +445,7 @@ export default {
           }
         }
       }
-    }
-    //extractCSS: true
+    },
+    extractCSS: true
   }
 };
