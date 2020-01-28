@@ -424,7 +424,7 @@ export default {
   [style*="--aspect-ratio"]::before {
     content: "";
     display: block;
-    padding-bottom: calc(100% / (var(--aspect-ratio)));
+    padding-bottom: calc(100% /* */ / /* */ (var(--aspect-ratio)));
   }
   [style*="--aspect-ratio"] > :first-child {
     position: absolute;
