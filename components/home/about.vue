@@ -4,8 +4,17 @@
       <span>agência</span>
     </div>
     <div class="about__img">
+      <div class="about__img--overlay">
+        <span>
+          <svg-icon name="logo"></svg-icon>
+        </span>
+      </div>
       <client-only>
-        <img v-lazy="about.img" class="lazyload" alt="Por que a Consilio?" />
+        <div class="background-video-container">
+          <video autoplay loop preload="auto">
+            <source :src="require('~/assets/video/timelapse.mp4')" type="video/mp4" />
+          </video>
+        </div>
       </client-only>
     </div>
     <div class="about__text">
@@ -78,8 +87,46 @@ export default {
 }
 .about__img {
   min-width: 100%;
+  position: relative;
   @media screen and (min-width: $break-md) {
     min-width: 54%;
+    width: 500px;
+  }
+  &--overlay {
+    //background: rgba($secondary, 0.8);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: absolute;
+    span {
+      @include flexbox;
+      @include align-items(flex-end);
+      @include justify-content(center);
+      height: 100%;
+      position: relative;
+      @keyframes animate {
+        0% {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+
+        80% {
+          transform: translateX(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translate(0);
+        }
+      }
+      & .icon {
+        width: 120px;
+        color: $white;
+        animation: animate 3s ease;
+        transform-origin: center top;
+        -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3));
+        filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3));
+      }
+    }
   }
 }
 .about__img img {
@@ -114,6 +161,20 @@ export default {
   margin: 30px 0 0 0;
   @media screen and (min-width: $break-md) {
     @include justify-content(left);
+  }
+}
+
+.background-video-container {
+  @include flexbox;
+  @include justify-content(center);
+  overflow: hidden;
+  position: relative;
+  & video {
+    height: 450px;
+    width: 800px;
+    filter: gray;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
   }
 }
 </style>
