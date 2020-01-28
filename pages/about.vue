@@ -99,6 +99,7 @@
   </section>
 </template>
 <script>
+const postcss = require("postcss");
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 import clients from "@/components/home/clients.vue";
 import newsletter from "@/components/home/newsletter.vue";
@@ -416,7 +417,6 @@ export default {
 }
 
 // Responsive iframe
-
 @supports (--custom: property) {
   [style*="--aspect-ratio"] {
     position: relative;
@@ -424,7 +424,7 @@ export default {
   [style*="--aspect-ratio"]::before {
     content: "";
     display: block;
-    padding-bottom: calc(100% /* */ / /* */ (var(--aspect-ratio)));
+    padding-bottom: calc(100% / (16 / 9));
   }
   [style*="--aspect-ratio"] > :first-child {
     position: absolute;
