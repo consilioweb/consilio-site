@@ -11,7 +11,7 @@
       </div>
       <client-only>
         <div class="background-video-container">
-          <video autoplay loop preload="auto">
+          <video muted autoplay loop preload="auto">
             <source :src="require('~/assets/video/timelapse.mp4')" type="video/mp4" />
           </video>
         </div>
@@ -120,11 +120,12 @@ export default {
       }
       & .icon {
         width: 120px;
+        height: 80px;
         color: $white;
         animation: animate 3s ease;
         transform-origin: center top;
-        -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3));
-        filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3));
+        -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3));
+        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3));
       }
     }
   }

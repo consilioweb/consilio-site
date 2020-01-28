@@ -38,7 +38,11 @@
       </div>
     </div>
     <div class="inner__video container__full" style="--aspect-ratio: 16/9;">
-      <div v-html="about.custom_fields['incorporacao-video']"></div>
+      <div>
+        <video muted autoplay loop preload="auto">
+          <source :src="require('~/assets/video/timelapse.mp4')" type="video/mp4" />
+        </video>
+      </div>
     </div>
     <div class="inner__team container__full">
       <div class="inner__team--title">
@@ -231,7 +235,6 @@ export default {
     position: relative;
   }
   &__video {
-    min-height: 500px;
     & iframe {
       width: 100%;
       height: 100%;
@@ -407,6 +410,9 @@ export default {
 }
 [style*="--aspect-ratio"] > img {
   height: auto;
+}
+[style*="--aspect-ratio"] video {
+  width: 100%;
 }
 
 // Responsive iframe
