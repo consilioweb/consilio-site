@@ -172,7 +172,7 @@ export default {
   position: relative;
   & video {
     height: 450px;
-    width: 800px;
+    width: 160%;
     filter: gray;
     -webkit-filter: grayscale(1);
     filter: grayscale(1);
