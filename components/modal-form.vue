@@ -404,11 +404,8 @@ export default {
 .mauticform-row {
   width: 100%;
   @include flexbox;
-  @include flex-direction(column);
-  @media screen and (min-width: $break-md) {
-    padding-bottom: 7px;
-    @include flex-direction(row);
-  }
+  @include flex-direction(row);
+  margin: 0 0 7px 0;
   white-space: nowrap;
   & label,
   select {
@@ -556,10 +553,10 @@ export default {
     text-align: center;
     box-shadow: 0 0.5rem 1.75rem -0.25rem rgba($primary, 0.4);
     overflow: auto;
-    height: 100%;
+    margin: 10px;
     @media screen and (min-width: $break-md) {
       overflow: initial;
-      height: initial;
+      margin: initial;
     }
   }
 
@@ -621,10 +618,7 @@ export default {
     font-weight: 400;
     opacity: 0.5;
     transition: opacity 150ms ease-out;
-    top: 2.25rem;
-    @media screen and (min-width: $break-md) {
-      top: 0.25rem;
-    }
+    top: 0.25rem;
     &:hover {
       opacity: 1;
     }
