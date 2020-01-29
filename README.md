@@ -1,6 +1,6 @@
-# Front site Consilio
+# @consilio/site
 
-> Front desenvolvido nas tecnologia NuxtJs consumindo API disponibilizada no WordPress.
+> Front of the PWA Consilio website developed in NuxtJS + VueJS
 
 ## Build Setup
 
@@ -8,7 +8,7 @@
 # install dependencies
 $ npm run install
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost:8000 (.env conf)
 $ npm run dev
 
 # build for production and launch server
