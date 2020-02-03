@@ -7,8 +7,8 @@
     <transition name="fade">
       <Menu :main-menu="mainMenu" v-if="statsMainMenu" />
     </transition>
-    <div v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
     <parallax-container tag="section">
+      <div v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
       <nuxt />
       <Footer />
     </parallax-container>
@@ -85,10 +85,6 @@ export default {
 };
 </script>
 
-<style scoped>
-section {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-}
+<style lang="scss">
+@import "~/assets/scss/main.scss";
 </style>

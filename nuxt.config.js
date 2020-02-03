@@ -1,5 +1,6 @@
 import axios from "axios";
 const TerserPlugin = require("terser-webpack-plugin");
+const ampify = require("./plugins/ampify");
 require("dotenv").config();
 
 export default {
@@ -86,7 +87,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["@/assets/scss/main.scss"],
+  css: [],
   /*
    ** Plugins to load before mounting the App
    */
@@ -140,6 +141,7 @@ export default {
     "@nuxtjs/svg-sprite",
     "@nuxtjs/style-resources",
     "@nuxtjs/onesignal",
+    "@nuxtjs/amp",
     [
       "@nuxtjs/recaptcha",
       {
@@ -159,6 +161,24 @@ export default {
     ],
     "nuxt-ssr-cache"
   ],
+
+  /**
+   * Hooks configuration
+   */
+  hooks: {
+    // This hook is called before saving the html to flat file
+    "generate:page": page => {
+      if (/^\/amp\//gi.test(page.route)) {
+        page.html = ampify(page.html);
+      }
+    },
+    // This hook is called before serving the html to the browser
+    "render:route": (url, page, { req, res }) => {
+      if (/^\/amp\//gi.test(url)) {
+        page.html = ampify(page.html);
+      }
+    }
+  },
 
   /**
    * Cache configuration
@@ -275,7 +295,7 @@ export default {
    */
   pwa: {
     meta: {
-      viewport: "width=device-width, initial-scale=1, user-scalable=no",
+      viewport: "width=device-width, initial-scale=1",
       mobileAppIOS: true,
       name: process.env.NODE_ENV.title,
       description: process.env.NODE_ENV.description,
@@ -290,7 +310,7 @@ export default {
     name: "Agência Consilio",
     short_name: "Consilio",
     lang: "pt-BR",
-    start_url: "/",
+    start_url: "/?utm_source=homescreen",
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     icons: [
       {
@@ -356,6 +376,7 @@ export default {
     skipWaiting: true,
     clientsClaim: true,
     offline: false,
+    exclude: [/\.vtt$/, /\.webm$/, /\.mp4$/],
     //dev: true,
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     runtimeCaching: [
