@@ -1,7 +1,5 @@
-@import "_reset.scss";
-@import "_flexbox.scss";
-@import "_fonts.scss";
-@import "_variables.scss";
+@import "~/assets/scss/_reset.scss";
+@import "~/assets/scss/_fonts.scss";
 
 /**
  * Base
@@ -393,6 +391,7 @@ select:focus {
 img[lazy="loading"] {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 30px !important;
   height: 30px !important;
 }

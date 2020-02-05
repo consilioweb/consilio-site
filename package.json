@@ -14,6 +14,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/amp": "^0.2.2",
     "@nuxtjs/axios": "^5.9.2",
     "@nuxtjs/component-cache": "^1.1.5",
     "@nuxtjs/dotenv": "^1.4.1",
