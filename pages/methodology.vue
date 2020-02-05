@@ -43,27 +43,27 @@
         <div class="second__container--content">
           <div class="media_social card__white">
             <svg-icon name="icons/loupe" />
-            <p>Pesquisa e análise da presença da marca nos meios digitais</p>
+            <p>Analisando a presença da sua marca nos meios digitais</p>
           </div>
           <div class="media_social card__white">
             <svg-icon name="icons/social-media" />
-            <p>Criação/adequação de contas próprias nas redes sociais</p>
+            <p>Criando conteúdos e peças gráficas para postagem</p>
           </div>
           <div class="media_social card__white">
             <svg-icon name="icons/vector" />
-            <p>Criação de peças gráficas para postagens</p>
+            <p>Monitorando os resultados</p>
           </div>
           <div class="media_social card__white">
             <svg-icon name="icons/professions-and-jobs" />
-            <p>Conteúdos com técnica atuais de copywrite</p>
+            <p>Adequando a conta da empresa para um aspecto profissional dentro das redes</p>
           </div>
           <div class="media_social card__white">
             <svg-icon name="icons/metrics" />
-            <p>Monitoramento social e assuntos inerentes</p>
+            <p>Aplicando técnicas de copywrite</p>
           </div>
           <div class="media_social card__white">
             <svg-icon name="icons/photo" />
-            <p>Atualização de materiais fotográficos</p>
+            <p>Utilizando imagens reais e de alta qualidade</p>
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@
                   </div>
                   <div class="strategy__text">
                     <h4>Criação website responsivo</h4>
-                    <p>Responsividade é aquele site que a tela se adapta automaticamente tantos nos computadores como também nos dispositivos mobiles.</p>
+                    <p>Responsividade é aquele site em que a tela se adapta automaticamente tanto nos computadores como nos dispositivos mobiles.</p>
                   </div>
                 </div>
                 <div class="strategy card__white">
@@ -141,8 +141,8 @@
                     <svg-icon name="icons/vector" />
                   </div>
                   <div class="strategy__text">
-                    <h4>Criação website responsivo</h4>
-                    <p>Responsividade é aquele site que a tela se adapta automaticamente tantos nos computadores como também nos dispositivos mobiles.</p>
+                    <h4>Otimização SEO</h4>
+                    <p>SEO são as boas práticas que garantem um melhor rankeamento do site nos mecanismos de busca.</p>
                   </div>
                 </div>
                 <div class="strategy card__white">
@@ -150,8 +150,26 @@
                     <svg-icon name="icons/vector" />
                   </div>
                   <div class="strategy__text">
-                    <h4>Criação website responsivo</h4>
-                    <p>Responsividade é aquele site que a tela se adapta automaticamente tantos nos computadores como também nos dispositivos mobiles.</p>
+                    <h4>Google Analitycs & Search Console</h4>
+                    <p>São ferramentas poderosas para analisar e entender todo o caminho do usuário dentro do site.</p>
+                  </div>
+                </div>
+                <div class="strategy card__white">
+                  <div class="strategy__icon">
+                    <svg-icon name="icons/vector" />
+                  </div>
+                  <div class="strategy__text">
+                    <h4>Tagueamentos de conversões</h4>
+                    <p>Os tagueamentos de conversões são instalados em páginas específicas para apontar se a conversão de leads é oriunda do tráfego do site.</p>
+                  </div>
+                </div>
+                <div class="strategy card__white">
+                  <div class="strategy__icon">
+                    <svg-icon name="icons/vector" />
+                  </div>
+                  <div class="strategy__text">
+                    <h4>Adequações de conteúdos</h4>
+                    <p>Produzir conteúdos ricos, originais e coniventes com a área de atuação da empresa enriquece o website e gera mais tráfego.</p>
                   </div>
                 </div>
               </carousel>
@@ -193,7 +211,7 @@
               <svg-icon name="icons/down-chevron" />
             </label>
             <div class="content">
-              <p>1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+              <p>Através da automação você registra todos os leads e as informações sobre eles. O que te dará controle sobre em qual etapa do funil eles estão e qual ação adotar com cada um.</p>
             </div>
           </div>
           <div class="collapse">
@@ -203,7 +221,7 @@
               <svg-icon name="icons/down-chevron" />
             </label>
             <div class="content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+              <p>Toda a logística presente no CRM pode ser incluída na Automação. Desde os registros do lead, informações, até a integração com a equipe.</p>
             </div>
           </div>
           <div class="collapse">
@@ -213,7 +231,7 @@
               <svg-icon name="icons/down-chevron" />
             </label>
             <div class="content">
-              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+              <p>As campanhas contam landing pages interativas, com formulários personalizados e os dados dos leads registrados de forma organizada. Ou seja, toda a logística melhora.</p>
             </div>
           </div>
           <div class="collapse">
@@ -223,7 +241,7 @@
               <svg-icon name="icons/down-chevron" />
             </label>
             <div class="content">
-              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+              <p>É um sistema de pontos que vai aumentando ou diminuindo de acordo com a interação do Lead. Ou seja, quanto maior a interação, mais pontos ele vai ganhando. Eles servem para determinar quem está pronto para compra ou não.</p>
             </div>
           </div>
           <div class="collapse">
@@ -233,7 +251,7 @@
               <svg-icon name="icons/down-chevron" />
             </label>
             <div class="content">
-              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+              <p>Com ele você poderá monitorar as ações do lead do início ao fim da compra. Quais as páginas ele navegou, por quanto tempo, o que eles mais viram e etc. Isso te permite entender quais interesses cada um tem e em qual nível ele está.</p>
             </div>
           </div>
           <div class="collapse">
@@ -243,7 +261,7 @@
               <svg-icon name="icons/down-chevron" />
             </label>
             <div class="content">
-              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+              <p>Os formulários são essenciais para colher as informações dos usuários e convertê-los em leads. Isso é ainda mais eficaz com a possibilidade personalizar os campos porque você consegue definir quais são os dados essenciais para diferentes momentos da jornada do seu consumidor.</p>
             </div>
           </div>
           <div class="collapse">
@@ -253,7 +271,7 @@
               <svg-icon name="icons/down-chevron" />
             </label>
             <div class="content">
-              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+              <p>A Jornada do Cliente é todo o mapeamento das ações dele. Você irá saber quem clicou no seu e-mail, por qual página ele navegou e onde ele se cadastrou. Ou seja, ter a visão completa sobre o caminho que aquele Lead está percorrendo e, com isso, classificá-los de acordo com as etapas do funil.</p>
             </div>
           </div>
           <div class="collapse">
@@ -263,7 +281,7 @@
               <svg-icon name="icons/down-chevron" />
             </label>
             <div class="content">
-              <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod repudiandae, cupiditate rerum tenetur ullam placeat, aspernatur sapiente animi ad doloremque! Iure eius laudantium dolores voluptatum facilis blanditiis voluptates, aspernatur numquam.</p>
+              <p>É a melhor forma de nutrir o Lead com conteúdos relevante para ele, fazendo com que ele interaja e não esqueça da sua empresa. Além do contato direto, você pode personalizar a mensagem de acordo com os interesses do lead.</p>
             </div>
           </div>
         </div>
@@ -278,7 +296,7 @@
           <div class="step-first">
             <div class="funnel-desc funnel-desc--left">
               <h4>Atração</h4>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat in incidunt ipsum.</p>
+              <p>Utilização das técnicas de Inbound Marketing através de conteúdos de engajamento considerados relevantes para os usuários.</p>
               <ul>
                 <li data-tooltip="Facebook">
                   <svg-icon name="icons/facebook" />
@@ -313,7 +331,7 @@
           <div class="step-second">
             <div class="funnel-desc funnel-desc--right">
               <h4>Conversão</h4>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat in incidunt ipsum.</p>
+              <p>Uso das ferramentas de captura e calls to action para colher as informações dos usuários e torná-los leads da empresa.</p>
               <ul>
                 <li data-tooltip="Formulários">
                   <format-line-style-icon :size="16" />
@@ -345,7 +363,7 @@
           <div class="step-third">
             <div class="funnel-desc funnel-desc--left">
               <h4>Nutrição</h4>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat in incidunt ipsum.</p>
+              <p>Impactar os leads com conteúdos segmentados e relevantes de acordo com a etapa de funil que cada um está, fazendo com que eles percorram toda a jornada.</p>
               <ul>
                 <li data-tooltip="Conteúdos de valor">
                   <playlist-star-icon :size="16" />
@@ -377,7 +395,7 @@
           <div class="step-fourth">
             <div class="funnel-desc funnel-desc--right">
               <h4>Oportunidades</h4>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat in incidunt ipsum.</p>
+              <p>Revisar, explicar e mensurar cada etapa. Além de adotar ações para que o cliente se fidelize a empresa.</p>
               <ul>
                 <li data-tooltip="CRM">
                   <account-plus-icon :size="16" />
