@@ -302,25 +302,6 @@
                     </div>
                   </div>
                 </div>
-
-                <input
-                  type="hidden"
-                  name="mauticform[formId]"
-                  id="mauticform_diagnosticogratuito_id"
-                  value="7"
-                />
-                <input
-                  type="hidden"
-                  name="mauticform[return]"
-                  id="mauticform_diagnosticogratuito_return"
-                  value
-                />
-                <input
-                  type="hidden"
-                  name="mauticform[formName]"
-                  id="mauticform_diagnosticogratuito_name"
-                  value="diagnosticogratuito"
-                />
               </form>
             </div>
           </div>
