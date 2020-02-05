@@ -91,7 +91,6 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    "~/plugins/axios",
     {
       src: "@/plugins/parallax.js"
     },
@@ -411,11 +410,14 @@ export default {
    ** Build configuration
    */
   build: {
-    //analyze: true,
+    analyze: true,
     filenames: {
-      app: ({ isDev }) => (isDev ? "[name].js" : "[contenthash].js"),
-      chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[contenthash].js"),
-      css: ({ isDev }) => (isDev ? "[name].css" : "[contenthash].css"),
+      app: ({ isDev }) =>
+        isDev ? "[name].[chunkhash].js" : "[contenthash].js",
+      chunk: ({ isDev }) =>
+        isDev ? "[name].[chunkhash].js" : "[id].[contenthash].js",
+      css: ({ isDev }) =>
+        isDev ? "[name].[chunkhash].css" : "[contenthash].css",
       font: ({ isDev }) =>
         isDev ? "[path][name].[ext]" : "fonts/[contenthash:7].[ext]",
       img: ({ isDev }) =>
@@ -437,6 +439,8 @@ export default {
         })
       ],
       splitChunks: {
+        minSize: 30000, //Byte, split point. Default: 30720
+        maxSize: 50000, //Byte, maxsize of per file. Default: 51200
         cacheGroups: {
           styles: {
             name: "styles",
