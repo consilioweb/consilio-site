@@ -431,7 +431,7 @@ export default {
    ** Build configuration
    */
   build: {
-    analyze: true,
+    //analyze: true,
     filenames: {
       app: ({ isDev }) =>
         isDev ? "[name].[chunkhash].js" : "[contenthash].js",
