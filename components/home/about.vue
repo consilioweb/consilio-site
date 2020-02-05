@@ -11,9 +11,12 @@
       </div>
       <client-only>
         <div class="background-video-container">
-          <video muted autoplay loop preload="auto">
-            <source :src="require('~/assets/video/timelapse.mp4')" type="video/mp4" />
-          </video>
+          <iframe
+            src="https://player.vimeo.com/video/389239456?autoplay=1&loop=1&title=0&byline=0&controls=0&background=1&muted=0"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+          ></iframe>
         </div>
       </client-only>
     </div>
@@ -93,7 +96,6 @@ export default {
     width: 500px;
   }
   &--overlay {
-    //background: rgba($secondary, 0.8);
     width: 100%;
     height: 100%;
     z-index: 10;
@@ -109,7 +111,6 @@ export default {
           opacity: 0;
           transform: translateX(-100px);
         }
-
         80% {
           transform: translateX(10px);
         }
@@ -166,16 +167,13 @@ export default {
 }
 
 .background-video-container {
-  @include flexbox;
-  @include justify-content(center);
   overflow: hidden;
-  position: relative;
-  & video {
-    height: 450px;
-    width: 160%;
-    filter: gray;
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1);
-  }
+}
+iframe {
+  height: 450px;
+  width: 160%;
+  filter: gray;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
 }
 </style>

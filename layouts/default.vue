@@ -86,9 +86,4 @@ export default {
 </script>
 
 <style scoped>
-section {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-}
 </style>

@@ -39,9 +39,12 @@
     </div>
     <div class="inner__video container__full" style="--aspect-ratio: 16/9;">
       <div>
-        <video muted autoplay loop preload="auto">
-          <source :src="require('~/assets/video/timelapse.mp4')" type="video/mp4" />
-        </video>
+        <iframe
+          src="https://player.vimeo.com/video/389239456?autoplay=1&loop=1&title=0&byline=0&controls=0&background=1&muted=0"
+          frameborder="0"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
     <div class="inner__team container__full">
