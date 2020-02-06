@@ -61,7 +61,9 @@
               </figure>
               <div class="testimonial-carousel__item--content">
                 <div class="testimonial-carousel__item--content--head">
-                  <h3>{{ item.title }}</h3>
+                  <h3>
+                    <span>{{ item.title }}</span>
+                  </h3>
                 </div>
                 <div class="testimonial-carousel__item--content--content" v-html="item.content"></div>
                 <div class="testimonial-carousel__item--content--footer">
@@ -212,17 +214,16 @@ export default {
         font-weight: 600;
         color: $tertiary;
         & h3 {
-          //Underline
-          width: calc(100%);
-          background-image: linear-gradient(
-            transparent calc(100% - 10px),
-            rgba(88, 99, 113, 0.08) 10px
-          );
-          background-repeat: no-repeat;
-          background-size: 50% 100%;
-          transition: background-size 1s;
-          &:hover {
+          & span {
+            //Underline
+            width: calc(100%);
+            background-image: linear-gradient(
+              transparent calc(100% - 10px),
+              rgba(88, 99, 113, 0.08) 10px
+            );
+            background-repeat: no-repeat;
             background-size: 100% 100%;
+            transition: background-size 1s;
           }
         }
       }

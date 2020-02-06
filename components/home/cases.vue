@@ -5,28 +5,14 @@
         <ul
           class="controls controls__carousel"
           id="slider-dots"
-          aria-label="Navegação do carssousel"
+          aria-label="Navegação do carousel"
           tabindex="0"
         >
           <li @click="prev" class="prev" data-controls="prev" tabindex="-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 48.52 48.52"
-            >
-              <circle class="svgplay__circle" cx="24.26" cy="24.26" r="22.5" />
-              <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
-            </svg>
+            <svg-icon name="icons/down-chevron" />
           </li>
           <li @click="next" class="next" data-controls="next" tabindex="-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 48.52 48.52"
-            >
-              <circle class="svgplay__circle" cx="24.26" cy="24.26" r="22.5" />
-              <polyline class="svgplay__line" points="21.51 16.76 29.01 24.26 21.51 31.76" />
-            </svg>
+            <svg-icon name="icons/down-chevron" />
           </li>
         </ul>
         <carousel ref="carousel" v-bind="carouselOptions">
@@ -269,13 +255,16 @@ export default {
   box-shadow: 1px 13px 41px -4px rgba(46, 61, 98, 0.15);
   outline: none;
   & svg {
-    width: 30px;
-    height: 30px;
+    width: 15px;
+    height: 15px;
+    padding: 10px;
     display: flex;
     cursor: pointer;
+    color: $secondary;
     @media screen and (min-width: $break-md) {
-      width: 40px;
-      height: 40px;
+      width: 15px;
+      height: 15px;
+      padding: 10px;
     }
   }
   &:hover {

@@ -262,11 +262,9 @@ export default {
       font-family: "Montserrat";
       font-weight: 900;
       z-index: -2;
-      top: 10px;
       text-align: center;
       @media screen and (min-width: $break-md) {
-        font-size: 180px;
-        top: -5%;
+        font-size: 130px;
       }
     }
     &--content {

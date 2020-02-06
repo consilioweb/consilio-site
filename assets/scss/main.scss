@@ -327,9 +327,8 @@ select:focus {
   top: 150%;
   left: 50%;
   margin-bottom: 5px;
-  margin-left: -50px;
-  padding: 7px;
-  min-width: 160px;
+  margin-left: -50%;
+  padding: 7px 10px;
   max-width: 350px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -340,8 +339,9 @@ select:focus {
   color: $primary;
   content: attr(data-tooltip);
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 /* Triangle hack to make tooltip look like a speech bubble */

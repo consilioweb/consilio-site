@@ -144,7 +144,7 @@ export default {
   color: $primary;
   opacity: 0.04;
   content: "consilio";
-  font-size: 180px;
+  font-size: 130px;
   font-family: "Montserrat";
   font-weight: 900;
   z-index: -2;
