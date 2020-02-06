@@ -9,16 +9,9 @@
           <svg-icon name="logo"></svg-icon>
         </span>
       </div>
-      <client-only>
-        <div class="background-video-container">
-          <iframe
-            src="https://player.vimeo.com/video/389239456?autoplay=1&loop=1&title=0&byline=0&controls=0&background=1&muted=0"
-            frameborder="0"
-            allow="autoplay; fullscreen"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </client-only>
+      <div class="background-video-container">
+        <img v-lazy="'@/assets/img/temp-about.png'" alt="Conheça a Consilio" />
+      </div>
     </div>
     <div class="about__text">
       <div class="about__text--title">
