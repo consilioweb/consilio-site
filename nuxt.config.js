@@ -158,7 +158,8 @@ export default {
         maxAge: 1000 * 60 * 60
       }
     ],
-    "nuxt-ssr-cache"
+    "nuxt-ssr-cache",
+    "nuxt-purgecss"
   ],
 
   /**
@@ -225,6 +226,10 @@ export default {
         if (path.includes("sw.js")) {
           res.setHeader("Cache-Control", "public, max-age=0");
         }
+      },
+      bundleRenderer: {
+        shouldPrefetch: (file, type) =>
+          ["script", "style", "font"].includes(type) && !file.includes("admin")
       }
     }
   },
@@ -462,6 +467,7 @@ export default {
       splitChunks: {
         minSize: 30000, //Byte, split point. Default: 30720
         maxSize: 50000, //Byte, maxsize of per file. Default: 51200
+        name: true,
         cacheGroups: {
           styles: {
             name: "styles",
