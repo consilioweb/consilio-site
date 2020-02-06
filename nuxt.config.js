@@ -448,6 +448,9 @@ export default {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
     },
+    performance: {
+      hints: false
+    },
     optimization: {
       minimize: true,
       minimizer: [

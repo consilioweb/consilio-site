@@ -90,7 +90,7 @@ export default {
     about: () => import("@/components/home/about.vue"),
     methodology: () => import("@/components/home/methodology.vue"),
     cases: () => import("@/components/home/cases.vue"),
-    recentPosts: () => import("@/components/blog/recentPosts.vue"),
+    RecentPosts: () => import("@/components/blog/recent-posts.vue"),
     testimonials: () => import("@/components/home/testimonials.vue"),
     clients: () => import("@/components/home/clients.vue"),
     cta: () => import("@/components/home/cta.vue"),

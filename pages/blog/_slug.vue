@@ -226,8 +226,6 @@ export default {
   }
 };
 </script>
-
-
 <style lang="scss" scoped>
 .onesignal-customlink-container {
   padding: 10px 20px 30px 20px;
@@ -265,7 +263,6 @@ svg {
     float: none;
     width: 100%;
     padding-bottom: 0;
-    // resets the block to flow with the rest of the document at small screen widths
   }
 }
 header {
@@ -281,15 +278,6 @@ header {
   background-size: cover;
 
   & .header__overlay {
-    /*
-    background-image: radial-gradient(
-      circle farthest-corner at -19.9% 50.2%,
-      rgba(255, 199, 67, 0.8) 0%,
-      rgba(255, 199, 67, 0.8) 24.5%,
-      rgba(19, 30, 37, 0.8) 24.5%,
-      rgba(19, 30, 37, 0.8) 66%
-    );
-    */
     background: rgba(19, 30, 37, 0.8);
     position: absolute;
     height: 100%;
@@ -509,15 +497,12 @@ header {
         height: 32px;
         outline: none;
         border: none;
-        // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         background: white;
         color: $primary;
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        //padding: 0 80px 0 20px;
         border-radius: 30px;
         box-shadow: 0 0 25px 0 rgba(255, 255, 255, 0.3),
           0 20px 25px 0 rgba(0, 0, 0, 0.2);
-        // box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.5);
         transition: all 1s;
         opacity: 0;
         z-index: 5;

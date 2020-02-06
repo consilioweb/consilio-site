@@ -70,31 +70,29 @@ export default {
   },
   methods: {
     infiniteScroll($state) {
-      setTimeout(() => {
-        api
-          .getPosts(
-            this.page,
-            5,
-            this.category,
-            this.tag,
-            this.author ? this.author.id : ""
-          )
-          .then(({ data }) => {
-            if (this.page <= this.totalPages) {
-              this.page += 1;
-              this.list.push(...data);
-              $state.loaded();
-              if (data.length <= 4) {
-                return $state.complete() && true;
-              }
-            } else {
-              $state.complete();
+      api
+        .getPosts(
+          this.page,
+          5,
+          this.category,
+          this.tag,
+          this.author ? this.author.id : ""
+        )
+        .then(({ data }) => {
+          if (this.page <= this.totalPages) {
+            this.page += 1;
+            this.list.push(...data);
+            $state.loaded();
+            if (data.length <= 4) {
+              return $state.complete() && true;
             }
-          })
-          .catch(function(error) {
+          } else {
             $state.complete();
-          });
-      }, 300);
+          }
+        })
+        .catch(function(error) {
+          $state.complete();
+        });
 
       /*
       setTimeout(() => {

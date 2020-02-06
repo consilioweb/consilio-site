@@ -127,7 +127,7 @@ export default {
   },
 
   async asyncData({ store, params }) {
-    store.dispatch("categories/getCategories", {
+    await store.dispatch("categories/getCategories", {
       page: 1,
       per_page: 5
     });
@@ -170,7 +170,6 @@ export default {
         }
       });
     },
-
     allCategories() {
       api.getCategories().then(categories => {
         let totalPages = categories.totalPages;
@@ -190,7 +189,6 @@ export default {
         }
       });
     },
-
     allTags() {
       api.getTags().then(tags => {
         let totalPages = tags.totalPages;
@@ -219,17 +217,14 @@ export default {
         }, 100);
       }
     },
-
     clearFilter(filter, except, active) {
       Object.keys(this.filters[filter]).forEach(option => {
         this.filters[filter][option] = except === option && !active;
       });
     },
-
     clearAllFilters() {
       Object.keys(this.filters).forEach(this.clearFilter);
     },
-
     setMenu(menu, active) {
       Object.keys(this.menus).forEach(tab => {
         this.menus[tab] = !active && tab === menu;
@@ -255,10 +250,8 @@ export default {
         -1
       );
     },
-
     list() {
       let { categorias, tags } = this.activeFilters;
-
       api
         .getPosts(1, 5, categorias[0], tags[0])
         .then(posts => {
@@ -267,23 +260,10 @@ export default {
         .catch(error => {
           console.log(error.message);
         });
-
       return !tags.length || !categorias.length;
-
-      /*
-      return this.todosposts.filter(({ post_categories, post_tags }) => {
-        if (tags.length && !~post_tags.indexOf(tags[0])) return false;
-        return (
-          !categories.length ||
-          categories.every(cat => ~post_categories.indexOf(cat))
-        );
-      });
-      */
     },
-
     activeFilters() {
       let { categorias, tags } = this.filters;
-
       return {
         categorias: Object.keys(categorias).filter(c => categorias[c]),
         tags: Object.keys(tags).filter(t => tags[t])
@@ -293,13 +273,15 @@ export default {
     ...mapState("posts", ["authors"])
   },
   async mounted() {
-    this.$forceUpdate();
-    await this.allPosts();
-    this.allCategories();
-    this.allTags();
-    this.$store.dispatch("posts/getAuthors");
-    this.$store.commit("HOVER_BUTTON_HEADER", true);
-    this.$store.commit("LOGO_HEADER_WHITE", true);
+    await Promise.all([
+      this.$forceUpdate(),
+      this.allPosts(),
+      this.allCategories(),
+      this.allTags(),
+      this.$store.dispatch("posts/getAuthors"),
+      this.$store.commit("HOVER_BUTTON_HEADER", true),
+      this.$store.commit("LOGO_HEADER_WHITE", true)
+    ]);
   },
   head() {
     return {
@@ -370,15 +352,6 @@ header {
   background-size: cover;
 
   & .header__overlay {
-    /*
-    background-image: radial-gradient(
-      circle farthest-corner at -19.9% 50.2%,
-      rgba(255, 199, 67, 0.8) 0%,
-      rgba(255, 199, 67, 0.8) 24.5%,
-      rgba(19, 30, 37, 0.8) 24.5%,
-      rgba(19, 30, 37, 0.8) 66%
-    );
-    */
     background: rgba(19, 30, 37, 0.8);
     position: absolute;
     height: 100%;
@@ -499,7 +472,6 @@ header {
         transition: all 1s;
         z-index: 4;
         box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.6);
-        // box-shadow: 0 0 25px 0 crimson;
         &:hover {
           cursor: pointer;
         }
@@ -539,15 +511,12 @@ header {
         height: 32px;
         outline: none;
         border: none;
-        // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         background: white;
         color: $primary;
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        //padding: 0 80px 0 20px;
         border-radius: 30px;
         box-shadow: 0 0 25px 0 rgba(255, 255, 255, 0.3),
           0 20px 25px 0 rgba(0, 0, 0, 0.2);
-        // box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.5);
         transition: all 1s;
         opacity: 0;
         z-index: 5;
