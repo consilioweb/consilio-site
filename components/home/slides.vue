@@ -5,7 +5,6 @@
         <div class="slides__text-rotate">
           <span>consilio</span>
         </div>
-
         <transition-group
           name="slide"
           mode="out__in"
@@ -15,6 +14,8 @@
           leave-active-class="animated slide__out__active"
         >
           <div
+            @mouseover="isPaused = true"
+            @mouseleave="isPaused = false"
             class="slide__content"
             v-for="(slide, index) in slides"
             v-if="index === current"
@@ -118,6 +119,7 @@ export default {
       duration: 5000,
       progress: 0,
       secondLast: 0,
+      isPaused: false,
       playslides: []
     };
   },
@@ -157,16 +159,20 @@ export default {
       this.start();
     },
     process() {
-      this.current++;
-      if (this.current >= this.length) {
-        this.current = 0;
+      if (!this.isPaused) {
+        this.current++;
+        if (this.current >= this.length) {
+          this.current = 0;
+        }
+        this.playslides[this.current % 2] = this.slides[this.current];
+        this.restart();
       }
-      this.playslides[this.current % 2] = this.slides[this.current];
-      this.restart();
     },
     going() {
-      let time = new Date().getTime();
-      this.percent = Math.floor((136 * (time - this.timer)) / this.duration);
+      if (!this.isPaused) {
+        let time = new Date().getTime();
+        this.percent = Math.floor((136 * (time - this.timer)) / this.duration);
+      }
     }
   }
 };
