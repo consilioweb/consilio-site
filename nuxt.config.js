@@ -56,6 +56,22 @@ export default {
       { name: "theme-color", content: "#fff" }
     ],
     link: [
+      /**
+       * DNS Prefetch
+       */
+      { rel: "dns-prefetch", href: "//www.googletagmanager.com" },
+      { rel: "dns-prefetch", href: "//ajax.googleapis.com" },
+      { rel: "dns-prefetch", href: "//fonts.googleapis.com" },
+      { rel: "dns-prefetch", href: "//fonts.gstatic.com" },
+      { rel: "dns-prefetch", href: "//connect.facebook.net" },
+      { rel: "dns-prefetch", href: "//player.vimeo.com" },
+      { rel: "dns-prefetch", href: "//0.gravatar.com" },
+      { rel: "dns-prefetch", href: "//2.gravatar.com" },
+      { rel: "dns-prefetch", href: "//1.gravatar.com" },
+      { rel: "dns-prefetch", href: "//cdn.onesignal.com" },
+      /**
+       * Favicons & icons
+       */
       { rel: "icon", type: "image/x-icon", href: "/favicon/favicon.ico" },
       {
         rel: "apple-touch-icon",
