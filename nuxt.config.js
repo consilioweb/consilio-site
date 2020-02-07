@@ -19,7 +19,7 @@ export default {
       {
         name: "viewport",
         content:
-          "initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
+          "initial-scale=1, maximum-scale=5, minimum-scale=1, width=device-width, height=device-height"
       },
       {
         hid: "description",
@@ -63,7 +63,11 @@ export default {
       { rel: "dns-prefetch", href: "//ajax.googleapis.com" },
       { rel: "dns-prefetch", href: "//fonts.googleapis.com" },
       { rel: "dns-prefetch", href: "//fonts.gstatic.com" },
+      { rel: "dns-prefetch", href: "//www.facebook.com" },
       { rel: "dns-prefetch", href: "//connect.facebook.net" },
+      { rel: "dns-prefetch", href: "//static.ak.facebook.com" },
+      { rel: "dns-prefetch", href: "//static.ak.fbcdn.net" },
+      { rel: "dns-prefetch", href: "//s-static.ak.facebook.com" },
       { rel: "dns-prefetch", href: "//player.vimeo.com" },
       { rel: "dns-prefetch", href: "//0.gravatar.com" },
       { rel: "dns-prefetch", href: "//2.gravatar.com" },
