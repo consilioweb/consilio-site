@@ -392,18 +392,13 @@ export default {
   workbox: {
     skipWaiting: true,
     clientsClaim: true,
-    offline: true,
-    //dev: true,
+    offline: false,
+    dev: true,
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     runtimeCaching: [
       {
-        urlPattern: /\/$/,
-        handler: "NetworkFirst",
-        method: "GET",
-        strategyOptions: {
-          cacheName: "my-cache-index",
-          cacheableResponse: { statuses: [0, 200] }
-        }
+        urlPattern: "/",
+        handler: "NetworkFirst"
       },
       {
         urlPattern: "https://cdn.jsdelivr.net/.*",
