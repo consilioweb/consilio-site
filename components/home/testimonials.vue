@@ -134,6 +134,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "tiny-slider/src/tiny-slider";
 .testimonial {
   &__content {
     padding-bottom: 30px;

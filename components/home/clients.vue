@@ -95,6 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "tiny-slider/src/tiny-slider";
 .clients {
   &__title {
     @include flexbox;
