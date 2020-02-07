@@ -114,10 +114,6 @@ export default {
     },
     {
       src: "@/plugins/lazyload.js"
-    },
-    {
-      src: "@/plugins/mautic.js",
-      ssr: false
     }
   ],
   /*
@@ -139,7 +135,6 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/svg-sprite",
     "@nuxtjs/style-resources",
-    "@nuxtjs/onesignal",
     "@nuxtjs/amp",
     [
       "@nuxtjs/recaptcha",
@@ -158,6 +153,7 @@ export default {
         maxAge: 1000 * 60 * 60
       }
     ],
+    ["@nuxtjs/google-tag-manager", { id: "GTM-TBX95TK" }],
     "nuxt-ssr-cache",
     "nuxt-purgecss"
   ],
@@ -179,7 +175,6 @@ export default {
       }
     }
   },
-
   /**
    * Cache configuration
    */
@@ -204,18 +199,6 @@ export default {
     }
   },
 
-  /**
-   * Options oneSignal configuration
-   */
-  oneSignal: {
-    init: {
-      appId: process.env.ONE_SIGNAL,
-      allowLocalhostAsSecureOrigin: true,
-      welcomeNotification: {
-        disable: false
-      }
-    }
-  },
   /*
    ** Render configuration
    */
@@ -228,19 +211,13 @@ export default {
         }
       },
       bundleRenderer: {
-        shouldPrefetch: (file, type) =>
-          ["script", "style", "font"].includes(type) && !file.includes("admin")
+        shouldPreload: (file, type) => {
+          return ["script", "style", "font"].includes(type);
+        }
       }
     }
   },
-  /*
-   ** Router configuration
-   */
-  /*
-  router: {
-    middleware: ["mautic"]
-  },
-  */
+
   /**
    * Style Resources configuration
    */

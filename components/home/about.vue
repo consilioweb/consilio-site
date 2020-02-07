@@ -4,13 +4,9 @@
       <span>agência</span>
     </div>
     <div class="about__img">
-      <div class="about__img--overlay">
-        <span>
-          <svg-icon name="logo"></svg-icon>
-        </span>
-      </div>
+      <div class="about__img--overlay"></div>
       <div class="background-video-container">
-        <img v-lazy="'@/assets/img/temp-about.png'" alt="Conheça a Consilio" />
+        <img v-lazy="require('@/assets/img/temp-about.png')" alt="Conheça a Consilio" />
       </div>
     </div>
     <div class="about__text">
@@ -127,9 +123,9 @@ export default {
 .about__img img {
   width: 100%;
   height: auto;
-  -webkit-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
-  -moz-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
-  box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+  // -webkit-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+  // -moz-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+  // box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
 }
 .about__bg {
   position: absolute;

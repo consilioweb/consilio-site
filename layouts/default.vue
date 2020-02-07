@@ -58,22 +58,9 @@ export default {
     }
   },
   mounted() {
-    this.$initMautic();
     if (this.$route.path === "/diagnostico-gratuito") {
       return this.$store.commit("TOOGLE_MODAL");
     }
-    if ("serviceWorker" in navigator && !navigator.serviceWorker.controller) {
-      navigator.serviceWorker.register("/OneSignalSDKWorker.js");
-    }
-    this.$OneSignal.push(() => {
-      this.$OneSignal.isPushNotificationsEnabled(isEnabled => {
-        if (isEnabled) {
-          console.log("Push notifications are enabled!");
-        } else {
-          console.log("Push notifications are not enabled yet.");
-        }
-      });
-    });
   },
   watch: {
     "$route.path": function() {
