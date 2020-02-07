@@ -84,14 +84,13 @@ dist
 .idea
 
 # Service worker
-sw.*
+static/sw.*
 
 # Mac OSX
 .DS_Store
 
 # Vim swap files
 *.swp
-sw.*
 
 # One Signal
 OneSignalSDK*

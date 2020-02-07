@@ -134,6 +134,10 @@ export default {
     },
     {
       src: "@/plugins/lazyload.js"
+    },
+    {
+      src: "@/plugins/sw.js",
+      ssr: false
     }
   ],
   /*
