@@ -1,39 +1,39 @@
 <template>
   <main>
-    <scripts />
-    <modal v-if="modal" />
-    <header :colorLogo="colorLogo" :buttonHover="buttonHover" />
+    <Scripts />
+    <Modal v-if="modal" />
+    <Header :colorLogo="colorLogo" :buttonHover="buttonHover" />
     <side-bar />
     <transition name="fade">
-      <menu :main-menu="mainMenu" v-if="statsMainMenu" />
+      <Menu :main-menu="mainMenu" v-if="statsMainMenu" />
     </transition>
     <div class="mode-off" v-if="$nuxt.isOffline">Você está navegando no modo offline.</div>
     <parallax-container tag="section">
       <nuxt />
-      <footer />
+      <Footer />
     </parallax-container>
   </main>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import header from "@/components/header.vue";
-import footer from "@/components/footer.vue";
+import Header from "@/components/header.vue";
+import Footer from "@/components/footer.vue";
 import SideBar from "@/components/side-bar.vue";
-import menu from "@/components/menu.vue";
+import Menu from "@/components/menu.vue";
 import BottomPlug from "@/components/bottom-plug.vue";
-import scripts from "@/components/scripts.vue";
-import modal from "@/components/modal-form.vue";
+import Scripts from "@/components/scripts.vue";
+import Modal from "@/components/modal-form.vue";
 
 export default {
   components: {
-    header,
-    footer,
-    menu,
+    Header,
+    Footer,
+    Menu,
     SideBar,
     BottomPlug,
-    scripts,
-    modal
+    Scripts,
+    Modal
   },
   computed: {
     ...mapState("menus", ["mainMenu"]),
