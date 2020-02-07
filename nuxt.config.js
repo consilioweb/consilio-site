@@ -170,9 +170,9 @@ export default {
       "node_modules/vue-tiny-slider/**/*.js",
       "node_modules/vue-tiny-slider/**/*.css"
     ],
-    whitelist: ["body", "html", "nuxt-progress", "carousel"],
-    whitelistPatterns: [/carousel$/, /cases$/, /tns-*/],
-    whitelistPatternsChildren: [/carousel$/, /cases$/]
+    whitelist: ["body", "html", "nuxt-progress", "carousel", /tns-*/],
+    whitelistPatterns: [/carousel$/, /cases$/, /clients$/, /tns-*/],
+    whitelistPatternsChildren: [/carousel$/, /cases$/, /clients$/, /tns-*/]
   },
 
   /**
