@@ -412,15 +412,16 @@ export default {
    */
   build: {
     //analyze: true,
-    // filenames: {
-    //   app: ({ isDev }) => (isDev ? "[name].js" : "[contenthash].js"),
-    //   chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[contenthash].js"),
-    //   css: ({ isDev }) => (isDev ? "[name].css" : "[contenthash].css"),
-    //   font: ({ isDev }) =>
-    //     isDev ? "[path][name].[ext]" : "fonts/[contenthash:7].[ext]",
-    //   img: ({ isDev }) =>
-    //     isDev ? "[path][name].[ext]" : "img/[contenthash:7].[ext]"
-    // },
+    filenames: {
+      app: ({ isDev }) => (isDev ? "[name].js" : "[contenthash].js"),
+      chunk: ({ isDev }) => (isDev ? "[name].js" : "[id].[contenthash].js"),
+      css: ({ isDev }) => (isDev ? "[name].css" : "[contenthash].css"),
+      font: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "fonts/[contenthash:7].[ext]",
+      img: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "img/[contenthash:7].[ext]"
+    },
+    exclude: [/\.vtt$/, /\.webm$/, /\.mp4$/],
     dir: "consilio",
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     extend(config, ctx) {
