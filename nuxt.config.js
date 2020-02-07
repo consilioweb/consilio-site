@@ -159,6 +159,28 @@ export default {
   ],
 
   /**
+   * PurgeCSS configuration
+   */
+  purgeCSS: {
+    extractors: () => [
+      {
+        extractor: content => (content || "").match(/[A-z0-9-:\\/]+/g),
+        extensions: ["html", "vue", "js"]
+      }
+    ],
+    paths: [
+      "components/**/*.vue",
+      "layouts/**/*.vue",
+      "pages/**/*.vue",
+      "plugins/**/*.js",
+      "node_modules/vue-tiny-slider/**/*.js",
+      "node_modules/vue-tiny-slider/**/*.css"
+    ],
+    whitelist: ["body", "html", "nuxt-progress"],
+    whitelistPatterns: [/tns-*/]
+  },
+
+  /**
    * Hooks configuration
    */
   hooks: {
