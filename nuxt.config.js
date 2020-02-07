@@ -392,7 +392,7 @@ export default {
   workbox: {
     skipWaiting: true,
     clientsClaim: true,
-    offline: false,
+    offline: true,
     //dev: true,
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     runtimeCaching: [
