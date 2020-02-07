@@ -58,6 +58,11 @@ export default {
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon/favicon.ico" },
       {
+        rel: "stylesheet",
+        href:
+          "https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/tiny-slider.css"
+      },
+      {
         rel: "apple-touch-icon",
         sizes: "180x180",
         href: "/favicon/apple-touch-icon.png"
