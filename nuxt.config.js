@@ -313,8 +313,7 @@ export default {
     theme_color: "#ffffff",
     background_color: "#ffffff",
     display: "standalone",
-    viewport:
-      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0"
   },
   /*
    ** Server configuration
@@ -356,7 +355,7 @@ export default {
   workbox: {
     skipWaiting: true,
     clientsClaim: true,
-    offline: false,
+    offline: true,
     exclude: [/\.vtt$/, /\.webm$/, /\.mp4$/],
     //dev: true,
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
