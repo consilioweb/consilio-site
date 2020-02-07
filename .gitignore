@@ -91,6 +91,3 @@ static/sw.*
 
 # Vim swap files
 *.swp
-
-# One Signal
-OneSignalSDK*
