@@ -81,6 +81,8 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+@import "./assets/scss/_variables.scss";
+
 .error-500 {
   display: flex;
   width: 100%;

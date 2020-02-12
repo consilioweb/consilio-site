@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./assets/scss/_flexbox.scss";
+@import "./assets/scss/_variables.scss";
+
 .about {
   position: relative;
   @include inline-flex;
@@ -123,9 +126,6 @@ export default {
 .about__img img {
   width: 100%;
   height: auto;
-  // -webkit-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
-  // -moz-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
-  // box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
 }
 .about__bg {
   position: absolute;

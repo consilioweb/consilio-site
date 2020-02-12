@@ -4,10 +4,7 @@
       <div class="modal" @click="$store.commit('TOOGLE_MODAL')">
         <div class="modal__content" @click.stop>
           <header class="modal__header">
-            <h1>
-              Diagnóstico Gratuito
-              <br />de Marketing Digital
-            </h1>
+            <h1>Diagnóstico Gratuito de Marketing Digital</h1>
             <p>Preencha as informações abaixo e receba um diagnóstico gratuito sobre o marketing digital da sua empresa.</p>
           </header>
           <div class="modal__form" v-if="!response">
@@ -361,6 +358,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./assets/scss/_flexbox.scss";
+@import "./assets/scss/_variables.scss";
+
 .mauticform-page-wrapper {
   display: flex;
   flex-direction: column;
@@ -525,19 +525,19 @@ export default {
     @include justify-content(center);
     @include align-items(center);
     position: relative;
-    width: 90%;
-    max-width: 500px;
-    min-height: 250px;
-    padding: 30px 20px;
+    width: 100%;
+    height: 94vh;
+    padding: 30px 30px 0px 30px;
     background-color: white;
-    border-radius: 12px;
+    border-radius: 12px 12px 0px 0px;
     text-align: center;
-    box-shadow: 0 0.5rem 1.75rem -0.25rem rgba($primary, 0.4);
-    overflow: auto;
-    margin: 10px;
+    box-shadow: 0 0.5rem 1.75rem -0.25rem rgba(88, 99, 113, 0.4);
+    margin-top: 15%;
     @media screen and (min-width: $break-md) {
       overflow: initial;
       margin: initial;
+      border-radius: 0px;
+      padding: 30px 30%;
     }
   }
 

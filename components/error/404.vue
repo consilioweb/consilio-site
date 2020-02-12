@@ -81,6 +81,7 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+@import "./assets/scss/_variables.scss";
 .error-404 {
   display: flex;
   position: relative;

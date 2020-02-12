@@ -135,6 +135,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "tiny-slider/src/tiny-slider";
+@import "./assets/scss/_flexbox.scss";
+@import "./assets/scss/_variables.scss";
+
 .testimonial {
   &__content {
     padding-bottom: 30px;

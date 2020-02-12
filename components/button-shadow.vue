@@ -28,6 +28,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./assets/scss/_variables.scss";
+
 @mixin btn($background, $color) {
   font-family: Poppins, sans-serif;
   font-size: 12px;

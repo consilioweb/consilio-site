@@ -58,6 +58,7 @@ export default {
     }
   },
   mounted() {
+    this.$gtm.init();
     if (this.$route.path === "/diagnostico-gratuito") {
       return this.$store.commit("TOOGLE_MODAL");
     }
@@ -74,6 +75,8 @@ export default {
 
 <style lang="scss">
 @import "~/assets/scss/main.scss";
+@import "./assets/scss/_flexbox.scss";
+@import "./assets/scss/_variables.scss";
 .mode-off {
   background: $tertiary;
   text-align: center;

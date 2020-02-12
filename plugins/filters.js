@@ -1,5 +1,26 @@
 import Vue from "vue";
 
+Vue.filter("ampStripped", param => {
+  param = param.replace(
+    /<img\s+[^>]*?src="\bhttps?:[^)''"]+\.(?:gif)(?![a-z/])" ([^>]*)>/gi,
+    (match, sub) => {
+      let url = match
+        .replace("<img ", "")
+        .split('" ')
+        .filter(s => s.includes("src") && !s.includes("srcset"))[0]
+        .replace(/src="/gi, "");
+      return `<amp-anim src="${url}" width="500" height="300"><amp-img fallback src="http://placekitten.com/200/300" width="500" height="300" layout="fill"></amp-img></amp-anim>`;
+    }
+  );
+  param = param.replace(
+    /<img\s+[^>]*?src="\bhttps?:[^)''"]+\.(?:jpg|jpeg|png)(?![a-z/])" ([^>]*)>/gi,
+    (match, sub) => {
+      let url = sub.replace(" /", "");
+      return `<amp-img ${url} height="0.8" width="1.33" layout="responsive"></amp-img>`;
+    }
+  );
+  return param;
+});
 Vue.filter("stripped", param => {
   if (!param) return "";
   return param.replace(/<\/?[^>]+(>|$)/g, "");

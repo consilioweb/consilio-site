@@ -1,6 +1,5 @@
 import axios from "axios";
 const TerserPlugin = require("terser-webpack-plugin");
-const ampify = require("./plugins/ampify");
 require("dotenv").config();
 
 export default {
@@ -139,10 +138,17 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/router-extras", "@nuxtjs/moment"],
+  buildModules: ["@nuxtjs/router-extras", "@nuxtjs/moment", "@nuxtjs/gtm"],
   moment: {
     defaultLocale: "pt-br",
     locales: ["pt-br"]
+  },
+  /*
+   ** GTM Configuration
+   */
+  gtm: {
+    id: "GTM-TBX95TK",
+    autoInit: false
   },
   /*
    ** Nuxt.js modules
@@ -154,7 +160,6 @@ export default {
     "@nuxtjs/proxy",
     "@nuxtjs/axios",
     "@nuxtjs/svg-sprite",
-    "@nuxtjs/style-resources",
     "@nuxtjs/amp",
     [
       "@nuxtjs/recaptcha",
@@ -173,7 +178,6 @@ export default {
         maxAge: 1000 * 60 * 60
       }
     ],
-    ["@nuxtjs/google-tag-manager", { id: "GTM-TBX95TK" }],
     "nuxt-ssr-cache",
     "nuxt-purgecss"
   ],
@@ -195,23 +199,6 @@ export default {
     whitelistPatternsChildren: [/carousel$/, /cases$/, /clients$/, /tns-*/]
   },
 
-  /**
-   * Hooks configuration
-   */
-  hooks: {
-    // This hook is called before saving the html to flat file
-    "generate:page": page => {
-      if (/^\/amp\//gi.test(page.route)) {
-        page.html = ampify(page.html);
-      }
-    },
-    // This hook is called before serving the html to the browser
-    "render:route": (url, page, { req, res }) => {
-      if (/^\/amp\//gi.test(url)) {
-        page.html = ampify(page.html);
-      }
-    }
-  },
   /**
    * Cache configuration
    */
@@ -240,6 +227,7 @@ export default {
    ** Render configuration
    */
   render: {
+    resourceHints: false,
     static: {
       maxAge: 1000 * 60 * 60 * 24 * 7,
       setHeaders(res, path) {
@@ -255,12 +243,6 @@ export default {
     }
   },
 
-  /**
-   * Style Resources configuration
-   */
-  styleResources: {
-    scss: ["./assets/scss/_flexbox.scss", "./assets/scss/_variables.scss"]
-  },
   /*
    ** SVG Sprite configuration
    */
@@ -393,7 +375,7 @@ export default {
     skipWaiting: true,
     clientsClaim: true,
     offline: false,
-    dev: true,
+    //dev: true,
     publicPath: process.env.NODE_ENV === "development" ? "/_nuxt/" : "/public/",
     runtimeCaching: [
       {
@@ -494,7 +476,10 @@ export default {
           }
         }
       }
-    },
-    extractCSS: true
+    }
+  },
+  amp: {
+    origin: process.env.BASE_URL,
+    mode: false
   }
 };

@@ -92,6 +92,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./assets/scss/_flexbox.scss";
+@import "./assets/scss/_variables.scss";
+
 .cases__content {
   @include flexbox;
   @include justify-content(center);
@@ -133,7 +136,6 @@ export default {
     overflow: inherit;
   }
   @media screen and (min-width: $break-md) {
-    //margin: 0% 5%;
     padding: 0px;
     min-height: 530px;
   }

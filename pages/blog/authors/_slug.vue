@@ -129,6 +129,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./assets/scss/_flexbox.scss";
+@import "./assets/scss/_variables.scss";
+
 section.blog {
   @include flexbox;
   @include flex-direction(column);

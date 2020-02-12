@@ -86,6 +86,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./assets/scss/_flexbox.scss";
+@import "./assets/scss/_variables.scss";
+
 .menu-side {
   position: fixed;
   bottom: 0;
@@ -152,10 +155,8 @@ export default {
     -ms-transform: translate(50%, 50%) rotate(-90deg);
     -webkit-transform: translate(50%, 50%) rotate(-90deg);
     transform: translate(50%, 50%) rotate(-90deg);
-    transition: opacity 800ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
     color: $tertiary;
-  }
-  &:not(.activeC) p {
   }
   &:not(.activeC):hover p {
     opacity: 1;

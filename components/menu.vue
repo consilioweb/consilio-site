@@ -61,9 +61,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./assets/scss/_flexbox.scss";
+@import "./assets/scss/_variables.scss";
+
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
 }
 .fade-enter,
 .fade-leave-to {
