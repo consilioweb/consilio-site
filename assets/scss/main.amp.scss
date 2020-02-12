@@ -7,6 +7,7 @@
     position: relative;
     overflow: hidden;
     max-width: 480px;
+    width: 100vw;
   }
   .header {
     display: flex;
@@ -56,6 +57,7 @@
   }
   .post {
     margin-bottom: 100px;
+    padding: 0 10px;
     figure {
       display: flex;
       margin: 0;
