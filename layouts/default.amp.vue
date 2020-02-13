@@ -1,5 +1,9 @@
 <template>
   <div class="layout">
+    <amp-analytics
+      config="https://www.googletagmanager.com/amp.json?id=GTM-WHQX4D3&gtm.url=SOURCE_URL"
+      data-credentials="include"
+    ></amp-analytics>
     <Header />
     <Nuxt />
     <Footer />
@@ -12,6 +16,9 @@ export default {
   components: {
     Header,
     Footer
+  },
+  head: {
+    // script: [{ src: "" }],
   }
 };
 </script>
