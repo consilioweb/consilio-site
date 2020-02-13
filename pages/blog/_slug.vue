@@ -8,8 +8,8 @@
         <amp-img
           class="author__img"
           :src="post.author_img"
-          height="48"
-          width="48"
+          height="36"
+          width="36"
           layout="fixed"
           :alt="post.author_name"
         />

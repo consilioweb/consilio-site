@@ -58,7 +58,9 @@ export default {
       /**
        * DNS Prefetch
        */
+      { rel: "dns-prefetch", href: "//automacao.consilio.com.br" },
       { rel: "dns-prefetch", href: "//www.googletagmanager.com" },
+      { rel: "dns-prefetch", href: "//www.google-analytics.com" },
       { rel: "dns-prefetch", href: "//ajax.googleapis.com" },
       { rel: "dns-prefetch", href: "//fonts.googleapis.com" },
       { rel: "dns-prefetch", href: "//fonts.gstatic.com" },
@@ -71,6 +73,7 @@ export default {
       { rel: "dns-prefetch", href: "//0.gravatar.com" },
       { rel: "dns-prefetch", href: "//2.gravatar.com" },
       { rel: "dns-prefetch", href: "//1.gravatar.com" },
+      { rel: "dns-prefetch", href: "//secure.gravatar.com" },
       { rel: "dns-prefetch", href: "//cdn.onesignal.com" },
       /**
        * Favicons & icons
