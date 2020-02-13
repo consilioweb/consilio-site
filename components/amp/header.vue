@@ -1,9 +1,9 @@
 <template>
   <header class="header">
     <div class="logo">
-      <n-link to="/">
+      <a href="/">
         <svg-icon name="logo" height="25" width="158" />
-      </n-link>
+      </a>
     </div>
     <div class="nav">
       <Menu />

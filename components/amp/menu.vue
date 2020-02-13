@@ -17,9 +17,9 @@
       </svg>
     </label>
     <div class="menu">
-      <n-link to="/">
+      <a href="/">
         <div>Home</div>
-      </n-link>
+      </a>
       <n-link to="/a-consilio">
         <div>A Consilio</div>
       </n-link>

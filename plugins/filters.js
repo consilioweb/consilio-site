@@ -9,7 +9,7 @@ Vue.filter("ampStripped", param => {
         .split('" ')
         .filter(s => s.includes("src") && !s.includes("srcset"))[0]
         .replace(/src="/gi, "");
-      return `<amp-anim src="${url}" width="500" height="300"><amp-img fallback src="http://placekitten.com/200/300" width="500" height="300" layout="fill"></amp-img></amp-anim>`;
+      return `<amp-anim src="${url}" width="500" height="300"><amp-img fallback src="http://placekitten.com/200/300" width="500" height="300" alt="placeholder" layout="fill"></amp-img></amp-anim>`;
     }
   );
   param = param.replace(

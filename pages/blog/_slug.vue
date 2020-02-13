@@ -3,11 +3,29 @@
     <header>
       <h1 v-html="post.title"></h1>
     </header>
+    <ul class="post__meta">
+      <li class="author">
+        <amp-img
+          class="author__img"
+          :src="post.author_img"
+          height="48"
+          width="48"
+          layout="fixed"
+          :alt="post.author_name"
+        />
+        <span class="author__name">{{ post.author_name }}</span>
+      </li>
+      <li class="date">
+        <span>Postado em:&nbsp;</span>
+        <span v-html="shortTimestamp(post.date)"></span>
+      </li>
+    </ul>
     <amp-img
       :src="post.img ? post.img : thumbnail_default"
       width="1200"
       height="700"
       layout="responsive"
+      :alt="post.title"
     ></amp-img>
     <article>
       <div v-html="this.$options.filters.ampStripped(this.post.content)"></div>
