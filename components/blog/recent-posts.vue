@@ -3,49 +3,47 @@
     <div class="shape">
       <svg-icon name="shape" />
     </div>
-    <div class="feed-blog__container">
-      <div class="feed-blog__title">
-        <parallax-element :strength="15" :type="'translate'">
-          <h2>blog</h2>
-        </parallax-element>
-        <span class="feed-blog__title--bg">explorar</span>
-      </div>
-      <div class="feed-blog__content">
-        <article
-          v-for="(post, index) in posts.slice(0, 3)"
-          :key="index"
-          class="feed-blog__content--post"
-        >
-          <n-link :to="'/blog/'+post.slug" :aria-label="'Artigo: '+post.title">
-            <div class="feed-blog__card">
-              <figure v-lazy:background-image="post.img"></figure>
-              <div class="feed-blog__card--meta">
-                <span v-html="shortTimestamp(post.date)"></span>
-                <span>•</span>
-                <span>
-                  <client-only>
-                    <img class="lazyload" :alt="post.author_name" :src="post.author_img" />
-                  </client-only>
-                </span>
-                <span v-html="post.author_name"></span>
-              </div>
-              <div class="feed-blog__card--title">
-                <h1 v-html="post.title"></h1>
-              </div>
-              <div class="feed-blog__card--content">
-                <p v-if="post.excerpt">{{ toLimitChars(post.excerpt, 100) | stripped }}</p>
-                <p v-else>{{ toLimitChars(post.content, 100) | stripped }}</p>
-              </div>
-              <div class="feed-blog__card--button">
-                <svg-icon name="icons/right-arrow" />
-              </div>
+    <div class="feed-blog__title">
+      <parallax-element :strength="15" :type="'translate'">
+        <h2>blog</h2>
+      </parallax-element>
+      <span class="feed-blog__title--bg">explorar</span>
+    </div>
+    <div class="feed-blog__content">
+      <article
+        v-for="(post, index) in posts.slice(0, 3)"
+        :key="index"
+        class="feed-blog__content--post"
+      >
+        <n-link :to="'/blog/'+post.slug" :aria-label="'Artigo: '+post.title">
+          <div class="feed-blog__card">
+            <figure v-lazy:background-image="post.img"></figure>
+            <div class="feed-blog__card--meta">
+              <span v-html="shortTimestamp(post.date)"></span>
+              <span>•</span>
+              <span>
+                <client-only>
+                  <img class="lazyload" :alt="post.author_name" :src="post.author_img" />
+                </client-only>
+              </span>
+              <span v-html="post.author_name"></span>
             </div>
-          </n-link>
-        </article>
-      </div>
-      <div class="feed-blog__footer">
-        <button-shadow :url="urlButton" :text="textButton" />
-      </div>
+            <div class="feed-blog__card--title">
+              <h1 v-html="post.title"></h1>
+            </div>
+            <div class="feed-blog__card--content">
+              <p v-if="post.excerpt">{{ toLimitChars(post.excerpt, 100) | stripped }}</p>
+              <p v-else>{{ toLimitChars(post.content, 100) | stripped }}</p>
+            </div>
+            <div class="feed-blog__card--button">
+              <svg-icon name="icons/right-arrow" />
+            </div>
+          </div>
+        </n-link>
+      </article>
+    </div>
+    <div class="feed-blog__footer">
+      <button-shadow :url="urlButton" :text="textButton" />
     </div>
   </section>
 </template>

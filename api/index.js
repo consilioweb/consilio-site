@@ -293,7 +293,9 @@ export default {
             author_slug: data._embedded.author[0].slug,
             author_description: data._embedded.author[0].description,
             status: data.status,
-            img: data.quick_img
+            img: data.quick_img,
+            next: data.next,
+            previous: data.previous
           };
           resolve(filtered);
         } else {
@@ -341,7 +343,9 @@ export default {
                 categories: item.categories,
                 tags: item.tags,
                 post_categories: item.post_categories,
-                post_tags: item.post_tags
+                post_tags: item.post_tags,
+                next: item.next,
+                previous: item.previous
               }))
             };
             resolve(filtered);

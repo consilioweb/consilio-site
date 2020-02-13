@@ -66,5 +66,25 @@
   {
     "from": "/o-posicionamento-da-sua-empresa-esta-claro",
     "to": "/blog/o-posicionamento-da-sua-empresa-esta-claro"
+  },
+  {
+    "from": "/amp/metodologia",
+    "to": "/metodologia"
+  },
+  {
+    "from": "/amp/a-consilio",
+    "to": "/a-consilio"
+  },
+  {
+    "from": "/amp/contato",
+    "to": "/contato"
+  },
+  {
+    "from": "/amp/servicos",
+    "to": "/estrategias"
+  },
+  {
+    "from": "/amp/diagnostico-gratuito",
+    "to": "/diagnostico-gratuito"
   }
 ]
