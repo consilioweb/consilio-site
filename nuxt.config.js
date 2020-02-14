@@ -75,6 +75,9 @@ export default {
       { rel: "dns-prefetch", href: "//1.gravatar.com" },
       { rel: "dns-prefetch", href: "//secure.gravatar.com" },
       { rel: "dns-prefetch", href: "//cdn.onesignal.com" },
+      { rel: "dns-prefetch", href: "//in.hotjar.com" },
+      { rel: "dns-prefetch", href: "//script.hotjar.com" },
+      { rel: "dns-prefetch", href: "//vars.hotjar.com" },
       /**
        * Favicons & icons
        */

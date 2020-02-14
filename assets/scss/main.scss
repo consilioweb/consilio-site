@@ -119,16 +119,109 @@ select:focus {
 .article {
   &__content {
     &--article {
+      font-family: Poppins, sans-serif;
       color: $primary;
       width: 100%;
-      & span,
-      b,
-      strong,
-      p,
-      a,
-      li {
-        font-family: Poppins, sans-serif;
+      .has-text-align-center {
+        text-align: center;
+        justify-content: center;
       }
+      .has-text-align-left {
+        text-align: left;
+      }
+      .has-text-align-right {
+        text-align: right;
+      }
+      & .wp-block-media-text {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        @media screen and (min-width: $break-md) {
+          flex-direction: row;
+        }
+        &__media {
+          flex: 1;
+        }
+        &__content {
+          flex: 1;
+        }
+      }
+      & .has-media-on-the-right {
+        & .wp-block-media-text__media {
+          order: 2;
+        }
+      }
+      blockquote {
+        font-size: 1.4em;
+        width: 85%;
+        margin: 30px auto;
+        color: #555555;
+        padding: 1.2em 30px 1.2em 55px;
+        border-left: 8px solid $secondary;
+        line-height: 1.6;
+        position: relative;
+        background: #ededed;
+        & p {
+          font-size: 13px;
+        }
+        &::before {
+          font-family: Arial;
+          content: "\201C";
+          color: $secondary;
+          font-size: 4em;
+          position: absolute;
+          left: 10px;
+          top: -10px;
+        }
+        &::after {
+          content: "";
+        }
+      }
+      blockquote blockquote span {
+        display: block;
+        color: #333333;
+        font-style: normal;
+        font-weight: bold;
+        margin-top: 1em;
+      }
+      .wp-block-columns {
+        display: flex;
+        margin: 20px 0;
+      }
+
+      .wp-block-column {
+        flex: 1;
+      }
+      .wp-block-columns {
+        &.are-vertically-aligned-top {
+          align-items: flex-start;
+        }
+
+        &.are-vertically-aligned-center {
+          align-items: center;
+        }
+
+        &.are-vertically-aligned-bottom {
+          align-items: flex-end;
+        }
+      }
+      @media (max-width: 764px) {
+        .wp-block-columns.has-3-columns {
+          flex-flow: row wrap;
+        }
+        .has-3-columns .wp-block-column:first-child {
+          flex-basis: 100%;
+        }
+      }
+      @media (max-width: 478px) {
+        .wp-block-columns.has-3-columns {
+          display: block;
+        }
+        .wp-block-column {
+          margin: 20px 0;
+        }
+      }
+
       & sup {
         top: -0.5em;
       }
@@ -141,7 +234,7 @@ select:focus {
       & ul,
       ol {
         list-style-type: disc;
-        padding: 0 0 0 20px;
+        padding: 0 0 0 40px;
         & li {
           font-size: 15px;
           line-height: 36px;
@@ -294,9 +387,6 @@ select:focus {
         max-width: 100%;
         max-height: 100%;
         padding: 10px 0;
-      }
-      & .has-text-align-right {
-        text-align: right;
       }
     }
   }
