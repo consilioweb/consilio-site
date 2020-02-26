@@ -329,16 +329,12 @@ export default {
       }
       const formData = new FormData(this.$refs.modal);
       await axios
-        .post(
-          "https://automacao.consilio.com.br/form/submit?formId=7",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "X-Requested-With": "XMLHttpRequest"
-            }
+        .post("https://mkt.consilio.com.br/form/submit?formId=7", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "X-Requested-With": "XMLHttpRequest"
           }
-        )
+        })
         .then(res => {
           this.response =
             "Você acaba de solicitar gratuitamente um diagnóstico de marketing digital, nossa equipe recebeu sua solicitação e já está trabalhando nesse documento, em no máximo 24 horas um de nossos especialistas entrará em contato para te apresentar. <br><br> <b>Você deu o primeiro passo para entender o marketing digital de verdade.</b> 🚀";

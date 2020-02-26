@@ -733,19 +733,19 @@ img[alt] {
     @media screen and (min-width: $break-md) {
       margin: -130px calc(10% + #{$distance_sb} + 10px) 10px calc(10% + 10px);
     }
-  }
-  & .__card {
-    @include flexbox;
-    @include flex-direction(column);
-    -webkit-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
-    -moz-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
-    box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
-    background: $white;
-    flex: 1;
-    transition: all 1s ease-in-out;
-    position: relative;
-    z-index: 999;
-    height: 0px;
+    & .__card {
+      @include flexbox;
+      @include flex-direction(column);
+      -webkit-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+      -moz-box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+      box-shadow: 0px 0px 28px -1px rgba(46, 61, 98, 0.14);
+      background: $white;
+      flex: 1;
+      transition: all 1s ease-in-out;
+      position: relative;
+      z-index: 999;
+      height: 0px;
+    }
   }
 
   & .nav {

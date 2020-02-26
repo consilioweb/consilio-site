@@ -3,6 +3,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 require("dotenv").config();
 
 export default {
+  debug: true,
   mode: "universal",
   /*
    ** Headers of the page
@@ -58,7 +59,7 @@ export default {
       /**
        * DNS Prefetch
        */
-      { rel: "dns-prefetch", href: "//automacao.consilio.com.br" },
+      { rel: "dns-prefetch", href: "//mkt.consilio.com.br" },
       { rel: "dns-prefetch", href: "//www.googletagmanager.com" },
       { rel: "dns-prefetch", href: "//www.google-analytics.com" },
       { rel: "dns-prefetch", href: "//ajax.googleapis.com" },

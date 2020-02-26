@@ -1,9 +1,9 @@
 <template>
-  <section class="blog">
+  <section class="blog author__page">
     <header
       :style="'background-image: radial-gradient( circle farthest-corner at 10% 20%, '+this.randombg1+' 21.4%, '+this.randombg2+' 80.3% ); '"
     >
-      <div class="inner">
+      <div class="container__full">
         <div class="__content">
           <div class="__content--title">
             <h1>Blog de Marketing Digital da Consilio</h1>
@@ -12,7 +12,7 @@
         </div>
       </div>
     </header>
-    <div class="inner">
+    <div class="container__full">
       <div class="__card">
         <div class="__authors">
           <a :href="'/blog/autores/'+author.slug">
@@ -139,16 +139,18 @@ section.blog {
   width: 100%;
   overflow: hidden;
 }
+.author {
+  &__page {
+    & .container__full {
+      margin-top: -130px;
+      margin-bottom: 30px;
+    }
+  }
+}
 svg {
   height: 16px;
   fill: #fff;
   fill-rule: evenodd;
-}
-.inner {
-  margin: -150px 5% 0% 5%;
-  @media screen and (min-width: $break-md) {
-    margin: -150px calc(13% - -10px) 10px calc(10% + 10px);
-  }
 }
 header {
   background-repeat: no-repeat;
@@ -161,15 +163,6 @@ header {
   color: #fff;
 
   & .header__overlay {
-    /*
-    background-image: radial-gradient(
-      circle farthest-corner at -19.9% 50.2%,
-      rgba(255, 199, 67, 0.8) 0%,
-      rgba(255, 199, 67, 0.8) 24.5%,
-      rgba(19, 30, 37, 0.8) 24.5%,
-      rgba(19, 30, 37, 0.8) 66%
-    );
-    */
     background-image: linear-gradient(
       178.1deg,
       rgba(60, 55, 106, 1) 8.5%,
@@ -427,6 +420,10 @@ header {
 .__authors {
   @include flexbox;
   @include align-items(center);
+  @include flex-direction(column);
+  @media screen and (min-width: $break-md) {
+    @include flex-direction(row);
+  }
   & .author-card-content {
     @include flexbox;
     @include flex-direction(column);

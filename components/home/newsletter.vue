@@ -134,16 +134,12 @@ export default {
       }
       const formData = new FormData(this.$refs.form);
       await axios
-        .post(
-          "https://automacao.consilio.com.br/form/submit?formId=8",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "X-Requested-With": "XMLHttpRequest"
-            }
+        .post("https://mkt.consilio.com.br/form/submit?formId=8", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "X-Requested-With": "XMLHttpRequest"
           }
-        )
+        })
         .then(res => {
           let self = this;
           setTimeout(function() {
