@@ -295,7 +295,7 @@ export default {
 .methodology__card--button svg {
   width: 25px;
   height: 25px;
-  fill: #bcbfc7;
+  color: #bcbfc7;
 }
 .shape {
   position: absolute;
