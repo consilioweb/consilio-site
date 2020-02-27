@@ -3,7 +3,7 @@
     <div class="logo">
       <n-link to="/">
         Agência Consilio
-        <svg-icon name="logo" :style="'color:'+colorLogo" width="180" height="40" />
+        <svg-icon name="logo" :style="'color:'+colorLogo" />
       </n-link>
     </div>
     <div class="button-top">
@@ -41,6 +41,13 @@ header .logo {
   @include flexbox;
   flex: 1;
   font-size: 0px;
+  & svg {
+    width: 150px;
+    height: 40px;
+    @media screen and (min-width: $break-md) {
+      width: 180px;
+    }
+  }
 }
 header .button-top {
   @include flexbox;

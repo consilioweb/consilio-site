@@ -260,7 +260,7 @@ section {
   position: relative;
   z-index: 25;
   text-align: center;
-  margin-top: 50%;
+  margin-top: calc(35vh);
   flex: auto;
   @media screen and (min-width: $break-md) {
     @include align-items(flex-start);
@@ -297,6 +297,7 @@ section {
   width: 100%;
   @include flexbox;
   @include align-items(center);
+  display: none;
   @media screen and (min-width: $break-sm) {
     height: 90%;
     right: -5%;
@@ -304,20 +305,20 @@ section {
     bottom: auto;
     position: relative;
     width: inherit;
+    display: inherit;
   }
 }
 #slides .slide__img img {
   width: 100%;
   @media screen and (min-width: $break-sm) {
     height: 100%;
-    //width: auto;
   }
 }
 #slides .controls__slides {
   position: relative;
   width: 230px;
   height: 35px;
-  top: -10%;
+  top: -5%;
   bottom: 0;
   margin: 0 auto;
   @include flexbox;
@@ -368,22 +369,22 @@ section {
 @keyframes expandThenFadeOut {
   from {
     stroke-dashoffset: 138px;
-    stroke: #586371;
+    stroke: $primary;
   }
   to {
     stroke-dashoffset: 0;
-    stroke: #586371;
+    stroke: $primary;
   }
 }
 
 @-webkit-keyframes expandThenFadeOut {
   from {
     stroke-dashoffset: 138px;
-    stroke: #586371;
+    stroke: $primary;
   }
   to {
     stroke-dashoffset: 0;
-    stroke: #586371;
+    stroke: $primary;
   }
 }
 
@@ -392,30 +393,30 @@ section {
   position: absolute;
   margin: 0;
   padding: 0;
-  color: $primary;
-  background: #fff;
   border-radius: 50%;
   cursor: pointer;
   line-height: 0px;
   text-align: center;
   transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: $white;
+  color: $primary;
   & svg {
     width: 30px;
     height: 30px;
     display: flex;
   }
   &:hover {
-    background: $primary;
-    color: #fff;
     transform: scale(1.2);
   }
   &:active {
     transform: translate(0, 3px) scale(1.2);
   }
-}
-#slides .prev:hover .svgplay__line,
-#slides .next:hover .svgplay__line {
-  stroke: $white;
+  & .svgplay__line {
+    stroke: $primary;
+  }
+  & .svgplay__circle {
+    stroke: $primary;
+  }
 }
 #slides .prev {
   left: 0px;
@@ -454,17 +455,20 @@ section {
     font-size: 13px;
     font-family: "Quicksand";
     font-weight: 700;
-    color: $primary;
+    color: $white;
     padding-left: 15px;
     margin-top: -4px;
     display: flex;
     position: absolute;
     right: -25px;
+    @media screen and (min-width: $break-sm) {
+      color: $primary;
+    }
   }
   li {
     flex-grow: 1;
     height: 4px;
-    background: #ffffff;
+    background: $white;
     display: inline-block;
     cursor: pointer;
     transition: all 1s cubic-bezier(0.2, 1, 0.3, 1) 0s;
@@ -481,13 +485,14 @@ section {
 
 #slides .slides {
   width: 100vw;
-  height: 100%;
+  height: calc(100vh - 60px);
   position: relative;
   font-size: 40px;
   display: flex;
   transition: all 1s;
   @media (min-width: $break-md) {
     font-size: 80px;
+    height: 100%;
   }
   @media (min-width: $break-md) {
     font-size: 100px;

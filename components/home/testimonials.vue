@@ -168,10 +168,12 @@ export default {
     &--container {
       @include flexbox;
       @include align-items(center);
+      @include justify-content(center);
       @include flex-direction(column);
       @include flex-flow(wrap);
       padding-left: 0px;
       @media screen and (min-width: $break-md) {
+        @include justify-content(initial);
         @include flex-direction(row);
         @include flex-flow(nowrap);
         padding-left: 50px;
@@ -207,8 +209,10 @@ export default {
     }
     &--content {
       padding: 20px 0;
+      text-align: center;
       @media screen and (min-width: $break-md) {
         padding: 0px 60px 0px 30px;
+        text-align: left;
       }
       &--head {
         font-family: Poppins, sans-serif;
@@ -273,7 +277,7 @@ export default {
   }
   &:hover {
     background: transparent;
-    color: #fff;
+    color: $primary;
     outline: none;
   }
   &:active {

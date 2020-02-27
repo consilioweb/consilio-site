@@ -199,7 +199,7 @@ export default {
   }
   &:hover {
     background: transparent;
-    color: #fff;
+    color: $primary;
     outline: none;
   }
   &:active {

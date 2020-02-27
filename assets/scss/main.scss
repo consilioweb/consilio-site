@@ -471,7 +471,9 @@ select:focus {
 
 // Bug correction
 .tns-inner {
-  margin: 0 auto !important;
+  @media screen and (min-width: $break-md) {
+    margin: 0 auto !important;
+  }
   width: 100%;
 }
 .tns-liveregion.tns-visually-hidden {
@@ -1098,7 +1100,6 @@ img[alt] {
     display: flex;
     flex: 1;
     position: relative;
-    //min-width: 350px;
     margin: 5%;
     &:nth-child(6n) {
       min-width: 100%;

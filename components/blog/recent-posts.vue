@@ -115,6 +115,7 @@ export default {
     //padding-bottom: 30px;
     position: relative;
     flex: 1;
+    margin: 0;
     @include flex-direction(column);
     @media screen and (min-width: $break-md) {
       @include flex-direction(row);
