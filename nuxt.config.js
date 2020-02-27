@@ -486,7 +486,7 @@ export default {
     }
   },
   amp: {
-    origin: process.env.BASE_URL,
+    origin: "https://consilio.com.br", // without / at the end of the url
     mode: false
   }
 };

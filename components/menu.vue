@@ -17,8 +17,6 @@
         >
           <li class="menu__title">
             <span>{{ item.title }}</span>
-
-            <brand class="perspective" />
           </li>
         </n-link>
         <div class="menu__title--bg">{{itemOver}}</div>
