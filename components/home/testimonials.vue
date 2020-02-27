@@ -30,7 +30,7 @@
                     :clip-path="'url(#testimonial-mask-'+index+')'"
                     height="100%"
                     width="100%"
-                    :xlink:href="item.img+'.webp'"
+                    :xlink:href="item.img"
                     :alt="'Foto de '+item.title"
                     class="lazyload"
                   />
