@@ -27,10 +27,7 @@
       >
         <div class="strategy">
           <div class="strategy--text">
-            <img
-              src="https://images.unsplash.com/photo-1528150113746-eedf29a184c1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=418cfe031d636ba13d884ecb0f791291&auto=format&fit=crop&w=3334&q=80"
-              alt
-            />
+            <img :src="strategy.img" :alt="strategy.title" />
             <h1>{{strategy.title}}</h1>
             <span v-html="strategy.excerpt"></span>
           </div>
@@ -56,49 +53,49 @@
       </div>
       <div class="content">
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/iclips.png')" />
+          <img alt="iClips" v-lazy="require('~/assets/img/partners/iclips.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/amazonses.png')" />
+          <img alt="Amazon SES" v-lazy="require('~/assets/img/partners/amazonses.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/googlepartner.png')" />
+          <img alt="Google Partner" v-lazy="require('~/assets/img/partners/googlepartner.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/facebookpartner.png')" />
+          <img alt="Facebook Partner" v-lazy="require('~/assets/img/partners/facebookpartner.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/configr.png')" />
+          <img alt="Configr" v-lazy="require('~/assets/img/partners/configr.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/laravel.png')" />
+          <img alt="Laravel" v-lazy="require('~/assets/img/partners/laravel.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/mautic.png')" />
+          <img alt="Mautic" v-lazy="require('~/assets/img/partners/mautic.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/nodejs.png')" />
+          <img alt="NodeJS" v-lazy="require('~/assets/img/partners/nodejs.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/rockcontent.png')" />
+          <img alt="RockContent" v-lazy="require('~/assets/img/partners/rockcontent.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/vuejs.png')" />
+          <img alt="VueJS" v-lazy="require('~/assets/img/partners/vuejs.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/nuxtjs.png')" />
+          <img alt="NuxtJS" v-lazy="require('~/assets/img/partners/nuxtjs.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/pwa.png')" />
+          <img alt="PWA" v-lazy="require('~/assets/img/partners/pwa.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/hubspot.png')" />
+          <img alt="Hubspot" v-lazy="require('~/assets/img/partners/hubspot.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/wordpress.png')" />
+          <img alt="WordPress" v-lazy="require('~/assets/img/partners/wordpress.png')" />
         </div>
         <div class="content__box">
-          <img v-lazy="require('~/assets/img/partners/gocache.png')" />
+          <img alt="GoCache" v-lazy="require('~/assets/img/partners/gocache.png')" />
         </div>
       </div>
 
@@ -316,9 +313,8 @@ header {
     & .strategy {
       @include flexbox;
       & img {
-        width: 150%;
-        margin: -25% -25%;
-        min-height: 100%;
+        width: 130%;
+        height: 100%;
         transition: 0.7s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
       }
       &--text {

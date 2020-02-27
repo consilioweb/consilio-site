@@ -733,7 +733,7 @@ img[alt] {
   & .section__filters {
     margin: -70px 5% 0% 5%;
     @media screen and (min-width: $break-md) {
-      margin: -130px calc(10% + #{$distance_sb} + 10px) 10px calc(10% + 10px);
+      margin: -130px calc(10% + #{$distance_sb} + 10px) 0px calc(10% + 10px);
     }
     & .__card {
       @include flexbox;

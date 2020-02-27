@@ -1,5 +1,5 @@
 <template>
-  <div class="error-404">
+  <div class="error-404 container__full">
     <div class="text">
       <p>404</p>
       <span>

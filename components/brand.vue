@@ -17,7 +17,7 @@ export default {};
   perspective: 900px;
   position: absolute;
   top: 30%;
-  right: 30px;
+  right: 50px;
   z-index: 11;
   transition: all 0.5s ease-in-out;
   -webkit-transition: all 0.5s ease-in-out;

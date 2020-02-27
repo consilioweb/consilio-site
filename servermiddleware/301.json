@@ -86,5 +86,9 @@
   {
     "from": "/amp/diagnostico-gratuito",
     "to": "/diagnostico-gratuito"
+  },
+  {
+    "from": "//amp/blog/a-definicao-das-kpis-e-a-chave-para-o-sucesso",
+    "to": "/amp/blog/a-definicao-das-kpis-e-a-chave-para-o-sucesso"
   }
 ]

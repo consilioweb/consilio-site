@@ -147,7 +147,7 @@ export default {
           this.dropdown.height = 0;
         } else {
           this.dropdown.height = `${this.$refs.menu[index].clientHeight +
-            27}px`;
+            14}px`;
         }
       });
     }

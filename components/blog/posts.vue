@@ -34,7 +34,7 @@
     </transition-group>
 
     <client-only>
-      <div class="container__full">
+      <div class="feed-blog__container">
         <infinite-loading
           spinner="waveDots"
           :identifier="infiniteId"
