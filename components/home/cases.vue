@@ -36,7 +36,7 @@
               <h3>{{ item.client }}</h3>
             </div>
             <div class="card-carousel__item--button">
-              <button-shadow :text="textButton" />
+              <button-shadow :text="item.button" :url="item.url" />
             </div>
           </div>
         </carousel>
@@ -55,7 +55,6 @@ export default {
     ButtonShadow
   },
   data: () => ({
-    textButton: "Em breve",
     carouselOptions: {
       lazyload: true,
       lazyloadSelector: ".lazyload",

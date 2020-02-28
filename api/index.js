@@ -150,7 +150,9 @@ export default {
               content: item.content.rendered,
               slug: item.slug,
               img: item.quick_img,
-              client: item.client
+              client: item.client,
+              url: item.url,
+              button: item.button
             }))
           };
           resolve(filtered);
